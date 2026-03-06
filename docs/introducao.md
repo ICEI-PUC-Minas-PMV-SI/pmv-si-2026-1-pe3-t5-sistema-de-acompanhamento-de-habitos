@@ -1,7 +1,12 @@
 # 1. INTRODUÇÃO
 
-Contextualizar a área de pesquisa do trabalho, apresentando conceitos e dados relacionados antes de apresentar a problemática a ser investigada.
+A formação e manutenção de hábitos é um tema amplamente estudado nas áreas de psicologia, saúde e comportamento humano, sendo considerada um fator importante para o desenvolvimento pessoal, produtividade e bem-estar. Hábitos consistem em comportamentos realizados de forma recorrente ao longo do tempo, geralmente associados a rotinas específicas do cotidiano. Estudos indicam que a repetição de determinadas ações em contextos semelhantes contribui para a automatização desses comportamentos, facilitando sua incorporação à rotina dos indivíduos (LALLY et al., 2010).
 
+Com o avanço das tecnologias digitais e a popularização dos dispositivos móveis, diversos sistemas e aplicativos passaram a ser utilizados como ferramentas de apoio na organização de atividades e no acompanhamento de metas pessoais. Essas ferramentas permitem o registro de tarefas, o monitoramento de progresso e a visualização de indicadores relacionados ao desempenho do usuário. Nesse contexto, sistemas de acompanhamento de hábitos têm sido utilizados como instrumentos que auxiliam indivíduos a manter consistência na realização de atividades desejadas, como prática de exercícios físicos, organização de estudos ou desenvolvimento de rotinas produtivas.
+
+Apesar da existência de diferentes soluções tecnológicas voltadas para esse propósito, muitos usuários ainda enfrentam dificuldades em manter regularidade na execução de seus hábitos. Entre os fatores que contribuem para esse problema destacam-se a ausência de acompanhamento estruturado, a falta de feedback sobre o progresso das atividades e a dificuldade em visualizar resultados ao longo do tempo.
+
+Diante desse cenário, torna-se relevante investigar formas de utilizar sistemas computacionais como suporte para o acompanhamento de hábitos pessoais. Nesse contexto, o presente trabalho propõe o desenvolvimento de um sistema voltado ao registro e monitoramento de hábitos, permitindo que os usuários acompanhem sua evolução ao longo do tempo e tenham acesso a informações que auxiliem na manutenção de comportamentos desejados.
 ## 1.1. Problema
 
 Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, não é a hora de comentar sobre a aplicação. 
