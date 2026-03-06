@@ -14,7 +14,13 @@ Descreva também o contexto em que essa aplicação será usada, se houver: empr
 
 ## 1.2. Objetivos do trabalho
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. O objetivo geral deve resumir e apresentar a ideia central de um trabalho, descrevendo também a sua finalidade. Os objetivos específicos darão uma maior delimitação ao tema, além de detalhar os processos necessários para a realização do trabalho.
+O que a gente quer fazer aqui, de forma geral, é um software pra acompanhar hábitos. Parece simples, mas o diferencial é focar na parte que ninguém foca: manter a pessoa engajada.
+
+Na prática, a gente pretende:
+- Fazer um registro diário que seja rápido e sem frescura, pra ninguém perder tempo.
+- Mostrar as sequências de dias (tipo streaks) pra dar aquela sensação de conquista.
+- Colocar lembretes que o próprio usuário configura do jeito que quiser.
+- Separar os hábitos em categorias, tipo saúde, estudo, dinheiro, essas coisas.
 
 ## 1.3. Justificativa
 

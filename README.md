@@ -1,4 +1,4 @@
-# Título do Projeto
+# Sistema de Acompanhamento de Hábitos
 
 `CURSO: Sistemas de Informação`
 
@@ -6,20 +6,20 @@
 
 `SEMESTRE: 3º`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+Quem nunca tentou começar uma academia ou cortar o açúcar e largou tudo depois de uma semana? Pois é, acontece com quase todo mundo. Esse projeto surgiu porque a gente percebeu que os apps que existem por aí não ajudam muito nessa parte de "não desistir". Então estamos desenvolvendo um sistema que mostra pro usuário, de forma bem visual, que ele tá evoluindo - porque às vezes a pessoa nem percebe o próprio progresso e acaba largando.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 5
-* Nome completo do aluno 6
+* Eduardo de Lyra Maranhão Chaves
+* Eduardo Henrique Martins Araújo
+* Ezequiel Jonatas Andrade Rocha
+* Kaio Mendes Araujo Ribeiro
+* Laura Magalhães Ferreira
+* Rafael Gomes Nascimento
 
 ## Orientador
 
-* Nome completo do professor 
+* Roselene Henrique Pereira Costa
 
 # Planejamento
 
