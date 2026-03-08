@@ -9,6 +9,6 @@ Ademais, existem alguns aspectos que carecem de uma maior abordagem, como:
 
 1)	Sustentação do comportamento no longo prazo, visto que ainda é neces-sário investigar como sistemas digitais podem manter o engajamento e a formação de hábitos ao decorrer do tempo. 
 
-2)	Personalização baseada no perfil do usuário, tendo em vista que há a ne-cessidade de estudos sobre a personalização de intervenções digitais. 
+2)	Personalização baseada no perfil do usuário, tendo em vista que há a necessidade de estudos sobre a personalização de intervenções digitais. 
 
-3)	Integração entre monitoramento e análise de comportamento, para que assim seja possível, oferecer recomendações baseadas em dados regis-trados e identificar tendências. 
+3)	Integração entre monitoramento e análise de comportamento, para que assim seja possível oferecer recomendações baseadas em dados registrados e identificar tendências. 
