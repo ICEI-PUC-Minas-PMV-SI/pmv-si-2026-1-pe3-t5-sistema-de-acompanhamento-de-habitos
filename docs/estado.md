@@ -1,10 +1,14 @@
 # 2. ESTADO DA ARTE
-O estado da arte é um mapeamento de toda a produção acadêmica sobre um assunto específico, aqui especificamente sobre o tema escolhido para o seu trabalho. A ideia consiste em reunir as conclusões que outras pesquisas científicas chegaram sobre um determinado assunto. Neste momento você deverá buscar respostas para as seguintes perguntas:
 
-1.	Quais pesquisas estão sendo desenvolvidas sobre esse tema?
-2.	Quem está pesquisando e onde?
-3.	O que as atuais pesquisas científicas concluíram sobre o tema? 
-4.	Quais as divergências dos pesquisadores sobre o assunto? 
-5.	Quais aspectos carecem de maior abordagem?
 
-É importante referenciar estas pesquisas, fazendo as devidas citações de acordo com as normas da ABNT e colocando as referências completas ao final do trabalho.
+O cenário de pesquisas acadêmicas contém diversas contribuições referentes ao uso de tecnologias em mudanças comportamentais e cuidado com a saúde. Essas análises estão sendo realizadas tanto em conjunturas nacionais como internacionais. Porém, o estudo que se segue focará em dissertações brasileiras. 
+
+De acordo com pesquisas coletadas por Thais Rodrigues Paula et al. (2020), a utilização de aplicativos móveis teve um impacto positivo na adoção de hábitos de vida saudável, em relação ao comportamento alimentar, à redução de peso e prática de atividade física. Logo, esses softwares contribuíram de forma significativa nas mudanças comportamentais dos indivíduos.  Contudo, o trabalho de Luiza Karla de Souza do Carmo e Renata Costa Fortes (2022) destaca a necessidade de avaliar esses aplicativos minuciosamente, para propiciar segurança à tecnologia, demons-trar maior eficácia e representar um instrumento confiável para quem for utilizá-lo. 
+
+Ademais, existem alguns aspectos que carecem de uma maior abordagem, como: 
+
+1)	Sustentação do comportamento no longo prazo, visto que ainda é neces-sário investigar como sistemas digitais podem manter o engajamento e a formação de hábitos ao decorrer do tempo. 
+
+2)	Personalização baseada no perfil do usuário, tendo em vista que há a ne-cessidade de estudos sobre a personalização de intervenções digitais. 
+
+3)	Integração entre monitoramento e análise de comportamento, para que assim seja possível, oferecer recomendações baseadas em dados regis-trados e identificar tendências. 
