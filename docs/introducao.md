@@ -24,7 +24,9 @@ Na prática, a gente pretende:
 
 ## 1.3. Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+A adoção de hábitos saudáveis e produtivos é um fator importante para o desenvolvimento pessoal, organização do tempo e melhoria da qualidade de vida. No entanto, muitas pessoas enfrentam dificuldades para manter consistência em atividades que desejam incorporar à rotina, como estudar regularmente, praticar exercícios físicos ou desenvolver novas habilidades. Frequentemente, a falta de acompanhamento estruturado e a dificuldade em visualizar o próprio progresso acabam levando à desmotivação e ao abandono dessas práticas.
+
+Nesse contexto, o desenvolvimento de um sistema de acompanhamento de hábitos torna-se relevante por oferecer uma forma organizada de registrar e monitorar atividades realizadas ao longo do tempo. Dessa maneira, o desenvolvimento do mesmo justifica-se pela necessidade de oferecer uma ferramenta que auxilie usuários no processo de criação e manutenção de hábitos, promovendo maior engajamento, organização e acompanhamento do progresso ao longo do tempo.
 
 ## 1.4. Público alvo
 
