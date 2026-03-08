@@ -9,8 +9,7 @@ Apesar da existência de diferentes soluções tecnológicas voltadas para esse 
 Diante desse cenário, torna-se relevante investigar formas de utilizar sistemas computacionais como suporte para o acompanhamento de hábitos pessoais. Nesse contexto, o presente trabalho propõe o desenvolvimento de um sistema voltado ao registro e monitoramento de hábitos, permitindo que os usuários acompanhem sua evolução ao longo do tempo e tenham acesso a informações que auxiliem na manutenção de comportamentos desejados.
 ## 1.1. Problema
 
-Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, não é a hora de comentar sobre a aplicação. 
-Descreva também o contexto em que essa aplicação será usada, se houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
+A dificuldade em converter metas em ações recorrentes é um obstáculo comum no desenvolvimento pessoal, acadêmico ou profissional. Muitas vezes, a tentativa de criar novos hábitos fracassa devido à falta de visibilidade sobre o progresso e  de lembretes que ajudam durante a rotina corrida. O que acaba gerando desmotivação e o abandono de metas de longo prazo.
 
 ## 1.2. Objetivos do trabalho
 
@@ -30,4 +29,9 @@ Nesse contexto, o desenvolvimento de um sistema de acompanhamento de hábitos to
 
 ## 1.4. Público alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações hierárquicas, etc.
+A aplicação destina-se a indivíduos que buscam maior autonomia e organização em suas rotinas, podendo ser segmentados nos seguintes perfis:
+- Estudantes: Pessoas que possuem uma carga elevada de conteúdos e prazos, necessitando de uma ferramenta para monitorar a constância e o progresso em seus estudos.
+- Profissionais: Usuários que desejam otimizar sua produtividade diária e separar hábitos estritamente profissionais de suas metas de bem-estar.
+- Pessoas que já possuem um desenvolvimento Pessoal: Indivíduos que já possuem o hábito de utilizar dispositivos móveis para gerenciar tarefas, mas que buscam um sistema focado em oferecer feedback visual para manter o engajamento com suas metas.
+  
+O público em geral deve possuir conhecimentos básicos em tecnologia, ainda que o sistema busque oferecer uma interface intuitiva para minimizar dificuldades técnicas e facilitar a usabilidade.
