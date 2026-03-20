@@ -1,22 +1,28 @@
 # 3. DOCUMENTO DE ESPECIFICAÇÃO DE REQUISITOS DE SOFTWARE
 
+Este documento detalha a especificação de requisitos do sistema proposto — o SAH (Sistema de Acompanhamento de Hábitos) — contemplando objetivos, escopo, requisitos funcionais e não funcionais, modelagem de casos de uso e diagrama de classes.
+
 ## 3.1 Objetivos deste documento
 
-Descrever e especificar as necessidades dos usuários que devem ser atendidas pelo projeto SAH – Sistema de Acompanhamento de Hábitos, uma aplicação web voltada ao registro e monitoramento de hábitos pessoais com foco em engajamento e visualização de progresso.
+Descrever e especificar as necessidades dos usuários finais que devem ser atendidas pelo projeto SAH – Sistema de Acompanhamento de Hábitos, de modo a orientar as etapas de design, desenvolvimento e testes da aplicação.
 
 ## 3.2 Escopo do produto
 
 ### 3.2.1 Nome do produto e seus componentes principais
+O produto será denominado **SAH – Sistema de Acompanhamento de Hábitos**. Ele será composto pelos seguintes módulos:
 
-O produto será denominado SAH – Sistema de Acompanhamento de Hábitos. Ele terá somente um componente (módulo) com os elementos necessários ao cadastro, registro e acompanhamento de hábitos pessoais.
+- **Módulo de Autenticação:** responsável pelo cadastro, login e recuperação de senha dos usuários.
+- **Módulo de Gestão de Hábitos:** responsável pela criação, edição, exclusão e categorização dos hábitos monitorados.
+- **Módulo de Check-in Diário:** responsável pelo registro diário de execução dos hábitos e pelo cálculo de sequências (streaks).
+- **Módulo de Dashboard e Relatórios:** responsável pela exibição de métricas de progresso, gráficos de frequência e histórico de atividades.
+- **Módulo de Notificações:** responsável pelo agendamento e disparo de lembretes configuráveis pelo usuário.
 
 ### 3.2.2 Missão do produto
 
 Permitir que usuários registrem, monitorem e acompanhem hábitos pessoais ao longo do tempo, oferecendo feedback visual sobre o progresso e mecanismos de engajamento como sequências de dias consecutivos (streaks) e lembretes configuráveis.
 
 ### 3.2.3 Limites do produto
-
-O SAH não fornece planos de hábitos predefinidos, integração com dispositivos de saúde (como smartwatches), funcionalidades sociais (compartilhamento entre usuários) ou relatórios exportáveis. O sistema é de uso estritamente individual — cada usuário gerencia apenas seus próprios hábitos.
+O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas, planos de treino físico ou orientação psicológica. O sistema não realiza integração com dispositivos wearables (smartwatches, pulseiras fitness) nem com aplicativos de saúde de terceiros. O SAH não contempla funcionalidades de rede social, compartilhamento público de progresso ou gamificação com competição entre usuários.
 
 ### 3.2.4 Benefícios do produto
 
