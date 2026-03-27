@@ -52,6 +52,10 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 | RF10 | Editar perfil | O sistema deve permitir ao usuário alterar nome e senha da conta |
 | RF11 | Recuperar senha | O sistema deve permitir redefinição de senha via e-mail |
 | RF12 | Arquivar hábito | O sistema deve permitir arquivar hábitos inativos sem excluí-los, preservando o histórico |
+| RF13 | Gerenciar usuários (Admin) | O sistema deve permitir ao administrador visualizar a lista de usuários cadastrados, bloquear e desbloquear contas |
+| RF14 | Visualizar métricas da plataforma (Admin) | O sistema deve permitir ao administrador visualizar estatísticas gerais da plataforma (total de usuários, total de hábitos cadastrados, taxa média de conclusão) |
+| RF15 | Gerenciar categorias globais (Admin) | O sistema deve permitir ao administrador criar, editar e excluir categorias globais pré-definidas disponíveis para todos os usuários |
+| RF16 | Visualizar logs do sistema (Admin) | O sistema deve permitir ao administrador consultar registros de atividade do sistema (logs de erros, acessos e operações críticas) |
 
 ### 3.3.2 Requisitos Não Funcionais
 
@@ -75,6 +79,7 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 | Ator | Descrição |
 |------|-----------|
 | Usuário | Pessoa cadastrada no sistema responsável pelo gerenciamento de seus próprios hábitos. Possui acesso total às funcionalidades do sistema referentes à sua conta. |
+| Administrador | Responsável técnico pela manutenção da plataforma, gerenciamento de usuários, monitoramento de métricas globais e gestão de categorias pré-definidas. Possui acesso ao painel administrativo, mas não acessa dados pessoais de hábitos ou check-ins dos usuários. |
 
 ## 3.4 Modelagem do Sistema
 
