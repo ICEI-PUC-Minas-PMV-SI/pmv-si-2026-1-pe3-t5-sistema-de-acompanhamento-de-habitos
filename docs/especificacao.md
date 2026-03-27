@@ -80,11 +80,93 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 
 ### 3.4.1 Diagrama de Casos de Uso
 
-_A ser inserido._
+<img width="758" height="701" alt="image" src="https://github.com/user-attachments/assets/a35350cb-cd8e-4537-ab66-48d459f77a83" />
+
 
 ### 3.4.2 Descrições de Casos de Uso
 
-_A ser inserido._
+
+# Cadastrar usuário (CSU01)
+
+Sumário: O usuário efetua seu cadastro no sistema. 
+
+Ator Primário: Usuário. 
+
+Fluxo principal: 
+
+1. O usuário entra na página de cadastro. 
+2. O sistema exibe um formulário com os dados a serem preenchidos (nome de usuário, e-mail e senha).
+3. O usuário preenche os dados. 
+4. O usuário envia o formulário. 
+5. O sistema opera o armazenamento dos dados solicitados. 
+
+
+Fluxo Alternativo (1): Dados inválidos 
+
+a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos (e-mail com formatação errada, senha fraca, etc), o sistema reporta. 
+b) O sistema segue com a página de cadastro aberta para que o usuário preencha de forma correta. 
+
+
+# Gerenciar hábitos (CSU01)
+
+Sumário: O usuário realiza a gestão (inclusão, edição, exclusão e consulta) dos dados referentes aos hábitos que o mesmo quer adquirir. 
+
+Ator Primário: Usuário.
+
+Fluxo  Principal: 
+
+1. O usuário entra no sistema a fim de gerenciar seus hábitos. 
+2. O sistema apresenta a aba desejada com as operações que podem ser realizadas: inclusão de um novo hábito, alteração de um hábito, exclusão de um hábito e a consulta dos 3. hábitos já existentes do usuário. 
+4. O usuário seleciona a operação desejada: inclusão, exclusão, alteração ou consulta, ou escolhe finalizar o caso de uso. 
+Se o usuário desejar continuar com o gerenciamento de hábitos, o caso de uso retorna ao passo 2; de outra forma o caso de uso termina. 
+
+Fluxo Alternativo (1): Inclusão
+
+a) O usuário solicita a inclusão de um novo hábito. 
+b) O sistema apresenta uma janela solicitando o nome do hábito que vai ser registrado. 
+c) O usuário fornece os dados requeridos
+d) O sistema registra o hábito. 
+
+
+Fluxo Alternativo (2): Exclusão
+
+a) O usuário seleciona um hábito e requisita que o sistema remova. 
+b) O sistema realiza a exclusão. 
+
+Fluxo Alternativo (3): Alteração
+
+a) O usuário altera um ou mais dos detalhes de determinado hábito e requisita sua atualização. 
+b) O sistema altera os dados na lista de hábitos. 
+
+Fluxo Alternativo (4): Consulta
+
+a) O usuário decide pesquisar pelo nome do hábito e solicita a consulta sobre a lista de hábitos. 
+b) O sistema apresenta uma lista de hábitos. 
+c) O usuário seleciona o hábito.
+d) O sistema apresenta os detalhes do hábito. 
+
+
+# Configurar lembretes (CSU03)
+
+Sumário: O usuário define lembretes relacionados aos hábitos cadastrados. 
+
+Ator primário: Usuário
+
+Fluxo principal: 
+
+1. O usuário acessa a lista de hábitos cadastrados. 
+2. O usuário escolhe o hábito que deseja configurar um lembrete. 
+3. O sistema fornece a opção de “configurar lembrete”. 
+4. O usuário concede os dados solicitados à um mini formulário, com o horário que o mesmo deseja ser lembrado. 
+5. O sistema registra.
+
+
+Fluxo Alternativo (1): Dados inválidos 
+
+a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos, o sistema reporta. 
+
+
+
 
 ### 3.4.3 Diagrama de Classes
 
