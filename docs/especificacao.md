@@ -1,6 +1,6 @@
 # 3. DOCUMENTO DE ESPECIFICAÇÃO DE REQUISITOS DE SOFTWARE
 
-Este documento detalha a especificação de requisitos do sistema proposto — o SAH (Sistema de Acompanhamento de Hábitos) — contemplando objetivos, escopo, requisitos funcionais e não funcionais, modelagem de casos de uso e diagrama de classes.
+Este documento detalha a especificação de requisitos do sistema proposto, o SAH (Sistema de Acompanhamento de Hábitos), contemplando objetivos, escopo, requisitos funcionais e não funcionais, modelagem de casos de uso e diagrama de classes.
 
 ## 3.1 Objetivos deste documento
 
@@ -175,8 +175,17 @@ a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos, o sis
 
 ### 3.4.3 Diagrama de Classes
 
-![Alt text](/drawSQL-image-export-2026-03-27.jpg "a title")
+O diagrama abaixo apresenta as entidades centrais do sistema e seus relacionamentos. O Usuário é a entidade raiz e possui Hábitos. Cada Hábito pertence a uma Categoria e gera múltiplos Registros de Execução (check-ins). Lembretes são configurados individualmente por hábito. A distinção entre usuário comum e administrador é feita pelo campo is_admin na própria tabela de usuários.
+
+![Diagrama de Classes do Sistema](img/diagrama-classes.png)
 
 ### 3.4.4 Descrições das Classes
 
-_A ser inserido._
+| # | Nome | Descrição |
+|---|------|-----------|
+| 1 | usuarios | Entidade central do sistema. Armazena nome, e-mail, senha (hash), status da conta (ativo/bloqueado) e data de cadastro. O campo `is_admin: boolean` define se o usuário tem acesso ao painel administrativo. Quando verdadeiro, a conta pode gerenciar usuários, visualizar métricas globais e consultar os logs de auditoria. Não existe tabela separada de roles. |
+| 2 | categorias | Entidade auxiliar para organização lógica dos hábitos. Armazena nome e cor de identificação visual. O campo `is_global` indica se a categoria foi criada pelo administrador e está disponível para todos os usuários (`true`), ou se é uma categoria pessoal do próprio usuário (`false`). |
+| 3 | habitos | Entidade central do sistema. Representa uma atividade recorrente configurada pelo usuário. Armazena nome, descrição, a frequência de execução esperada (campo `frequencia` em JSON com os dias da semana), além dos flags `ativo` e `arquivado`. Hábitos arquivados preservam o histórico de check-ins sem aparecer na listagem principal. |
+| 4 | registros_execucao | Entidade transacional. Cada registro representa um check-in realizado, com a data e hora exatas. É a fonte de dados para todos os cálculos de progresso: streak atual, maior streak histórico e taxa de conclusão semanal/mensal. |
+| 5 | lembretes | Entidade de configuração de alertas, associada 1-para-1 a um hábito. Armazena o horário de disparo e os dias da semana em que o lembrete deve ser enviado (campo `dias_disparo` em JSON). O campo `ativo` permite suspender as notificações sem deletar a configuração. |
+| 6 | auditorias | Entidade de log do sistema. Registra eventos relevantes (logins, bloqueios de conta, operações administrativas). Armazena o tipo do evento (`tipo_evento`), uma descrição legível (`evento`), a data e a referência ao usuário que originou a ação. Consultada exclusivamente por usuários com `is_admin = true`. |
