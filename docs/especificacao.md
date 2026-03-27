@@ -85,7 +85,8 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 
 ### 3.4.1 Diagrama de Casos de Uso
 
-<img width="758" height="701" alt="image" src="https://github.com/user-attachments/assets/a35350cb-cd8e-4537-ab66-48d459f77a83" />
+<img width="687" height="720" alt="image" src="https://github.com/user-attachments/assets/7c021f3e-c320-4dc0-ac10-8a6b75a499b5" />
+
 
 
 ### 3.4.2 Descrições de Casos de Uso
