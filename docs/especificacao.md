@@ -175,7 +175,7 @@ a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos, o sis
 
 ### 3.4.3 Diagrama de Classes
 
-_A ser inserido._
+![Alt text](/drawSQL-image-export-2026-03-27.jpg "a title")
 
 ### 3.4.4 Descrições das Classes
 
