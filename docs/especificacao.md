@@ -86,7 +86,7 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 ### 3.4.2 Descrições de Casos de Uso
 
 
-# Cadastrar usuário (CSU01)
+#### Cadastrar usuário (CSU01)
 
 Sumário: O usuário efetua seu cadastro no sistema. 
 
@@ -107,7 +107,7 @@ a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos (e-mai
 b) O sistema segue com a página de cadastro aberta para que o usuário preencha de forma correta. 
 
 
-# Gerenciar hábitos (CSU01)
+#### Gerenciar hábitos (CSU02)
 
 Sumário: O usuário realiza a gestão (inclusão, edição, exclusão e consulta) dos dados referentes aos hábitos que o mesmo quer adquirir. 
 
@@ -146,7 +146,7 @@ c) O usuário seleciona o hábito.
 d) O sistema apresenta os detalhes do hábito. 
 
 
-# Configurar lembretes (CSU03)
+#### Configurar lembretes (CSU03)
 
 Sumário: O usuário define lembretes relacionados aos hábitos cadastrados. 
 
