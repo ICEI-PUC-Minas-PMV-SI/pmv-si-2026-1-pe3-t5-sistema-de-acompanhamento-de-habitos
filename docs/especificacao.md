@@ -46,7 +46,7 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 | RF04 | Registrar conclusão diária | O sistema deve permitir marcar um hábito como concluído no dia atual |
 | RF05 | Visualizar streaks | O sistema deve exibir a sequência de dias consecutivos em que o hábito foi concluído |
 | RF06 | Configurar lembretes | O sistema deve permitir definir notificações para horários específicos por hábito |
-| RF07 | Gerenciar categorias | O sistema deve permitir criar e associar categorias aos hábitos |
+| RF07 | Gerenciar categorias | O sistema deve permitir criar, editar, excluir e associar categorias aos hábitos |
 | RF08 | Visualizar histórico | O sistema deve exibir o histórico de registros de um hábito por período |
 | RF09 | Visualizar progresso geral | O sistema deve exibir um painel com resumo de todos os hábitos do dia (quantos concluídos e pendentes) |
 | RF10 | Editar perfil | O sistema deve permitir ao usuário alterar nome e senha da conta |
