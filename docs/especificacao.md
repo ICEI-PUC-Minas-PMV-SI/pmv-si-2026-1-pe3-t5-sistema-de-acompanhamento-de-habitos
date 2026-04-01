@@ -92,12 +92,15 @@ O SAH não fornece nenhuma forma de diagnóstico médico, prescrição de dietas
 
 ### 3.4.2 Descrições de Casos de Uso
 
-
 #### Cadastrar usuário (CSU01)
 
 Sumário: O usuário efetua seu cadastro no sistema. 
 
 Ator Primário: Usuário. 
+Ator Secundário: Administrador.
+
+Pré-condições: 
+- O usuário deve ter acesso à página de cadastro.
 
 Fluxo principal: 
 
@@ -105,35 +108,67 @@ Fluxo principal:
 2. O sistema exibe um formulário com os dados a serem preenchidos (nome de usuário, e-mail e senha).
 3. O usuário preenche os dados. 
 4. O usuário envia o formulário. 
-5. O sistema opera o armazenamento dos dados solicitados. 
-
+5. O sistema opera o armazenamento dos dados solicitados.
+6. O novo usuário é adicionado na lista de usuários que o administrador tem acesso, e o administrador é notificado imediatamente.  
 
 Fluxo Alternativo (1): Dados inválidos 
 
-a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos (e-mail com formatação errada, senha fraca, etc), o sistema reporta. 
+a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos (e-mail com formatação errada, etc), o sistema reporta. 
 b) O sistema segue com a página de cadastro aberta para que o usuário preencha de forma correta. 
 
+Pós-condições: 
+- O usuário é cadastrado com sucesso no sistema. 
+- O administrador passa a ter acesso ao novo usuário cadastrado.
 
-#### Gerenciar hábitos (CSU02)
+#### Autenticar usuário (CSU02)
+
+Sumário: O usuário realiza seu login com as credenciais cadastradas. 
+
+Ator primário: Usuário
+
+Pré-condições: 
+- O usuário deve estar previamente cadastrado no sistema.
+
+Fluxo principal: 
+
+1. O usuário acessa a tela de login.
+2. O sistema exibe os campos de usuário (login) e senha. 
+3. O usuário insere suas credenciais. 
+4. O usuário clica no botão "Entrar". 
+5. O sistema valida as credenciais.
+6. O sistema cria uma sessão ativa e redireciona para a página principal.
+
+Fluxo Alternativo (1): Credenciais Inválidas
+
+a) Se o campo solicitado estiver vazio ou conter um e-mail não cadastrado/inválido, o sistema identifica e reporta. 
+b) O sistema permite uma nova tentativa de autenticação. 
+c) O fluxo volta ao passo 2. 
+
+Pós-condições: 
+- O usuário é autenticado com sucesso.
+
+#### Gerenciar hábitos (CSU03)
 
 Sumário: O usuário realiza a gestão (inclusão, edição, exclusão e consulta) dos dados referentes aos hábitos que o mesmo quer adquirir. 
 
 Ator Primário: Usuário.
 
+Pré-condições: 
+- O usuário deve estar autenticado no sistema.
+  
 Fluxo  Principal: 
 
 1. O usuário entra no sistema a fim de gerenciar seus hábitos. 
-2. O sistema apresenta a aba desejada com as operações que podem ser realizadas: inclusão de um novo hábito, alteração de um hábito, exclusão de um hábito e a consulta dos 3. hábitos já existentes do usuário. 
-4. O usuário seleciona a operação desejada: inclusão, exclusão, alteração ou consulta, ou escolhe finalizar o caso de uso. 
-Se o usuário desejar continuar com o gerenciamento de hábitos, o caso de uso retorna ao passo 2; de outra forma o caso de uso termina. 
+2. O sistema apresenta a aba desejada com as operações que podem ser realizadas: inclusão de um novo hábito, alteração de um hábito, exclusão de um hábito e a consulta dos hábitos já existentes do usuário. 
+3. O usuário seleciona a operação desejada: inclusão, exclusão, alteração ou consulta, ou escolhe finalizar o caso de uso. 
+4. Se o usuário desejar continuar com o gerenciamento de hábitos, o caso de uso retorna ao passo 2; de outra forma o caso de uso termina. 
 
 Fluxo Alternativo (1): Inclusão
 
 a) O usuário solicita a inclusão de um novo hábito. 
 b) O sistema apresenta uma janela solicitando o nome do hábito que vai ser registrado. 
-c) O usuário fornece os dados requeridos
+c) O usuário fornece os dados requeridos.
 d) O sistema registra o hábito. 
-
 
 Fluxo Alternativo (2): Exclusão
 
@@ -152,12 +187,57 @@ b) O sistema apresenta uma lista de hábitos.
 c) O usuário seleciona o hábito.
 d) O sistema apresenta os detalhes do hábito. 
 
+Pós-condições: 
+- Os hábitos do usuário podem ser criados, atualizados ou removidos.
+- As alterações são persistidas no sistema. 
 
-#### Configurar lembretes (CSU03)
+#### Registrar conclusão diária (CSU04)
+
+Sumário: O usuário marca um hábito como concluído no dia atual. 
+
+Ator primário: Usuário. 
+
+Pré-condições: 
+- O usuário deve estar autenticado.
+
+Fluxo principal: 
+
+1. O usuário acessa a lista de hábitos cadastrados. 
+2. O usuário escolhe o hábito que deseja marcar como concluído. 
+3. O sistema apresenta uma caixa de seleção para realizar a operação de marcar como concluído. 
+4. O usuário realiza essa operação. 
+5. O sistema atualiza a lista de hábitos. 
+
+Pós-condições: 
+- O registro de conclusão do hábito é armazenado para o dia atual.
+- A lista de hábitos é atualizada. 
+
+#### Visualizar streaks (CSU05)
+
+Sumário: O usuário visualiza a sequência de dias consecutivos em que concluiu determinado hábito. 
+
+Ator primário: Usuário. 
+
+Pré-condições: 
+- O usuário deve estar autenticado.
+
+Fluxo principal: 
+1. O usuário acessa a lista de hábitos cadastrados. 
+2. O usuário escolhe o hábito que deseja ver a sequência de dias concluídos. 
+3. O sistema calcula e apresenta automaticamente a sequência de dias consecutivos que determinado hábito foi marcado como concluído. 
+
+Pós-condições: 
+- A sequência de dias consecutivos é exibida ao usuário.
+- Nenhum dado é alterado no sistema.
+
+#### Configurar lembretes (CSU06)
 
 Sumário: O usuário define lembretes relacionados aos hábitos cadastrados. 
 
 Ator primário: Usuário
+
+Pré-condições: 
+- O usuário deve estar autenticado.
 
 Fluxo principal: 
 
@@ -167,12 +247,79 @@ Fluxo principal:
 4. O usuário concede os dados solicitados à um mini formulário, com o horário que o mesmo deseja ser lembrado. 
 5. O sistema registra.
 
-
 Fluxo Alternativo (1): Dados inválidos 
 
 a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos, o sistema reporta. 
 
+Pós-condições: 
+- O lembrete é registrado no sistema.
+- O hábito passa a ter um lembrete associado.
 
+#### Gerenciar Categorias (CSU07)
+
+Sumário: O usuário realiza a gestão (criação, edição, exclusão e associação) das categorias para a organização dos seus hábitos. 
+
+Ator Primário: Usuário. 
+
+Pré-condições:
+- O usuário deve estar autenticado.
+
+Fluxo Principal: 
+
+1. O usuário entra no sistema a fim de gerenciar as categorias dos seus hábitos. 
+2. O sistema apresenta a aba desejada com as operações que podem ser realizadas: criação de uma nova categoria, edição de uma categoria, exclusão de uma categoria e a associação de categorias já existentes. 
+3. O usuário seleciona a operação desejada: criação, edição, exclusão ou associação, ou escolhe finalizar o caso de uso. Se o usuário desejar continuar com o gerenciamento de categorias, o caso de uso retorna ao passo 2; de outra forma o caso de uso termina. 
+
+Fluxo Alternativo (1): Criação 
+
+a) O usuário solicita a criação de uma nova categoria. 
+b) O sistema apresenta uma janela solicitando o nome da categoria que vai ser registrada. 
+c) O usuário fornece os dados requeridos. 
+d) O sistema registra a categoria. 
+
+Fluxo Alternativo (2): Edição 
+
+a) O usuário solicita a edição de uma categoria existente. 
+b) O usuário edita um ou mais detalhes de determinada categoria e requisita sua atualização. 
+c) O sistema altera e atualiza os dados da categoria escolhida. 
+
+Fluxo Alternativo (3): Exclusão 
+
+a) O usuário requisita a exclusão de uma categoria já existente. 
+b) O sistema realiza a exclusão. 
+
+Fluxo Alternativo (4): Associação
+
+a) O usuário decide associar um hábito à uma categoria já criada. 
+b) O usuário seleciona o hábito escolhido. 
+c) O sistema apresenta uma opção que permite associar uma categoria. 
+d) O usuário escolhe a opção que deseja. 
+e) O sistema atualiza o hábito, agora com uma categoria definida. 
+
+Pós-condições: 
+- As categorias podem ser criadas, editadas, excluídas ou associadas a hábitos.
+- As alterações são persistidas no sistema.
+
+#### Visualizar histórico (CSU08)
+
+Sumário: O usuário  visualiza o histórico de registros de um hábito ao longo de um período específico, para acompanhar seu progresso e consistência. 
+
+Ator Primário: Usuário. 
+
+Pré-condições:
+- O usuário deve estar autenticado.
+
+Fluxo Principal: 
+
+1. O usuário acessa a lista de hábitos. 
+2. O usuário seleciona um hábito. 
+3. O usuário escolhe um período para visualização (ex: últimos 7 dias)
+4. O sistema consulta os registros do hábito no período informado. 
+5. O sistema apresenta os dados de forma organizada(lista ou calendário )
+
+Pós-condições: 
+- O histórico do hábito é exibido conforme o período selecionado.
+- Nenhum dado é alterado no sistema.
 
 
 ### 3.4.3 Diagrama de Classes
