@@ -140,9 +140,9 @@ Fluxo principal:
 
 Fluxo Alternativo (1): Credenciais Inválidas
 
-a) Se o campo solicitado estiver vazio ou conter um e-mail não cadastrado/inválido, o sistema identifica e reporta. 
-b) O sistema permite uma nova tentativa de autenticação. 
-c) O fluxo volta ao passo 2. 
+a) Se o campo solicitado estiver vazio ou conter um e-mail não cadastrado/inválido, o sistema identifica e reporta.<br> 
+b) O sistema permite uma nova tentativa de autenticação.<br> 
+c) O fluxo volta ao passo 2.<br> 
 
 Pós-condições: 
 - O usuário é autenticado com sucesso.
@@ -165,27 +165,27 @@ Fluxo  Principal:
 
 Fluxo Alternativo (1): Inclusão
 
-a) O usuário solicita a inclusão de um novo hábito. 
-b) O sistema apresenta uma janela solicitando o nome do hábito que vai ser registrado. 
-c) O usuário fornece os dados requeridos.
-d) O sistema registra o hábito. 
+a) O usuário solicita a inclusão de um novo hábito.<br> 
+b) O sistema apresenta uma janela solicitando o nome do hábito que vai ser registrado.<br> 
+c) O usuário fornece os dados requeridos.<br>
+d) O sistema registra o hábito.<br> 
 
 Fluxo Alternativo (2): Exclusão
 
-a) O usuário seleciona um hábito e requisita que o sistema remova. 
-b) O sistema realiza a exclusão. 
+a) O usuário seleciona um hábito e requisita que o sistema remova.<br> 
+b) O sistema realiza a exclusão.<br> 
 
 Fluxo Alternativo (3): Alteração
 
-a) O usuário altera um ou mais dos detalhes de determinado hábito e requisita sua atualização. 
-b) O sistema altera os dados na lista de hábitos. 
+a) O usuário altera um ou mais dos detalhes de determinado hábito e requisita sua atualização.<br> 
+b) O sistema altera os dados na lista de hábitos.<br> 
 
 Fluxo Alternativo (4): Consulta
 
-a) O usuário decide pesquisar pelo nome do hábito e solicita a consulta sobre a lista de hábitos. 
-b) O sistema apresenta uma lista de hábitos. 
-c) O usuário seleciona o hábito.
-d) O sistema apresenta os detalhes do hábito. 
+a) O usuário decide pesquisar pelo nome do hábito e solicita a consulta sobre a lista de hábitos.<br> 
+b) O sistema apresenta uma lista de hábitos.<br> 
+c) O usuário seleciona o hábito.<br>
+d) O sistema apresenta os detalhes do hábito.<br> 
 
 Pós-condições: 
 - Os hábitos do usuário podem ser criados, atualizados ou removidos.
@@ -272,29 +272,29 @@ Fluxo Principal:
 
 Fluxo Alternativo (1): Criação 
 
-a) O usuário solicita a criação de uma nova categoria. 
-b) O sistema apresenta uma janela solicitando o nome da categoria que vai ser registrada. 
-c) O usuário fornece os dados requeridos. 
-d) O sistema registra a categoria. 
+a) O usuário solicita a criação de uma nova categoria.<br> 
+b) O sistema apresenta uma janela solicitando o nome da categoria que vai ser registrada.<br> 
+c) O usuário fornece os dados requeridos.<br> 
+d) O sistema registra a categoria.<br> 
 
 Fluxo Alternativo (2): Edição 
 
-a) O usuário solicita a edição de uma categoria existente. 
-b) O usuário edita um ou mais detalhes de determinada categoria e requisita sua atualização. 
-c) O sistema altera e atualiza os dados da categoria escolhida. 
+a) O usuário solicita a edição de uma categoria existente.<br> 
+b) O usuário edita um ou mais detalhes de determinada categoria e requisita sua atualização.<br> 
+c) O sistema altera e atualiza os dados da categoria escolhida.<br> 
 
 Fluxo Alternativo (3): Exclusão 
 
-a) O usuário requisita a exclusão de uma categoria já existente. 
-b) O sistema realiza a exclusão. 
+a) O usuário requisita a exclusão de uma categoria já existente.<br> 
+b) O sistema realiza a exclusão.<br> 
 
 Fluxo Alternativo (4): Associação
 
-a) O usuário decide associar um hábito à uma categoria já criada. 
-b) O usuário seleciona o hábito escolhido. 
-c) O sistema apresenta uma opção que permite associar uma categoria. 
-d) O usuário escolhe a opção que deseja. 
-e) O sistema atualiza o hábito, agora com uma categoria definida. 
+a) O usuário decide associar um hábito à uma categoria já criada.<br> 
+b) O usuário seleciona o hábito escolhido.<br> 
+c) O sistema apresenta uma opção que permite associar uma categoria.<br> 
+d) O usuário escolhe a opção que deseja.<br> 
+e) O sistema atualiza o hábito, agora com uma categoria definida.<br> 
 
 Pós-condições: 
 - As categorias podem ser criadas, editadas, excluídas ou associadas a hábitos.
