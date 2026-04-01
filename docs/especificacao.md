@@ -113,7 +113,7 @@ Fluxo principal:
 
 Fluxo Alternativo (1): Dados inválidos 
 
-a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos (e-mail com formatação errada, etc), o sistema reporta. 
+a) Se o campo solicitado estiver vazio ou preenchido com dados inválidos (e-mail com formatação errada, etc), o sistema reporta.\ 
 b) O sistema segue com a página de cadastro aberta para que o usuário preencha de forma correta. 
 
 Pós-condições: 
