@@ -102,7 +102,7 @@ Ator Secundário: Administrador.
 Pré-condições: 
 - O usuário deve ter acesso à página de cadastro.
 
-Fluxo principal: 
+Fluxo Principal: 
 
 1. O usuário entra na página de cadastro. 
 2. O sistema exibe um formulário com os dados a serem preenchidos (nome de usuário, e-mail e senha).
@@ -124,12 +124,12 @@ Pós-condições:
 
 Sumário: O usuário realiza seu login com as credenciais cadastradas. 
 
-Ator primário: Usuário
+Ator Primário: Usuário
 
 Pré-condições: 
 - O usuário deve estar previamente cadastrado no sistema.
 
-Fluxo principal: 
+Fluxo Principal: 
 
 1. O usuário acessa a tela de login.
 2. O sistema exibe os campos de usuário (login) e senha. 
@@ -156,7 +156,7 @@ Ator Primário: Usuário.
 Pré-condições: 
 - O usuário deve estar autenticado no sistema.
   
-Fluxo  Principal: 
+Fluxo Principal: 
 
 1. O usuário entra no sistema a fim de gerenciar seus hábitos. 
 2. O sistema apresenta a aba desejada com as operações que podem ser realizadas: inclusão de um novo hábito, alteração de um hábito, exclusão de um hábito e a consulta dos hábitos já existentes do usuário. 
@@ -195,12 +195,12 @@ Pós-condições:
 
 Sumário: O usuário marca um hábito como concluído no dia atual. 
 
-Ator primário: Usuário. 
+Ator Primário: Usuário. 
 
 Pré-condições: 
 - O usuário deve estar autenticado.
 
-Fluxo principal: 
+Fluxo Principal: 
 
 1. O usuário acessa a lista de hábitos cadastrados. 
 2. O usuário escolhe o hábito que deseja marcar como concluído. 
@@ -216,12 +216,13 @@ Pós-condições:
 
 Sumário: O usuário visualiza a sequência de dias consecutivos em que concluiu determinado hábito. 
 
-Ator primário: Usuário. 
+Ator Primário: Usuário. 
 
 Pré-condições: 
 - O usuário deve estar autenticado.
 
-Fluxo principal: 
+Fluxo Principal: 
+
 1. O usuário acessa a lista de hábitos cadastrados. 
 2. O usuário escolhe o hábito que deseja ver a sequência de dias concluídos. 
 3. O sistema calcula e apresenta automaticamente a sequência de dias consecutivos que determinado hábito foi marcado como concluído. 
@@ -234,17 +235,17 @@ Pós-condições:
 
 Sumário: O usuário define lembretes relacionados aos hábitos cadastrados. 
 
-Ator primário: Usuário
+Ator Primário: Usuário
 
 Pré-condições: 
 - O usuário deve estar autenticado.
 
-Fluxo principal: 
+Fluxo Principal: 
 
 1. O usuário acessa a lista de hábitos cadastrados. 
 2. O usuário escolhe o hábito que deseja configurar um lembrete. 
 3. O sistema fornece a opção de “configurar lembrete”. 
-4. O usuário concede os dados solicitados à um mini formulário, com o horário que o mesmo deseja ser lembrado. 
+4. O usuário preenche os dados solicitados em um formulário com o horário que deseja ser lembrado. 
 5. O sistema registra.
 
 Fluxo Alternativo (1): Dados inválidos 
@@ -290,7 +291,7 @@ b) O sistema realiza a exclusão.<br>
 
 Fluxo Alternativo (4): Associação
 
-a) O usuário decide associar um hábito à uma categoria já criada.<br> 
+a) O usuário decide associar um hábito a uma categoria já criada.<br> 
 b) O usuário seleciona o hábito escolhido.<br> 
 c) O sistema apresenta uma opção que permite associar uma categoria.<br> 
 d) O usuário escolhe a opção que deseja.<br> 
@@ -302,7 +303,7 @@ Pós-condições:
 
 #### Visualizar histórico (CSU08)
 
-Sumário: O usuário  visualiza o histórico de registros de um hábito ao longo de um período específico, para acompanhar seu progresso e consistência. 
+Sumário: O usuário visualiza o histórico de registros de um hábito ao longo de um período específico, para acompanhar seu progresso e consistência. 
 
 Ator Primário: Usuário. 
 
@@ -315,10 +316,277 @@ Fluxo Principal:
 2. O usuário seleciona um hábito. 
 3. O usuário escolhe um período para visualização (ex: últimos 7 dias)
 4. O sistema consulta os registros do hábito no período informado. 
-5. O sistema apresenta os dados de forma organizada(lista ou calendário )
+5. O sistema apresenta os dados de forma organizada (lista ou calendário).
 
 Pós-condições: 
 - O histórico do hábito é exibido conforme o período selecionado.
+- Nenhum dado é alterado no sistema.
+
+#### Visualizar progresso geral (CSU09)
+
+Sumário: O usuário visualiza um painel com o resumo dos hábitos do dia.
+
+Ator Primário: Usuário.
+
+Pré-condições:
+- O usuário deve estar autenticado no sistema.
+
+Fluxo Principal:
+
+1. O usuário acessa o painel principal.
+2. O sistema exibe o resumo dos hábitos do dia.
+3. O sistema apresenta a quantidade de hábitos concluídos e pendentes.
+4. O sistema exibe indicadores visuais (ex: barra de progresso ou porcentagem).
+
+Fluxo Alternativo (1): Nenhum hábito cadastrado
+
+a) O sistema identifica que o usuário não possui hábitos cadastrados.<br>
+b) O sistema exibe uma mensagem orientando o usuário a criar seu primeiro hábito.
+
+Pós-condições:
+- O progresso diário dos hábitos foi apresentado ao usuário.
+- Nenhum dado é alterado no sistema.
+
+#### Editar perfil (CSU10)
+
+Sumário: O usuário realiza a alteração de seus dados cadastrais.
+
+Ator Primário: Usuário.
+
+Pré-condições:
+- O usuário deve estar autenticado.
+
+Fluxo Principal:
+
+1. O usuário acessa a opção de edição de perfil.
+2. O sistema apresenta um formulário com os dados atuais do usuário (nome e campos de alteração de senha).
+3. O usuário altera nome e/ou senha.
+4. O usuário solicita a atualização dos dados.
+5. O sistema valida as informações.
+6. O sistema salva as alterações, encerra a sessão ativa e confirma a operação.
+
+Fluxo Alternativo (1): Dados inválidos
+
+a) O sistema identifica campos inválidos (nome vazio, senha muito curta, etc.).<br>
+b) O sistema informa o erro e solicita correção.<br>
+c) O fluxo retorna ao passo 3.
+
+Fluxo Alternativo (2): Senha atual incorreta
+
+a) O sistema verifica que a senha atual informada não corresponde à senha cadastrada.<br>
+b) O sistema informa o erro sem revelar a senha correta.<br>
+c) O fluxo retorna ao passo 3.
+
+Pós-condições:
+- Os dados do usuário foram atualizados.
+- O usuário recebe confirmação visual da operação.
+
+#### Recuperar senha (CSU11)
+
+Sumário: O usuário redefine sua senha por meio de e-mail.
+
+Ator Primário: Usuário.
+Ator Secundário: Serviço de E-mail.
+
+Pré-condições:
+- O usuário deve possuir e-mail cadastrado.
+- O usuário não deve estar autenticado no sistema.
+
+Fluxo Principal:
+
+1. O usuário solicita recuperação de senha na tela de login.
+2. O sistema solicita o e-mail cadastrado.
+3. O usuário informa o e-mail.
+4. O sistema envia um link de redefinição com validade limitada.
+5. O usuário acessa o link recebido.
+6. O sistema solicita a nova senha.
+7. O usuário informa a nova senha.
+8. O sistema valida e atualiza a senha.
+
+Fluxo Alternativo (1): E-mail não encontrado
+
+a) O sistema informa que o e-mail não está cadastrado.<br>
+b) O fluxo retorna ao passo 2.
+
+Fluxo Alternativo (2): Link de redefinição expirado
+
+a) O usuário acessa um link de redefinição cujo prazo já expirou.<br>
+b) O sistema informa que o link não é mais válido.<br>
+c) O sistema oferece a opção de solicitar um novo link.<br>
+d) O fluxo retorna ao passo 2.
+
+Fluxo Alternativo (3): Nova senha inválida
+
+a) O sistema identifica que a nova senha não atende aos critérios mínimos (ex: comprimento insuficiente).<br>
+b) O sistema informa os requisitos e solicita nova entrada.<br>
+c) O fluxo retorna ao passo 7.
+
+Pós-condições:
+- A senha do usuário foi redefinida.
+- Links de redefinição anteriores são invalidados.
+
+#### Arquivar hábito (CSU12)
+
+Sumário: O usuário arquiva hábitos inativos sem excluí-los, preservando o histórico.
+
+Ator Primário: Usuário.
+
+Pré-condições:
+- O usuário deve estar autenticado e possuir hábitos cadastrados.
+
+Fluxo Principal:
+
+1. O usuário acessa sua lista de hábitos.
+2. O sistema apresenta os hábitos ativos.
+3. O usuário seleciona um hábito.
+4. O usuário solicita o arquivamento.
+5. O sistema move o hábito para a lista de arquivados.
+
+Fluxo Alternativo (1): Hábito já arquivado
+
+a) O sistema identifica que o hábito selecionado já se encontra arquivado.<br>
+b) O sistema informa o usuário e não realiza nenhuma alteração.
+
+Pós-condições:
+- O hábito foi arquivado e permanece disponível para consulta.
+- O hábito não aparece na listagem principal de hábitos ativos.
+
+#### Gerenciar usuários (CSU13)
+
+Sumário: O administrador visualiza a lista de usuários cadastrados e gerencia o status de suas contas.
+
+Ator Primário: Administrador.
+
+Pré-condições:
+- O administrador deve estar autenticado e possuir permissão de administrador.
+
+Fluxo Principal:
+
+1. O administrador acessa a área de gerenciamento de usuários.
+2. O sistema apresenta a lista de usuários cadastrados com nome, e-mail e status da conta.
+3. O administrador seleciona um usuário para visualizar seus detalhes.
+4. O sistema exibe os dados do usuário selecionado.
+5. O administrador seleciona a operação desejada: bloquear ou desbloquear a conta.
+6. O sistema executa a ação e atualiza o status do usuário na lista.
+
+Fluxo Alternativo (1): Bloquear conta
+
+a) O administrador seleciona a opção de bloquear a conta de um usuário ativo.<br>
+b) O sistema solicita confirmação da ação.<br>
+c) O administrador confirma.<br>
+d) O sistema bloqueia a conta e impede novos logins do usuário.
+
+Fluxo Alternativo (2): Desbloquear conta
+
+a) O administrador seleciona a opção de desbloquear a conta de um usuário bloqueado.<br>
+b) O sistema reativa a conta e permite que o usuário faça login novamente.
+
+Fluxo Alternativo (3): Nenhum usuário encontrado
+
+a) A lista de usuários está vazia ou nenhum resultado corresponde ao filtro aplicado.<br>
+b) O sistema exibe uma mensagem informando a ausência de resultados.
+
+Pós-condições:
+- O status da conta do usuário selecionado foi atualizado.
+- O usuário bloqueado perde imediatamente o acesso ao sistema.
+
+#### Visualizar métricas da plataforma (CSU14)
+
+Sumário: O administrador visualiza estatísticas gerais da plataforma.
+
+Ator Primário: Administrador.
+
+Pré-condições:
+- O administrador deve estar autenticado e possuir permissão de administrador.
+
+Fluxo Principal:
+
+1. O administrador acessa o painel de métricas.
+2. O sistema consulta os dados agregados da plataforma.
+3. O sistema exibe total de usuários cadastrados, total de hábitos cadastrados e taxa média de conclusão.
+
+Fluxo Alternativo (1): Dados insuficientes para geração de métricas
+
+a) O sistema identifica que não há dados suficientes para calcular uma ou mais métricas (ex: nenhum usuário ativo).<br>
+b) O sistema exibe as métricas disponíveis e indica com "—" as que não podem ser calculadas.
+
+Pós-condições:
+- As métricas foram exibidas ao administrador.
+- Nenhum dado é alterado no sistema.
+
+#### Gerenciar categorias globais (CSU15)
+
+Sumário: O administrador realiza a gestão das categorias globais pré-definidas disponíveis para todos os usuários.
+
+Ator Primário: Administrador.
+
+Pré-condições:
+- O administrador deve estar autenticado e possuir permissão de administrador.
+
+Fluxo Principal:
+
+1. O administrador acessa a área de categorias globais.
+2. O sistema apresenta as categorias globais existentes.
+3. O administrador seleciona a operação desejada: criar, editar ou excluir uma categoria.
+4. O sistema solicita os dados necessários conforme a operação.
+5. O administrador informa os dados.
+6. O sistema valida e salva as alterações.
+
+Fluxo Alternativo (1): Criar categoria
+
+a) O administrador solicita a criação de uma nova categoria global.<br>
+b) O sistema apresenta um formulário solicitando nome e cor de identificação.<br>
+c) O administrador preenche os dados e confirma.<br>
+d) O sistema registra a categoria e a disponibiliza para todos os usuários.
+
+Fluxo Alternativo (2): Editar categoria
+
+a) O administrador seleciona uma categoria existente para edição.<br>
+b) O sistema apresenta os dados atuais da categoria.<br>
+c) O administrador altera os dados e confirma.<br>
+d) O sistema atualiza a categoria.
+
+Fluxo Alternativo (3): Excluir categoria em uso
+
+a) O administrador solicita a exclusão de uma categoria que possui hábitos de usuários associados.<br>
+b) O sistema informa que a categoria está em uso e exibe o número de hábitos vinculados.<br>
+c) O sistema solicita confirmação, informando que os hábitos perderão a associação com essa categoria.<br>
+d) O administrador confirma.<br>
+e) O sistema remove a categoria e desassocia os hábitos vinculados.
+
+Fluxo Alternativo (4): Dados inválidos
+
+a) O sistema identifica que os dados fornecidos são inválidos (ex: nome vazio ou duplicado).<br>
+b) O sistema informa o erro e solicita correção.<br>
+c) O fluxo retorna ao passo 5.
+
+Pós-condições:
+- As categorias globais foram atualizadas no sistema.
+- As alterações são refletidas imediatamente para todos os usuários.
+
+#### Visualizar logs do sistema (CSU16)
+
+Sumário: O administrador consulta os registros de atividade do sistema.
+
+Ator Primário: Administrador.
+
+Pré-condições:
+- O administrador deve estar autenticado e possuir permissão de administrador.
+
+Fluxo Principal:
+
+1. O administrador acessa a área de logs do sistema.
+2. O sistema exibe os registros mais recentes em ordem cronológica decrescente, sem filtros aplicados.
+3. O administrador aplica filtros opcionais (data, tipo de evento, usuário).
+4. O sistema atualiza a listagem exibindo apenas os registros que correspondem aos critérios informados.
+
+Fluxo Alternativo (1): Nenhum resultado encontrado
+
+a) Nenhum registro corresponde aos filtros aplicados.<br>
+b) O sistema informa a ausência de resultados e permite que o administrador ajuste ou limpe os filtros.
+
+Pós-condições:
+- Os logs foram apresentados para consulta.
 - Nenhum dado é alterado no sistema.
 
 
