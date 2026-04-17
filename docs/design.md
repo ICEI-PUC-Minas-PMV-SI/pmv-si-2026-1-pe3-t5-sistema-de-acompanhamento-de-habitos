@@ -35,6 +35,38 @@ Lucas trabalha 40 horas semanais em regime 5×2 e, apesar de sentir que o dia te
 - Ver o streak crescendo dia a dia
 - Sensação de controle sobre a própria rotina
 
+### Persona 2 — Ricardo Oliveira
+
+**Nome:** Ricardo Oliveira 
+**Idade:** 42 anos
+**Ocupação:** Gerente de Logística
+**Localização:** Itajubá, MG
+**Perfil:** Bem-estar e Rotina
+
+Ricardo tem uma vida profissional estável, mas sente que o sedentarismo e a rotina automática o deixaram sem disposição. Ele quer retomar hábitos simples que tinha antes de os filhos nascerem, mas sente que precisa de um "empurrão" visual para não esquecer de cuidar de si mesmo entre uma reunião e outra.
+
+| Campo | Detalhe |
+|---|---|
+| Idade | 42 anos |
+| Ocupação | Gerente de Logística (5×2, 40h/semana) |
+| Hábitos que quer criar | Ir à academia (3x na semana), ler 10 páginas de um livro, meditar |
+| Tecnologia | Usa muito o celular para trabalho; quer notificações de lembrete |
+
+**Objetivos**
+- Ir à academia regularmente para perder peso.
+- Ler um livro de ficção antes de dormir.
+- Fazer 5 minutos de meditação para reduzir o estresse.
+
+**Frustrações**
+- Chega em casa cansado e senta no sofá para ver TV.
+- Sente dores nas costas por ficar muito tempo sentado.
+- Começa a ler e dorme na segunda página por falta de hábito.
+
+**Motivações**
+- Ter mais fôlego para brincar com os filhos no final de semana.
+- Reduzir a medicação para ansiedade com hábitos naturais.
+- Completar a leitura de um livro que ganhou há meses.
+
 ## 4.2 Mapa de Empatia
 Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A partir do mapa da empatia é possível detalhar a personalidade do cliente e compreendê-la melhor. O objetivo é obter um nível mais profundo de compreensão de uma persona. A seguir um exemplo de template que pode ser usado para o mapa de empatia. Para cada persona deverá ser apresentado o seu respectivo mapa de empatia. Sugere-se a utilização do template apresentado em https://www.rdstation.com/blog/marketing/mapa-da-empatia/.
 
