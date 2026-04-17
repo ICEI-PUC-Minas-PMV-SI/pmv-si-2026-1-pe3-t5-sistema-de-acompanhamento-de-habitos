@@ -37,11 +37,11 @@ Lucas trabalha 40 horas semanais em regime 5×2 e, apesar de sentir que o dia te
 
 ### Persona 2 — Ricardo Oliveira
 
-**Nome:** Ricardo Oliveira 
-**Idade:** 42 anos
-**Ocupação:** Gerente de Logística
-**Localização:** Itajubá, MG
-**Perfil:** Bem-estar e Rotina
+**Nome:** Ricardo Oliveira  
+**Idade:** 42 anos  
+**Ocupação:** Gerente de Logística  
+**Localização:** Itajubá, MG  
+**Perfil:** Bem-estar e Rotina  
 
 Ricardo tem uma vida profissional estável, mas sente que o sedentarismo e a rotina automática o deixaram sem disposição. Ele quer retomar hábitos simples que tinha antes de os filhos nascerem, mas sente que precisa de um "empurrão" visual para não esquecer de cuidar de si mesmo entre uma reunião e outra.
 
@@ -80,6 +80,17 @@ Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A p
 | **Fala e Faz** | Começa desafios com entusiasmo. Usa o celular para gerenciar tarefas. Esquece compromissos sem notificação. |
 | **Dores** | Sensação de desorganização. Culpa quando abandona um hábito. Falta de visibilidade do próprio progresso ao longo do tempo. |
 | **Ganhos** | Satisfação ao ver o streak crescer. Sensação de controle da rotina. Progresso visível ao longo do tempo. |
+
+### Mapa de Empatia — Ricardo Oliveira
+
+| Dimensão | Conteúdo |
+|---|---|
+| **Pensa e Sente** | Quer recuperar a disposição física, mas sente que o "modo automático" do trabalho consome toda sua energia. Sente saudade da vitalidade que tinha antes da paternidade. |
+| **Vê** | Reuniões constantes e planilhas de logística. No tempo livre, vê os filhos cheios de energia enquanto ele se sente exausto no sofá. |
+| **Ouve** | Notificações de trabalho o dia todo. A esposa comentando sobre a saúde dele. Conselhos médicos sobre a necessidade de movimentar o corpo e reduzir o estresse. |
+| **Fala e Faz** | Diz que "segunda-feira começa a academia", mas acaba priorizando o descanso passivo (TV). Usa o celular intensamente para gerenciar a frota, mas esquece de usá-lo para si mesmo. |
+| **Dores** | Dores nas costas por sedentarismo. Culpa por não conseguir brincar com os filhos como gostaria. Frustração por não conseguir terminar uma leitura simples sem dormir. |
+| **Ganhos** | Sensação de realização ao fechar o dia com os "checks" de autocuidado. Menos dependência de medicação. Prazer em compartilhar momentos ativos com a família. |
 
 ## 4.3 Protótipos das Interfaces
 Apresente nesta seção os protótipos de alta fidelidade do sistema proposto. A fidelidade do protótipo refere-se ao nível de detalhes e funcionalidades incorporadas a ele. Assim, um protótipo de alta fidelidade é uma representação interativa do produto, baseada no computador ou em dispositivos móveis. Esse protótipo já apresenta maior semelhança com o design final em termos de detalhes e funcionalidades. No desenvolvimento dos protótipos, devem ser considerados os princípios gestálticos, as recomendações ergonômicas e as regras de design (como as 8 regras de ouro). É importante descrever no texto do relatório como os princípios gestálticos e as regras de ouro foram seguidas no projeto das interfaces. Nesta etapa deve-se dar uma ênfase na implementação do software de modo que possam ser realizados os testes com usuários na etapa seguinte.
