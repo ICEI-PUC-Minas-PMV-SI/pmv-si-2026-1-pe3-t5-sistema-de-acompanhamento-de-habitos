@@ -71,7 +71,7 @@ Ricardo tem uma vida profissional estável, mas sente que o sedentarismo e a rot
 
 **Nome:** Ana Souza  
 **Idade:** 17 anos  
-**Ocupação:** Estudante (Vestibulanda) 
+**Ocupação:** Estudante (Vestibulanda)<br> 
 **Localização:** Belo Horizonte, MG  
 **Perfil:** Preparação Acadêmica 
 
