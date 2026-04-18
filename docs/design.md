@@ -67,6 +67,38 @@ Ricardo tem uma vida profissional estável, mas sente que o sedentarismo e a rot
 - Reduzir a medicação para ansiedade com hábitos naturais.
 - Completar a leitura de um livro que ganhou há meses.
 
+### Persona 3 — Ana Souza
+
+**Nome:** Ana Souza  
+**Idade:** 17 anos  
+**Ocupação:** Estudante (Vestibulanda) 
+**Localização:** Belo Horizonte, MG  
+**Perfil:** Preparação Acadêmica 
+
+Ana está no último ano do ensino médio e se prepara para o vestibular e o ENEM. Sua rotina é intensa, conciliando escola, estudos em casa e, às vezes, cursinho. Apesar de estar motivada a alcançar uma boa nota, ela enfrenta dificuldades para manter consistência nos estudos e organizar seu tempo de forma eficiente. Frequentemente começa cronogramas de estudo bem estruturados, mas não consegue mantê-los por muito tempo, o que gera ansiedade e sensação de atraso.
+
+| Campo | Detalhe |
+|---|---|
+| Idade | 17 anos |
+| Ocupação | Estudante (Vestibulanda) |
+| Hábitos que quer criar | Estudo diário consistente, revisão semanal, resolução de exercícios |
+| Tecnologia | Usa smartphone e notebook; utiliza apps de estudo, cronômetros e plataformas online |
+
+**Objetivos**
+- Criar uma rotina consistente de estudos
+- Revisar conteúdos com frequência para fixação
+- Melhorar desempenho em simulados e provas
+
+**Frustrações**
+- Sente que não consegue cumprir o cronograma de estudos
+- Fica ansiosa ao perceber que está atrasada em relação ao planejamento
+- Não consegue visualizar claramente sue evolução
+
+**Motivações**
+- Lembretes para manter o ritmo de estudos
+- Acompanhar progresso (horas estudadas, conteúdos concluídos)
+- Sensação de estar avançando rumo à aprovação
+
 ## 4.2 Mapa de Empatia
 Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A partir do mapa da empatia é possível detalhar a personalidade do cliente e compreendê-la melhor. O objetivo é obter um nível mais profundo de compreensão de uma persona. A seguir um exemplo de template que pode ser usado para o mapa de empatia. Para cada persona deverá ser apresentado o seu respectivo mapa de empatia. Sugere-se a utilização do template apresentado em https://www.rdstation.com/blog/marketing/mapa-da-empatia/.
 
