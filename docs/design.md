@@ -5,6 +5,8 @@ Nesta seção você deve detalhar as personas do seu projeto. Deve-se documentar
 
 ### Persona 1 — Lucas Ferreira
 
+![Persona Lucas Ferreira](img/persona/Lucas_ferreira.png)
+
 **Nome:** Lucas Ferreira  
 **Idade:** 25 anos  
 **Ocupação:** Analista  
@@ -103,6 +105,8 @@ Ana está no último ano do ensino médio e se prepara para o vestibular e o ENE
 Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A partir do mapa da empatia é possível detalhar a personalidade do cliente e compreendê-la melhor. O objetivo é obter um nível mais profundo de compreensão de uma persona. A seguir um exemplo de template que pode ser usado para o mapa de empatia. Para cada persona deverá ser apresentado o seu respectivo mapa de empatia. Sugere-se a utilização do template apresentado em https://www.rdstation.com/blog/marketing/mapa-da-empatia/.
 
 ### Mapa de Empatia — Lucas Ferreira
+
+![Mapa de Empatia Lucas Ferreira](img/mapa_empatia/Lucas_Ferreira.png)
 
 | Dimensão | Conteúdo |
 |---|---|
