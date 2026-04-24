@@ -106,7 +106,7 @@ Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A p
 
 ### Mapa de Empatia — Lucas Ferreira
 
-![Mapa de Empatia Lucas Ferreira](img/mapa_empatia/Lucas_Ferreira.png)
+![Mapa de Empatia Lucas Ferreira](img/mapa_empatia/Lucas_ferreira.png)
 
 | Dimensão | Conteúdo |
 |---|---|
