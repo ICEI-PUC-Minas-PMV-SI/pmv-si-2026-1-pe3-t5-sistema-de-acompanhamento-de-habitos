@@ -32,27 +32,27 @@ Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A p
 
 ### Mapa de Empatia — Lucas Ferreira
 
-![Mapa de Empatia Lucas Ferreira](img/mapa_empatia/Lucas_ferreira.png)
-
-| Dimensão | Conteúdo |
-|---|---|
-| **Pensa e Sente** | Quer mudar sua rotina mas sente que o dia termina rápido demais. Fica frustrado quando quebra uma sequência que estava construindo. |
-| **Vê** | Amigos produtivos nas redes sociais. Conteúdos sobre produtividade e desenvolvimento pessoal. |
-| **Ouve** | Podcasts de produtividade. Colegas falando sobre apps de rotina. Conselhos de familiares sobre equilíbrio entre trabalho e vida pessoal. |
-| **Fala e Faz** | Começa desafios com entusiasmo. Usa o celular para gerenciar tarefas. Esquece compromissos sem notificação. |
-| **Dores** | Sensação de desorganização. Culpa quando abandona um hábito. Falta de visibilidade do próprio progresso ao longo do tempo. |
-| **Ganhos** | Satisfação ao ver o streak crescer. Sensação de controle da rotina. Progresso visível ao longo do tempo. |
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/fc7f43dd-2911-4dd5-99e1-5a70ee68eaf8" />
 
 ### Mapa de Empatia — Ricardo Oliveira
 
-| Dimensão | Conteúdo |
-|---|---|
-| **Pensa e Sente** | Quer recuperar a disposição física, mas sente que o "modo automático" do trabalho consome toda sua energia. Sente saudade da vitalidade que tinha antes da paternidade. |
-| **Vê** | Reuniões constantes e planilhas de logística. No tempo livre, vê os filhos cheios de energia enquanto ele se sente exausto no sofá. |
-| **Ouve** | Notificações de trabalho o dia todo. A esposa comentando sobre a saúde dele. Conselhos médicos sobre a necessidade de movimentar o corpo e reduzir o estresse. |
-| **Fala e Faz** | Diz que "segunda-feira começa a academia", mas acaba priorizando o descanso passivo (TV). Usa o celular intensamente para gerenciar a frota, mas esquece de usá-lo para si mesmo. |
-| **Dores** | Dores nas costas por sedentarismo. Culpa por não conseguir brincar com os filhos como gostaria. Frustração por não conseguir terminar uma leitura simples sem dormir. |
-| **Ganhos** | Sensação de realização ao fechar o dia com os "checks" de autocuidado. Menos dependência de medicação. Prazer em compartilhar momentos ativos com a família. |
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/e2c86eb3-5011-4660-8622-5ab99ca713c9" />
+
+### Mapa de Empatia - Roberto Alves
+
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/5cc4a0b1-c536-459d-a6b8-316cfeedd3ea" />
+
+### Mapa de Empatia - Fernando Lima
+
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/9a8ceb46-6933-4708-8749-09c0a4ea95d6" />
+
+### Mapa de Empatia - Camila Torres
+
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/3121d068-67b4-4b53-bff3-b072f89aabb3" />
+
+### Mapa de Empatia - Ana Souza
+
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/a18f1569-fd8d-40eb-8979-79d772a723f3" />
 
 ## 4.3 Protótipos das Interfaces
 
