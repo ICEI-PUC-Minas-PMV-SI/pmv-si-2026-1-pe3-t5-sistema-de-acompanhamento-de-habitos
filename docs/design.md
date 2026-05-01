@@ -40,7 +40,7 @@ Mapa da Empatia é um material utilizado para conhecer melhor o seu cliente. A p
 
 ### Mapa de Empatia - Roberto Alves
 
-<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/5cc4a0b1-c536-459d-a6b8-316cfeedd3ea" />
+<img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/8dea15e6-2ef7-4417-9d9b-11fd9f8c8c7f" />
 
 ### Mapa de Empatia - Fernando Lima
 
