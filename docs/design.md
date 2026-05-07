@@ -53,21 +53,137 @@
 
 <img width="1015" height="570" alt="image" src="https://github.com/user-attachments/assets/a18f1569-fd8d-40eb-8979-79d772a723f3" />
 
-## 4.3 Protótipos das Interfaces
+## 4.3 Guia de Estilo e Protótipos das Interfaces
+
+### 4.3.1 Guia de Estilo (Design System)
+
+O guia de estilo completo e interativo do SAH está disponível no arquivo [`SAH Design System.html`](SAH%20Design%20System.html), acessível diretamente no navegador sem dependência de servidor externo. O documento cobre 10 seções editoriais com exemplos vivos de todos os tokens e componentes.
+
+#### Identidade de Marca
+
+**Logo:** símbolo orgânico composto por círculo com opacidade (aura de progresso), forma blob preenchida na cor primária e ponto dourado posicionado na extremidade superior direita, evocando um streak ativo. Acompanhado do wordmark **SAH** em General Sans 700.
+
+#### Paleta de Cores
+
+O sistema utiliza seis famílias de cor com semântica fixa — cada família carrega um único significado no produto e não deve ser reutilizada fora de seu contexto.
+
+| Token | Hex | Uso exclusivo |
+|-------|-----|---------------|
+| `primary` | `#4A7C59` | Ações de avanço, progresso, CTA principal |
+| `primaryHover` | `#3E6B4C` | Estado hover do primário |
+| `primarySoft` | `#DCEAE0` | Fundo de badge success |
+| `primaryFaint` | `#EEF5F0` | Fundo de callout, highlight |
+| `accent` | `#6B5B95` | Bem-estar, reflexão, painel admin |
+| `accentHover` | `#584A7E` | Estado hover do acento |
+| `accentSoft` | `#E5E0ED` | Fundo de badge accent |
+| `accentFaint` | `#F2EFF5` | Surface acento suave |
+| `streak` | `#C89B3C` | Streaks e conquistas — exclusivo |
+| `streakSoft` | `#F4E8CC` | Fundo do indicador de streak |
+| `danger` | `#B8544A` | Terracota quente — erros, ações destrutivas |
+| `dangerSoft` | `#F2DAD7` | Fundo de badge danger |
+| `info` | `#5B7FA8` | Informativo neutro |
+| `infoSoft` | `#DCE5F0` | Fundo de badge info |
+| `bg` | `#FAF7F2` | Fundo global — creme papel |
+| `bgAlt` | `#F4F0E8` | Fundo alternativo sombreado |
+| `surface` | `#FFFFFF` | Cartão, modal |
+| `text` | `#2A2622` | Texto primário |
+| `textMuted` | `#6B655D` | Texto secundário, labels |
+| `textFaint` | `#9B958B` | Texto terciário, placeholders |
+
+> **Princípio:** Verde sage para progresso. Roxo para bem-estar. Dourado para streaks. Nunca misturar os papéis semânticos.
+
+#### Tipografia
+
+| Família | Papel | Fonte de fallback |
+|---------|-------|-------------------|
+| **General Sans** | Títulos, números de streak (display) | Inter Tight → system |
+| **Inter Tight** | Corpo, UI, tabelas | -apple-system → Segoe UI |
+| **JetBrains Mono** | Metadados, refs, código, eyebrows | ui-monospace |
+
+**Escala tipográfica:**
+
+| Nome | Tamanho | Peso | Line-height | Uso |
+|------|---------|------|-------------|-----|
+| display/xl | 64px | 600 | 1.0 | Cover, hero |
+| display/lg | 38px | 600 | 1.1 | Título de seção (h2) |
+| display/md | 26px | 600 | 1.2 | Título de página (tela) |
+| display/sm | 20px | 600 | 1.25 | Card title, modal |
+| body/lg | 17px | 400 | 1.6 | Parágrafo lead |
+| body/md | 14px | 400 | 1.55 | Padrão, UI, tabela |
+| body/sm | 13px | 500 | 1.5 | Label, hint |
+| caption | 12px | 500 | 1.4 | Badge, metadata |
+| mono/xs | 11px | 400 | 1.3 | Eyebrow, code |
+
+> **Regra:** Todo número de UI (streak, métrica, contagem) deve usar `font-variant-numeric: tabular-nums` para alinhamento de coluna.
+
+#### Espaçamento e Borda
+
+**Grade base:** múltiplos de 4px — `4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 56, 80`.
+
+**Border radius:**
+
+| Token | Valor | Uso |
+|-------|-------|-----|
+| `radius.sm` | 6px | Tag, chip pequeno |
+| `radius.md` | 10px | Botão, input, ícone container |
+| `radius.lg` | 14px | Card padrão |
+| `radius.xl` | 20px | Modal, painel grande |
+| `radius.full` | 999px | Avatar, badge, dot |
+
+**Sombras** (tom marrom morno `rgba(40,30,20,…)` — não preto neutro):
+
+| Token | Uso |
+|-------|-----|
+| `shadow.sm` | Card em repouso |
+| `shadow.md` | Card hover, dropdown |
+| `shadow.lg` | Modal, painel flutuante |
+| `shadow.focus` | Ring de foco (acessibilidade) |
+
+#### Ícones
+
+34 ícones em estilo line, traço 1.8px, viewport 24×24. Tamanhos canônicos: 14px (inline/badge), 16px (prefixo de input), 20px (nav/sidebar), 24px (empty-state). Cor herda de `currentColor`.
+
+**Grupos:** Navegação · Ações · Direção · Form & feedback · Hábitos & contexto
+
+#### Componentes
+
+| Componente | Variantes | Notas |
+|-----------|-----------|-------|
+| **Button** | primary, accent, secondary, ghost, danger, dangerGhost | 3 tamanhos (30/40/48px); estados loading e disabled |
+| **Input** | — | Label acima obrigatório; ícone prefixo; estados foco, erro, hint |
+| **Card** | — | Hover opcional com elevação e translate(-1px) |
+| **Badge** | neutral, success, warning, danger, accent, info | 2 tamanhos; dot opcional |
+| **ProgressBar** | — | Cor configurável; animação 0.5s |
+| **Spinner** | — | Cor configurável; 0.7s linear |
+
+#### Voz e Microcopy
+
+A interface fala de forma clara, calma e próxima — nunca culpa, nunca usa jargão técnico.
+
+| Evitar | Preferir |
+|--------|----------|
+| "Erro: senha inválida" | "Mínimo 8 caracteres com 1 número" |
+| "Você falhou hoje" | "Quase lá — amanhã o streak recomeça" |
+| "Operação concluída com sucesso" | "Pronto. Categoria criada." |
+| "Carregando dados…" | "Buscando seus hábitos…" |
+
+---
+
+### 4.3.2 Protótipos das Interfaces
 
 O protótipo de alta fidelidade do Sistema de Acompanhamento de Hábitos (SAH) foi desenvolvido como uma aplicação interativa responsiva, contemplando versões para desktop (1280×820 px) e mobile (360×760 px, moldura estilo iPhone). O protótipo está disponível no arquivo `SAH Prototype _standalone_.html` e é totalmente navegável no navegador, sem dependência de servidor externo.
 
 O protótipo está organizado em três seções, totalizando 13 artboards, detalhados individualmente a seguir.
 
-### Identidade Visual
+#### Identidade Visual
 
 O protótipo adota uma paleta de cores quentes e escuras (fundo `#1a1715`, superfícies `#2a2622`) combinada com verde como cor primária e roxo como cor de destaque. A cor de *streak* (sequência de dias) é diferenciada para reforçar o elemento de engajamento central do sistema. O protótipo oferece um painel de ajustes (*TweaksPanel*) que permite customizar cores, densidade de layout (compacto/regular/confortável), raio dos cards e estilo de ilustração (blobs/dots/minimal), demonstrando a flexibilidade do sistema de design.
 
 ---
 
-### Seção 1 — Módulo de Autenticação
+#### Seção 1 — Módulo de Autenticação
 
-#### Artboard 01 — Login (desktop)
+##### Artboard 01 — Login (desktop)
 
 ![Artboard 01 — Login Desktop](img/prototype/artboard-01-login-desktop.png)
 
@@ -93,7 +209,7 @@ Permitir que o usuário acesse o sistema informando suas credenciais (e-mail e s
 
 ---
 
-#### Artboard 02 — Cadastro (desktop)
+##### Artboard 02 — Cadastro (desktop)
 
 ![Artboard 02 — Cadastro Desktop](img/prototype/artboard-02-cadastro-desktop.png)
 
@@ -119,7 +235,7 @@ Permitir que novos usuários criem uma conta no sistema informando nome, e-mail 
 
 ---
 
-#### Artboard 03 — Recuperar senha (desktop)
+##### Artboard 03 — Recuperar senha (desktop)
 
 ![Artboard 03 — Recuperar Senha Desktop](img/prototype/artboard-03-recuperar-senha-desktop.png)
 
@@ -142,7 +258,7 @@ Permitir que o usuário solicite o envio de um link de redefinição de senha pa
 
 ---
 
-#### Artboard 04 — Login (mobile)
+##### Artboard 04 — Login (mobile)
 
 ![Artboard 04 — Login Mobile](img/prototype/artboard-04-login-mobile.png)
 
@@ -166,7 +282,7 @@ Versão adaptada da tela de login para dispositivos móveis, mantendo todas as f
 
 ---
 
-#### Artboard 05 — Estado: link enviado
+##### Artboard 05 — Estado: link enviado
 
 ![Artboard 05 — Link Enviado](img/prototype/artboard-05-link-enviado.png)
 
@@ -189,9 +305,9 @@ Confirmar ao usuário que o e-mail de redefinição de senha foi enviado com suc
 
 ---
 
-### Seção 2 — Painel Administrativo
+#### Seção 2 — Painel Administrativo
 
-#### Artboard 06 — Dashboard Admin (desktop)
+##### Artboard 06 — Dashboard Admin (desktop)
 
 ![Artboard 06 — Dashboard Admin Desktop](img/prototype/artboard-06-dashboard-admin-desktop.png)
 
@@ -218,7 +334,7 @@ Apresentar uma visão geral da plataforma ao administrador, com indicadores de u
 
 ---
 
-#### Artboard 07 — Dashboard Admin (mobile)
+##### Artboard 07 — Dashboard Admin (mobile)
 
 ![Artboard 07 — Dashboard Admin Mobile](img/prototype/artboard-07-dashboard-admin-mobile.png)
 
@@ -242,7 +358,7 @@ Versão do dashboard administrativo adaptada para smartphone, mantendo as inform
 
 ---
 
-#### Artboard 08 — Gerenciamento de Usuários
+##### Artboard 08 — Gerenciamento de Usuários
 
 ![Artboard 08 — Gerenciamento de Usuários](img/prototype/artboard-08-gerenciamento-usuarios.png)
 
@@ -268,7 +384,7 @@ Permitir ao administrador visualizar, pesquisar e gerenciar os usuários da plat
 
 ---
 
-#### Artboard 09 — Categorias de Hábitos
+##### Artboard 09 — Categorias de Hábitos
 
 ![Artboard 09 — Categorias de Hábitos](img/prototype/artboard-09-categorias-habitos.png)
 
@@ -294,7 +410,7 @@ Permitir ao administrador criar, editar e excluir as categorias de hábitos disp
 
 ---
 
-#### Artboard 10 — Logs de Atividade
+##### Artboard 10 — Logs de Atividade
 
 ![Artboard 10 — Logs de Atividade](img/prototype/artboard-10-logs-atividade.png)
 
@@ -320,9 +436,9 @@ Apresentar o histórico de ações realizadas no sistema em um painel de auditor
 
 ---
 
-### Seção 3 — Estados do Sistema
+#### Seção 3 — Estados do Sistema
 
-#### Artboard 11 — Carregando
+##### Artboard 11 — Carregando
 
 ![Artboard 11 — Carregando](img/prototype/artboard-11-carregando.png)
 
@@ -345,7 +461,7 @@ Comunicar ao usuário que o sistema está processando uma requisição, evitando
 
 ---
 
-#### Artboard 12 — Nenhum resultado
+##### Artboard 12 — Nenhum resultado
 
 ![Artboard 12 — Nenhum Resultado](img/prototype/artboard-12-nenhum-resultado.png)
 
@@ -368,7 +484,7 @@ Comunicar ao usuário que a área acessada está vazia (sem dados cadastrados ou
 
 ---
 
-#### Artboard 13 — Erro global
+##### Artboard 13 — Erro global
 
 ![Artboard 13 — Erro Global](img/prototype/artboard-13-erro-global.png)
 
