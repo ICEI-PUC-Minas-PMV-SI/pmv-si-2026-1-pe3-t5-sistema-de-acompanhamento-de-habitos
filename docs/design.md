@@ -1,5 +1,39 @@
 # 4. PROJETO DO DESIGN DE INTERAÇÃO
 
+## 4.0 Metodologia de Levantamento de Necessidades
+
+O levantamento de necessidades dos usuários do SAH foi conduzido por meio de **pesquisa secundária estruturada**, combinando três fontes complementares: revisão da literatura acadêmica, análise de avaliações de usuários de aplicativos concorrentes e definição do público-alvo documentada na etapa de introdução do projeto.
+
+### Revisão Bibliográfica
+
+A base principal para a compreensão dos conflitos e necessidades dos usuários de sistemas de acompanhamento de hábitos foi a revisão de literatura realizada na Seção 2 (Estado da Arte) deste projeto. As pesquisas analisadas permitiram identificar os principais pontos de conflito enfrentados por usuários desse tipo de sistema:
+
+- **Sustentação do comportamento no longo prazo:** estudos indicam que o engajamento digital tende a decair sem mecanismos de feedback contínuo e reforço positivo (PAULA et al., 2020). Esse conflito fundamentou a decisão de tornar *streaks* e visualização de progresso elementos centrais do SAH.
+- **Ausência de feedback visual:** a dificuldade em perceber progresso ao longo do tempo foi identificada como fator determinante no abandono de hábitos (LALLY et al., 2010), diretamente mapeado como necessidade nas personas dos segmentos estudantil e profissional.
+- **Personalização insuficiente:** a literatura aponta a necessidade de adequação das intervenções digitais ao perfil individual do usuário (CARMO; FORTES, 2022), necessidade que se refletiu nas personas com perfis distintos de frequência, motivação e contexto de uso.
+
+### Análise de Avaliações de Usuários (Benchmarking)
+
+Complementando a revisão bibliográfica, foram analisadas avaliações públicas de usuários dos principais aplicativos concorrentes disponíveis nas lojas Google Play e App Store — Habitica, Streaks e Habit Bull. A análise das avaliações negativas recorrentes revelou os seguintes pontos de conflito reais reportados por usuários:
+
+| Ponto de conflito identificado | Frequência nas avaliações | Reflexo no SAH |
+|-------------------------------|--------------------------|----------------|
+| Interface confusa ou sobrecarregada | Alta | Design minimalista, foco em uma ação por tela |
+| Notificações excessivas ou ineficazes | Alta | Lembretes configuráveis individualmente por hábito |
+| Perda de motivação ao interromper sequência | Alta | Mensagens de encorajamento; streak não apaga histórico |
+| Dificuldade em categorizar hábitos | Média | Módulo de categorias com suporte a categorias globais |
+| Falta de visão consolidada do dia | Média | Dashboard com progresso diário (concluídos vs. pendentes) |
+
+### Definição do Público-Alvo
+
+Os segmentos de usuário foram estabelecidos na Seção 1.4 do projeto, identificando três perfis principais: **estudantes**, **profissionais** e **pessoas com foco em desenvolvimento pessoal**. Esses perfis orientaram diretamente a construção das personas, garantindo que cada arquétipo representasse um segmento real e distinto do público-alvo definido.
+
+### Sobre o Método de Construção das Personas
+
+As personas foram construídas pelo método de **proto-personas** (*assumption-based personas*), técnica indicada para contextos em que a realização de entrevistas primárias não é viável dentro do prazo disponível. Nesse método, os arquétipos de usuário são derivados do conhecimento acumulado sobre o domínio — literatura acadêmica, análise de concorrentes e definição de público-alvo — em vez de entrevistas individuais. O resultado são personas baseadas em evidências secundárias consistentes, adequadas para orientar decisões de design na fase de especificação e prototipação do sistema.
+
+---
+
 ## 4.1 Personas
 
 ### Persona 1 — Lucas Ferreira
