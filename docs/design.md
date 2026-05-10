@@ -550,12 +550,12 @@ O formulário elaborado contém nove perguntas, sendo seis objetivas e três dis
 #### 1) Compreensão rápida do objetivo do sistema
 
 <img width="635" height="296" alt="image" src="https://github.com/user-attachments/assets/e2d5b3a3-3976-48c7-a7db-6d49d7991796" />
-<br>
+<br><br>
 Os resultados obtidos demonstraram que aproximadamente 33,3% dos usuários relataram não compreender de forma imediata o objetivo do sistema ao acessá-lo pela primeira vez. Esse fator pode impactar negativamente a experiência do usuário, dificultando a retenção de possíveis clientes devido à falta de clareza na comunicação inicial da proposta do software. 
-<br>
+<br><br>
 <img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/cb117573-683e-4eae-9126-4dbf8f7a041d" />
 <i>Legenda: Comentário de usuário destacando oportunidades de melhoria na apresentação inicial do sistema.</i>
-<br>
+<br><br>
 Com base nos dados coletados, a equipe passou a discutir a possibilidade de implementar uma landing page contendo informações explicativas sobre o sistema, uma apresentação da equipe responsável pelo projeto e uma descrição mais clara dos objetivos da plataforma.
 
 
