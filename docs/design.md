@@ -548,7 +548,7 @@ Para a realização da validação do software, foi utilizada a ferramenta Googl
 O formulário elaborado contém nove perguntas, sendo seis objetivas e três discursivas. Os dados detalhados encontram-se disponíveis nos anexos deste documento.
 
 #### 1. Compreensão rápida do objetivo do sistema
-
+<br>
 <img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/e2d5b3a3-3976-48c7-a7db-6d49d7991796" />
 <br><br>
 Os resultados obtidos demonstraram que aproximadamente 33,3% dos usuários relataram não compreender de forma imediata o objetivo do sistema ao acessá-lo pela primeira vez. Esse fator pode impactar negativamente a experiência do usuário, dificultando a retenção de possíveis clientes devido à falta de clareza na comunicação inicial da proposta do software. 
@@ -560,25 +560,25 @@ Com base nos dados coletados, a equipe passou a discutir a possibilidade de impl
 
 
 #### 2. Clareza na nomenclatura das seções
-
+<br>
 <img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/8521fb7f-06da-4433-abd5-6338270d4d96" />
 <br><br>
 Uma parcela dos participantes informou que a nomenclatura das seções do sistema apresenta apenas clareza parcial. Esse resultado evidencia a existência de pontos que ainda podem ser aprimorados para tornar a navegação mais intuitiva. 
 <br><br>
 <img width="920" height="116" alt="image" src="https://github.com/user-attachments/assets/f31fee55-dfae-4fc2-90c8-e2825d99ea99" />
-<i>Legenda:Relatos de usuários sobre o nível de segurança e compreensão durante a utilização do sistema.</i>
+<i>Legenda: Relatos de usuários sobre o nível de segurança e compreensão durante a utilização do sistema.</i>
 <br><br>
 Diante dessa análise, a equipe pretende aperfeiçoar elementos que já demonstraram resultados positivos, buscando tornar o fluxo de navegação mais intuitivo e proporcionar uma experiência mais eficiente aos usuários ao explorarem funcionalidades e seções da plataforma. 
 
 
 #### 3. Facilidade na localização de informações ou funcionalidades 
-
+<br>
 <img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/5321d439-0c31-492e-b007-47c7f5abbfa6" />
 <br><br>
 Parte dos usuários relatou dificuldades para localizar determinadas informações e funcionalidades dentro do sistema, indicando a necessidade de melhorias relacionadas à organização e acessibilidade da interface. 
 <br><br>
 <img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/38df5cef-663b-46f2-98af-1c42040923fd" />
-<i>Legenda:  Sugestão de um usuário sobre a modificação da localidade de uma função específica.</i>
+<i>Legenda: Sugestão de um usuário sobre a modificação da localidade de uma função específica.</i>
 <br><br>
 Com o objetivo de minimizar esse problema, serão realizadas discussões para avaliar possíveis alterações estruturais, incluindo modificações no layout e a implementação de novas páginas, visando facilitar a navegação e otimizar a experiência do usuário. 
 
