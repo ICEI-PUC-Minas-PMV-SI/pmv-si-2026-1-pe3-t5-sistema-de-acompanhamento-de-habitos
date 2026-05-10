@@ -614,12 +614,12 @@ Diante desses dados, a equipe identificou que a clareza deve ser reforçada desd
 
 ### 6.Existência de termos ou expressões desordenadas
 
-<<img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/9e64aec7-2baa-4f6d-9110-6660fa35eb12" />
+<img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/9e64aec7-2baa-4f6d-9110-6660fa35eb12" />
 <br>
 Os resultados obtidos demonstram que a grande maioria dos participantes, totalizando 83,3%, afirmou não ter encontrado termos técnicos ou expressões confusas durante a navegação. Apenas uma pequena parcela de 16,7% relatou ter compreendido apenas parcialmente a linguagem utilizada. Esse índice positivo indica que a terminologia adotada é, em geral, acessível e adequada ao público-alvo, facilitando a interação direta com as funcionalidades da plataforma. 
 <br><br>
 <img width="935" height="205" alt="image" src="https://github.com/user-attachments/assets/0e756fa8-ad24-45cb-9ba8-aaba8ce376ce" />
-<i>Legenda: Segurança dos usuário na utilização do protótipo</i>
+<i>Legenda: Segurança dos usuários na utilização do protótipo</i>
 <br><br>
 A partir desses dados e dos feedbacks qualitativos, a equipe observou que, embora a maioria consiga acessar o que precisa sem problemas, existe uma oportunidade clara de aumentar a confiança de usuários menos experientes. Como destacado nos relatos, a implementação de um botão de "Ajuda" ou um tutorial rápido seria bem-vinda para garantir que ninguém se sinta desamparado tecnologicamente. Essa ação visa reforçar o sentimento de controle da rotina e reduzir a ansiedade (dores identificadas em uma das personas do projeto).
 
