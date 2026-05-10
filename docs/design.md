@@ -558,6 +558,7 @@ Os resultados obtidos demonstraram que aproximadamente 33,3% dos usuários relat
 <br><br>
 Com base nos dados coletados, a equipe passou a discutir a possibilidade de implementar uma landing page contendo informações explicativas sobre o sistema, uma apresentação da equipe responsável pelo projeto e uma descrição mais clara dos objetivos da plataforma.
 
+---
 
 ### 2. Clareza na nomenclatura das seções
 
@@ -570,6 +571,7 @@ Uma parcela dos participantes informou que a nomenclatura das seções do sistem
 <br><br>
 Diante dessa análise, a equipe pretende aperfeiçoar elementos que já demonstraram resultados positivos, buscando tornar o fluxo de navegação mais intuitivo e proporcionar uma experiência mais eficiente aos usuários ao explorarem funcionalidades e seções da plataforma. 
 
+---
 
 ### 3. Facilidade na localização de informações ou funcionalidades 
 
