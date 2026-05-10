@@ -607,5 +607,14 @@ Os resultados obtidos demonstram que a maioria dos usuários, totalizando 66,7%,
 Diante desses dados, a equipe identificou que a clareza deve ser reforçada desde o primeiro contato com a ferramenta. Embora usuários tenham destacado que o "fluxo é bem intuitivo", houve sugestões explícitas para tornar o objetivo da aplicação mais claro já na página de cadastro. Essa ação irá visar mitigar a sensação de desorganização ou falta de 
 visibilidade de progresso.
 
+### 6.Existência de termos ou expressões confusas
 
+<img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/5321d439-0c31-492e-b007-47c7f5abbfa6" />
+<br>
+Os resultados obtidos demonstram que a grande maioria dos participantes, totalizando 83,3%, afirmou não ter encontrado termos técnicos ou expressões confusas durante a navegação. Apenas uma pequena parcela de 16,7% relatou ter compreendido apenas parcialmente a linguagem utilizada. Esse índice positivo indica que a terminologia adotada é, em geral, acessível e adequada ao público-alvo, facilitando a interação direta com as funcionalidades da plataforma. 
+<br><br>
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/38df5cef-663b-46f2-98af-1c42040923fd" />
+<i>Legenda: Segurança dos usuário na utilização do protótipo</i>
+<br><br>
+A partir desses dados e dos feedbacks qualitativos, a equipe observou que, embora a maioria consiga acessar o que precisa sem problemas, existe uma oportunidade clara de aumentar a confiança de usuários menos experientes. Como destacado nos relatos, a implementação de um botão de "Ajuda" ou um tutorial rápido seria bem-vinda para garantir que ninguém se sinta desamparado tecnologicamente. Essa ação visa reforçar o sentimento de controle da rotina e reduzir a ansiedade (dores identificadas em uma das personas do projeto).
 
