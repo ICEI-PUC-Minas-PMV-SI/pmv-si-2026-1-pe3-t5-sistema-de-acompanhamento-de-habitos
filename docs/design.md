@@ -542,10 +542,20 @@ Comunicar ao usuário que ocorreu um erro inesperado no sistema, de forma humani
 - **Consistência:** Formato visual e tom de voz da mensagem de erro alinhados com o restante da aplicação, mantendo a identidade visual mesmo em cenários de falha.
 
 ## 4.4 Testes com Protótipos
-Nesta seção você deve apresentar os testes realizados com usuários utilizando os protótipos de alta fidelidade desenvolvidos na seção anterior. O objetivo é avaliar a usabilidade, a clareza das informações e a adequação do design às necessidades das personas definidas no projeto.
 
-Cada integrante do grupo deverá aplicar o teste com um usuário distinto, preferencialmente alinhado ao perfil das personas criadas. Devem ser definidas previamente as tarefas que o usuário deverá executar no protótipo (por exemplo: realizar um cadastro, buscar um produto, concluir uma compra).
+A presente seção tem como objetivo apresentar os resultados dos testes realizados com os usuários do sistema SAH, avaliando aspectos relacionados à usabilidade, clareza das informações e experiência de navegação na plataforma.
+Para a realização da validação do software, foi utilizada a ferramenta Google Forms, por meio da aplicação de um questionário direcionado a um público específico.
+O formulário elaborado contém nove perguntas, sendo seis objetivas e três discursivas. Os dados detalhados encontram-se disponíveis nos anexos deste documento.
 
-Durante a aplicação do teste, registre observações sobre comportamentos, dúvidas, erros e comentários feitos pelo usuário, bem como o tempo necessário para a execução de cada tarefa. Ao final, colete o feedback do participante, destacando pontos positivos e aspectos a serem melhorados.
+### 1) Compreensão rápida do objetivo do sistema
 
-Os resultados obtidos por todos os integrantes devem ser consolidados, apresentando uma análise geral com os principais problemas encontrados, oportunidades de melhoria e as ações previstas para o projeto final. 
+<img width="635" height="296" alt="image" src="https://github.com/user-attachments/assets/e2d5b3a3-3976-48c7-a7db-6d49d7991796" />
+
+Os resultados obtidos demonstraram que aproximadamente 33,3% dos usuários relataram não compreender de forma imediata o objetivo do sistema ao acessá-lo pela primeira vez. Esse fator pode impactar negativamente a experiência do usuário, dificultando a retenção de possíveis clientes devido à falta de clareza na comunicação inicial da proposta do software. 
+
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/cb117573-683e-4eae-9126-4dbf8f7a041d" />
+<sub>*Legenda: Comentário de usuário destacando oportunidades de melhoria na apresentação inicial do sistema.*</sub>
+
+Com base nos dados coletados, a equipe passou a discutir a possibilidade de implementar uma landing page contendo informações explicativas sobre o sistema, uma apresentação da equipe responsável pelo projeto e uma descrição mais clara dos objetivos da plataforma.
+
+
