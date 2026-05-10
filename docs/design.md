@@ -584,7 +584,28 @@ Parte dos usuários relatou dificuldades para localizar determinadas informaçõ
 <br><br>
 Com o objetivo de minimizar esse problema, serão realizadas discussões para avaliar possíveis alterações estruturais, incluindo modificações no layout e a implementação de novas páginas, visando facilitar a navegação e otimizar a experiência do usuário. 
 
+### 4. Clareza nos elementos visuais(cores, ícones e layout) e facilidade na navegação
 
+<img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/5321d439-0c31-492e-b007-47c7f5abbfa6" />
+<br>
+Os resultados obtidos demonstram que aproximadamente 16,7% dos usuários relataram compreender apenas parcialmente quais elementos da interface são clicáveis ao interagir com o sistema. Embora a grande maioria (83,3%) tenha identificado os componentes de interação com facilidade, a existência de uma parcela que enfrenta incertezas visuais indica que cores, ícones ou o layout podem não estar comunicando a função de clique de maneira universal. 
+<br><br>
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/38df5cef-663b-46f2-98af-1c42040923fd" />
+<i>Legenda: Relatos dos usuários sobre melhorias e segurança na utilização do sistema</i>
+<br><br>
+Com base nos dados coletados e nos feedbacks qualitativos, a equipe identificou a necessidade de refinar a experiência de integração do usuário. As sugestões apontam para a implementação de um tutorial rápido ou um botão de "Ajuda" acessível, visando oferecer suporte a usuários com menor familiaridade tecnológica. Além disso, a equipe discute a expansão da aba de perfil, permitindo a inclusão de mais campos para uma experiência personalizada, garantindo que o sistema se adapte melhor às necessidades individuais de organização e autocuidado. 
+
+### 5.Elementos que podem gerar confusão ou chamar  a atenção do usuário inadequadamente
+
+<img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/5321d439-0c31-492e-b007-47c7f5abbfa6" />
+<br>
+Os resultados obtidos demonstram que a maioria dos usuários, totalizando 66,7%, relatou que existem elementos que geram confusão parcialmente durante o uso da plataforma. Em contrapartida, 33,3% dos participantes afirmaram não ter encontrado dificuldades ou distrações visuais inadequadas. Essa percepção mista indica que, embora o fluxo principal possa ser intuitivo para alguns, há componentes de design que ainda não comunicam sua finalidade com total clareza para a maior parte do público testado. 
+<br><br>
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/38df5cef-663b-46f2-98af-1c42040923fd" />
+<i>Legenda: Sugestão e relatos dos usuários sobre utilização da interface e melhorias</i>
+<br><br>
+Diante desses dados, a equipe identificou que a clareza deve ser reforçada desde o primeiro contato com a ferramenta. Embora usuários tenham destacado que o "fluxo é bem intuitivo", houve sugestões explícitas para tornar o objetivo da aplicação mais claro já na página de cadastro. Essa ação irá visar mitigar a sensação de desorganização ou falta de 
+visibilidade de progresso.
 
 
 
