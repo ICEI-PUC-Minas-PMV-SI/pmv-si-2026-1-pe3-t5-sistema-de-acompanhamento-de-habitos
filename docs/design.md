@@ -629,7 +629,8 @@ A partir desses dados e dos feedbacks qualitativos, a equipe observou que, embor
 
 <img width="950" height="290" alt="image" src="https://github.com/user-attachments/assets/8e230335-e48d-4ba6-8bc8-0006b24dbc06" />
 <i>Legenda: Respostas dos usuários quando foram indagados sobre o que melhorariam no sistema</i>
-<br>
+<br><br>
+
 As respostas coletadas na seção de sugestões de melhorias permitiram identificar pontos relevantes relacionados à experiência do usuário, usabilidade e personalização do sistema. De maneira geral, os participantes demonstraram interesse em tornar a plataforma mais intuitiva, acessível e acolhedora durante o uso.
 
 Um aspecto observado foi a preocupação dos usuários com a experiência emocional durante a utilização do sistema. Houve sugestões para que a aplicação adotasse uma abordagem mais motivacional e acolhedora diante de falhas ou perda de sequência de hábitos (“streak”), demonstrando que elementos de incentivo e empatia podem contribuir positivamente para o engajamento e permanência dos usuários na plataforma.
