@@ -612,7 +612,7 @@ Diante desses dados, a equipe identificou que a clareza deve ser reforçada desd
 
 ---
 
-### 6.Existência de termos ou expressões desordenadas
+### 6. Existência de termos ou expressões desordenadas
 
 <img width="620" height="300" alt="image" src="https://github.com/user-attachments/assets/9e64aec7-2baa-4f6d-9110-6660fa35eb12" />
 <br>
@@ -622,4 +622,21 @@ Os resultados obtidos demonstram que a grande maioria dos participantes, totaliz
 <i>Legenda: Segurança dos usuários na utilização do protótipo</i>
 <br><br>
 A partir desses dados e dos feedbacks qualitativos, a equipe observou que, embora a maioria consiga acessar o que precisa sem problemas, existe uma oportunidade clara de aumentar a confiança de usuários menos experientes. Como destacado nos relatos, a implementação de um botão de "Ajuda" ou um tutorial rápido seria bem-vinda para garantir que ninguém se sinta desamparado tecnologicamente. Essa ação visa reforçar o sentimento de controle da rotina e reduzir a ansiedade (dores identificadas em uma das personas do projeto).
+
+---
+
+### Sugestões de Melhorias
+
+<img width="950" height="290" alt="image" src="https://github.com/user-attachments/assets/8e230335-e48d-4ba6-8bc8-0006b24dbc06" />
+<i>Legenda: Respostas dos usuários quando foram indagados sobre o que melhorariam no sistema</i>
+<br>
+As respostas coletadas na seção de sugestões de melhorias permitiram identificar pontos relevantes relacionados à experiência do usuário, usabilidade e personalização do sistema. De maneira geral, os participantes demonstraram interesse em tornar a plataforma mais intuitiva, acessível e acolhedora durante o uso.
+
+Um aspecto observado foi a preocupação dos usuários com a experiência emocional durante a utilização do sistema. Houve sugestões para que a aplicação adotasse uma abordagem mais motivacional e acolhedora diante de falhas ou perda de sequência de hábitos (“streak”), demonstrando que elementos de incentivo e empatia podem contribuir positivamente para o engajamento e permanência dos usuários na plataforma.
+
+Além disso, alguns participantes sugeriram melhorias relacionadas à personalização e visualização de dados. Entre elas, destacam-se a adição de mais campos no perfil do usuário e a implementação de gráficos mais detalhados na seção de progresso geral, permitindo uma experiência mais personalizada e informativa.
+
+Por fim, também foram mencionadas melhorias voltadas à praticidade e segurança do sistema, como a otimização do processo de recuperação de senha por meio de métodos mais rápidos, incluindo autenticação via código enviado ao celular.
+
+De modo geral, as sugestões recebidas forneceram direcionamentos importantes para futuras melhorias do sistema, evidenciando oportunidades de aperfeiçoamento relacionadas à navegação, comunicação visual, personalização, acessibilidade e experiência do usuário.
 
