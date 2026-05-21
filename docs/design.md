@@ -553,7 +553,7 @@ O formulário elaborado contém nove perguntas, sendo seis objetivas e três dis
 <br>
 Os resultados obtidos demonstraram que aproximadamente 33,3% dos usuários relataram não compreender de forma imediata o objetivo do sistema ao acessá-lo pela primeira vez. Esse fator pode impactar negativamente a experiência do usuário, dificultando a retenção de possíveis clientes devido à falta de clareza na comunicação inicial da proposta do software. 
 <br><br>
-<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/cb117573-683e-4eae-9126-4dbf8f7a041d" />
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/cb117573-683e-4eae-9126-4dbf8f7a041d" /><br>
 <i>Legenda: Comentário de usuário destacando oportunidades de melhoria na apresentação inicial do sistema.</i>
 <br><br>
 Com base nos dados coletados, a equipe passou a discutir a possibilidade de implementar uma landing page contendo informações explicativas sobre o sistema, uma apresentação da equipe responsável pelo projeto e uma descrição mais clara dos objetivos da plataforma.
@@ -566,7 +566,7 @@ Com base nos dados coletados, a equipe passou a discutir a possibilidade de impl
 <br>
 Uma parcela dos participantes informou que a nomenclatura das seções do sistema apresenta apenas clareza parcial. Esse resultado evidencia a existência de pontos que ainda podem ser aprimorados para tornar a navegação mais intuitiva. 
 <br><br>
-<img width="920" height="116" alt="image" src="https://github.com/user-attachments/assets/f31fee55-dfae-4fc2-90c8-e2825d99ea99" />
+<img width="920" height="116" alt="image" src="https://github.com/user-attachments/assets/f31fee55-dfae-4fc2-90c8-e2825d99ea99" /><br>
 <i>Legenda: Relatos de usuários sobre o nível de segurança e compreensão durante a utilização do sistema.</i>
 <br><br>
 Diante dessa análise, a equipe pretende aperfeiçoar elementos que já demonstraram resultados positivos, buscando tornar o fluxo de navegação mais intuitivo e proporcionar uma experiência mais eficiente aos usuários ao explorarem funcionalidades e seções da plataforma. 
@@ -579,7 +579,7 @@ Diante dessa análise, a equipe pretende aperfeiçoar elementos que já demonstr
 <br>
 Parte dos usuários relatou dificuldades para localizar determinadas informações e funcionalidades dentro do sistema, indicando a necessidade de melhorias relacionadas à organização e acessibilidade da interface. 
 <br><br>
-<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/38df5cef-663b-46f2-98af-1c42040923fd" />
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/38df5cef-663b-46f2-98af-1c42040923fd" /><br>
 <i>Legenda: Sugestão de um usuário sobre a modificação da localidade de uma função específica.</i>
 <br><br>
 Com o objetivo de minimizar esse problema, serão realizadas discussões para avaliar possíveis alterações estruturais, incluindo modificações no layout e a implementação de novas páginas, visando facilitar a navegação e otimizar a experiência do usuário. 
@@ -592,7 +592,7 @@ Com o objetivo de minimizar esse problema, serão realizadas discussões para av
 <br>
 Os resultados obtidos demonstram que aproximadamente 16,7% dos usuários relataram compreender apenas parcialmente quais elementos da interface são clicáveis ao interagir com o sistema. Embora a grande maioria (83,3%) tenha identificado os componentes de interação com facilidade, a existência de uma parcela que enfrenta incertezas visuais indica que cores, ícones ou o layout podem não estar comunicando a função de clique de maneira universal. 
 <br><br>
-<img width="920" height="75" alt="image" src="https://github.com/user-attachments/assets/b2b82081-7945-497f-9268-4ac5b9cfde3f" />
+<img width="920" height="75" alt="image" src="https://github.com/user-attachments/assets/b2b82081-7945-497f-9268-4ac5b9cfde3f" /><br>
 <i>Legenda: Relatos de um usuário sobre melhorias na segurança na utilização do sistema</i>
 <br><br>
 Com base nos dados coletados e nos feedbacks qualitativos, a equipe identificou a necessidade de refinar a experiência de integração do usuário. As sugestões apontam para a implementação de um tutorial rápido ou um botão de "Ajuda" acessível, visando oferecer suporte a usuários com menor familiaridade tecnológica. Além disso, a equipe discute a expansão da aba de perfil, permitindo a inclusão de mais campos para uma experiência personalizada, garantindo que o sistema se adapte melhor às necessidades individuais de organização e autocuidado. 
@@ -605,7 +605,7 @@ Com base nos dados coletados e nos feedbacks qualitativos, a equipe identificou 
 <br>
 Os resultados obtidos demonstram que a maioria dos usuários, totalizando 66,7%, relatou que existem elementos que geram confusão parcialmente durante o uso da plataforma. Em contrapartida, 33,3% dos participantes afirmaram não ter encontrado dificuldades ou distrações visuais inadequadas. Essa percepção mista indica que, embora o fluxo principal possa ser intuitivo para alguns, há componentes de design que ainda não comunicam sua finalidade com total clareza para a maior parte do público testado. 
 <br><br>
-<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/315b5a23-9938-460d-bd73-0c6a060d57fc" />
+<img width="920" height="60" alt="image" src="https://github.com/user-attachments/assets/315b5a23-9938-460d-bd73-0c6a060d57fc" /><br>
 <i>Legenda: Feedback de um usuário sobre a interface da plataforma</i>
 <br><br>
 Diante desses dados, a equipe identificou que a clareza deve ser reforçada desde o primeiro contato com a ferramenta. Embora usuários tenham destacado a interface como "simples e limpa", houve sugestões explícitas para tornar o objetivo da aplicação mais claro já na página de cadastro. Essa ação irá visar mitigar a sensação de desorganização ou falta de visibilidade de progresso.
@@ -618,8 +618,8 @@ Diante desses dados, a equipe identificou que a clareza deve ser reforçada desd
 <br>
 Os resultados obtidos demonstram que a grande maioria dos participantes, totalizando 83,3%, afirmou não ter encontrado termos técnicos ou expressões confusas durante a navegação. Apenas uma pequena parcela de 16,7% relatou ter compreendido apenas parcialmente a linguagem utilizada. Esse índice positivo indica que a terminologia adotada é, em geral, acessível e adequada ao público-alvo, facilitando a interação direta com as funcionalidades da plataforma. 
 <br><br>
-<img width="935" height="205" alt="image" src="https://github.com/user-attachments/assets/0e756fa8-ad24-45cb-9ba8-aaba8ce376ce" />
-  <i>Legenda: Segurança dos usuários na utilização do protótipo</i>
+<img width="935" height="205" alt="image" src="https://github.com/user-attachments/assets/0e756fa8-ad24-45cb-9ba8-aaba8ce376ce" /><br>
+<i>Legenda: Segurança dos usuários na utilização do protótipo</i>
 <br><br>
 A partir desses dados e dos feedbacks qualitativos, a equipe observou que, embora a maioria consiga acessar o que precisa sem problemas, existe uma oportunidade clara de aumentar a confiança de usuários menos experientes. Como destacado nos relatos, a implementação de um botão de "Ajuda" ou um tutorial rápido seria bem-vinda para garantir que ninguém se sinta desamparado tecnologicamente. Essa ação visa reforçar o sentimento de controle da rotina e reduzir a ansiedade (dores identificadas em uma das personas do projeto).
 
@@ -627,7 +627,7 @@ A partir desses dados e dos feedbacks qualitativos, a equipe observou que, embor
 
 ### Sugestões de Melhorias
 
-<img width="950" height="290" alt="image" src="https://github.com/user-attachments/assets/8e230335-e48d-4ba6-8bc8-0006b24dbc06" />
+<img width="950" height="290" alt="image" src="https://github.com/user-attachments/assets/8e230335-e48d-4ba6-8bc8-0006b24dbc06" /><br>
 <i>Legenda: Respostas dos usuários quando foram indagados sobre o que melhorariam no sistema</i>
 <br><br>
 
