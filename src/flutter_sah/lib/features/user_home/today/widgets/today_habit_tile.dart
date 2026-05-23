@@ -3,16 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_shadows.dart';
+import '../../habits/utils/habit_icons.dart';
 import '../controllers/today_controller.dart';
 
 class TodayHabitTile extends StatelessWidget {
   final TodayHabitEntry entry;
   final VoidCallback onToggle;
+  final VoidCallback? onLongPress;
 
   const TodayHabitTile({
     super.key,
     required this.entry,
     required this.onToggle,
+    this.onLongPress,
   });
 
   Color get _catColor {
@@ -46,6 +49,7 @@ class TodayHabitTile extends StatelessWidget {
       onTap: onToggle,
       child: GestureDetector(
       onTap: onToggle,
+      onLongPress: onLongPress,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
@@ -60,26 +64,30 @@ class TodayHabitTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Checkbox
+            // Checkbox / ícone do hábito
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 28,
-              height: 28,
+              width: 36,
+              height: 36,
               decoration: BoxDecoration(
-                color: done ? _catColor : SahColors.surface,
+                color: done ? _catColor : _catColor.withAlpha(20),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: done ? _catColor : SahColors.border,
-                  width: 2,
+                  color: done ? _catColor : _catColor.withAlpha(80),
+                  width: done ? 2 : 1.5,
                 ),
               ),
               child: done
                   ? Icon(
                       Icons.check_rounded,
-                      size: 16,
+                      size: 18,
                       color: SahColors.surface,
                     )
-                  : null,
+                  : Icon(
+                      HabitIcons.iconFor(entry.habit.icone),
+                      size: 18,
+                      color: _catColor,
+                    ),
             ),
             const SizedBox(width: 14),
             // Conteúdo

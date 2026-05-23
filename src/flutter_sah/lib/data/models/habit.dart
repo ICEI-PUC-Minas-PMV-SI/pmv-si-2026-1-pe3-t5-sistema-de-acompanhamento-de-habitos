@@ -8,6 +8,7 @@ class Habit {
   final bool ativo;
   final bool arquivado;
   final List<String> lembretes; // ['08:00', '20:00'] — HH:mm
+  final String? icone; // nome simbólico do ícone (ex.: 'drop', 'book')
 
   const Habit({
     required this.id,
@@ -19,6 +20,7 @@ class Habit {
     this.ativo = true,
     this.arquivado = false,
     this.lembretes = const [],
+    this.icone,
   });
 
   factory Habit.fromJson(Map<String, dynamic> j) => Habit(
@@ -34,6 +36,7 @@ class Habit {
         ativo: j['ativo'] as bool? ?? true,
         arquivado: j['arquivado'] as bool? ?? false,
         lembretes: (j['lembretes'] as List<dynamic>?)?.cast<String>() ?? const [],
+        icone: j['icone'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -46,6 +49,7 @@ class Habit {
         'ativo': ativo,
         'arquivado': arquivado,
         'lembretes': lembretes,
+        'icone': icone,
       };
 
   Habit copyWith({
@@ -58,6 +62,7 @@ class Habit {
     bool? ativo,
     bool? arquivado,
     List<String>? lembretes,
+    String? icone,
   }) =>
       Habit(
         id: id ?? this.id,
@@ -69,5 +74,6 @@ class Habit {
         ativo: ativo ?? this.ativo,
         arquivado: arquivado ?? this.arquivado,
         lembretes: lembretes ?? this.lembretes,
+        icone: icone ?? this.icone,
       );
 }

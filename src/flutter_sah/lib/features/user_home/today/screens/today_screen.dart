@@ -3,8 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_palette_scope.dart';
+import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
-import '../../../../core/design_system/widgets/sah_empty_state.dart';
+import '../../../../core/design_system/widgets/sah_action_sheet.dart';
+import '../../../../core/design_system/widgets/sah_button.dart';
+import '../../../../core/design_system/widgets/sah_illustrated_empty.dart';
+import '../../../../core/design_system/widgets/sah_input.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../data/backup/auto_backup_service.dart';
 import '../../../../data/notifications/notification_service.dart';
@@ -153,11 +157,8 @@ class _TodayView extends StatelessWidget {
           ),
         );
       }
-      return const SliverFillRemaining(
-        child: SahEmptyState(
-          title: 'Dia livre!',
-          description: 'Nenhum hábito agendado para hoje.',
-        ),
+      return SliverFillRemaining(
+        child: SahIllustratedEmpty.todayFree(),
       );
     }
 
@@ -181,13 +182,93 @@ class _TodayView extends StatelessWidget {
         ...ctrl.entries.map(
           (entry) => Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: TodayHabitTile(
-              entry: entry,
-              onToggle: () => ctrl.toggle(entry.habit.id),
-            ),
+            child: Builder(builder: (context) {
+              return TodayHabitTile(
+                entry: entry,
+                onToggle: () => ctrl.toggle(entry.habit.id),
+                onLongPress: () => _showTileActions(context, ctrl, entry),
+              );
+            }),
           ),
         ),
       ]),
+    );
+  }
+
+  void _showTileActions(
+    BuildContext context,
+    TodayController ctrl,
+    TodayHabitEntry entry,
+  ) {
+    showSahActionSheet(
+      context,
+      title: entry.habit.nome,
+      actions: [
+        SahActionItem(
+          icon: entry.frozenToday ? Icons.replay : Icons.snooze_outlined,
+          label: entry.frozenToday ? 'Desfazer pulo' : 'Pular hoje',
+          onTap: () {
+            Navigator.pop(context);
+            ctrl.toggleFreeze(entry.habit.id);
+          },
+        ),
+        SahActionItem(
+          icon: entry.notaToday == null
+              ? Icons.note_add_outlined
+              : Icons.edit_note_outlined,
+          label: entry.notaToday == null ? 'Adicionar nota' : 'Editar nota',
+          onTap: () {
+            Navigator.pop(context);
+            _showNoteDialog(context, ctrl, entry);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _showNoteDialog(
+    BuildContext context,
+    TodayController ctrl,
+    TodayHabitEntry entry,
+  ) {
+    final controller = TextEditingController(text: entry.notaToday ?? '');
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: SahColors.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SahRadius.lg),
+        ),
+        title: Text(
+          'Nota do dia',
+          style: TextStyle(
+            fontFamily: 'GeneralSans',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: SahColors.text,
+          ),
+        ),
+        content: SahInput(
+          label: 'Como foi?',
+          controller: controller,
+          hint: 'Opcional. Ex: dormi mal, treino curto…',
+          autofocus: true,
+        ),
+        actions: [
+          SahButton.ghost(
+            label: 'Cancelar',
+            onPressed: () => Navigator.pop(ctx),
+          ),
+          SahButton.primary(
+            label: 'Salvar',
+            onPressed: () {
+              final text = controller.text.trim();
+              Navigator.pop(ctx);
+              ctrl.setNote(entry.habit.id, text.isEmpty ? null : text);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

@@ -11,6 +11,7 @@ import '../repositories/habit_repository.dart';
 import '../repositories/user_repository.dart';
 import 'audit_logger.dart';
 import 'hive_keys.dart';
+import 'login_attempt_store.dart';
 import 'mailtrap_config_store.dart';
 import 'password_hasher.dart';
 import 'password_reset_token_store.dart';
@@ -27,6 +28,7 @@ class HiveAuthRepository implements AuthRepository {
   final MailtrapConfigStore _mailtrapStore;
   final MailtrapClient _mailtrapClient;
   final PasswordResetTokenStore _tokenStore;
+  final LoginAttemptStore _loginAttempts;
 
   HiveAuthRepository({
     required UserRepository userRepo,
@@ -37,6 +39,7 @@ class HiveAuthRepository implements AuthRepository {
     required MailtrapConfigStore mailtrapStore,
     required MailtrapClient mailtrapClient,
     required PasswordResetTokenStore tokenStore,
+    required LoginAttemptStore loginAttempts,
   })  : _userRepo = userRepo,
         _habitRepo = habitRepo,
         _catRepo = catRepo,
@@ -44,7 +47,8 @@ class HiveAuthRepository implements AuthRepository {
         _notifications = notifications,
         _mailtrapStore = mailtrapStore,
         _mailtrapClient = mailtrapClient,
-        _tokenStore = tokenStore;
+        _tokenStore = tokenStore,
+        _loginAttempts = loginAttempts;
 
   Box<String> get _users => Hive.box<String>(HiveBoxes.users);
   Box<String> get _credentials => Hive.box<String>(HiveBoxes.credentials);
@@ -53,12 +57,28 @@ class HiveAuthRepository implements AuthRepository {
   @override
   Future<Result<User>> login(String email, String password) async {
     final key = email.trim().toLowerCase();
+
+    // Rate limit: bloqueio temporário após N tentativas
+    final remainingLock = _loginAttempts.remainingLock(key);
+    if (remainingLock != null) {
+      final minutes = remainingLock.inMinutes + 1;
+      return Failure(
+        'Conta temporariamente bloqueada. Tente novamente em $minutes minuto${minutes == 1 ? '' : 's'}.',
+      );
+    }
+
     final credRaw = _credentials.get(key);
-    if (credRaw == null) return const Failure('E-mail ou senha incorretos.');
-    final cred = jsonDecode(credRaw) as Map<String, dynamic>;
-    if (!PasswordHasher.verify(password, cred['hash'] as String)) {
+    if (credRaw == null) {
+      await _loginAttempts.registerFailure(key);
       return const Failure('E-mail ou senha incorretos.');
     }
+    final cred = jsonDecode(credRaw) as Map<String, dynamic>;
+    final storedHash = cred['hash'] as String;
+    if (!PasswordHasher.verify(password, storedHash)) {
+      await _loginAttempts.registerFailure(key);
+      return const Failure('E-mail ou senha incorretos.');
+    }
+
     final userId = cred['user_id'] as String;
     final raw = _users.get(userId);
     if (raw == null) return const Failure('Usuário não encontrado.');
@@ -66,6 +86,16 @@ class HiveAuthRepository implements AuthRepository {
     if (user.isBlocked) {
       return const Failure('Sua conta está bloqueada. Entre em contato com o administrador.');
     }
+
+    // Migração silenciosa: se a senha estava em SHA-256 legado, rehasher para bcrypt
+    if (PasswordHasher.needsRehash(storedHash)) {
+      cred['hash'] = PasswordHasher.hash(password);
+      await _credentials.put(key, jsonEncode(cred));
+    }
+
+    // Login bem-sucedido: zera contador de tentativas
+    await _loginAttempts.reset(key);
+
     await _session.put('user_id', userId);
     await AuditLogger.log(
       tipo: AuditEventType.login,

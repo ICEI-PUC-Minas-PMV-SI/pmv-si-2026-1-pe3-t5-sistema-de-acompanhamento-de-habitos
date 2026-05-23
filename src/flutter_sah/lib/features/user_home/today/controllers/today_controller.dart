@@ -16,6 +16,8 @@ typedef TodayHabitEntry = ({
   Habit habit,
   Category? category,
   bool doneToday,
+  bool frozenToday,
+  String? notaToday,
   int streak,
 });
 
@@ -96,7 +98,7 @@ class TodayController extends ChangeNotifier {
       onSuccess: (l) => l,
       onFailure: (_) => <ExecutionLog>[],
     );
-    final doneTodayIds = logsToday.map((l) => l.habitId).toSet();
+    final logByHabitId = {for (final l in logsToday) l.habitId: l};
 
     // Calcular streaks para cada hábito
     final entries = <TodayHabitEntry>[];
@@ -111,10 +113,13 @@ class TodayController extends ChangeNotifier {
             (c) => c?.id == habit.categoriaId,
             orElse: () => null,
           );
+      final logToday = logByHabitId[habit.id];
       entries.add((
         habit: habit,
         category: cat,
-        doneToday: doneTodayIds.contains(habit.id),
+        doneToday: logToday != null && !logToday.frozen,
+        frozenToday: logToday?.frozen ?? false,
+        notaToday: logToday?.nota,
         streak: streak,
       ));
     }
@@ -144,12 +149,36 @@ class TodayController extends ChangeNotifier {
     if (idx == -1) return;
 
     final entry = _entries[idx];
-    if (entry.doneToday) {
+    if (entry.doneToday || entry.frozenToday) {
       await _execRepo.deleteForHabitOnDate(habitId, today);
     } else {
       await _execRepo.create(habitId, today);
     }
     // Reload para recalcular streaks consistentemente
+    await load();
+  }
+
+  /// "Pulei o dia de propósito" — não quebra streak mas também não conta como +1.
+  Future<void> toggleFreeze(String habitId) async {
+    final today = DateTime.now();
+    final idx = _entries.indexWhere((e) => e.habit.id == habitId);
+    if (idx == -1) return;
+
+    final entry = _entries[idx];
+    // Já está pulado → remove
+    if (entry.frozenToday) {
+      await _execRepo.deleteForHabitOnDate(habitId, today);
+    } else {
+      // Substitui qualquer log existente do dia por um freeze
+      await _execRepo.deleteForHabitOnDate(habitId, today);
+      await _execRepo.create(habitId, today, frozen: true);
+    }
+    await load();
+  }
+
+  Future<void> setNote(String habitId, String? nota) async {
+    final today = DateTime.now();
+    await _execRepo.upsertNoteForDate(habitId, today, nota);
     await load();
   }
 }

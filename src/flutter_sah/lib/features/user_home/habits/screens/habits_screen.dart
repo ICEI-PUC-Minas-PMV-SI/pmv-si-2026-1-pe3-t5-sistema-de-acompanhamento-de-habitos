@@ -5,8 +5,9 @@ import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
+import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
-import '../../../../core/design_system/widgets/sah_empty_state.dart';
+import '../../../../core/design_system/widgets/sah_illustrated_empty.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/design_system/tokens/sah_durations.dart';
 import '../../../../core/utils/base_list_controller.dart';
@@ -20,6 +21,7 @@ import '../../../../features/auth/controllers/auth_controller.dart';
 import '../controllers/habits_controller.dart';
 import '../widgets/habit_form_modal.dart';
 import '../widgets/habit_list_item.dart';
+import '../widgets/template_picker_modal.dart';
 
 class HabitsScreen extends StatelessWidget {
   const HabitsScreen({super.key});
@@ -77,7 +79,7 @@ class _HabitsView extends StatelessWidget {
                   ),
                   SahButton.primary(
                     label: 'Novo hábito',
-                    onPressed: () => _showCreate(context, ctrl),
+                    onPressed: () => _showCreateOptions(context, ctrl),
                     size: SahButtonSize.sm,
                   ),
                 ],
@@ -157,19 +159,15 @@ class _HabitsView extends StatelessWidget {
         ),
       );
     } else if (ctrl.habits.isEmpty) {
-      body = SahEmptyState(
+      body = KeyedSubtree(
         key: const ValueKey('empty'),
-        title: ctrl.showArchived
-            ? 'Nenhum hábito arquivado'
-            : 'Nenhum hábito ainda',
-        description: ctrl.showArchived
-            ? 'Hábitos arquivados aparecerão aqui.'
-            : 'Crie seu primeiro hábito para começar.',
-        primaryAction: ctrl.showArchived
-            ? null
-            : SahButton.primary(
-                label: 'Criar primeiro hábito',
-                onPressed: () => _showCreate(context, ctrl),
+        child: ctrl.showArchived
+            ? SahIllustratedEmpty.noArchived()
+            : SahIllustratedEmpty.noHabits(
+                primaryAction: SahButton.primary(
+                  label: 'Criar primeiro hábito',
+                  onPressed: () => _showCreate(context, ctrl),
+                ),
               ),
       );
     } else {
@@ -224,6 +222,67 @@ class _HabitsView extends StatelessWidget {
     if (habit != null && context.mounted) {
       await ctrl.create(habit.copyWith(userId: ctrl.userId));
     }
+  }
+
+  Future<void> _showCreateOptions(
+    BuildContext context,
+    HabitsController ctrl,
+  ) async {
+    await showSahActionSheet(
+      context,
+      title: 'Novo hábito',
+      actions: [
+        SahActionItem(
+          icon: Icons.add_rounded,
+          label: 'Criar do zero',
+          onTap: () {
+            Navigator.pop(context);
+            _showCreate(context, ctrl);
+          },
+        ),
+        SahActionItem(
+          icon: Icons.collections_bookmark_outlined,
+          label: 'Usar template de rotina',
+          onTap: () {
+            Navigator.pop(context);
+            _showTemplates(context, ctrl);
+          },
+        ),
+      ],
+    );
+  }
+
+  Future<void> _showTemplates(
+    BuildContext context,
+    HabitsController ctrl,
+  ) async {
+    final template = await showTemplatePickerModal(context);
+    if (template == null || !context.mounted) return;
+    var created = 0;
+    var failed = 0;
+    for (final t in template.habitos) {
+      final ok = await ctrl.create(Habit(
+        id: '',
+        userId: ctrl.userId,
+        nome: t.nome,
+        categoriaId: t.categoriaId,
+        icone: t.icone,
+        lembretes: List<String>.from(t.lembretes),
+      ));
+      if (ok) {
+        created++;
+      } else {
+        failed++;
+      }
+    }
+    if (!context.mounted) return;
+    final msg = failed == 0
+        ? 'Template aplicado: $created hábitos criados!'
+        : 'Criados $created, $failed falharam.';
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(msg, style: GoogleFonts.interTight(fontSize: 14)),
+      backgroundColor: failed == 0 ? SahColors.primary : SahColors.danger,
+    ));
   }
 
   Future<void> _showEdit(

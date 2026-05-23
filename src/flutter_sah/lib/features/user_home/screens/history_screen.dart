@@ -4,14 +4,17 @@ import 'package:provider/provider.dart';
 import '../../../core/design_system/tokens/sah_colors.dart';
 import '../../../core/design_system/tokens/sah_radius.dart';
 import '../../../core/design_system/tokens/sah_spacing.dart';
-import '../../../core/design_system/widgets/sah_empty_state.dart';
+import '../../../core/design_system/widgets/sah_illustrated_empty.dart';
 import '../../../core/design_system/widgets/sah_spinner.dart';
+import '../../../data/notifications/notification_service.dart';
 import '../../../data/repositories/execution_log_repository.dart';
 import '../../../data/repositories/habit_repository.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../history/controllers/history_controller.dart';
 import '../history/widgets/history_list.dart';
 import '../history/widgets/history_summary_card.dart';
+import '../history/widgets/history_weekly_chart.dart';
+import '../history/widgets/reminder_suggestion_card.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -24,6 +27,7 @@ class HistoryScreen extends StatelessWidget {
         ctx.read<HabitRepository>(),
         ctx.read<ExecutionLogRepository>(),
         userId: auth.currentUser?.id ?? '',
+        notifications: ctx.read<NotificationService>(),
       )..load(),
       child: const _HistoryContent(),
     );
@@ -64,10 +68,7 @@ class _HistoryContent extends StatelessWidget {
           if (ctrl.loading && ctrl.habits.isEmpty)
             const Center(child: SahSpinner(size: 28))
           else if (ctrl.habits.isEmpty)
-            const SahEmptyState(
-              title: 'Nenhum hábito',
-              description: 'Crie um hábito na aba Hábitos para ver seu histórico.',
-            )
+            SahIllustratedEmpty.noHabits()
           else ...[
             _HabitFilterBar(
               habits: ctrl.habits.map((h) => (id: h.id, nome: h.nome)).toList(),
@@ -90,12 +91,38 @@ class _HistoryContent extends StatelessWidget {
                 adherence: ctrl.adherence,
                 bestStreak: ctrl.bestStreak,
               ),
+              if (ctrl.reminderSuggestion != null &&
+                  ctrl.selectedHabit != null &&
+                  !ctrl.isSuggestionDismissed(ctrl.selectedHabit!.id)) ...[
+                const SizedBox(height: 12),
+                ReminderSuggestionCard(
+                  suggestion: ctrl.reminderSuggestion!,
+                  habitName: ctrl.selectedHabit!.nome,
+                  onDismiss: () =>
+                      ctrl.dismissSuggestion(ctrl.selectedHabit!.id),
+                  onApply: () async {
+                    final s = ctrl.reminderSuggestion!;
+                    final ok = await ctrl.applyReminderSuggestion(s);
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        ok
+                            ? 'Lembrete ajustado para ${s.suggestedReminder}'
+                            : 'Não foi possível ajustar.',
+                      ),
+                      backgroundColor:
+                          ok ? SahColors.primary : SahColors.danger,
+                    ));
+                  },
+                ),
+              ],
+              if (ctrl.weeklyAdherence.length >= 2) ...[
+                const SizedBox(height: 12),
+                HistoryWeeklyChart(data: ctrl.weeklyAdherence),
+              ],
               const SizedBox(height: 16),
               if (ctrl.logs.isEmpty)
-                const SahEmptyState(
-                  title: 'Sem registros',
-                  description: 'Nenhum check-in encontrado neste período.',
-                )
+                SahIllustratedEmpty.noHistory()
               else
                 HistoryList(logsByDay: ctrl.logsByDay),
             ],

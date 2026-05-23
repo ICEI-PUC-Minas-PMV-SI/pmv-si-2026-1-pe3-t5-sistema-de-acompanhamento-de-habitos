@@ -6,6 +6,7 @@ import 'core/design_system/theme/sah_theme.dart';
 import 'core/design_system/tokens/sah_colors.dart';
 import 'core/design_system/tokens/sah_palette.dart';
 import 'core/design_system/tokens/sah_palette_scope.dart';
+import 'core/error/error_reporter.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/theme_controller.dart';
 import 'data/local/onboarding_store.dart';
@@ -60,6 +61,7 @@ class _SahAppState extends State<SahApp> with WidgetsBindingObserver {
       child: MaterialApp.router(
         title: 'SAH',
         debugShowCheckedModeBanner: false,
+        scaffoldMessengerKey: ErrorReporter.instance.messengerKey,
         theme: SahTheme.light(),
         darkTheme: SahTheme.dark(),
         themeMode: themeCtrl.mode,

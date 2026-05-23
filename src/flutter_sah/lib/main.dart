@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app.dart';
+import 'core/error/error_reporter.dart';
 import 'core/theme/theme_controller.dart';
 import 'data/http/mailtrap_client.dart';
 import 'data/local/hive_audit_log_repository.dart';
@@ -12,6 +13,7 @@ import 'data/local/hive_habit_repository.dart';
 import 'data/backup/auto_backup_service.dart';
 import 'data/backup/backup_service.dart';
 import 'data/local/hive_user_repository.dart';
+import 'data/local/login_attempt_store.dart';
 import 'data/local/mailtrap_config_store.dart';
 import 'data/local/onboarding_store.dart';
 import 'data/local/password_reset_token_store.dart';
@@ -27,6 +29,7 @@ import 'features/auth/controllers/auth_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ErrorReporter.instance.install();
   await HiveBootstrap.init();
   final themeController = ThemeController();
   await themeController.load();
@@ -61,6 +64,7 @@ Future<void> main() async {
         Provider<MailtrapConfigStore>(create: (_) => MailtrapConfigStore()),
         Provider<MailtrapClient>(create: (_) => MailtrapClient()),
         Provider<PasswordResetTokenStore>(create: (_) => PasswordResetTokenStore()),
+        Provider<LoginAttemptStore>(create: (_) => LoginAttemptStore()),
         Provider<AuthRepository>(
           create: (ctx) => HiveAuthRepository(
             userRepo: ctx.read<UserRepository>(),
@@ -71,6 +75,7 @@ Future<void> main() async {
             mailtrapStore: ctx.read<MailtrapConfigStore>(),
             mailtrapClient: ctx.read<MailtrapClient>(),
             tokenStore: ctx.read<PasswordResetTokenStore>(),
+            loginAttempts: ctx.read<LoginAttemptStore>(),
           ),
         ),
         ChangeNotifierProvider<AuthController>(

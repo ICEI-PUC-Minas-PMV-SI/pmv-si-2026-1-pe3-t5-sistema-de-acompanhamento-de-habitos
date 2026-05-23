@@ -6,6 +6,7 @@ import '../../../../core/design_system/tokens/sah_shadows.dart';
 import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/habit.dart';
+import '../utils/habit_icons.dart';
 
 class HabitListItem extends StatelessWidget {
   final Habit habit;
@@ -84,23 +85,29 @@ class HabitListItem extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      // Ícone de categoria
+                      // Ícone do hábito (ou inicial da categoria como fallback)
                       Container(
-                        width: 32,
-                        height: 32,
+                        width: 36,
+                        height: 36,
                         decoration: BoxDecoration(
                           color: _catColor.withAlpha(25),
                           borderRadius: BorderRadius.circular(SahRadius.sm),
                         ),
                         child: Center(
-                          child: Text(
-                            category?.nome.substring(0, 1).toUpperCase() ?? '?',
-                            style: GoogleFonts.interTight(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: _catColor,
-                            ),
-                          ),
+                          child: habit.icone != null
+                              ? Icon(
+                                  HabitIcons.iconFor(habit.icone),
+                                  size: 18,
+                                  color: _catColor,
+                                )
+                              : Text(
+                                  category?.nome.substring(0, 1).toUpperCase() ?? '?',
+                                  style: GoogleFonts.interTight(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                    color: _catColor,
+                                  ),
+                                ),
                         ),
                       ),
                       const SizedBox(width: 12),

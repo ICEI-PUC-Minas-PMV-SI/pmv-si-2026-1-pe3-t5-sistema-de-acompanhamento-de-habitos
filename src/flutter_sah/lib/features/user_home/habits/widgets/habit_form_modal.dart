@@ -9,6 +9,7 @@ import '../../../../core/design_system/widgets/sah_input.dart';
 import '../../../../core/design_system/widgets/sah_modal.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/habit.dart';
+import '../utils/habit_icons.dart';
 
 Future<Habit?> showHabitFormModal(
   BuildContext context, {
@@ -44,6 +45,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
   late List<int> _frequencia;
   late String? _categoriaId;
   late List<String> _lembretes;
+  String? _icone;
   String? _nomeError;
 
   @override
@@ -57,6 +59,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
     _categoriaId = widget.existing?.categoriaId ??
         (widget.categories.isNotEmpty ? widget.categories.first.id : null);
     _lembretes = List<String>.from(widget.existing?.lembretes ?? []);
+    _icone = widget.existing?.icone;
   }
 
   @override
@@ -136,6 +139,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
       frequencia: List<int>.from(_frequencia)..sort(),
       categoriaId: _categoriaId,
       lembretes: List<String>.from(_lembretes),
+      icone: _icone,
     );
     Navigator.pop(context, habit);
   }
@@ -204,6 +208,21 @@ class _HabitFormModalState extends State<_HabitFormModal> {
               label: 'Descrição (opcional)',
               controller: _descCtrl,
               hint: 'Detalhes ou motivação',
+            ),
+            const SizedBox(height: 16),
+            // Ícone
+            Text(
+              'Ícone',
+              style: GoogleFonts.interTight(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: SahColors.text,
+              ),
+            ),
+            const SizedBox(height: 8),
+            _IconPicker(
+              selected: _icone,
+              onSelect: (name) => setState(() => _icone = name),
             ),
             const SizedBox(height: 16),
             // Categoria
@@ -401,6 +420,81 @@ class _HabitFormModalState extends State<_HabitFormModal> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _IconPicker extends StatelessWidget {
+  final String? selected;
+  final ValueChanged<String?> onSelect;
+
+  const _IconPicker({required this.selected, required this.onSelect});
+
+  @override
+  Widget build(BuildContext context) {
+    final names = HabitIcons.names();
+    return SizedBox(
+      height: 48,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: names.length + 1,
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemBuilder: (_, i) {
+          // Item 0 = "sem ícone"
+          if (i == 0) {
+            final isSelected = selected == null;
+            return GestureDetector(
+              onTap: () => onSelect(null),
+              child: _IconCell(
+                isSelected: isSelected,
+                child: Icon(
+                  Icons.block,
+                  size: 18,
+                  color: isSelected ? SahColors.accent : SahColors.textFaint,
+                ),
+              ),
+            );
+          }
+          final name = names[i - 1];
+          final isSelected = selected == name;
+          return GestureDetector(
+            onTap: () => onSelect(name),
+            child: _IconCell(
+              isSelected: isSelected,
+              child: Icon(
+                HabitIcons.iconFor(name),
+                size: 20,
+                color: isSelected ? SahColors.accent : SahColors.textMuted,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _IconCell extends StatelessWidget {
+  final bool isSelected;
+  final Widget child;
+
+  const _IconCell({required this.isSelected, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: isSelected ? SahColors.accentFaint : SahColors.bgAlt,
+        borderRadius: BorderRadius.circular(SahRadius.md),
+        border: Border.all(
+          color: isSelected ? SahColors.accent : SahColors.border,
+          width: isSelected ? 1.5 : 1,
+        ),
+      ),
+      child: Center(child: child),
     );
   }
 }

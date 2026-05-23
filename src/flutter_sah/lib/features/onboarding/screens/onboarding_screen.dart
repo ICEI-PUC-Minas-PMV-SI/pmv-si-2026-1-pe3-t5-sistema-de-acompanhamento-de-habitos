@@ -16,6 +16,7 @@ import '../../../data/repositories/category_repository.dart';
 import '../../../data/repositories/habit_repository.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../data/onboarding_suggestions.dart';
+import '../widgets/onboarding_intro.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -29,6 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   List<Category> _categories = [];
   bool _loading = true;
   bool _saving = false;
+  bool _introDone = false;
 
   @override
   void initState() {
@@ -108,6 +110,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       return Scaffold(
         backgroundColor: SahColors.bg,
         body: const Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    // Fase 1: slides de boas-vindas.
+    if (!_introDone) {
+      return Scaffold(
+        backgroundColor: SahColors.bg,
+        body: OnboardingIntro(
+          onContinue: () => setState(() => _introDone = true),
+          onSkip: _finishAndGoToToday,
+        ),
       );
     }
 

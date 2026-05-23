@@ -13,7 +13,18 @@ abstract interface class ExecutionLogRepository {
     DateTime date,
   );
 
-  Future<Result<ExecutionLog>> create(String habitId, DateTime when);
+  Future<Result<ExecutionLog>> create(
+    String habitId,
+    DateTime when, {
+    bool frozen = false,
+    String? nota,
+  });
+
+  Future<Result<ExecutionLog>> upsertNoteForDate(
+    String habitId,
+    DateTime date,
+    String? nota,
+  );
 
   Future<Result<void>> deleteForHabitOnDate(String habitId, DateTime date);
 
