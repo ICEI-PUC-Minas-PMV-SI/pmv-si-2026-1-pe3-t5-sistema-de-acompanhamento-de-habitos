@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
@@ -18,6 +20,7 @@ import '../../../../data/repositories/execution_log_repository.dart';
 import '../../../../data/repositories/habit_repository.dart';
 import '../../../../data/widgets/home_widget_service.dart';
 import '../../../../features/auth/controllers/auth_controller.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../controllers/today_controller.dart';
 import '../widgets/onboarding_hint_card.dart';
 import '../widgets/progress_summary_card.dart';
@@ -48,22 +51,17 @@ class TodayScreen extends StatelessWidget {
 class _TodayView extends StatelessWidget {
   const _TodayView();
 
-  String _greeting(String nome) {
+  String _greeting(AppL10n l, String nome) {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Bom dia, $nome!';
-    if (hour < 18) return 'Boa tarde, $nome!';
-    return 'Boa noite, $nome!';
+    if (hour < 12) return l.todayGreetingMorning(nome);
+    if (hour < 18) return l.todayGreetingAfternoon(nome);
+    return l.todayGreetingEvening(nome);
   }
 
-  String _formatDate(DateTime d) {
-    final weekdays = [
-      'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado',
-    ];
-    final months = [
-      '', 'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro',
-    ];
-    return '${weekdays[d.weekday % 7]}, ${d.day} de ${months[d.month]}';
+  String _formatDate(BuildContext context, DateTime d) {
+    final locale = Localizations.localeOf(context).toString();
+    final formatted = DateFormat('EEEE, d MMMM', locale).format(d);
+    return formatted[0].toUpperCase() + formatted.substring(1);
   }
 
   @override
@@ -71,6 +69,7 @@ class _TodayView extends StatelessWidget {
     SahPaletteScope.subscribe(context);
     final ctrl = context.watch<TodayController>();
     final auth = context.read<AuthController>();
+    final l = AppL10n.of(context)!;
     final nome = auth.currentUser?.nome.split(' ').first ?? '';
     final today = DateTime.now();
 
@@ -94,7 +93,7 @@ class _TodayView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _greeting(nome),
+                        _greeting(l, nome),
                         style: TextStyle(
                           fontFamily: 'GeneralSans',
                           fontSize: 24,
@@ -104,7 +103,7 @@ class _TodayView extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        _formatDate(today),
+                        _formatDate(context, today),
                         style: GoogleFonts.interTight(
                           fontSize: 14,
                           color: SahColors.textMuted,
@@ -123,7 +122,7 @@ class _TodayView extends StatelessWidget {
                   SahSpacing.pagePadding,
                   SahSpacing.pagePadding,
                 ),
-                sliver: _buildContent(ctrl),
+                sliver: _buildContent(context, ctrl),
               ),
             ],
           ),
@@ -132,7 +131,7 @@ class _TodayView extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(TodayController ctrl) {
+  Widget _buildContent(BuildContext context, TodayController ctrl) {
     if (ctrl.status == TodayStatus.loading) {
       return const SliverFillRemaining(
         child: Center(child: SahSpinner()),
@@ -140,10 +139,11 @@ class _TodayView extends StatelessWidget {
     }
 
     if (ctrl.status == TodayStatus.error) {
+      final l = AppL10n.of(context)!;
       return SliverFillRemaining(
         child: Center(
           child: Text(
-            ctrl.error ?? 'Erro ao carregar hábitos.',
+            ctrl.error ?? l.commonError,
             style: GoogleFonts.interTight(color: SahColors.danger),
           ),
         ),
@@ -160,7 +160,7 @@ class _TodayView extends StatelessWidget {
         );
       }
       return SliverFillRemaining(
-        child: SahIllustratedEmpty.todayFree(),
+        child: SahIllustratedEmpty.todayFree(context),
       );
     }
 
@@ -172,7 +172,7 @@ class _TodayView extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'Hábitos de hoje',
+          AppL10n.of(context)!.todayHeading,
           style: TextStyle(
             fontFamily: 'GeneralSans',
             fontSize: 16,
@@ -202,13 +202,14 @@ class _TodayView extends StatelessWidget {
     TodayController ctrl,
     TodayHabitEntry entry,
   ) {
+    final l = AppL10n.of(context)!;
     showSahActionSheet(
       context,
       title: entry.habit.nome,
       actions: [
         SahActionItem(
           icon: entry.frozenToday ? Icons.replay : Icons.snooze_outlined,
-          label: entry.frozenToday ? 'Desfazer pulo' : 'Pular hoje',
+          label: entry.frozenToday ? l.todayActionUndoSkip : l.todayActionSkipDay,
           onTap: () {
             Navigator.pop(context);
             ctrl.toggleFreeze(entry.habit.id);
@@ -218,7 +219,9 @@ class _TodayView extends StatelessWidget {
           icon: entry.notaToday == null
               ? Icons.note_add_outlined
               : Icons.edit_note_outlined,
-          label: entry.notaToday == null ? 'Adicionar nota' : 'Editar nota',
+          label: entry.notaToday == null
+              ? l.todayActionAddNote
+              : l.todayActionEditNote,
           onTap: () {
             Navigator.pop(context);
             _showNoteDialog(context, ctrl, entry);
@@ -233,6 +236,7 @@ class _TodayView extends StatelessWidget {
     TodayController ctrl,
     TodayHabitEntry entry,
   ) {
+    final l = AppL10n.of(context)!;
     final controller = TextEditingController(text: entry.notaToday ?? '');
     showDialog<void>(
       context: context,
@@ -242,7 +246,7 @@ class _TodayView extends StatelessWidget {
           borderRadius: BorderRadius.circular(SahRadius.lg),
         ),
         title: Text(
-          'Nota do dia',
+          l.todayNoteDialogTitle,
           style: TextStyle(
             fontFamily: 'GeneralSans',
             fontSize: 18,
@@ -251,18 +255,18 @@ class _TodayView extends StatelessWidget {
           ),
         ),
         content: SahInput(
-          label: 'Como foi?',
+          label: l.todayNoteLabel,
           controller: controller,
-          hint: 'Opcional. Ex: dormi mal, treino curto…',
+          hint: l.todayNoteHint,
           autofocus: true,
         ),
         actions: [
           SahButton.ghost(
-            label: 'Cancelar',
+            label: l.commonCancel,
             onPressed: () => Navigator.pop(ctx),
           ),
           SahButton.primary(
-            label: 'Salvar',
+            label: l.commonSave,
             onPressed: () {
               final text = controller.text.trim();
               Navigator.pop(ctx);

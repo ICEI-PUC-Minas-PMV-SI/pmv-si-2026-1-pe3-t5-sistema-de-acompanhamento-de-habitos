@@ -4,6 +4,7 @@ import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../data/habit_templates.dart';
 
 Future<HabitTemplate?> showTemplatePickerModal(BuildContext context) {
@@ -20,6 +21,7 @@ class _TemplatePickerModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Container(
       padding: EdgeInsets.fromLTRB(
         SahSpacing.pagePadding,
@@ -49,7 +51,7 @@ class _TemplatePickerModal extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Templates de rotina',
+              l.templatesTitle,
               style: TextStyle(
                 fontFamily: 'GeneralSans',
                 fontSize: 18,
@@ -59,7 +61,7 @@ class _TemplatePickerModal extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Crie vários hábitos de uma vez. Você pode editar tudo depois.',
+              l.templatesSubtitle,
               style: GoogleFonts.interTight(
                 fontSize: 13,
                 color: SahColors.textMuted,
@@ -73,7 +75,7 @@ class _TemplatePickerModal extends StatelessWidget {
                 )),
             const SizedBox(height: 8),
             SahButton.ghost(
-              label: 'Cancelar',
+              label: l.commonCancel,
               fullWidth: true,
               onPressed: () => Navigator.pop(context),
             ),
@@ -91,6 +93,7 @@ class _TemplateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return InkWell(
       onTap: () => Navigator.pop(context, template),
       borderRadius: BorderRadius.circular(SahRadius.lg),
@@ -128,7 +131,7 @@ class _TemplateCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${template.habitos.length} hábitos · ${template.descricao}',
+                    l.templatesCount(template.habitos.length, template.descricao),
                     style: GoogleFonts.interTight(
                       fontSize: 12,
                       color: SahColors.textMuted,

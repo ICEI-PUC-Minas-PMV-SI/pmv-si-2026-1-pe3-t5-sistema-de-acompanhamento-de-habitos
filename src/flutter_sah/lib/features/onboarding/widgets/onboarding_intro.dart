@@ -5,6 +5,7 @@ import '../../../core/design_system/tokens/sah_colors.dart';
 import '../../../core/design_system/tokens/sah_radius.dart';
 import '../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../core/design_system/widgets/sah_button.dart';
+import '../../../l10n/app_localizations.dart';
 
 class _Slide {
   final IconData icon;
@@ -20,29 +21,26 @@ class _Slide {
   });
 }
 
-const _slides = <_Slide>[
-  _Slide(
-    icon: PhosphorIconsRegular.sparkle,
-    color: Color(0xFF6B5B95),
-    title: 'Bem-vindo ao SAH',
-    description:
-        'O lugar para criar, lembrar e celebrar seus hábitos. Comece pequeno, mantenha consistência.',
-  ),
-  _Slide(
-    icon: PhosphorIconsRegular.bell,
-    color: Color(0xFFC89B3C),
-    title: 'Lembretes que cabem na sua rotina',
-    description:
-        'Defina quantos horários quiser para cada hábito. As notificações tocam só nos dias que você escolher.',
-  ),
-  _Slide(
-    icon: PhosphorIconsRegular.chartLine,
-    color: Color(0xFF4A7C59),
-    title: 'Veja sua evolução',
-    description:
-        'Streaks, aderência e histórico — tudo no app, salvo só no seu dispositivo.',
-  ),
-];
+List<_Slide> _slidesFor(AppL10n l) => [
+      _Slide(
+        icon: PhosphorIconsRegular.sparkle,
+        color: const Color(0xFF6B5B95),
+        title: l.onboardingWelcomeTitle,
+        description: l.onboardingWelcomeDescription,
+      ),
+      _Slide(
+        icon: PhosphorIconsRegular.bell,
+        color: const Color(0xFFC89B3C),
+        title: l.onboardingRemindersTitle,
+        description: l.onboardingRemindersDescription,
+      ),
+      _Slide(
+        icon: PhosphorIconsRegular.chartLine,
+        color: const Color(0xFF4A7C59),
+        title: l.onboardingProgressTitle,
+        description: l.onboardingProgressDescription,
+      ),
+    ];
 
 class OnboardingIntro extends StatefulWidget {
   /// Chamado no botão principal do último slide ("Vamos começar"):
@@ -65,8 +63,9 @@ class OnboardingIntro extends StatefulWidget {
 class _OnboardingIntroState extends State<OnboardingIntro> {
   final _ctrl = PageController();
   int _page = 0;
+  int _slideCount = 0;
 
-  bool get _isLast => _page == _slides.length - 1;
+  bool get _isLast => _page == _slideCount - 1;
 
   @override
   void dispose() {
@@ -87,6 +86,9 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
+    final slides = _slidesFor(l);
+    _slideCount = slides.length;
     return SafeArea(
       child: Column(
         children: [
@@ -98,7 +100,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
               child: TextButton(
                 onPressed: widget.onSkip,
                 child: Text(
-                  'Pular',
+                  l.commonSkip,
                   style: GoogleFonts.interTight(
                     fontSize: 13,
                     color: SahColors.textMuted,
@@ -111,14 +113,14 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
             child: PageView.builder(
               controller: _ctrl,
               onPageChanged: (p) => setState(() => _page = p),
-              itemCount: _slides.length,
-              itemBuilder: (_, i) => _SlideView(slide: _slides[i]),
+              itemCount: slides.length,
+              itemBuilder: (_, i) => _SlideView(slide: slides[i]),
             ),
           ),
           // Indicador de dots
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(_slides.length, (i) {
+            children: List.generate(slides.length, (i) {
               final selected = i == _page;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
@@ -140,7 +142,7 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
               SahSpacing.x6,
             ),
             child: SahButton.primary(
-              label: _isLast ? 'Vamos começar' : 'Próximo',
+              label: _isLast ? l.commonContinue : l.commonNext,
               fullWidth: true,
               onPressed: _next,
             ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/design_system/tokens/sah_colors.dart';
+import '../../../../core/design_system/tokens/sah_durations.dart';
 import '../../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
@@ -9,7 +11,6 @@ import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../core/design_system/widgets/sah_illustrated_empty.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
-import '../../../../core/design_system/tokens/sah_durations.dart';
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/dialogs.dart';
 import '../../../../data/events/habits_bus.dart';
@@ -19,6 +20,7 @@ import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
 import '../../../../data/repositories/habit_repository.dart';
 import '../../../../features/auth/controllers/auth_controller.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../controllers/habits_controller.dart';
 import '../widgets/habit_form_modal.dart';
 import '../widgets/habit_list_item.dart';
@@ -51,6 +53,7 @@ class _HabitsView extends StatelessWidget {
   Widget build(BuildContext context) {
     SahPaletteScope.subscribe(context);
     final ctrl = context.watch<HabitsController>();
+    final l = AppL10n.of(context)!;
 
     return Scaffold(
       backgroundColor: SahColors.bg,
@@ -70,7 +73,7 @@ class _HabitsView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Meus Hábitos',
+                      l.habitsTitle,
                       style: TextStyle(
                         fontFamily: 'GeneralSans',
                         fontSize: 22,
@@ -80,7 +83,7 @@ class _HabitsView extends StatelessWidget {
                     ),
                   ),
                   SahButton.primary(
-                    label: 'Novo hábito',
+                    label: l.habitsNewHabit,
                     onPressed: () => _showCreateOptions(context, ctrl),
                     size: SahButtonSize.sm,
                   ),
@@ -128,7 +131,7 @@ class _HabitsView extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'Mostrar arquivados',
+                      l.habitsShowArchived,
                       style: GoogleFonts.interTight(
                         fontSize: 13,
                         color: SahColors.textMuted,
@@ -148,6 +151,7 @@ class _HabitsView extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, HabitsController ctrl) {
+    final l = AppL10n.of(context)!;
     final Widget body;
 
     if (ctrl.status == ListStatus.loading) {
@@ -156,7 +160,7 @@ class _HabitsView extends StatelessWidget {
       body = Center(
         key: const ValueKey('error'),
         child: Text(
-          ctrl.error ?? 'Erro ao carregar hábitos.',
+          ctrl.error ?? l.habitsLoadError,
           style: GoogleFonts.interTight(color: SahColors.danger),
         ),
       );
@@ -164,10 +168,10 @@ class _HabitsView extends StatelessWidget {
       body = KeyedSubtree(
         key: const ValueKey('empty'),
         child: ctrl.showArchived
-            ? SahIllustratedEmpty.noArchived()
-            : SahIllustratedEmpty.noHabits(
+            ? SahIllustratedEmpty.noArchived(context)
+            : SahIllustratedEmpty.noHabits(context,
                 primaryAction: SahButton.primary(
-                  label: 'Criar primeiro hábito',
+                  label: l.habitsCreateFirstButton,
                   onPressed: () => _showCreate(context, ctrl),
                 ),
               ),
@@ -230,13 +234,14 @@ class _HabitsView extends StatelessWidget {
     BuildContext context,
     HabitsController ctrl,
   ) async {
+    final l = AppL10n.of(context)!;
     await showSahActionSheet(
       context,
-      title: 'Novo hábito',
+      title: l.habitsNewHabit,
       actions: [
         SahActionItem(
           icon: Icons.add_rounded,
-          label: 'Criar do zero',
+          label: l.habitsCreateFromScratch,
           onTap: () {
             Navigator.pop(context);
             _showCreate(context, ctrl);
@@ -244,7 +249,7 @@ class _HabitsView extends StatelessWidget {
         ),
         SahActionItem(
           icon: Icons.collections_bookmark_outlined,
-          label: 'Usar template de rotina',
+          label: l.habitsUseTemplate,
           onTap: () {
             Navigator.pop(context);
             _showTemplates(context, ctrl);
@@ -278,9 +283,10 @@ class _HabitsView extends StatelessWidget {
       }
     }
     if (!context.mounted) return;
+    final l = AppL10n.of(context)!;
     final msg = failed == 0
-        ? 'Template aplicado: $created hábitos criados!'
-        : 'Criados $created, $failed falharam.';
+        ? l.templatesAppliedSuccess(created)
+        : l.templatesAppliedPartial(created, failed);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(msg, style: GoogleFonts.interTight(fontSize: 14)),
       backgroundColor: failed == 0 ? SahColors.primary : SahColors.danger,
@@ -311,12 +317,12 @@ class _HabitsView extends StatelessWidget {
       await ctrl.unarchive(habit.id);
       return;
     }
+    final l = AppL10n.of(context)!;
     final ok = await showConfirmDialog(
       context,
-      title: 'Arquivar hábito?',
-      message:
-          'O hábito ficará oculto da lista principal. Você pode desarquivá-lo depois em "Mostrar arquivados".',
-      confirmLabel: 'Arquivar',
+      title: l.habitsActionArchive,
+      message: l.habitsArchivedEmptyDescription,
+      confirmLabel: l.habitsActionArchive,
     );
     if (ok && context.mounted) await ctrl.archive(habit.id);
   }
@@ -326,11 +332,12 @@ class _HabitsView extends StatelessWidget {
     HabitsController ctrl,
     Habit habit,
   ) async {
+    final l = AppL10n.of(context)!;
     final ok = await showConfirmDialog(
       context,
-      title: 'Excluir hábito',
-      message: 'Tem certeza? O histórico de check-ins também será removido.',
-      confirmLabel: 'Excluir',
+      title: l.habitsDeleteConfirmTitle,
+      message: l.habitsDeleteConfirmBody,
+      confirmLabel: l.commonDelete,
       isDangerous: true,
     );
     if (ok && context.mounted) await ctrl.delete(habit.id);

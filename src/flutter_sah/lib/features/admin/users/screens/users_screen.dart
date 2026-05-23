@@ -8,6 +8,7 @@ import '../../../../core/design_system/widgets/sah_empty_state.dart';
 import '../../../../core/design_system/widgets/sah_search_field.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../data/repositories/user_repository.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../auth/controllers/auth_controller.dart';
 import '../controllers/users_controller.dart';
 import '../widgets/block_user_modal.dart';
@@ -31,6 +32,7 @@ class _UsersContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<UsersController>();
+    final l = AppL10n.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +48,7 @@ class _UsersContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Usuários',
+                l.adminUsersTitle,
                 style: TextStyle(
                   fontFamily: 'GeneralSans',
                   fontSize: 22,
@@ -57,7 +59,7 @@ class _UsersContent extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SahSearchField(
-                hint: 'Buscar por nome ou e-mail…',
+                hint: l.adminUsersSearchHint,
                 onChanged: ctrl.setQuery,
               ),
               const SizedBox(height: 10),
@@ -74,21 +76,22 @@ class _UsersContent extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, UsersController ctrl) {
+    final l = AppL10n.of(context)!;
     if (ctrl.status == UsersStatus.loading) {
       return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == UsersStatus.error) {
       return Center(
         child: Text(
-          ctrl.error ?? 'Erro ao carregar usuários',
+          ctrl.error ?? l.adminUsersLoadError,
           style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
         ),
       );
     }
     if (ctrl.users.isEmpty) {
-      return const SahEmptyState(
-        title: 'Nenhum usuário encontrado',
-        description: 'Tente ajustar os filtros ou o termo de busca.',
+      return SahEmptyState(
+        title: l.adminUsersEmptyTitle,
+        description: l.adminUsersEmptyDescription,
       );
     }
 
@@ -117,7 +120,7 @@ class _UsersContent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(SahRadius.lg),
                 ),
                 title: Text(
-                  'Remover admin?',
+                  l.adminUsersDemoteTitle,
                   style: TextStyle(
                     fontFamily: 'GeneralSans',
                     fontSize: 18,
@@ -125,7 +128,7 @@ class _UsersContent extends StatelessWidget {
                   ),
                 ),
                 content: Text(
-                  '${user.nome} perderá acesso ao painel administrativo.',
+                  l.adminUsersDemoteBody(user.nome),
                   style: GoogleFonts.interTight(
                     fontSize: 14,
                     color: SahColors.textMuted,
@@ -135,11 +138,11 @@ class _UsersContent extends StatelessWidget {
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context, false),
-                    child: Text('Cancelar', style: GoogleFonts.interTight(color: SahColors.textMuted)),
+                    child: Text(l.commonCancel, style: GoogleFonts.interTight(color: SahColors.textMuted)),
                   ),
                   TextButton(
                     onPressed: () => Navigator.pop(context, true),
-                    child: Text('Remover', style: GoogleFonts.interTight(color: SahColors.danger)),
+                    child: Text(l.commonRemove, style: GoogleFonts.interTight(color: SahColors.danger)),
                   ),
                 ],
               ),
@@ -162,10 +165,11 @@ class _FilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final options = [
-      (label: 'Todos', value: UserStatusFilter.all),
-      (label: 'Ativos', value: UserStatusFilter.active),
-      (label: 'Bloqueados', value: UserStatusFilter.blocked),
+      (label: l.adminUsersFilterAll, value: UserStatusFilter.all),
+      (label: l.adminUsersFilterActive, value: UserStatusFilter.active),
+      (label: l.adminUsersFilterBlocked, value: UserStatusFilter.blocked),
     ];
 
     return SingleChildScrollView(

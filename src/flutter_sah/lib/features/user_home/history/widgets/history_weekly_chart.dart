@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/widgets/sah_card.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class HistoryWeeklyChart extends StatelessWidget {
   final List<({DateTime weekStart, double value})> data;
@@ -12,6 +13,7 @@ class HistoryWeeklyChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (data.isEmpty) return const SizedBox.shrink();
+    final l = AppL10n.of(context)!;
 
     final spots = <FlSpot>[
       for (var i = 0; i < data.length; i++)
@@ -23,7 +25,7 @@ class HistoryWeeklyChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Aderência semanal',
+            l.historyChartWeeklyTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 14,
@@ -32,7 +34,7 @@ class HistoryWeeklyChart extends StatelessWidget {
             ),
           ),
           Text(
-            '% de dias agendados que você cumpriu por semana',
+            l.historyChartWeeklySubtitle,
             style: GoogleFonts.interTight(
               fontSize: 11,
               color: SahColors.textMuted,

@@ -17,6 +17,7 @@ import '../../../../core/utils/dialogs.dart';
 import '../../../../core/utils/result.dart';
 import '../../../../data/backup/auto_backup_service.dart';
 import '../../../../data/backup/backup_service.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../auth/controllers/auth_controller.dart';
 
 class BackupScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _BackupScreenState extends State<BackupScreen> {
 
     final json = result.valueOrNull;
     if (json == null) {
-      _snack('Falha ao exportar.', isError: true);
+      _snack(AppL10n.of(context)!.backupExportError, isError: true);
       return;
     }
 
@@ -58,7 +59,7 @@ class _BackupScreenState extends State<BackupScreen> {
         subject: 'Backup SAH — $stamp',
       );
     } catch (e) {
-      if (mounted) _snack('Erro ao compartilhar: $e', isError: true);
+      if (mounted) _snack(AppL10n.of(context)!.backupExportShareError(e.toString()), isError: true);
     }
   }
 
@@ -70,13 +71,13 @@ class _BackupScreenState extends State<BackupScreen> {
     if (picked == null || picked.files.isEmpty) return;
     if (!mounted) return;
 
+    final l = AppL10n.of(context)!;
     final ok = await showConfirmDialog(
       context,
-      title: 'Importar backup?',
-      message:
-          'Todos os seus hábitos, registros e categorias atuais serão substituídos pelos do arquivo. Esta ação não pode ser desfeita.',
-      confirmLabel: 'Importar',
-      cancelLabel: 'Cancelar',
+      title: l.backupImportConfirmTitle,
+      message: l.backupImportConfirmBody,
+      confirmLabel: l.backupImportTitle,
+      cancelLabel: l.commonCancel,
       isDangerous: true,
     );
     if (!ok || !mounted) return;
@@ -85,7 +86,7 @@ class _BackupScreenState extends State<BackupScreen> {
 
     final path = picked.files.single.path;
     if (path == null) {
-      _snack('Arquivo inválido.', isError: true);
+      _snack(l.backupImportInvalid, isError: true);
       setState(() => _importing = false);
       return;
     }
@@ -102,14 +103,14 @@ class _BackupScreenState extends State<BackupScreen> {
         _snack(result.message, isError: true);
         return;
       }
-      _snack('Backup importado com sucesso!');
+      _snack(l.backupImportSuccess);
       // Aguarda um momento e volta
       await Future<void>.delayed(const Duration(milliseconds: 600));
       if (mounted) context.pop();
     } catch (e) {
       if (mounted) {
         setState(() => _importing = false);
-        _snack('Erro ao ler arquivo: $e', isError: true);
+        _snack(l.backupImportReadError(e.toString()), isError: true);
       }
     }
   }
@@ -121,18 +122,19 @@ class _BackupScreenState extends State<BackupScreen> {
     ));
   }
 
-  String _formatLast(DateTime? dt) {
-    if (dt == null) return 'Nunca';
+  String _formatLast(BuildContext context, DateTime? dt) {
+    if (dt == null) return AppL10n.of(context)!.backupAutoNever;
     final dd = dt.day.toString().padLeft(2, '0');
     final mm = dt.month.toString().padLeft(2, '0');
     final hh = dt.hour.toString().padLeft(2, '0');
     final min = dt.minute.toString().padLeft(2, '0');
-    return '$dd/$mm/${dt.year} às $hh:$min';
+    return '$dd/$mm/${dt.year} · $hh:$min';
   }
 
   @override
   Widget build(BuildContext context) {
     SahPaletteScope.subscribe(context);
+    final l = AppL10n.of(context)!;
     final userId = context.read<AuthController>().currentUser!.id;
     final lastBackup = context.read<AutoBackupService>().lastBackupAt(userId);
 
@@ -145,11 +147,11 @@ class _BackupScreenState extends State<BackupScreen> {
         leading: IconButton(
           icon: Icon(PhosphorIconsRegular.caretLeft,
               size: 22, color: SahColors.text),
-          tooltip: 'Voltar',
+          tooltip: l.tooltipBack,
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Backup e dados',
+          l.backupTitle,
           style: TextStyle(
             fontFamily: 'GeneralSans',
             fontSize: 18,
@@ -164,7 +166,7 @@ class _BackupScreenState extends State<BackupScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Mantenha seus dados seguros',
+              l.backupSubtitle,
               style: GoogleFonts.interTight(
                 fontSize: 13,
                 color: SahColors.textMuted,
@@ -194,7 +196,7 @@ class _BackupScreenState extends State<BackupScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Exportar dados',
+                              l.backupExportTitle,
                               style: TextStyle(
                                 fontFamily: 'GeneralSans',
                                 fontSize: 15,
@@ -204,7 +206,7 @@ class _BackupScreenState extends State<BackupScreen> {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              'Gera um arquivo JSON com seus hábitos, registros e categorias.',
+                              l.backupExportDescription,
                               style: GoogleFonts.interTight(
                                 fontSize: 12,
                                 color: SahColors.textMuted,
@@ -218,7 +220,7 @@ class _BackupScreenState extends State<BackupScreen> {
                   ),
                   const SizedBox(height: 14),
                   SahButton.primary(
-                    label: 'Exportar agora',
+                    label: l.backupExportNow,
                     fullWidth: true,
                     loading: _exporting,
                     onPressed: _export,
@@ -249,7 +251,7 @@ class _BackupScreenState extends State<BackupScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Importar backup',
+                              l.backupImportTitle,
                               style: TextStyle(
                                 fontFamily: 'GeneralSans',
                                 fontSize: 15,
@@ -259,7 +261,7 @@ class _BackupScreenState extends State<BackupScreen> {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              'Substitui seus dados pelos do arquivo. Ação destrutiva.',
+                              l.backupImportDescription,
                               style: GoogleFonts.interTight(
                                 fontSize: 12,
                                 color: SahColors.textMuted,
@@ -273,7 +275,7 @@ class _BackupScreenState extends State<BackupScreen> {
                   ),
                   const SizedBox(height: 14),
                   SahButton.dangerGhost(
-                    label: 'Selecionar arquivo',
+                    label: l.backupImportSelect,
                     fullWidth: true,
                     loading: _importing,
                     onPressed: _import,
@@ -299,7 +301,7 @@ class _BackupScreenState extends State<BackupScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Backup automático',
+                          l.backupAutoTitle,
                           style: GoogleFonts.interTight(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -308,7 +310,7 @@ class _BackupScreenState extends State<BackupScreen> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          'Último: ${_formatLast(lastBackup)}',
+                          l.backupAutoLast(_formatLast(context, lastBackup)),
                           style: GoogleFonts.interTight(
                             fontSize: 11,
                             color: SahColors.textMuted,

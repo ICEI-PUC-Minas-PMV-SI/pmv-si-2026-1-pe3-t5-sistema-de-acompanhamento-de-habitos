@@ -3,17 +3,20 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../core/design_system/widgets/sah_input.dart';
+import '../../../../core/i18n/locale_controller.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/theme_controller.dart';
 import '../../../../data/local/mailtrap_config_store.dart';
 import '../../../../data/models/mailtrap_config.dart';
 import '../../../../data/notifications/notification_service.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../auth/controllers/auth_controller.dart';
 
 Future<void> showSettingsModal(BuildContext context) {
@@ -33,14 +36,27 @@ class _SettingsModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeCtrl = context.watch<ThemeController>();
+    final localeCtrl = context.watch<LocaleController>();
     final auth = context.read<AuthController>();
     final store = context.read<MailtrapConfigStore>();
+    final l = AppL10n.of(context)!;
 
     final themeSubtitle = switch (themeCtrl.mode) {
-      ThemeMode.light  => 'Sempre claro',
-      ThemeMode.dark   => 'Sempre escuro',
-      ThemeMode.system => 'Sistema',
+      ThemeMode.light  => l.settingsThemeLight,
+      ThemeMode.dark   => l.settingsThemeDark,
+      ThemeMode.system => l.settingsThemeSystem,
     };
+
+    String languageSubtitle() {
+      final loc = localeCtrl.locale;
+      if (loc == null) return l.settingsThemeSystem;
+      return switch (loc.languageCode) {
+        'pt' => l.settingsLanguagePortuguese,
+        'en' => l.settingsLanguageEnglish,
+        'es' => l.settingsLanguageSpanish,
+        _ => loc.languageCode,
+      };
+    }
 
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
@@ -66,7 +82,7 @@ class _SettingsModal extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            'Configurações',
+            l.settingsTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 18,
@@ -77,8 +93,8 @@ class _SettingsModal extends StatelessWidget {
           const SizedBox(height: 16),
           _SettingsTile(
             icon: PhosphorIconsRegular.tag,
-            title: 'Gerenciar categorias',
-            subtitle: 'Crie e edite suas próprias',
+            title: l.settingsManageCategories,
+            subtitle: l.settingsManageCategoriesSubtitle,
             onTap: () {
               Navigator.pop(context);
               parentContext.push(Routes.userCategories);
@@ -87,15 +103,22 @@ class _SettingsModal extends StatelessWidget {
           const SizedBox(height: 4),
           _SettingsTile(
             icon: PhosphorIconsRegular.moon,
-            title: 'Tema',
+            title: l.settingsTheme,
             subtitle: themeSubtitle,
             onTap: () => _showThemePicker(context, themeCtrl),
           ),
           const SizedBox(height: 4),
           _SettingsTile(
+            icon: PhosphorIconsRegular.translate,
+            title: l.settingsLanguage,
+            subtitle: languageSubtitle(),
+            onTap: () => _showLanguagePicker(context, localeCtrl),
+          ),
+          const SizedBox(height: 4),
+          _SettingsTile(
             icon: PhosphorIconsRegular.cloudArrowUp,
-            title: 'Backup e dados',
-            subtitle: 'Exportar e importar',
+            title: l.settingsBackup,
+            subtitle: l.settingsBackupSubtitle,
             onTap: () {
               Navigator.pop(context);
               parentContext.push(Routes.backup);
@@ -104,8 +127,8 @@ class _SettingsModal extends StatelessWidget {
           const SizedBox(height: 4),
           _SettingsTile(
             icon: PhosphorIconsRegular.bell,
-            title: 'Testar notificação',
-            subtitle: 'Dispara uma notificação agora',
+            title: l.settingsTestNotification,
+            subtitle: l.settingsTestNotificationSubtitle,
             onTap: () async {
               await context.read<NotificationService>().showTestNotification();
               if (parentContext.mounted) Navigator.pop(context);
@@ -115,8 +138,8 @@ class _SettingsModal extends StatelessWidget {
             const SizedBox(height: 4),
             _SettingsTile(
               icon: Icons.mark_email_unread_outlined,
-              title: 'Integração de e-mail',
-              subtitle: store.isConfigured ? 'Mailtrap configurado' : 'Não configurado',
+              title: l.settingsEmailIntegration,
+              subtitle: store.isConfigured ? l.settingsEmailConfigured : l.settingsEmailNotConfigured,
               onTap: () => _showMailtrapConfigModal(context, store),
             ),
           ],
@@ -127,13 +150,14 @@ class _SettingsModal extends StatelessWidget {
 
   Future<void> _showThemePicker(
       BuildContext ctx, ThemeController ctrl) {
+    final l = AppL10n.of(ctx)!;
     return showSahActionSheet(
       ctx,
-      title: 'Tema do aplicativo',
+      title: l.settingsThemeAppTitle,
       actions: [
         SahActionItem(
           icon: Icons.smartphone_outlined,
-          label: 'Sistema',
+          label: l.settingsThemeSystem,
           onTap: () {
             Navigator.pop(ctx);
             ctrl.setMode(ThemeMode.system);
@@ -141,7 +165,7 @@ class _SettingsModal extends StatelessWidget {
         ),
         SahActionItem(
           icon: Icons.light_mode_outlined,
-          label: 'Sempre claro',
+          label: l.settingsThemeLight,
           onTap: () {
             Navigator.pop(ctx);
             ctrl.setMode(ThemeMode.light);
@@ -149,10 +173,53 @@ class _SettingsModal extends StatelessWidget {
         ),
         SahActionItem(
           icon: Icons.dark_mode_outlined,
-          label: 'Sempre escuro',
+          label: l.settingsThemeDark,
           onTap: () {
             Navigator.pop(ctx);
             ctrl.setMode(ThemeMode.dark);
+          },
+        ),
+      ],
+    );
+  }
+
+  Future<void> _showLanguagePicker(
+      BuildContext ctx, LocaleController ctrl) {
+    final l = AppL10n.of(ctx)!;
+    return showSahActionSheet(
+      ctx,
+      title: l.settingsLanguageAppTitle,
+      actions: [
+        SahActionItem(
+          icon: Icons.smartphone_outlined,
+          label: l.settingsThemeSystem,
+          onTap: () {
+            Navigator.pop(ctx);
+            ctrl.setLocale(null);
+          },
+        ),
+        SahActionItem(
+          icon: Icons.language,
+          label: l.settingsLanguagePortuguese,
+          onTap: () {
+            Navigator.pop(ctx);
+            ctrl.setLocale(const Locale('pt', 'BR'));
+          },
+        ),
+        SahActionItem(
+          icon: Icons.language,
+          label: l.settingsLanguageEnglish,
+          onTap: () {
+            Navigator.pop(ctx);
+            ctrl.setLocale(const Locale('en'));
+          },
+        ),
+        SahActionItem(
+          icon: Icons.language,
+          label: l.settingsLanguageSpanish,
+          onTap: () {
+            Navigator.pop(ctx);
+            ctrl.setLocale(const Locale('es'));
           },
         ),
       ],
@@ -205,6 +272,7 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
   }
 
   Future<void> _save() async {
+    final l = AppL10n.of(context)!;
     final token = _tokenCtrl.text.trim();
     final inbox = _inboxCtrl.text.trim();
     final email = _emailCtrl.text.trim();
@@ -213,7 +281,7 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
     if (token.isEmpty || inbox.isEmpty || email.isEmpty || name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Preencha todos os campos.',
+          content: Text(l.settingsMailtrapFillAll,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.danger,
         ),
@@ -233,7 +301,7 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Mailtrap configurado!',
+        content: Text(l.settingsMailtrapSaved,
             style: GoogleFonts.interTight(fontSize: 14)),
         backgroundColor: SahColors.primary,
       ),
@@ -248,6 +316,7 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -275,7 +344,7 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Integração de e-mail',
+              l.settingsMailtrapTitle,
               style: TextStyle(
                 fontFamily: 'GeneralSans',
                 fontSize: 18,
@@ -284,50 +353,50 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
               ),
             ),
             Text(
-              'Credenciais do Mailtrap Sandbox',
+              l.settingsMailtrapSubtitle,
               style: GoogleFonts.interTight(fontSize: 13, color: SahColors.textMuted),
             ),
             const SizedBox(height: 20),
             SahInput(
-              label: 'API Token',
+              label: l.settingsMailtrapToken,
               controller: _tokenCtrl,
               obscureText: true,
-              hint: 'Token de API do Mailtrap',
+              hint: l.settingsMailtrapTokenHint,
               textInputAction: TextInputAction.next,
             ),
             const SizedBox(height: SahSpacing.x4),
             SahInput(
-              label: 'Inbox ID',
+              label: l.settingsMailtrapInbox,
               controller: _inboxCtrl,
-              hint: 'ID da inbox no Mailtrap',
+              hint: l.settingsMailtrapInboxHint,
               textInputAction: TextInputAction.next,
             ),
             const SizedBox(height: SahSpacing.x4),
             SahInput(
-              label: 'E-mail do remetente',
+              label: l.settingsMailtrapFromEmail,
               controller: _emailCtrl,
               keyboardType: TextInputType.emailAddress,
-              hint: 'ex: noreply@sah.app',
+              hint: l.settingsMailtrapFromEmailHint,
               textInputAction: TextInputAction.next,
             ),
             const SizedBox(height: SahSpacing.x4),
             SahInput(
-              label: 'Nome do remetente',
+              label: l.settingsMailtrapFromName,
               controller: _nameCtrl,
-              hint: 'ex: Equipe SAH',
+              hint: l.settingsMailtrapFromNameHint,
               textInputAction: TextInputAction.done,
               onEditingComplete: _save,
             ),
             const SizedBox(height: 20),
             SahButton.primary(
-              label: 'Salvar',
+              label: l.commonSave,
               fullWidth: true,
               loading: _saving,
               onPressed: _save,
             ),
             const SizedBox(height: 8),
             SahButton.ghost(
-              label: 'Limpar configuração',
+              label: l.settingsMailtrapClear,
               fullWidth: true,
               onPressed: _clear,
             ),

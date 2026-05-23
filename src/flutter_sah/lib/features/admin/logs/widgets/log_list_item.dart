@@ -4,6 +4,7 @@ import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/utils/formatters.dart';
 import '../../../../data/models/audit_log.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class LogListItem extends StatelessWidget {
   final AuditLog log;
@@ -40,28 +41,29 @@ class LogListItem extends StatelessWidget {
     };
   }
 
-  static String _typeLabel(AuditEventType t) {
+  static String _typeLabel(AppL10n l, AuditEventType t) {
     return switch (t) {
-      AuditEventType.login => 'Login',
-      AuditEventType.logout => 'Logout',
-      AuditEventType.cadastro => 'Cadastro',
-      AuditEventType.bloqueio => 'Bloqueio',
-      AuditEventType.desbloqueio => 'Desbloqueio',
-      AuditEventType.erroSistema => 'Erro',
-      AuditEventType.adminAction => 'Admin',
-      AuditEventType.profileUpdate => 'Perfil',
-      AuditEventType.passwordChanged => 'Senha',
-      AuditEventType.passwordReset => 'Reset',
-      AuditEventType.contaExcluida => 'Exclusão',
-      AuditEventType.dataBackup => 'Backup',
+      AuditEventType.login => l.adminLogsTypeLogin,
+      AuditEventType.logout => l.adminLogsTypeLogout,
+      AuditEventType.cadastro => l.adminLogsTypeSignup,
+      AuditEventType.bloqueio => l.adminLogsTypeBlock,
+      AuditEventType.desbloqueio => l.adminLogsTypeUnblock,
+      AuditEventType.erroSistema => l.adminLogsTypeError,
+      AuditEventType.adminAction => l.adminLogsTypeAdmin,
+      AuditEventType.profileUpdate => l.adminLogsTypeProfile,
+      AuditEventType.passwordChanged => l.adminLogsTypePassword,
+      AuditEventType.passwordReset => l.adminLogsTypeReset,
+      AuditEventType.contaExcluida => l.adminLogsTypeAccountDeleted,
+      AuditEventType.dataBackup => l.adminLogsTypeBackup,
     };
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final color = _typeColor(log.tipoEvento);
     final bg = _typeBg(log.tipoEvento);
-    final label = _typeLabel(log.tipoEvento);
+    final label = _typeLabel(l, log.tipoEvento);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),

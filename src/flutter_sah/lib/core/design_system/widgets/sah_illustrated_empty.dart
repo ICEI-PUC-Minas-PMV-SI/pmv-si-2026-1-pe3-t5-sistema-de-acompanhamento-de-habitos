@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import '../../../l10n/app_localizations.dart';
 import '../tokens/sah_colors.dart';
 import '../tokens/sah_radius.dart';
 import '../tokens/sah_spacing.dart';
@@ -24,48 +25,56 @@ class SahIllustratedEmpty extends StatelessWidget {
   });
 
   /// "Dia livre" — não há hábitos agendados pra hoje.
-  factory SahIllustratedEmpty.todayFree({Widget? primaryAction}) =>
-      SahIllustratedEmpty(
-        icon: PhosphorIconsRegular.sunHorizon,
-        color: SahColors.streak,
-        title: 'Dia livre!',
-        description:
-            'Nenhum hábito agendado para hoje. Aproveite o descanso ou crie um novo hábito.',
-        primaryAction: primaryAction,
-      );
+  static SahIllustratedEmpty todayFree(BuildContext context,
+      {Widget? primaryAction}) {
+    final l = AppL10n.of(context)!;
+    return SahIllustratedEmpty(
+      icon: PhosphorIconsRegular.sunHorizon,
+      color: SahColors.streak,
+      title: l.todayFreeDay,
+      description: l.todayFreeDescription,
+      primaryAction: primaryAction,
+    );
+  }
 
   /// "Sem hábitos ainda" — usuário ainda não cadastrou nenhum hábito.
-  factory SahIllustratedEmpty.noHabits({Widget? primaryAction}) =>
-      SahIllustratedEmpty(
-        icon: PhosphorIconsRegular.sparkle,
-        color: SahColors.accent,
-        title: 'Comece sua jornada',
-        description:
-            'Você ainda não tem hábitos. Crie o primeiro pra acompanhar seu progresso.',
-        primaryAction: primaryAction,
-      );
+  static SahIllustratedEmpty noHabits(BuildContext context,
+      {Widget? primaryAction}) {
+    final l = AppL10n.of(context)!;
+    return SahIllustratedEmpty(
+      icon: PhosphorIconsRegular.sparkle,
+      color: SahColors.accent,
+      title: l.habitsEmptyTitle,
+      description: l.habitsEmptyDescription,
+      primaryAction: primaryAction,
+    );
+  }
 
   /// "Sem hábitos arquivados".
-  factory SahIllustratedEmpty.noArchived({Widget? primaryAction}) =>
-      SahIllustratedEmpty(
-        icon: PhosphorIconsRegular.archive,
-        color: SahColors.textMuted,
-        title: 'Nenhum hábito arquivado',
-        description:
-            'Quando você arquivar um hábito, ele aparece aqui sem perder o histórico.',
-        primaryAction: primaryAction,
-      );
+  static SahIllustratedEmpty noArchived(BuildContext context,
+      {Widget? primaryAction}) {
+    final l = AppL10n.of(context)!;
+    return SahIllustratedEmpty(
+      icon: PhosphorIconsRegular.archive,
+      color: SahColors.textMuted,
+      title: l.habitsArchivedEmpty,
+      description: l.habitsArchivedEmptyDescription,
+      primaryAction: primaryAction,
+    );
+  }
 
   /// "Sem registros no histórico".
-  factory SahIllustratedEmpty.noHistory({Widget? primaryAction}) =>
-      SahIllustratedEmpty(
-        icon: PhosphorIconsRegular.chartLine,
-        color: SahColors.info,
-        title: 'Sem registros',
-        description:
-            'Quando você marcar check-ins, o histórico aparece aqui.',
-        primaryAction: primaryAction,
-      );
+  static SahIllustratedEmpty noHistory(BuildContext context,
+      {Widget? primaryAction}) {
+    final l = AppL10n.of(context)!;
+    return SahIllustratedEmpty(
+      icon: PhosphorIconsRegular.chartLine,
+      color: SahColors.info,
+      title: l.historyEmptyTitle,
+      description: l.historyEmptyDescription,
+      primaryAction: primaryAction,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

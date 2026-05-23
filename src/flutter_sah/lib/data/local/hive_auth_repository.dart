@@ -1,6 +1,9 @@
 import 'dart:convert';
+
 import 'package:hive/hive.dart';
+
 import '../../core/utils/result.dart';
+import '../http/mailtrap_client.dart';
 import '../models/audit_log.dart';
 import '../models/user.dart';
 import '../notifications/notification_service.dart';
@@ -15,7 +18,6 @@ import 'login_attempt_store.dart';
 import 'mailtrap_config_store.dart';
 import 'password_hasher.dart';
 import 'password_reset_token_store.dart';
-import '../http/mailtrap_client.dart';
 
 // credentials box: email → { 'user_id': String, 'hash': String }
 

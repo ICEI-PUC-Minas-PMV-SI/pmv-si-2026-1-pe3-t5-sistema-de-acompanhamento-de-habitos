@@ -9,6 +9,7 @@ import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../data/models/audit_log.dart';
 import '../../../../data/repositories/audit_log_repository.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../controllers/logs_controller.dart';
 import '../widgets/log_list_item.dart';
 
@@ -27,18 +28,18 @@ class LogsScreen extends StatelessWidget {
 class _LogsContent extends StatelessWidget {
   const _LogsContent();
 
-  static const _typeFilters = [
-    (label: 'Todos', value: null),
-    (label: 'Login', value: AuditEventType.login),
-    (label: 'Cadastro', value: AuditEventType.cadastro),
-    (label: 'Bloqueio', value: AuditEventType.bloqueio),
-    (label: 'Admin', value: AuditEventType.adminAction),
-    (label: 'Erros', value: AuditEventType.erroSistema),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<LogsController>();
+    final l = AppL10n.of(context)!;
+    final typeFilters = [
+      (label: l.adminLogsFilterAll, value: null),
+      (label: l.adminLogsFilterLogin, value: AuditEventType.login),
+      (label: l.adminLogsFilterSignup, value: AuditEventType.cadastro),
+      (label: l.adminLogsFilterBlock, value: AuditEventType.bloqueio),
+      (label: l.adminLogsFilterAdmin, value: AuditEventType.adminAction),
+      (label: l.adminLogsFilterError, value: AuditEventType.erroSistema),
+    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +55,7 @@ class _LogsContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Logs do sistema',
+                l.adminLogsTitle,
                 style: TextStyle(
                   fontFamily: 'GeneralSans',
                   fontSize: 22,
@@ -65,7 +66,7 @@ class _LogsContent extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _FilterBar(
-                filters: _typeFilters,
+                filters: typeFilters,
                 current: ctrl.selectedType,
                 onChanged: ctrl.setType,
               ),
@@ -73,29 +74,30 @@ class _LogsContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        Expanded(child: _buildBody(ctrl)),
+        Expanded(child: _buildBody(context, ctrl)),
       ],
     );
   }
 
-  Widget _buildBody(LogsController ctrl) {
+  Widget _buildBody(BuildContext context, LogsController ctrl) {
+    final l = AppL10n.of(context)!;
     if (ctrl.status == ListStatus.loading) {
       return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == ListStatus.error) {
       return Center(
         child: Text(
-          ctrl.error ?? 'Erro ao carregar logs',
+          ctrl.error ?? l.commonError,
           style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
         ),
       );
     }
     if (ctrl.logs.isEmpty) {
       return SahEmptyState(
-        title: 'Nenhum log encontrado',
+        title: l.adminLogsEmpty,
         description: ctrl.selectedType != null
-            ? 'Nenhum evento deste tipo foi registrado. Limpe os filtros para ver todos.'
-            : 'Nenhum evento registrado ainda.',
+            ? l.adminLogsEmptyFiltered
+            : l.adminLogsEmptyAll,
       );
     }
     return ListView.separated(

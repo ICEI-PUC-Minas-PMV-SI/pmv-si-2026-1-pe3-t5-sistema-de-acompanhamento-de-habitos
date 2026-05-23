@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../habits/utils/reminder_suggestions.dart';
 
 class ReminderSuggestionCard extends StatelessWidget {
@@ -21,6 +22,7 @@ class ReminderSuggestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -37,7 +39,7 @@ class ReminderSuggestionCard extends StatelessWidget {
                   size: 18, color: SahColors.accent),
               const SizedBox(width: 8),
               Text(
-                'Insight',
+                l.historyInsight,
                 style: TextStyle(
                   fontFamily: 'GeneralSans',
                   fontSize: 13,
@@ -49,9 +51,11 @@ class ReminderSuggestionCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Você costuma marcar "$habitName" perto das ${suggestion.suggestedReminder}, '
-            'mas o lembrete está às ${suggestion.currentReminder}. '
-            'Quer ajustar?',
+            l.historyReminderHint(
+              habitName,
+              suggestion.suggestedReminder,
+              suggestion.currentReminder,
+            ),
             style: GoogleFonts.interTight(
               fontSize: 13,
               color: SahColors.text,
@@ -67,7 +71,7 @@ class ReminderSuggestionCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 child: Text(
-                  'Agora não',
+                  l.commonNotNow,
                   style: GoogleFonts.interTight(
                     fontSize: 13,
                     color: SahColors.textMuted,
@@ -81,7 +85,7 @@ class ReminderSuggestionCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 child: Text(
-                  'Ajustar para ${suggestion.suggestedReminder}',
+                  l.historyReminderApply(suggestion.suggestedReminder),
                   style: GoogleFonts.interTight(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,

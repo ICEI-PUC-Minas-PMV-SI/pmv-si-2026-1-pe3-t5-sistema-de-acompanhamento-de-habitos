@@ -10,6 +10,7 @@ import '../../../core/design_system/widgets/sah_button.dart';
 import '../../../core/design_system/widgets/sah_card.dart';
 import '../../../core/design_system/widgets/sah_input.dart';
 import '../../../core/utils/validators.dart';
+import '../../../l10n/app_localizations.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 import '../widgets/password_strength_meter.dart';
@@ -39,15 +40,16 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Future<void> _submit() async {
+    final l = AppL10n.of(context)!;
     final nome = _nomeCtrl.text.trim();
     final email = _emailCtrl.text.trim();
     final pass = _passCtrl.text;
     setState(() {
-      _nomeError = nome.isEmpty ? 'Informe seu nome' : null;
+      _nomeError = nome.isEmpty ? l.commonRequiredField : null;
       _emailError =
-          !SahValidators.isValidEmail(email) ? 'Informe um e-mail válido' : null;
+          !SahValidators.isValidEmail(email) ? l.commonRequiredField : null;
       _passError = !SahValidators.isValidPassword(pass)
-          ? 'Mínimo 8 caracteres com 1 número'
+          ? l.profileNewPasswordTooShort
           : null;
     });
     if (_nomeError != null || _emailError != null || _passError != null) return;
@@ -71,6 +73,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return AuthScaffold(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     size: 16, color: SahColors.textMuted),
                 const SizedBox(width: 6),
                 Text(
-                  'Voltar ao login',
+                  l.authBackToLogin,
                   style: GoogleFonts.interTight(
                       fontSize: 13, color: SahColors.textMuted),
                 ),
@@ -92,7 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
           const SizedBox(height: SahSpacing.x6),
           Text(
-            'Crie sua conta.',
+            l.authSignupTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 26,
@@ -104,7 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Comece a acompanhar seus hábitos hoje.',
+            l.authSignupSubtitle,
             style: GoogleFonts.interTight(
                 fontSize: 15, color: SahColors.textMuted, height: 1.5),
           ),
@@ -114,16 +117,16 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Column(
               children: [
                 SahInput(
-                  label: 'Nome',
+                  label: l.authNameLabel,
                   controller: _nomeCtrl,
-                  hint: 'Seu nome completo',
+                  hint: l.authNameHint,
                   prefixIcon: const SahIcon(SahIconName.user, size: 16),
                   errorText: _nomeError,
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: SahSpacing.itemGap),
                 SahInput(
-                  label: 'E-mail',
+                  label: l.authEmailLabel,
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const SahIcon(SahIconName.mail, size: 16),
@@ -133,10 +136,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: SahSpacing.itemGap),
                 SahInput(
-                  label: 'Senha',
+                  label: l.authPasswordLabel,
                   controller: _passCtrl,
                   obscureText: true,
-                  hint: 'Mínimo 8 caracteres com 1 número',
+                  hint: l.profileNewPasswordTooShort,
                   prefixIcon: const SahIcon(SahIconName.lock, size: 16),
                   errorText: _passError,
                   onChanged: (_) => setState(() {}),
@@ -146,7 +149,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 PasswordStrengthMeter(password: _passCtrl.text),
                 const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
-                  label: 'Criar conta',
+                  label: l.authSignupButton,
                   fullWidth: true,
                   size: SahButtonSize.lg,
                   loading: _loading,

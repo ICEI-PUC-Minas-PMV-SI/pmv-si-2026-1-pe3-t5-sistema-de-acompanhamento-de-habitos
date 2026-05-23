@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+
+import '../../data/local/onboarding_store.dart';
 import '../../features/admin/categories/screens/categories_screen.dart';
 import '../../features/admin/dashboard/screens/admin_dashboard_screen.dart';
 import '../../features/admin/logs/screens/logs_screen.dart';
@@ -8,19 +10,18 @@ import '../../features/auth/controllers/auth_controller.dart';
 import '../../features/auth/screens/login_screen.dart';
 import '../../features/auth/screens/recover_screen.dart';
 import '../../features/auth/screens/recover_sent_screen.dart';
-import '../../features/auth/screens/signup_screen.dart';
 import '../../features/auth/screens/reset_password_screen.dart';
+import '../../features/auth/screens/signup_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
 import '../../features/system_states/error_screen.dart';
-import '../../features/user_home/backup/screens/backup_screen.dart';
-import '../../data/local/onboarding_store.dart';
 import '../../features/system_states/splash_screen.dart';
+import '../../features/user_home/backup/screens/backup_screen.dart';
 import '../../features/user_home/categories/screens/user_categories_screen.dart';
+import '../../features/user_home/habits/screens/habits_screen.dart';
 import '../../features/user_home/screens/history_screen.dart';
 import '../../features/user_home/screens/profile_screen.dart';
-import '../../features/user_home/habits/screens/habits_screen.dart';
-import '../../features/user_home/today/screens/today_screen.dart';
 import '../../features/user_home/shell/user_shell.dart';
+import '../../features/user_home/today/screens/today_screen.dart';
 import 'guards.dart';
 import 'routes.dart';
 

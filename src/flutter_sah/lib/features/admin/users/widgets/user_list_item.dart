@@ -5,6 +5,7 @@ import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_badge.dart';
 import '../../../../data/models/user.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class UserListItem extends StatelessWidget {
   final User user;
@@ -28,6 +29,7 @@ class UserListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Container(
       margin: const EdgeInsets.only(bottom: SahSpacing.x2),
       padding: const EdgeInsets.all(14),
@@ -60,13 +62,13 @@ class UserListItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     if (user.isOwner)
-                      const SahBadge.accent('Owner', size: SahBadgeSize.sm)
+                      SahBadge.accent(l.adminUsersOwnerBadge, size: SahBadgeSize.sm)
                     else if (user.isAdmin)
-                      const SahBadge.accent('Admin', size: SahBadgeSize.sm)
+                      SahBadge.accent(l.adminUsersAdminBadge, size: SahBadgeSize.sm)
                     else if (user.isBlocked)
-                      const SahBadge.danger('Bloqueado', size: SahBadgeSize.sm)
+                      SahBadge.danger(l.adminUsersBlockedBadge, size: SahBadgeSize.sm)
                     else
-                      const SahBadge.success('Ativo', size: SahBadgeSize.sm),
+                      SahBadge.success(l.adminUsersActiveBadge, size: SahBadgeSize.sm),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -115,28 +117,29 @@ class _ActionsMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final items = <PopupMenuEntry<_Action>>[];
 
     if (!user.isAdmin) {
       if (user.isBlocked) {
         items.add(PopupMenuItem(
           value: _Action.unblock,
-          child: _MenuItem(icon: Icons.lock_open_rounded, label: 'Desbloquear', color: SahColors.primary),
+          child: _MenuItem(icon: Icons.lock_open_rounded, label: l.adminUsersUnblockButton, color: SahColors.primary),
         ));
       } else {
         items.add(PopupMenuItem(
           value: _Action.block,
-          child: _MenuItem(icon: Icons.block_rounded, label: 'Bloquear', color: SahColors.danger),
+          child: _MenuItem(icon: Icons.block_rounded, label: l.adminUsersBlockButton, color: SahColors.danger),
         ));
         items.add(PopupMenuItem(
           value: _Action.promote,
-          child: _MenuItem(icon: Icons.shield_rounded, label: 'Tornar admin', color: SahColors.accent),
+          child: _MenuItem(icon: Icons.shield_rounded, label: l.adminUsersPromoteAdmin, color: SahColors.accent),
         ));
       }
     } else if (!user.isOwner && !isSelf) {
       items.add(PopupMenuItem(
         value: _Action.demote,
-        child: _MenuItem(icon: Icons.shield_outlined, label: 'Remover admin', color: SahColors.textMuted),
+        child: _MenuItem(icon: Icons.shield_outlined, label: l.adminUsersRevokeAdmin, color: SahColors.textMuted),
       ));
     }
 

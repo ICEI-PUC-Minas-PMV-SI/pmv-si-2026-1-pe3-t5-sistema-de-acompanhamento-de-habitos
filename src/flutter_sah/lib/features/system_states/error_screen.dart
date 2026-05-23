@@ -6,6 +6,7 @@ import '../../core/design_system/tokens/sah_radius.dart';
 import '../../core/design_system/tokens/sah_spacing.dart';
 import '../../core/design_system/widgets/sah_button.dart';
 import '../../core/routing/routes.dart';
+import '../../l10n/app_localizations.dart';
 
 class ErrorScreen extends StatelessWidget {
   final String? message;
@@ -15,6 +16,7 @@ class ErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Scaffold(
       backgroundColor: SahColors.bg,
       body: SafeArea(
@@ -39,7 +41,7 @@ class ErrorScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Algo deu errado.',
+                  l.errorScreenTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'GeneralSans',
@@ -51,7 +53,7 @@ class ErrorScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  message ?? 'Não foi possível carregar esta página. Tente novamente.',
+                  message ?? l.errorScreenDescription,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.interTight(
                     fontSize: 15,
@@ -69,7 +71,7 @@ class ErrorScreen extends StatelessWidget {
                       border: Border.all(color: SahColors.border),
                     ),
                     child: Text(
-                      'Ref: $refCode',
+                      l.errorScreenRef(refCode!),
                       style: GoogleFonts.jetBrainsMono(
                         fontSize: 12,
                         color: SahColors.textMuted,
@@ -79,7 +81,7 @@ class ErrorScreen extends StatelessWidget {
                 ],
                 const SizedBox(height: 32),
                 SahButton.primary(
-                  label: 'Ir para o início',
+                  label: l.errorScreenGoHome,
                   onPressed: () => context.go(Routes.login),
                 ),
               ],

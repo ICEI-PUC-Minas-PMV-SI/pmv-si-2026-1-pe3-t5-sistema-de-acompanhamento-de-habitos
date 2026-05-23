@@ -6,6 +6,7 @@ import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_shadows.dart';
 import '../../../../core/design_system/widgets/sah_badge.dart';
 import '../../../../data/models/category.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class CategoryCard extends StatelessWidget {
   final Category category;
@@ -36,6 +37,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final catColor = _parseColor(category.cor);
     final bg = catColor.withAlpha(26);
 
@@ -65,7 +67,7 @@ class CategoryCard extends StatelessWidget {
               ),
               const Spacer(),
               if (showGlobalBadge)
-                const SahBadge.neutral('Global', size: SahBadgeSize.sm),
+                SahBadge.neutral(l.adminCategoriesGlobalBadge, size: SahBadgeSize.sm),
               if (!readOnly)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
@@ -81,11 +83,11 @@ class CategoryCard extends StatelessWidget {
                   itemBuilder: (_) => [
                     PopupMenuItem(
                       value: 'edit',
-                      child: Text('Editar', style: GoogleFonts.interTight(fontSize: 14, color: SahColors.text)),
+                      child: Text(l.commonEdit, style: GoogleFonts.interTight(fontSize: 14, color: SahColors.text)),
                     ),
                     PopupMenuItem(
                       value: 'delete',
-                      child: Text('Excluir', style: GoogleFonts.interTight(fontSize: 14, color: SahColors.danger)),
+                      child: Text(l.commonDelete, style: GoogleFonts.interTight(fontSize: 14, color: SahColors.danger)),
                     ),
                   ],
                 ),
@@ -104,7 +106,7 @@ class CategoryCard extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Text(
-            '$habitCount hábito${habitCount != 1 ? "s" : ""}',
+            l.adminCategoriesHabitCount(habitCount),
             style: GoogleFonts.interTight(fontSize: 12, color: SahColors.textMuted),
           ),
         ],

@@ -33,7 +33,7 @@ class HistoryList extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              DecoratedBox(
                 decoration: BoxDecoration(
                   color: SahColors.surface,
                   borderRadius: BorderRadius.circular(SahRadius.md),

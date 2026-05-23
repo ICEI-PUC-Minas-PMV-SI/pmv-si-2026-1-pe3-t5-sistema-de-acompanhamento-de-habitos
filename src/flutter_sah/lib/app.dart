@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'core/design_system/theme/sah_theme.dart';
@@ -7,10 +6,12 @@ import 'core/design_system/tokens/sah_colors.dart';
 import 'core/design_system/tokens/sah_palette.dart';
 import 'core/design_system/tokens/sah_palette_scope.dart';
 import 'core/error/error_reporter.dart';
+import 'core/i18n/locale_controller.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/theme_controller.dart';
 import 'data/local/onboarding_store.dart';
 import 'features/auth/controllers/auth_controller.dart';
+import 'l10n/app_localizations.dart';
 
 class SahApp extends StatefulWidget {
   const SahApp({super.key});
@@ -46,6 +47,7 @@ class _SahAppState extends State<SahApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final themeCtrl = context.watch<ThemeController>();
+    final localeCtrl = context.watch<LocaleController>();
     final systemBrightness = MediaQuery.platformBrightnessOf(context);
     final effective = switch (themeCtrl.mode) {
       ThemeMode.light  => Brightness.light,
@@ -67,19 +69,11 @@ class _SahAppState extends State<SahApp> with WidgetsBindingObserver {
         themeMode: themeCtrl.mode,
         routerConfig: _router,
         builder: (context, child) {
-          // Garante que toda página renderizada pelo router fique abaixo
-          // do scope — necessário porque o GoRouter pode preservar identity
-          // dos seus filhos e o InheritedWidget acima do MaterialApp não
-          // chega aos descendentes do Navigator interno.
           return SahPaletteScope(palette: palette, child: child!);
         },
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: const Locale('pt', 'BR'),
-        supportedLocales: const [Locale('pt', 'BR'), Locale('en')],
+        localizationsDelegates: AppL10n.localizationsDelegates,
+        locale: localeCtrl.locale,
+        supportedLocales: AppL10n.supportedLocales,
       ),
     );
   }

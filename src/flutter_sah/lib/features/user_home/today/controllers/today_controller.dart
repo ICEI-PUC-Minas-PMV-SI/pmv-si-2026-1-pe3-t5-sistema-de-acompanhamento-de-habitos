@@ -1,11 +1,13 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart' show ChangeNotifier;
+
 import '../../../../core/utils/result.dart';
+import '../../../../data/backup/auto_backup_service.dart';
+import '../../../../data/events/habits_bus.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/execution_log.dart';
 import '../../../../data/models/habit.dart';
-import '../../../../data/backup/auto_backup_service.dart';
-import '../../../../data/events/habits_bus.dart';
 import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';

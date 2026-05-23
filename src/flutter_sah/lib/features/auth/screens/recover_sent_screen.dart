@@ -5,12 +5,14 @@ import '../../../core/design_system/tokens/sah_colors.dart';
 import '../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../core/design_system/widgets/sah_button.dart';
 import '../../../core/routing/routes.dart';
+import '../../../l10n/app_localizations.dart';
 
 class RecoverSentScreen extends StatelessWidget {
   const RecoverSentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Scaffold(
       backgroundColor: SahColors.bg,
       body: SafeArea(
@@ -36,7 +38,7 @@ class RecoverSentScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Link enviado.',
+                  l.authRecoverSentTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'GeneralSans',
@@ -48,7 +50,7 @@ class RecoverSentScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Acesse sua caixa de entrada e clique no link recebido para redefinir sua senha.',
+                  l.authRecoverSentBody,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.interTight(
                     fontSize: 15,
@@ -58,12 +60,12 @@ class RecoverSentScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 SahButton.primary(
-                  label: 'Voltar ao login',
+                  label: l.authBackToLogin,
                   onPressed: () => context.go(Routes.login),
                 ),
                 const SizedBox(height: 12),
                 SahButton.ghost(
-                  label: 'Tenho meu código',
+                  label: l.authHaveCode,
                   onPressed: () => context.go(Routes.resetPassword),
                 ),
               ],

@@ -10,6 +10,7 @@ import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../data/repositories/habit_repository.dart';
 import '../../../../data/repositories/user_repository.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../controllers/dashboard_controller.dart';
 import '../widgets/metric_card.dart';
 
@@ -41,6 +42,7 @@ class _DashboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<DashboardController>();
+    final l = AppL10n.of(context)!;
 
     if (ctrl.status == DashboardStatus.loading) {
       return const Center(child: SahSpinner(size: 28));
@@ -54,7 +56,7 @@ class _DashboardContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Dashboard',
+            l.adminDashboardTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 22,
@@ -65,7 +67,7 @@ class _DashboardContent extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Visão geral da plataforma',
+            l.adminDashboardSubtitle,
             style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
           ),
           const SizedBox(height: 20),
@@ -78,28 +80,28 @@ class _DashboardContent extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               MetricCard(
-                label: 'Usuários ativos',
+                label: l.adminDashboardActiveUsers,
                 value: _formatNumber(m['usuariosAtivos'] as int? ?? 0),
                 icon: SahIconName.users,
                 iconColor: SahColors.primary,
                 iconBg: SahColors.primaryFaint,
               ),
               MetricCard(
-                label: 'Hábitos criados',
+                label: l.adminDashboardTotalHabits,
                 value: _formatNumber(m['habitosCriados'] as int? ?? 0),
                 icon: SahIconName.sparkle,
                 iconColor: SahColors.accent,
                 iconBg: SahColors.accentFaint,
               ),
               MetricCard(
-                label: 'Streak médio (dias)',
+                label: l.adminDashboardAvgStreak,
                 value: (m['streakMedioDias'] as int? ?? 0).toString(),
                 icon: SahIconName.flame,
                 iconColor: SahColors.streak,
                 iconBg: SahColors.streakSoft,
               ),
               MetricCard(
-                label: 'Contas bloqueadas',
+                label: l.adminDashboardBlockedUsers,
                 value: (m['bloqueios'] as int? ?? 0).toString(),
                 icon: SahIconName.block,
                 iconColor: SahColors.danger,
@@ -109,7 +111,7 @@ class _DashboardContent extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Acesso rápido',
+            l.adminDashboardQuickAccess,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 16,
@@ -120,19 +122,19 @@ class _DashboardContent extends StatelessWidget {
           const SizedBox(height: 12),
           _QuickLink(
             icon: SahIconName.users,
-            label: 'Gerenciar usuários',
+            label: l.adminUsersTitle,
             onTap: () => context.go(Routes.adminUsers),
           ),
           const SizedBox(height: 8),
           _QuickLink(
             icon: SahIconName.grid,
-            label: 'Categorias globais',
+            label: l.adminCategoriesTitle,
             onTap: () => context.go(Routes.adminCategories),
           ),
           const SizedBox(height: 8),
           _QuickLink(
             icon: SahIconName.logs,
-            label: 'Logs do sistema',
+            label: l.adminLogsTitle,
             onTap: () => context.go(Routes.adminLogs),
           ),
         ],

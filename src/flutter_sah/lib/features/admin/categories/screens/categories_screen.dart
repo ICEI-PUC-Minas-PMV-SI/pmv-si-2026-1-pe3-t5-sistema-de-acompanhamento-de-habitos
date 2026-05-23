@@ -10,6 +10,7 @@ import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/repositories/category_repository.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../controllers/categories_controller.dart';
 import '../widgets/category_card.dart';
 import '../widgets/category_form_modal.dart';
@@ -32,6 +33,7 @@ class _CategoriesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<CategoriesController>();
+    final l = AppL10n.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.all(SahSpacing.pagePadding),
@@ -42,7 +44,7 @@ class _CategoriesContent extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Categorias',
+                  l.adminCategoriesShortTitle,
                   style: TextStyle(
                     fontFamily: 'GeneralSans',
                     fontSize: 22,
@@ -53,7 +55,7 @@ class _CategoriesContent extends StatelessWidget {
                 ),
               ),
               SahButton.primary(
-                label: 'Nova',
+                label: l.adminCategoriesNewButton,
                 icon: const Icon(Icons.add_rounded, size: 16, color: Colors.white),
                 size: SahButtonSize.sm,
                 onPressed: () => _showCreate(context, ctrl),
@@ -68,23 +70,24 @@ class _CategoriesContent extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context, CategoriesController ctrl) {
+    final l = AppL10n.of(context)!;
     if (ctrl.status == ListStatus.loading) {
       return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == ListStatus.error) {
       return Center(
         child: Text(
-          ctrl.error ?? 'Erro ao carregar categorias',
+          ctrl.error ?? l.adminCategoriesLoadError,
           style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
         ),
       );
     }
     if (ctrl.categories.isEmpty) {
       return SahEmptyState(
-        title: 'Nenhuma categoria',
-        description: 'Crie a primeira categoria global para os usuários.',
+        title: l.adminCategoriesEmptyTitle,
+        description: l.adminCategoriesEmptyDescription,
         primaryAction: SahButton.primary(
-          label: 'Criar categoria',
+          label: l.adminCategoriesCreateButton,
           onPressed: () => _showCreate(context, ctrl),
         ),
       );
@@ -127,6 +130,7 @@ class _CategoriesContent extends StatelessWidget {
     String id,
     int count,
   ) async {
+    final l = AppL10n.of(context)!;
     if (count > 0) {
       final confirm = await showDialog<bool>(
         context: context,
@@ -136,21 +140,21 @@ class _CategoriesContent extends StatelessWidget {
             borderRadius: BorderRadius.circular(SahRadius.lg),
           ),
           title: Text(
-            'Categoria em uso',
+            l.adminCategoriesInUseTitle,
             style: TextStyle(fontFamily: 'GeneralSans', fontSize: 18, color: SahColors.text),
           ),
           content: Text(
-            'Esta categoria está vinculada a $count hábito${count != 1 ? "s" : ""}. Deseja excluir mesmo assim?',
+            l.adminCategoriesInUseBody(count),
             style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted, height: 1.5),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: Text('Cancelar', style: GoogleFonts.interTight(color: SahColors.textMuted)),
+              child: Text(l.commonCancel, style: GoogleFonts.interTight(color: SahColors.textMuted)),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: Text('Excluir assim mesmo', style: GoogleFonts.interTight(color: SahColors.danger)),
+              child: Text(l.adminCategoriesForceDelete, style: GoogleFonts.interTight(color: SahColors.danger)),
             ),
           ],
         ),
@@ -167,21 +171,21 @@ class _CategoriesContent extends StatelessWidget {
         backgroundColor: SahColors.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SahRadius.lg)),
         title: Text(
-          'Excluir categoria?',
+          l.adminCategoriesDeleteTitle,
           style: TextStyle(fontFamily: 'GeneralSans', fontSize: 18, color: SahColors.text),
         ),
         content: Text(
-          'Esta ação não pode ser desfeita.',
+          l.adminCategoriesDeleteBody,
           style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Cancelar', style: GoogleFonts.interTight(color: SahColors.textMuted)),
+            child: Text(l.commonCancel, style: GoogleFonts.interTight(color: SahColors.textMuted)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Excluir', style: GoogleFonts.interTight(color: SahColors.danger)),
+            child: Text(l.commonDelete, style: GoogleFonts.interTight(color: SahColors.danger)),
           ),
         ],
       ),

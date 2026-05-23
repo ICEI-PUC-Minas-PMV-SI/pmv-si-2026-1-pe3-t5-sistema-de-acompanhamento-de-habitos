@@ -9,19 +9,13 @@ import '../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../core/design_system/tokens/sah_shadows.dart';
 import '../../../core/design_system/widgets/sah_logo.dart';
 import '../../../core/routing/routes.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../auth/controllers/auth_controller.dart';
 
 class AdminShell extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
   const AdminShell({super.key, required this.navigationShell});
-
-  static const _items = [
-    (icon: SahIconName.chart, label: 'Dashboard', path: Routes.adminDashboard),
-    (icon: SahIconName.users, label: 'Usuários', path: Routes.adminUsers),
-    (icon: SahIconName.grid, label: 'Categorias', path: Routes.adminCategories),
-    (icon: SahIconName.logs, label: 'Logs', path: Routes.adminLogs),
-  ];
 
   void _onTap(BuildContext ctx, int idx) {
     navigationShell.goBranch(idx,
@@ -30,11 +24,18 @@ class AdminShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
+    final items = [
+      (icon: SahIconName.chart, label: l.navAdminDashboard, path: Routes.adminDashboard),
+      (icon: SahIconName.users, label: l.navAdminUsers, path: Routes.adminUsers),
+      (icon: SahIconName.grid, label: l.navAdminCategories, path: Routes.adminCategories),
+      (icon: SahIconName.logs, label: l.navAdminLogs, path: Routes.adminLogs),
+    ];
     return LayoutBuilder(
       builder: (ctx, constraints) {
         final isTablet = constraints.maxWidth >= 600;
-        if (isTablet) return _TabletLayout(navigationShell: navigationShell, items: _items, onTap: _onTap);
-        return _PhoneLayout(navigationShell: navigationShell, items: _items, onTap: _onTap);
+        if (isTablet) return _TabletLayout(navigationShell: navigationShell, items: items, onTap: _onTap);
+        return _PhoneLayout(navigationShell: navigationShell, items: items, onTap: _onTap);
       },
     );
   }
@@ -60,7 +61,7 @@ class _PhoneLayout extends StatelessWidget {
         leading: Builder(
           builder: (ctx) => IconButton(
             icon: SahIcon(SahIconName.menu, size: 22, color: SahColors.text),
-            tooltip: 'Abrir menu',
+            tooltip: AppL10n.of(context)!.tooltipOpenMenu,
             onPressed: () => Scaffold.of(ctx).openDrawer(),
           ),
         ),
@@ -71,7 +72,7 @@ class _PhoneLayout extends StatelessWidget {
             child: IconButton(
               icon: SahIcon(SahIconName.logout, size: 20, color: SahColors.textMuted),
               onPressed: () => _confirmLogout(context),
-              tooltip: 'Sair',
+              tooltip: AppL10n.of(context)!.tooltipLogout,
             ),
           ),
         ],
@@ -84,16 +85,16 @@ class _PhoneLayout extends StatelessWidget {
     );
   }
 
-  void _confirmLogout(BuildContext context) async {
+  Future<void> _confirmLogout(BuildContext context) async {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: SahColors.surface,
-        title: Text('Sair?', style: TextStyle(fontFamily: 'GeneralSans', color: SahColors.text)),
-        content: Text('Deseja encerrar a sessão?', style: GoogleFonts.interTight(color: SahColors.textMuted)),
+        title: Text(AppL10n.of(context)!.logoutDialogTitle, style: TextStyle(fontFamily: 'GeneralSans', color: SahColors.text)),
+        content: Text(AppL10n.of(context)!.logoutDialogBody, style: GoogleFonts.interTight(color: SahColors.textMuted)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancelar', style: GoogleFonts.interTight(color: SahColors.textMuted))),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: Text('Sair', style: GoogleFonts.interTight(color: SahColors.danger))),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(AppL10n.of(context)!.commonCancel, style: GoogleFonts.interTight(color: SahColors.textMuted))),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(AppL10n.of(context)!.logoutDialogConfirm, style: GoogleFonts.interTight(color: SahColors.danger))),
         ],
       ),
     );
@@ -147,7 +148,7 @@ class _TabletLayout extends StatelessWidget {
                   Divider(color: SahColors.border, height: 1),
                   ListTile(
                     leading: SahIcon(SahIconName.logout, size: 20, color: SahColors.textMuted),
-                    title: Text('Sair', style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted)),
+                    title: Text(AppL10n.of(context)!.profileLogout, style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted)),
                     onTap: () async {
                       await context.read<AuthController>().logout();
                       if (context.mounted) context.go(Routes.login);

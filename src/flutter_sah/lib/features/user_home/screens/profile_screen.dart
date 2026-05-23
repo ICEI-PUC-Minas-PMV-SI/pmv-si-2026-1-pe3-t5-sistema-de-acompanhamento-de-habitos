@@ -11,6 +11,7 @@ import '../../../core/design_system/widgets/sah_card.dart';
 import '../../../core/design_system/widgets/sah_input.dart';
 import '../../../core/routing/routes.dart';
 import '../../../core/utils/dialogs.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../auth/controllers/auth_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SahPaletteScope.subscribe(context);
+    final l = AppL10n.of(context)!;
     final auth = context.watch<AuthController>();
     final user = auth.currentUser;
 
@@ -89,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
           const _EditProfileSection(),
           const SizedBox(height: 8),
           SahButton.danger(
-            label: 'Sair da conta',
+            label: l.profileLogout,
             fullWidth: true,
             onPressed: () async {
               await context.read<AuthController>().logout();
@@ -98,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           SahButton.dangerGhost(
-            label: 'Excluir minha conta',
+            label: l.profileDeleteAccount,
             fullWidth: true,
             onPressed: () => _confirmDelete(context),
           ),
@@ -108,13 +110,13 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Future<void> _confirmDelete(BuildContext context) async {
+    final l = AppL10n.of(context)!;
     final ok = await showConfirmDialog(
       context,
-      title: 'Excluir minha conta?',
-      message:
-          'Esta ação é permanente. Todos os seus hábitos, registros e categorias serão removidos. Não pode ser desfeita.',
-      confirmLabel: 'Excluir',
-      cancelLabel: 'Cancelar',
+      title: l.profileDeleteConfirmTitle,
+      message: l.profileDeleteConfirmBody,
+      confirmLabel: l.profileDeleteConfirmAction,
+      cancelLabel: l.commonCancel,
       isDangerous: true,
     );
     if (!ok || !context.mounted) return;
@@ -127,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
-          ctrl.error ?? 'Falha ao excluir conta.',
+          ctrl.error ?? l.profileDeleteError,
           style: GoogleFonts.interTight(fontSize: 14),
         ),
         backgroundColor: SahColors.danger,
@@ -179,10 +181,11 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
       _nomeCtrl.text.trim() != (_nomeOriginal ?? '');
 
   Future<void> _salvarNome() async {
+    final l = AppL10n.of(context)!;
     final nome = _nomeCtrl.text.trim();
     String? err;
-    if (nome.isEmpty) err = 'O nome não pode ser vazio';
-    if (nome.length < 2) err = 'Nome deve ter pelo menos 2 caracteres';
+    if (nome.isEmpty) err = l.profileNameEmpty;
+    if (nome.length < 2) err = l.profileNameMinLength;
     setState(() => _nomeError = err);
     if (err != null) return;
 
@@ -194,7 +197,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Nome atualizado!',
+          content: Text(l.profileNameUpdated,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.primary,
         ),
@@ -202,7 +205,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(ctrl.error ?? 'Erro ao atualizar nome.',
+          content: Text(ctrl.error ?? l.profileNameUpdateError,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.danger,
         ),
@@ -211,13 +214,14 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
   }
 
   Future<void> _alterarSenha() async {
+    final l = AppL10n.of(context)!;
     final atual = _senhaAtualCtrl.text;
     final nova = _novaSenhaCtrl.text;
     final confirmar = _confirmarCtrl.text;
 
-    final atualErr = atual.isEmpty ? 'Informe a senha atual' : null;
-    final novaErr = nova.length < 6 ? 'A nova senha deve ter no mínimo 6 caracteres' : null;
-    final confirmarErr = confirmar != nova ? 'As senhas não coincidem' : null;
+    final atualErr = atual.isEmpty ? l.profileCurrentPasswordRequired : null;
+    final novaErr = nova.length < 6 ? l.profileNewPasswordTooShort : null;
+    final confirmarErr = confirmar != nova ? l.profilePasswordsDoNotMatch : null;
 
     setState(() {
       _senhaAtualError = atualErr;
@@ -241,7 +245,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
       _confirmarCtrl.clear();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Senha alterada com sucesso!',
+          content: Text(l.profilePasswordChanged,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.primary,
         ),
@@ -249,7 +253,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(ctrl.error ?? 'Erro ao alterar senha.',
+          content: Text(ctrl.error ?? l.profilePasswordChangeError,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.danger,
         ),
@@ -259,6 +263,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return Column(
       children: [
         // Seção: Dados da conta
@@ -268,7 +273,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Dados da conta',
+                l.profileDataAccount,
                 style: TextStyle(
                   fontFamily: 'GeneralSans',
                   fontSize: 15,
@@ -278,7 +283,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
               ),
               const SizedBox(height: 16),
               SahInput(
-                label: 'Nome',
+                label: l.profileNameLabel,
                 controller: _nomeCtrl,
                 errorText: _nomeError,
                 textInputAction: TextInputAction.done,
@@ -287,7 +292,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
               ),
               const SizedBox(height: 12),
               SahButton.primary(
-                label: 'Salvar nome',
+                label: l.profileEditName,
                 fullWidth: true,
                 loading: _savingNome,
                 disabled: !_nomeAlterado,
@@ -304,7 +309,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Alterar senha',
+                l.profileChangePassword,
                 style: TextStyle(
                   fontFamily: 'GeneralSans',
                   fontSize: 15,
@@ -314,7 +319,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
               ),
               const SizedBox(height: 16),
               SahInput(
-                label: 'Senha atual',
+                label: l.profileCurrentPassword,
                 controller: _senhaAtualCtrl,
                 obscureText: true,
                 errorText: _senhaAtualError,
@@ -322,7 +327,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
               ),
               const SizedBox(height: SahSpacing.x4),
               SahInput(
-                label: 'Nova senha',
+                label: l.authNewPassword,
                 controller: _novaSenhaCtrl,
                 obscureText: true,
                 errorText: _novaSenhaError,
@@ -330,7 +335,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
               ),
               const SizedBox(height: SahSpacing.x4),
               SahInput(
-                label: 'Confirmar nova senha',
+                label: l.authConfirmPassword,
                 controller: _confirmarCtrl,
                 obscureText: true,
                 errorText: _confirmarError,
@@ -339,7 +344,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
               ),
               const SizedBox(height: 12),
               SahButton.primary(
-                label: 'Alterar senha',
+                label: l.profileChangePasswordButton,
                 fullWidth: true,
                 loading: _savingPassword,
                 onPressed: _alterarSenha,

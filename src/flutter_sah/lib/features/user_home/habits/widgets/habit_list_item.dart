@@ -6,6 +6,7 @@ import '../../../../core/design_system/tokens/sah_shadows.dart';
 import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/habit.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../utils/habit_icons.dart';
 
 class HabitListItem extends StatelessWidget {
@@ -38,21 +39,21 @@ class HabitListItem extends StatelessWidget {
     }
   }
 
-  String _freqLabel(List<int> freq) {
-    if (freq.length == 7) return 'Todos os dias';
+  String _freqLabel(AppL10n l, List<int> freq) {
+    if (freq.length == 7) return l.habitsFreqEveryDay;
     if (freq.length == 5 &&
         freq.contains(1) &&
         freq.contains(5) &&
         !freq.contains(0) &&
         !freq.contains(6)) {
-      return 'Seg – Sex';
+      return l.habitsFreqWeekdays;
     }
-    if (freq.length == 1) return '1x por semana';
-    return '${freq.length}x por semana';
+    return l.habitsFreqTimesPerWeek(freq.length);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final isArchived = habit.arquivado;
 
     return Opacity(
@@ -160,7 +161,7 @@ class HabitListItem extends StatelessWidget {
                                   const SizedBox(width: 6),
                                 ],
                                 Text(
-                                  _freqLabel(habit.frequencia),
+                                  _freqLabel(l, habit.frequencia),
                                   style: GoogleFonts.interTight(
                                     fontSize: 11,
                                     color: SahColors.textFaint,
@@ -186,7 +187,7 @@ class HabitListItem extends StatelessWidget {
                           actions: [
                             SahActionItem(
                               icon: Icons.edit_outlined,
-                              label: 'Editar',
+                              label: l.habitsActionEdit,
                               onTap: () {
                                 Navigator.pop(context);
                                 onEdit();
@@ -196,7 +197,7 @@ class HabitListItem extends StatelessWidget {
                               icon: isArchived
                                   ? Icons.unarchive_outlined
                                   : Icons.archive_outlined,
-                              label: isArchived ? 'Desarquivar' : 'Arquivar',
+                              label: isArchived ? l.habitsActionUnarchive : l.habitsActionArchive,
                               onTap: () {
                                 Navigator.pop(context);
                                 onArchive();
@@ -204,7 +205,7 @@ class HabitListItem extends StatelessWidget {
                             ),
                             SahActionItem(
                               icon: Icons.delete_outline,
-                              label: 'Excluir',
+                              label: l.habitsActionDelete,
                               destructive: true,
                               onTap: () {
                                 Navigator.pop(context);

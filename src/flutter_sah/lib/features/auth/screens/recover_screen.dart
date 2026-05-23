@@ -11,6 +11,7 @@ import '../../../core/design_system/widgets/sah_card.dart';
 import '../../../core/design_system/widgets/sah_input.dart';
 import '../../../core/routing/routes.dart';
 import '../../../core/utils/validators.dart';
+import '../../../l10n/app_localizations.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 
@@ -33,10 +34,11 @@ class _RecoverScreenState extends State<RecoverScreen> {
   }
 
   Future<void> _submit() async {
+    final l = AppL10n.of(context)!;
     final email = _emailCtrl.text.trim();
     setState(() {
       _emailError =
-          !SahValidators.isValidEmail(email) ? 'Informe um e-mail válido' : null;
+          !SahValidators.isValidEmail(email) ? l.commonRequiredField : null;
     });
     if (_emailError != null) return;
     setState(() => _loading = true);
@@ -47,7 +49,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
     if (!ok) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(ctrl.error ?? 'Erro ao enviar e-mail.',
+          content: Text(ctrl.error ?? l.authRecoverError,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.danger,
         ),
@@ -59,6 +61,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return AuthScaffold(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +73,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
                 SahIcon(SahIconName.arrowLeft,
                     size: 16, color: SahColors.textMuted),
                 const SizedBox(width: 6),
-                Text('Voltar ao login',
+                Text(l.authBackToLogin,
                     style: GoogleFonts.interTight(
                         fontSize: 13, color: SahColors.textMuted)),
               ],
@@ -78,7 +81,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
           ),
           const SizedBox(height: SahSpacing.x6),
           Text(
-            'Recuperar senha.',
+            l.authRecoverTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 26,
@@ -90,7 +93,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Enviaremos um link de redefinição para o e-mail cadastrado.',
+            l.authRecoverSubtitle,
             style: GoogleFonts.interTight(
                 fontSize: 15, color: SahColors.textMuted, height: 1.5),
           ),
@@ -100,7 +103,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
             child: Column(
               children: [
                 SahInput(
-                  label: 'E-mail',
+                  label: l.authEmailLabel,
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const SahIcon(SahIconName.mail, size: 16),
@@ -111,7 +114,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
                 ),
                 const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
-                  label: 'Enviar link',
+                  label: l.authSendLink,
                   fullWidth: true,
                   size: SahButtonSize.lg,
                   loading: _loading,
@@ -122,7 +125,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
                   child: TextButton(
                     onPressed: () => context.go(Routes.resetPassword),
                     child: Text(
-                      'Já tenho um código',
+                      l.authHaveCode,
                       style: GoogleFonts.interTight(
                         fontSize: 13,
                         color: SahColors.textMuted,

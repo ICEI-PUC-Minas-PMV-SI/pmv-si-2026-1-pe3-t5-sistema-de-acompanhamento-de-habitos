@@ -10,6 +10,7 @@ import '../../../core/design_system/widgets/sah_button.dart';
 import '../../../core/design_system/widgets/sah_card.dart';
 import '../../../core/design_system/widgets/sah_input.dart';
 import '../../../core/routing/routes.dart';
+import '../../../l10n/app_localizations.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 
@@ -39,13 +40,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   bool _validate() {
+    final l = AppL10n.of(context)!;
     final token = _tokenCtrl.text.trim();
     final newPass = _newPassCtrl.text;
     final confirm = _confirmCtrl.text;
 
-    String? tokenErr = token.isEmpty ? 'Informe o código recebido por e-mail' : null;
-    String? newPassErr = newPass.length < 6 ? 'A senha deve ter no mínimo 6 caracteres' : null;
-    String? confirmErr = confirm != newPass ? 'As senhas não coincidem' : null;
+    final String? tokenErr = token.isEmpty ? l.commonRequiredField : null;
+    final String? newPassErr = newPass.length < 6 ? l.profileNewPasswordTooShort : null;
+    final String? confirmErr = confirm != newPass ? l.profilePasswordsDoNotMatch : null;
 
     setState(() {
       _tokenError = tokenErr;
@@ -58,6 +60,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   Future<void> _submit() async {
     if (!_validate()) return;
+    final l = AppL10n.of(context)!;
     setState(() => _loading = true);
     final ctrl = context.read<AuthController>();
     final ok = await ctrl.confirmPasswordReset(
@@ -69,7 +72,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Senha redefinida com sucesso!',
+          content: Text(l.authResetSuccess,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.primary,
         ),
@@ -78,7 +81,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(ctrl.error ?? 'Erro ao redefinir senha.',
+          content: Text(ctrl.error ?? l.authResetError,
               style: GoogleFonts.interTight(fontSize: 14)),
           backgroundColor: SahColors.danger,
         ),
@@ -88,6 +91,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return AuthScaffold(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +102,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: [
                 SahIcon(SahIconName.arrowLeft, size: 16, color: SahColors.textMuted),
                 const SizedBox(width: 6),
-                Text('Voltar ao login',
+                Text(l.authBackToLogin,
                     style: GoogleFonts.interTight(
                         fontSize: 13, color: SahColors.textMuted)),
               ],
@@ -106,7 +110,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
           const SizedBox(height: SahSpacing.x6),
           Text(
-            'Redefinir senha.',
+            l.authResetTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 26,
@@ -118,7 +122,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Cole o código que enviamos por e-mail e escolha uma nova senha.',
+            l.authResetSubtitle,
             style: GoogleFonts.interTight(
                 fontSize: 15, color: SahColors.textMuted, height: 1.5),
           ),
@@ -128,15 +132,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             child: Column(
               children: [
                 SahInput(
-                  label: 'Código de redefinição',
+                  label: l.authResetCodeLabel,
                   controller: _tokenCtrl,
-                  hint: 'Cole aqui o código recebido por e-mail',
                   errorText: _tokenError,
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: SahSpacing.x4),
                 SahInput(
-                  label: 'Nova senha',
+                  label: l.authNewPassword,
                   controller: _newPassCtrl,
                   obscureText: true,
                   errorText: _newPassError,
@@ -144,7 +147,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 const SizedBox(height: SahSpacing.x4),
                 SahInput(
-                  label: 'Confirmar nova senha',
+                  label: l.authConfirmPassword,
                   controller: _confirmCtrl,
                   obscureText: true,
                   errorText: _confirmError,
@@ -153,7 +156,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
-                  label: 'Redefinir senha',
+                  label: l.authResetButton,
                   fullWidth: true,
                   size: SahButtonSize.lg,
                   loading: _loading,

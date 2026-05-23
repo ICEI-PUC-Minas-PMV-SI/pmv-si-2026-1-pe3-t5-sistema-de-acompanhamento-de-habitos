@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/design_system/tokens/sah_colors.dart';
 import '../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../core/design_system/tokens/sah_radius.dart';
@@ -14,6 +15,7 @@ import '../../../data/models/category.dart';
 import '../../../data/models/habit.dart';
 import '../../../data/repositories/category_repository.dart';
 import '../../../data/repositories/habit_repository.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../data/onboarding_suggestions.dart';
 import '../widgets/onboarding_intro.dart';
@@ -92,9 +94,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     if (!mounted) return;
     if (failures > 0) {
+      final l = AppL10n.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
-          '$failures hábito(s) falharam ao criar.',
+          l.onboardingFailedHabits(failures),
           style: GoogleFonts.interTight(fontSize: 14),
         ),
         backgroundColor: SahColors.danger,
@@ -124,6 +127,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     }
 
+    final l = AppL10n.of(context)!;
     final nome = context.read<AuthController>().currentUser?.nome.split(' ').first ?? '';
 
     return Scaffold(
@@ -143,7 +147,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      nome.isEmpty ? 'Bem-vindo!' : 'Bem-vindo, $nome!',
+                      nome.isEmpty
+                          ? l.onboardingSuggestionsTitleFallback
+                          : l.onboardingSuggestionsTitle(nome),
                       style: TextStyle(
                         fontFamily: 'GeneralSans',
                         fontSize: 26,
@@ -154,7 +160,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Escolha os hábitos que combinam com você. Você pode ajustar tudo depois.',
+                      l.onboardingSuggestionsSubtitle,
                       style: GoogleFonts.interTight(
                         fontSize: 14,
                         color: SahColors.textMuted,
@@ -259,6 +265,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildBottomBar() {
+    final l = AppL10n.of(context)!;
     final count = _selected.length;
     return Container(
       padding: const EdgeInsets.fromLTRB(
@@ -275,9 +282,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SahButton.primary(
-            label: count == 0
-                ? 'Selecione ao menos um hábito'
-                : 'Começar com $count hábito${count == 1 ? '' : 's'}',
+            label: l.onboardingStartButton(count),
             fullWidth: true,
             disabled: count == 0,
             loading: _saving,
@@ -285,7 +290,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 6),
           SahButton.ghost(
-            label: 'Pular',
+            label: l.commonSkip,
             fullWidth: true,
             onPressed: _saving ? null : _skip,
           ),

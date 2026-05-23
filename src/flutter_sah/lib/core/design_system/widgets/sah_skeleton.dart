@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../tokens/sah_colors.dart';
-import '../tokens/sah_radius.dart';
 import '../tokens/sah_durations.dart';
+import '../tokens/sah_radius.dart';
 
 class SahSkeleton extends StatefulWidget {
   final double? width;

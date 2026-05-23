@@ -5,6 +5,7 @@ import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../data/models/user.dart';
+import '../../../../l10n/app_localizations.dart';
 
 Future<String?> showBlockUserModal(BuildContext context, User user) {
   return showModalBottomSheet<String>(
@@ -36,7 +37,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
   void _confirm() {
     final motivo = _ctrl.text.trim();
     if (motivo.isEmpty) {
-      setState(() => _error = 'Informe o motivo do bloqueio');
+      setState(() => _error = AppL10n.of(context)!.adminUsersBlockReasonRequired);
       return;
     }
     Navigator.pop(context, motivo);
@@ -44,6 +45,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -72,7 +74,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
           ),
           const SizedBox(height: 20),
           Text(
-            'Bloquear usuário',
+            l.adminUsersConfirmBlock,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 18,
@@ -82,18 +84,18 @@ class _BlockUserModalState extends State<_BlockUserModal> {
           ),
           const SizedBox(height: 6),
           Text(
-            'A conta de ${widget.user.nome} ficará inacessível até ser desbloqueada.',
+            l.adminUsersBlockModalSubtitle(widget.user.nome),
             style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted, height: 1.5),
           ),
           const SizedBox(height: 20),
-          Text('Motivo', style: GoogleFonts.interTight(fontSize: 13, fontWeight: FontWeight.w500, color: SahColors.text)),
+          Text(l.adminUsersBlockReasonLabel, style: GoogleFonts.interTight(fontSize: 13, fontWeight: FontWeight.w500, color: SahColors.text)),
           const SizedBox(height: 6),
           TextField(
             controller: _ctrl,
             maxLines: 3,
             style: GoogleFonts.interTight(fontSize: 14, color: SahColors.text),
             decoration: InputDecoration(
-              hintText: 'Descreva o motivo do bloqueio…',
+              hintText: l.adminUsersBlockReasonHint,
               hintStyle: GoogleFonts.interTight(fontSize: 14, color: SahColors.textFaint),
               filled: true,
               fillColor: SahColors.bgAlt,
@@ -119,14 +121,14 @@ class _BlockUserModalState extends State<_BlockUserModal> {
             children: [
               Expanded(
                 child: SahButton.ghost(
-                  label: 'Cancelar',
+                  label: l.commonCancel,
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: SahButton.danger(
-                  label: 'Bloquear',
+                  label: l.adminUsersBlockButton,
                   onPressed: _confirm,
                 ),
               ),

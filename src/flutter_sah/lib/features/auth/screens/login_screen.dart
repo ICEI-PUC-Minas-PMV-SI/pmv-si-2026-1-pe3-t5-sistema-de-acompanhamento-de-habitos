@@ -11,6 +11,7 @@ import '../../../core/design_system/widgets/sah_card.dart';
 import '../../../core/design_system/widgets/sah_input.dart';
 import '../../../core/routing/routes.dart';
 import '../../../core/utils/validators.dart';
+import '../../../l10n/app_localizations.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 
@@ -36,13 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _submit() async {
+    final l = AppL10n.of(context)!;
     final email = _emailCtrl.text.trim();
     final pass = _passCtrl.text;
     setState(() {
       _emailError =
-          !SahValidators.isValidEmail(email) ? 'Informe um e-mail válido' : null;
+          !SahValidators.isValidEmail(email) ? l.commonRequiredField : null;
       _passError =
-          pass.isEmpty ? 'Informe a senha' : null;
+          pass.isEmpty ? l.commonRequiredField : null;
     });
     if (_emailError != null || _passError != null) return;
 
@@ -66,12 +68,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     return AuthScaffold(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Bem-vindo de volta.',
+            l.authLoginTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 26,
@@ -83,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Entre para acompanhar seus hábitos.',
+            l.authLoginSubtitle,
             style: GoogleFonts.interTight(
               fontSize: 15,
               color: SahColors.textMuted,
@@ -96,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 SahInput(
-                  label: 'E-mail',
+                  label: l.authEmailLabel,
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const SahIcon(SahIconName.mail, size: 16),
@@ -106,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: SahSpacing.itemGap),
                 SahInput(
-                  label: 'Senha',
+                  label: l.authPasswordLabel,
                   controller: _passCtrl,
                   obscureText: true,
                   prefixIcon: const SahIcon(SahIconName.lock, size: 16),
@@ -117,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
-                  label: 'Entrar',
+                  label: l.authLoginButton,
                   fullWidth: true,
                   size: SahButtonSize.lg,
                   loading: _loading,
@@ -131,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: GestureDetector(
               onTap: () => context.push(Routes.recover),
               child: Text(
-                'Esqueci minha senha',
+                l.authForgotPassword,
                 style: GoogleFonts.interTight(
                   fontSize: 13,
                   color: SahColors.primary,
@@ -149,9 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: GoogleFonts.interTight(
                       fontSize: 13, color: SahColors.textMuted),
                   children: <TextSpan>[
-                    const TextSpan(text: 'Não tem conta? '),
+                    TextSpan(text: l.authNoAccount),
                     TextSpan(
-                      text: 'Cadastre-se',
+                      text: l.authSignupLink,
                       style: TextStyle(
                           color: SahColors.primary,
                           fontWeight: FontWeight.w600),

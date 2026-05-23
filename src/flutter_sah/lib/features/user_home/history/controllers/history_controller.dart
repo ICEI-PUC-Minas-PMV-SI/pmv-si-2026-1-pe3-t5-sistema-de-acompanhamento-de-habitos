@@ -96,6 +96,36 @@ class HistoryController extends ChangeNotifier {
     );
   }
 
+  /// Heatmap: para cada dia no período, retorna 0 (sem log) ou 1 (com check-in
+  /// não-frozen). Ordenado cronológico do mais antigo pro mais recente.
+  List<({DateTime day, bool done})> get heatmap {
+    final daysWithLog = logs
+        .where((l) => !l.frozen)
+        .map((l) => DateTime(l.dataHora.year, l.dataHora.month, l.dataHora.day))
+        .toSet();
+    final result = <({DateTime day, bool done})>[];
+    var day = DateTime(_from.year, _from.month, _from.day + 1);
+    final last = DateTime(_to.year, _to.month, _to.day);
+    while (!day.isAfter(last)) {
+      final key = DateTime(day.year, day.month, day.day);
+      result.add((day: key, done: daysWithLog.contains(key)));
+      day = day.add(const Duration(days: 1));
+    }
+    return result;
+  }
+
+  /// Distribuição de check-ins por dia da semana (0=dom..6=sab).
+  /// Retorna Map fixo com 7 entradas; valor é a contagem de check-ins
+  /// (não-frozen) naquele dia da semana.
+  Map<int, int> get byWeekday {
+    final map = {for (var i = 0; i < 7; i++) i: 0};
+    for (final l in logs.where((l) => !l.frozen)) {
+      final dow = l.dataHora.weekday % 7; // dart: 1..7 → 0=dom
+      map[dow] = (map[dow] ?? 0) + 1;
+    }
+    return map;
+  }
+
   ReminderSuggestion? get reminderSuggestion {
     final habit = selectedHabit;
     if (habit == null || habit.lembretes.isEmpty) return null;

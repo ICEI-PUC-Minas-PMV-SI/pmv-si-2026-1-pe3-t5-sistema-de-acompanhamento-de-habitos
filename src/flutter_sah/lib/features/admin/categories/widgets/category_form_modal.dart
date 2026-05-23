@@ -6,6 +6,7 @@ import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../core/design_system/widgets/sah_input.dart';
 import '../../../../data/models/category.dart';
+import '../../../../l10n/app_localizations.dart';
 
 Future<Category?> showCategoryFormModal(
   BuildContext context, {
@@ -61,7 +62,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
   void _confirm() {
     final nome = _nomeCtrl.text.trim();
     if (nome.isEmpty) {
-      setState(() => _error = 'Informe o nome da categoria');
+      setState(() => _error = AppL10n.of(context)!.adminCategoriesFormNameRequired);
       return;
     }
     final category = Category(
@@ -85,6 +86,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     final isEditing = widget.existing != null;
 
@@ -115,7 +117,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
           ),
           const SizedBox(height: 20),
           Text(
-            isEditing ? 'Editar categoria' : 'Nova categoria',
+            isEditing ? l.adminCategoriesFormEditTitle : l.adminCategoriesFormNewTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 18,
@@ -125,15 +127,15 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
           ),
           const SizedBox(height: 20),
           SahInput(
-            label: 'Nome',
+            label: l.adminCategoriesFormNameLabel,
             controller: _nomeCtrl,
-            hint: 'Ex: Exercício, Leitura…',
+            hint: l.adminCategoriesFormNameHint,
             errorText: _error,
             autofocus: true,
             onChanged: (_) => setState(() => _error = null),
           ),
           const SizedBox(height: 16),
-          Text('Cor', style: GoogleFonts.interTight(fontSize: 13, fontWeight: FontWeight.w500, color: SahColors.text)),
+          Text(l.adminCategoriesFormColorLabel, style: GoogleFonts.interTight(fontSize: 13, fontWeight: FontWeight.w500, color: SahColors.text)),
           const SizedBox(height: 8),
           Wrap(
             spacing: 10,
@@ -168,14 +170,14 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
             children: [
               Expanded(
                 child: SahButton.ghost(
-                  label: 'Cancelar',
+                  label: l.commonCancel,
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: SahButton.primary(
-                  label: isEditing ? 'Salvar' : 'Criar',
+                  label: isEditing ? l.commonSave : l.adminCategoriesFormCreate,
                   onPressed: _confirm,
                 ),
               ),

@@ -9,6 +9,7 @@ import '../../../../core/design_system/widgets/sah_input.dart';
 import '../../../../core/design_system/widgets/sah_modal.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/habit.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../utils/habit_icons.dart';
 
 Future<Habit?> showHabitFormModal(
@@ -89,31 +90,30 @@ class _HabitFormModalState extends State<_HabitFormModal> {
   }
 
   void _showCategoryInfoDialog(BuildContext context) {
+    final l = AppL10n.of(context)!;
     showSahModal<void>(
       context: context,
-      title: 'Como funcionam as categorias',
-      content: const Column(
+      title: l.habitFormCategoryInfoTitle,
+      content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           _InfoBlock(
             icon: PhosphorIconsRegular.globe,
-            title: 'Globais',
-            description:
-                'Criadas pelo administrador e disponíveis para todos. Não podem ser editadas.',
+            title: l.habitFormCategoryGlobalTitle,
+            description: l.habitFormCategoryGlobalDescription,
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _InfoBlock(
             icon: PhosphorIconsRegular.userCircle,
-            title: 'Minhas',
-            description:
-                'Criadas por você, visíveis só para você. Gerencie em Configurações → Gerenciar categorias.',
+            title: l.habitFormCategoryMineTitle,
+            description: l.habitFormCategoryMineDescription,
           ),
         ],
       ),
       actions: [
         SahButton.primary(
-          label: 'Entendi',
+          label: l.commonUnderstood,
           size: SahButtonSize.sm,
           onPressed: () => Navigator.pop(context),
         ),
@@ -122,13 +122,14 @@ class _HabitFormModalState extends State<_HabitFormModal> {
   }
 
   void _confirm() {
+    final l = AppL10n.of(context)!;
     final nome = _nomeCtrl.text.trim();
     if (nome.isEmpty) {
-      setState(() => _nomeError = 'Informe o nome do hábito');
+      setState(() => _nomeError = l.habitFormNameRequired);
       return;
     }
     if (_frequencia.isEmpty) {
-      setState(() => _nomeError = 'Selecione ao menos um dia da semana');
+      setState(() => _nomeError = l.habitFormDayRequired);
       return;
     }
     final habit = Habit(
@@ -154,6 +155,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     final isEditing = widget.existing != null;
 
@@ -186,7 +188,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
             ),
             const SizedBox(height: 20),
             Text(
-              isEditing ? 'Editar hábito' : 'Novo hábito',
+              isEditing ? l.habitFormEdit : l.habitFormCreate,
               style: TextStyle(
                 fontFamily: 'GeneralSans',
                 fontSize: 18,
@@ -196,23 +198,23 @@ class _HabitFormModalState extends State<_HabitFormModal> {
             ),
             const SizedBox(height: 20),
             SahInput(
-              label: 'Nome',
+              label: l.habitFormName,
               controller: _nomeCtrl,
-              hint: 'Ex: Meditar, Ler, Correr…',
+              hint: l.habitFormNameHint,
               errorText: _nomeError,
               autofocus: true,
               onChanged: (_) => setState(() => _nomeError = null),
             ),
             const SizedBox(height: 12),
             SahInput(
-              label: 'Descrição (opcional)',
+              label: l.habitFormDescription,
               controller: _descCtrl,
-              hint: 'Detalhes ou motivação',
+              hint: l.habitFormDescriptionHint,
             ),
             const SizedBox(height: 16),
             // Ícone
             Text(
-              'Ícone',
+              l.habitFormIcon,
               style: GoogleFonts.interTight(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -230,7 +232,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
               Row(
                 children: [
                   Text(
-                    'Categoria',
+                    l.habitFormCategory,
                     style: GoogleFonts.interTight(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -301,7 +303,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
             ],
             // Frequência
             Text(
-              'Frequência',
+              l.habitFormFrequency,
               style: GoogleFonts.interTight(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -355,7 +357,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
             const SizedBox(height: 16),
             // Lembretes
             Text(
-              'Lembretes',
+              l.habitFormReminders,
               style: GoogleFonts.interTight(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -386,7 +388,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                         Icon(Icons.add, size: 14, color: SahColors.textMuted),
                         const SizedBox(width: 4),
                         Text(
-                          'Adicionar',
+                          l.habitFormReminderAdd,
                           style: GoogleFonts.interTight(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -404,14 +406,14 @@ class _HabitFormModalState extends State<_HabitFormModal> {
               children: [
                 Expanded(
                   child: SahButton.ghost(
-                    label: 'Cancelar',
+                    label: l.commonCancel,
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: SahButton.primary(
-                    label: isEditing ? 'Salvar' : 'Criar',
+                    label: isEditing ? l.habitFormSaveButton : l.habitFormCreateButton,
                     onPressed: _confirm,
                   ),
                 ),

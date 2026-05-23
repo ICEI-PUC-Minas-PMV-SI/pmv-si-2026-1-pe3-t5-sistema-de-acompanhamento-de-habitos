@@ -10,10 +10,13 @@ import '../../../data/events/habits_bus.dart';
 import '../../../data/notifications/notification_service.dart';
 import '../../../data/repositories/execution_log_repository.dart';
 import '../../../data/repositories/habit_repository.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../history/controllers/history_controller.dart';
+import '../history/widgets/history_heatmap.dart';
 import '../history/widgets/history_list.dart';
 import '../history/widgets/history_summary_card.dart';
+import '../history/widgets/history_weekday_chart.dart';
 import '../history/widgets/history_weekly_chart.dart';
 import '../history/widgets/reminder_suggestion_card.dart';
 
@@ -39,16 +42,16 @@ class HistoryScreen extends StatelessWidget {
 class _HistoryContent extends StatelessWidget {
   const _HistoryContent();
 
-  static const _periods = [
-    (label: '7 dias', days: 7),
-    (label: '30 dias', days: 30),
-    (label: '90 dias', days: 90),
-    (label: 'Tudo', days: 0),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<HistoryController>();
+    final l = AppL10n.of(context)!;
+    final periods = [
+      (label: l.historyPeriod7, days: 7),
+      (label: l.historyPeriod30, days: 30),
+      (label: l.historyPeriod90, days: 90),
+      (label: l.historyPeriodAll, days: 0),
+    ];
 
     return RefreshIndicator(
       color: SahColors.accent,
@@ -60,7 +63,7 @@ class _HistoryContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
           Text(
-            'Histórico',
+            l.historyTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 22,
@@ -74,7 +77,7 @@ class _HistoryContent extends StatelessWidget {
           if (ctrl.loading && ctrl.habits.isEmpty)
             const Center(child: SahSpinner(size: 28))
           else if (ctrl.habits.isEmpty)
-            SahIllustratedEmpty.noHabits()
+            SahIllustratedEmpty.noHabits(context)
           else ...[
             _HabitFilterBar(
               habits: ctrl.habits.map((h) => (id: h.id, nome: h.nome)).toList(),
@@ -83,7 +86,7 @@ class _HistoryContent extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             _PeriodFilterBar(
-              periods: _periods,
+              periods: periods,
               current: ctrl.periodDays,
               onSelect: ctrl.selectPeriod,
             ),
@@ -92,7 +95,7 @@ class _HistoryContent extends StatelessWidget {
               const Center(child: SahSpinner(size: 24))
             else if (ctrl.logs.isEmpty)
               // Nenhum check-in no período: tela limpa, só o empty state
-              SahIllustratedEmpty.noHistory()
+              SahIllustratedEmpty.noHistory(context)
             else ...[
               HistorySummaryCard(
                 checkIns: ctrl.checkInCount,
@@ -116,8 +119,8 @@ class _HistoryContent extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
                         ok
-                            ? 'Lembrete ajustado para ${s.suggestedReminder}'
-                            : 'Não foi possível ajustar.',
+                            ? l.historyReminderApplied(s.suggestedReminder)
+                            : l.historyReminderError,
                       ),
                       backgroundColor:
                           ok ? SahColors.primary : SahColors.danger,
@@ -128,6 +131,14 @@ class _HistoryContent extends StatelessWidget {
               if (ctrl.weeklyAdherence.length >= 2) ...[
                 const SizedBox(height: 12),
                 HistoryWeeklyChart(data: ctrl.weeklyAdherence),
+              ],
+              if (ctrl.heatmap.length >= 7) ...[
+                const SizedBox(height: 12),
+                HistoryHeatmap(data: ctrl.heatmap),
+              ],
+              if (ctrl.checkInCount >= 3) ...[
+                const SizedBox(height: 12),
+                HistoryWeekdayChart(data: ctrl.byWeekday),
               ],
               const SizedBox(height: 16),
               HistoryList(logsByDay: ctrl.logsByDay),

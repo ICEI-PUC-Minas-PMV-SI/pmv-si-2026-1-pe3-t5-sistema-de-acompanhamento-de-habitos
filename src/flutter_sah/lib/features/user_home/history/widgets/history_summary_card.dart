@@ -4,6 +4,7 @@ import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_card.dart';
 import '../../../../core/design_system/widgets/sah_progress_bar.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class HistorySummaryCard extends StatelessWidget {
   final int checkIns;
@@ -21,6 +22,7 @@ class HistorySummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final adherencePct = scheduledDays > 0
         ? '${(adherence * 100).round()}%'
         : '—';
@@ -33,10 +35,10 @@ class HistorySummaryCard extends StatelessWidget {
             spacing: SahSpacing.x4,
             runSpacing: SahSpacing.x4,
             children: [
-              _MetricTile(label: 'Check-ins', value: '$checkIns'),
-              _MetricTile(label: 'Dias agendados', value: '$scheduledDays'),
-              _MetricTile(label: 'Melhor streak', value: '$bestStreak dias'),
-              _MetricTile(label: 'Aderência', value: adherencePct),
+              _MetricTile(label: l.historyCheckIns, value: '$checkIns'),
+              _MetricTile(label: l.historyScheduledDays, value: '$scheduledDays'),
+              _MetricTile(label: l.historyBestStreak, value: l.historyStreakDays(bestStreak)),
+              _MetricTile(label: l.historyAdherence, value: adherencePct),
             ],
           ),
           if (scheduledDays > 0) ...[

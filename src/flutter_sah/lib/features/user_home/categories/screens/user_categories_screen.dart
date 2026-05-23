@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
-import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../core/design_system/tokens/sah_shadows.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
+import '../../../../core/design_system/widgets/sah_action_sheet.dart';
 import '../../../../core/design_system/widgets/sah_badge.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../core/design_system/widgets/sah_empty_state.dart';
@@ -13,6 +14,7 @@ import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/repositories/category_repository.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../admin/categories/widgets/category_form_modal.dart';
 import '../../../auth/controllers/auth_controller.dart';
 import '../controllers/user_categories_controller.dart';
@@ -40,6 +42,7 @@ class _UserCategoriesContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final ctrl = context.watch<UserCategoriesController>();
     final userId = context.read<AuthController>().currentUser!.id;
+    final l = AppL10n.of(context)!;
 
     return Scaffold(
       backgroundColor: SahColors.bg,
@@ -52,7 +55,7 @@ class _UserCategoriesContent extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Minhas categorias',
+          l.userCategoriesTitle,
           style: TextStyle(
             fontFamily: 'GeneralSans',
             fontSize: 18,
@@ -64,7 +67,7 @@ class _UserCategoriesContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: SahSpacing.pagePadding),
             child: SahButton.primary(
-              label: 'Nova',
+              label: l.adminCategoriesNewButton,
               icon: const Icon(Icons.add_rounded, size: 16, color: Colors.white),
               size: SahButtonSize.sm,
               onPressed: () => _showCreate(context, ctrl, userId),
@@ -81,13 +84,14 @@ class _UserCategoriesContent extends StatelessWidget {
     UserCategoriesController ctrl,
     String userId,
   ) {
+    final l = AppL10n.of(context)!;
     if (ctrl.status == ListStatus.loading) {
       return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == ListStatus.error) {
       return Center(
         child: Text(
-          ctrl.error ?? 'Erro ao carregar categorias',
+          ctrl.error ?? l.adminCategoriesLoadError,
           style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
         ),
       );
@@ -98,14 +102,14 @@ class _UserCategoriesContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionHeader(title: 'Suas categorias'),
+          _SectionHeader(title: l.userCategoriesYourSection),
           const SizedBox(height: 10),
           if (ctrl.personal.isEmpty)
             SahEmptyState(
-              title: 'Nenhuma categoria pessoal',
-              description: 'Crie categorias próprias para organizar seus hábitos.',
+              title: l.userCategoriesEmptyTitle,
+              description: l.userCategoriesEmptyDescription,
               primaryAction: SahButton.primary(
-                label: 'Criar primeira',
+                label: l.userCategoriesCreateFirst,
                 onPressed: () => _showCreate(context, ctrl, userId),
               ),
             )
@@ -123,10 +127,10 @@ class _UserCategoriesContent extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 24),
-          const _SectionHeader(title: 'Globais'),
+          _SectionHeader(title: l.userCategoriesGlobalsSection),
           const SizedBox(height: 4),
           Text(
-            'Disponíveis para todos — somente leitura.',
+            l.userCategoriesGlobalsHint,
             style: GoogleFonts.interTight(fontSize: 12, color: SahColors.textMuted),
           ),
           const SizedBox(height: 10),
@@ -175,6 +179,7 @@ class _UserCategoriesContent extends StatelessWidget {
     String id,
     int count,
   ) async {
+    final l = AppL10n.of(context)!;
     if (count > 0) {
       final confirm = await showDialog<bool>(
         context: context,
@@ -184,7 +189,7 @@ class _UserCategoriesContent extends StatelessWidget {
             borderRadius: BorderRadius.circular(SahRadius.lg),
           ),
           title: Text(
-            'Categoria em uso',
+            l.adminCategoriesInUseTitle,
             style: TextStyle(
               fontFamily: 'GeneralSans',
               fontSize: 18,
@@ -192,19 +197,19 @@ class _UserCategoriesContent extends StatelessWidget {
             ),
           ),
           content: Text(
-            'Esta categoria está vinculada a $count hábito${count != 1 ? "s" : ""}. Deseja excluir mesmo assim?',
+            l.adminCategoriesInUseBody(count),
             style: GoogleFonts.interTight(
                 fontSize: 14, color: SahColors.textMuted, height: 1.5),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: Text('Cancelar',
+              child: Text(l.commonCancel,
                   style: GoogleFonts.interTight(color: SahColors.textMuted)),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: Text('Excluir assim mesmo',
+              child: Text(l.adminCategoriesForceDelete,
                   style: GoogleFonts.interTight(color: SahColors.danger)),
             ),
           ],
@@ -224,7 +229,7 @@ class _UserCategoriesContent extends StatelessWidget {
           borderRadius: BorderRadius.circular(SahRadius.lg),
         ),
         title: Text(
-          'Excluir categoria?',
+          l.adminCategoriesDeleteTitle,
           style: TextStyle(
             fontFamily: 'GeneralSans',
             fontSize: 18,
@@ -232,18 +237,18 @@ class _UserCategoriesContent extends StatelessWidget {
           ),
         ),
         content: Text(
-          'Esta ação não pode ser desfeita.',
+          l.adminCategoriesDeleteBody,
           style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Cancelar',
+            child: Text(l.commonCancel,
                 style: GoogleFonts.interTight(color: SahColors.textMuted)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Excluir',
+            child: Text(l.commonDelete,
                 style: GoogleFonts.interTight(color: SahColors.danger)),
           ),
         ],
@@ -336,6 +341,7 @@ class _CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
     final color = _color;
 
     return Material(
@@ -401,7 +407,7 @@ class _CategoryTile extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                '$habitCount hábito${habitCount != 1 ? "s" : ""}',
+                                l.adminCategoriesHabitCount(habitCount),
                                 style: GoogleFonts.interTight(
                                   fontSize: 11,
                                   color: SahColors.textFaint,
@@ -411,8 +417,8 @@ class _CategoryTile extends StatelessWidget {
                           ),
                         ),
                         if (readOnly)
-                          const SahBadge.neutral(
-                            'Global',
+                          SahBadge.neutral(
+                            l.adminCategoriesGlobalBadge,
                             size: SahBadgeSize.sm,
                           )
                         else
@@ -430,7 +436,7 @@ class _CategoryTile extends StatelessWidget {
                               actions: [
                                 SahActionItem(
                                   icon: Icons.edit_outlined,
-                                  label: 'Editar',
+                                  label: l.commonEdit,
                                   onTap: () {
                                     Navigator.pop(context);
                                     onEdit();
@@ -438,7 +444,7 @@ class _CategoryTile extends StatelessWidget {
                                 ),
                                 SahActionItem(
                                   icon: Icons.delete_outline,
-                                  label: 'Excluir',
+                                  label: l.commonDelete,
                                   destructive: true,
                                   onTap: () {
                                     Navigator.pop(context);

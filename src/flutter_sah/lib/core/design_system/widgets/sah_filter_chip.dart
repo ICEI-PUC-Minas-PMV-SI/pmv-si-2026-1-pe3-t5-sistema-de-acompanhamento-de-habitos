@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../tokens/sah_colors.dart';
-import '../tokens/sah_radius.dart';
+
 import '../icons/sah_icon.dart';
 import '../icons/sah_icon_data.dart';
+import '../tokens/sah_colors.dart';
+import '../tokens/sah_radius.dart';
 
 class SahFilterChip extends StatelessWidget {
   final String label;
