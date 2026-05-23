@@ -24,19 +24,19 @@ class _Slide {
 List<_Slide> _slidesFor(AppL10n l) => [
       _Slide(
         icon: PhosphorIconsRegular.sparkle,
-        color: const Color(0xFF6B5B95),
+        color: SahColors.accent,
         title: l.onboardingWelcomeTitle,
         description: l.onboardingWelcomeDescription,
       ),
       _Slide(
         icon: PhosphorIconsRegular.bell,
-        color: const Color(0xFFC89B3C),
+        color: SahColors.streak,
         title: l.onboardingRemindersTitle,
         description: l.onboardingRemindersDescription,
       ),
       _Slide(
         icon: PhosphorIconsRegular.chartLine,
-        color: const Color(0xFF4A7C59),
+        color: SahColors.primary,
         title: l.onboardingProgressTitle,
         description: l.onboardingProgressDescription,
       ),
@@ -63,9 +63,6 @@ class OnboardingIntro extends StatefulWidget {
 class _OnboardingIntroState extends State<OnboardingIntro> {
   final _ctrl = PageController();
   int _page = 0;
-  int _slideCount = 0;
-
-  bool get _isLast => _page == _slideCount - 1;
 
   @override
   void dispose() {
@@ -73,22 +70,11 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
     super.dispose();
   }
 
-  void _next() {
-    if (_isLast) {
-      widget.onContinue();
-    } else {
-      _ctrl.nextPage(
-        duration: const Duration(milliseconds: 280),
-        curve: Curves.easeOutCubic,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l = AppL10n.of(context)!;
     final slides = _slidesFor(l);
-    _slideCount = slides.length;
+    final isLast = _page == slides.length - 1;
     return SafeArea(
       child: Column(
         children: [
@@ -142,9 +128,18 @@ class _OnboardingIntroState extends State<OnboardingIntro> {
               SahSpacing.x6,
             ),
             child: SahButton.primary(
-              label: _isLast ? l.commonContinue : l.commonNext,
+              label: isLast ? l.commonContinue : l.commonNext,
               fullWidth: true,
-              onPressed: _next,
+              onPressed: () {
+                if (isLast) {
+                  widget.onContinue();
+                } else {
+                  _ctrl.nextPage(
+                    duration: const Duration(milliseconds: 280),
+                    curve: Curves.easeOutCubic,
+                  );
+                }
+              },
             ),
           ),
         ],

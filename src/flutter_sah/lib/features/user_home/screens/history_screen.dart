@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../core/design_system/tokens/sah_colors.dart';
+import '../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../core/design_system/tokens/sah_radius.dart';
 import '../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../core/design_system/widgets/sah_illustrated_empty.dart';
@@ -44,6 +45,7 @@ class _HistoryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SahPaletteScope.subscribe(context);
     final ctrl = context.watch<HistoryController>();
     final l = AppL10n.of(context)!;
     final periods = [

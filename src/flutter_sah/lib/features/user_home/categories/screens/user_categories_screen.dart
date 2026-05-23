@@ -3,19 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/design_system/tokens/sah_colors.dart';
+import '../../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
-import '../../../../core/design_system/tokens/sah_shadows.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
-import '../../../../core/design_system/widgets/sah_action_sheet.dart';
-import '../../../../core/design_system/widgets/sah_badge.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../core/design_system/widgets/sah_empty_state.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/utils/base_list_controller.dart';
+import '../../../../data/events/categories_bus.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../admin/categories/widgets/category_form_modal.dart';
+import '../../../admin/categories/widgets/category_tile.dart';
 import '../../../auth/controllers/auth_controller.dart';
 import '../controllers/user_categories_controller.dart';
 
@@ -29,6 +29,7 @@ class UserCategoriesScreen extends StatelessWidget {
       create: (ctx) => UserCategoriesController(
         ctx.read<CategoryRepository>(),
         userId: userId,
+        bus: ctx.read<CategoriesBus>(),
       ),
       child: const _UserCategoriesContent(),
     );
@@ -40,6 +41,7 @@ class _UserCategoriesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SahPaletteScope.subscribe(context);
     final ctrl = context.watch<UserCategoriesController>();
     final userId = context.read<AuthController>().currentUser!.id;
     final l = AppL10n.of(context)!;
@@ -114,10 +116,11 @@ class _UserCategoriesContent extends StatelessWidget {
               ),
             )
           else
-            _CategoryList(
-              categories: ctrl.personal,
-              habitCounts: ctrl.habitCounts,
+            ..._tilesFor(
+              ctrl.personal,
+              ctrl.habitCounts,
               readOnly: false,
+              showGlobalBadge: false,
               onEdit: (cat) => _showEdit(context, ctrl, cat, userId),
               onDelete: (cat) => _confirmDelete(
                 context,
@@ -134,10 +137,11 @@ class _UserCategoriesContent extends StatelessWidget {
             style: GoogleFonts.interTight(fontSize: 12, color: SahColors.textMuted),
           ),
           const SizedBox(height: 10),
-          _CategoryList(
-            categories: ctrl.globals,
-            habitCounts: ctrl.habitCounts,
+          ..._tilesFor(
+            ctrl.globals,
+            ctrl.habitCounts,
             readOnly: true,
+            showGlobalBadge: true,
             onEdit: (_) {},
             onDelete: (_) {},
           ),
@@ -258,9 +262,31 @@ class _UserCategoriesContent extends StatelessWidget {
       await ctrl.delete(id);
     }
   }
-}
 
-// ─── Widgets de layout ───────────────────────────────────────────────────────
+  List<Widget> _tilesFor(
+    List<Category> items,
+    Map<String, int> habitCounts, {
+    required bool readOnly,
+    required bool showGlobalBadge,
+    required void Function(Category) onEdit,
+    required void Function(Category) onDelete,
+  }) {
+    final widgets = <Widget>[];
+    for (var i = 0; i < items.length; i++) {
+      final cat = items[i];
+      widgets.add(CategoryTile(
+        category: cat,
+        habitCount: habitCounts[cat.id] ?? 0,
+        readOnly: readOnly,
+        showGlobalBadge: showGlobalBadge,
+        onEdit: () => onEdit(cat),
+        onDelete: () => onDelete(cat),
+      ));
+      if (i < items.length - 1) widgets.add(const SizedBox(height: 8));
+    }
+    return widgets;
+  }
+}
 
 class _SectionHeader extends StatelessWidget {
   final String title;
@@ -275,193 +301,6 @@ class _SectionHeader extends StatelessWidget {
         fontSize: 15,
         fontWeight: FontWeight.w600,
         color: SahColors.text,
-      ),
-    );
-  }
-}
-
-class _CategoryList extends StatelessWidget {
-  final List<Category> categories;
-  final Map<String, int> habitCounts;
-  final bool readOnly;
-  final void Function(Category) onEdit;
-  final void Function(Category) onDelete;
-
-  const _CategoryList({
-    required this.categories,
-    required this.habitCounts,
-    required this.readOnly,
-    required this.onEdit,
-    required this.onDelete,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (int i = 0; i < categories.length; i++) ...[
-          _CategoryTile(
-            category: categories[i],
-            habitCount: habitCounts[categories[i].id] ?? 0,
-            readOnly: readOnly,
-            onEdit: () => onEdit(categories[i]),
-            onDelete: () => onDelete(categories[i]),
-          ),
-          if (i < categories.length - 1) const SizedBox(height: 8),
-        ],
-      ],
-    );
-  }
-}
-
-class _CategoryTile extends StatelessWidget {
-  final Category category;
-  final int habitCount;
-  final bool readOnly;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
-
-  const _CategoryTile({
-    required this.category,
-    required this.habitCount,
-    required this.readOnly,
-    required this.onEdit,
-    required this.onDelete,
-  });
-
-  Color get _color {
-    try {
-      return Color(
-        int.parse('FF${category.cor.replaceAll('#', '')}', radix: 16),
-      );
-    } catch (_) {
-      return SahColors.primary;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l = AppL10n.of(context)!;
-    final color = _color;
-
-    return Material(
-      color: SahColors.surface,
-      borderRadius: BorderRadius.circular(SahRadius.md),
-      child: InkWell(
-        onTap: readOnly ? null : onEdit,
-        borderRadius: BorderRadius.circular(SahRadius.md),
-        splashColor: color.withAlpha(20),
-        highlightColor: color.withAlpha(10),
-        child: Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(SahRadius.md),
-            border: Border.all(color: SahColors.border),
-            boxShadow: SahShadows.sm,
-          ),
-          child: IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(width: 4, color: color),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 10),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: color.withAlpha(25),
-                            borderRadius: BorderRadius.circular(SahRadius.sm),
-                          ),
-                          child: Center(
-                            child: Text(
-                              category.nome
-                                  .substring(0, 1)
-                                  .toUpperCase(),
-                              style: GoogleFonts.interTight(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700,
-                                color: color,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                category.nome,
-                                style: TextStyle(
-                                  fontFamily: 'GeneralSans',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: SahColors.text,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                l.adminCategoriesHabitCount(habitCount),
-                                style: GoogleFonts.interTight(
-                                  fontSize: 11,
-                                  color: SahColors.textFaint,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        if (readOnly)
-                          SahBadge.neutral(
-                            l.adminCategoriesGlobalBadge,
-                            size: SahBadgeSize.sm,
-                          )
-                        else
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            icon: Icon(
-                              Icons.more_vert_rounded,
-                              size: 18,
-                              color: SahColors.textMuted,
-                            ),
-                            onPressed: () => showSahActionSheet(
-                              context,
-                              title: category.nome,
-                              actions: [
-                                SahActionItem(
-                                  icon: Icons.edit_outlined,
-                                  label: l.commonEdit,
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    onEdit();
-                                  },
-                                ),
-                                SahActionItem(
-                                  icon: Icons.delete_outline,
-                                  label: l.commonDelete,
-                                  destructive: true,
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    onDelete();
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

@@ -13,6 +13,7 @@ import '../../../../core/design_system/widgets/sah_illustrated_empty.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/dialogs.dart';
+import '../../../../data/events/categories_bus.dart';
 import '../../../../data/events/habits_bus.dart';
 import '../../../../data/models/habit.dart';
 import '../../../../data/notifications/notification_service.dart';
@@ -40,6 +41,7 @@ class HabitsScreen extends StatelessWidget {
         execRepo: ctx.read<ExecutionLogRepository>(),
         notifications: ctx.read<NotificationService>(),
         bus: ctx.read<HabitsBus>(),
+        catBus: ctx.read<CategoriesBus>(),
       ),
       child: const _HabitsView(),
     );

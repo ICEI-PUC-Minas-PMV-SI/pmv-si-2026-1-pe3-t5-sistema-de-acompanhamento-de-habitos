@@ -99,12 +99,6 @@ abstract class AppL10n {
     Locale('es')
   ];
 
-  /// No description provided for @appName.
-  ///
-  /// In pt, this message translates to:
-  /// **'SAH'**
-  String get appName;
-
   /// No description provided for @commonCancel.
   ///
   /// In pt, this message translates to:
@@ -129,18 +123,6 @@ abstract class AppL10n {
   /// **'Editar'**
   String get commonEdit;
 
-  /// No description provided for @commonBack.
-  ///
-  /// In pt, this message translates to:
-  /// **'Voltar'**
-  String get commonBack;
-
-  /// No description provided for @commonOk.
-  ///
-  /// In pt, this message translates to:
-  /// **'OK'**
-  String get commonOk;
-
   /// No description provided for @commonNext.
   ///
   /// In pt, this message translates to:
@@ -159,18 +141,6 @@ abstract class AppL10n {
   /// **'Vamos começar'**
   String get commonContinue;
 
-  /// No description provided for @commonRetry.
-  ///
-  /// In pt, this message translates to:
-  /// **'Tentar novamente'**
-  String get commonRetry;
-
-  /// No description provided for @commonLoading.
-  ///
-  /// In pt, this message translates to:
-  /// **'Carregando…'**
-  String get commonLoading;
-
   /// No description provided for @commonError.
   ///
   /// In pt, this message translates to:
@@ -182,18 +152,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Campo obrigatório'**
   String get commonRequiredField;
-
-  /// No description provided for @commonClose.
-  ///
-  /// In pt, this message translates to:
-  /// **'Fechar'**
-  String get commonClose;
-
-  /// No description provided for @commonConfirm.
-  ///
-  /// In pt, this message translates to:
-  /// **'Confirmar'**
-  String get commonConfirm;
 
   /// No description provided for @commonUnderstood.
   ///
@@ -291,12 +249,6 @@ abstract class AppL10n {
   /// **'Senha'**
   String get authPasswordLabel;
 
-  /// No description provided for @authPasswordHint.
-  ///
-  /// In pt, this message translates to:
-  /// **'Sua senha'**
-  String get authPasswordHint;
-
   /// No description provided for @authLoginButton.
   ///
   /// In pt, this message translates to:
@@ -350,18 +302,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Criar conta'**
   String get authSignupButton;
-
-  /// No description provided for @authHaveAccount.
-  ///
-  /// In pt, this message translates to:
-  /// **'Já tem conta? '**
-  String get authHaveAccount;
-
-  /// No description provided for @authLoginLink.
-  ///
-  /// In pt, this message translates to:
-  /// **'Entrar'**
-  String get authLoginLink;
 
   /// No description provided for @authRecoverTitle.
   ///
@@ -495,12 +435,6 @@ abstract class AppL10n {
   /// **'Nenhum hábito agendado para hoje. Aproveite o descanso ou crie um novo hábito.'**
   String get todayFreeDescription;
 
-  /// No description provided for @todayLoadError.
-  ///
-  /// In pt, this message translates to:
-  /// **'Erro ao carregar hábitos.'**
-  String get todayLoadError;
-
   /// No description provided for @todayActionSkipDay.
   ///
   /// In pt, this message translates to:
@@ -572,12 +506,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Mostrar arquivados'**
   String get habitsShowArchived;
-
-  /// No description provided for @habitsHideArchived.
-  ///
-  /// In pt, this message translates to:
-  /// **'Ocultar arquivados'**
-  String get habitsHideArchived;
 
   /// No description provided for @habitsEmptyTitle.
   ///
@@ -668,12 +596,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'O hábito e todo seu histórico serão permanentemente removidos.'**
   String get habitsDeleteConfirmBody;
-
-  /// No description provided for @habitsArchivedLabel.
-  ///
-  /// In pt, this message translates to:
-  /// **'Arquivado'**
-  String get habitsArchivedLabel;
 
   /// No description provided for @habitFormCreate.
   ///
@@ -867,18 +789,6 @@ abstract class AppL10n {
   /// **'Quando você marcar check-ins, o histórico aparece aqui.'**
   String get historyEmptyDescription;
 
-  /// No description provided for @historyNoHabitsTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Comece sua jornada'**
-  String get historyNoHabitsTitle;
-
-  /// No description provided for @historyNoHabitsDescription.
-  ///
-  /// In pt, this message translates to:
-  /// **'Você ainda não tem hábitos. Crie o primeiro pra acompanhar seu progresso.'**
-  String get historyNoHabitsDescription;
-
   /// No description provided for @historyChartWeeklyTitle.
   ///
   /// In pt, this message translates to:
@@ -1053,6 +963,12 @@ abstract class AppL10n {
   /// **'As senhas não coincidem'**
   String get profilePasswordsDoNotMatch;
 
+  /// No description provided for @profileSameAsCurrentPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'A nova senha não pode ser igual à atual'**
+  String get profileSameAsCurrentPassword;
+
   /// No description provided for @profileLogout.
   ///
   /// In pt, this message translates to:
@@ -1178,6 +1094,30 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Exportar e importar'**
   String get settingsBackupSubtitle;
+
+  /// No description provided for @settingsSwitchToUser.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meus hábitos'**
+  String get settingsSwitchToUser;
+
+  /// No description provided for @settingsSwitchToUserSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Acessar área pessoal'**
+  String get settingsSwitchToUserSubtitle;
+
+  /// No description provided for @settingsSwitchToAdmin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Painel admin'**
+  String get settingsSwitchToAdmin;
+
+  /// No description provided for @settingsSwitchToAdminSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar para a administração'**
+  String get settingsSwitchToAdminSubtitle;
 
   /// No description provided for @settingsTestNotification.
   ///
@@ -1509,96 +1449,6 @@ abstract class AppL10n {
   /// **'{count} hábitos · {description}'**
   String templatesCount(int count, String description);
 
-  /// No description provided for @categoriesEmptyTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Nenhuma categoria'**
-  String get categoriesEmptyTitle;
-
-  /// No description provided for @categoriesEmptyDescription.
-  ///
-  /// In pt, this message translates to:
-  /// **'Crie sua primeira categoria para organizar seus hábitos.'**
-  String get categoriesEmptyDescription;
-
-  /// No description provided for @categoriesNewCategory.
-  ///
-  /// In pt, this message translates to:
-  /// **'Nova categoria'**
-  String get categoriesNewCategory;
-
-  /// No description provided for @categoriesNameLabel.
-  ///
-  /// In pt, this message translates to:
-  /// **'Nome'**
-  String get categoriesNameLabel;
-
-  /// No description provided for @categoriesNameHint.
-  ///
-  /// In pt, this message translates to:
-  /// **'Ex: Saúde, Trabalho…'**
-  String get categoriesNameHint;
-
-  /// No description provided for @categoriesColorLabel.
-  ///
-  /// In pt, this message translates to:
-  /// **'Cor'**
-  String get categoriesColorLabel;
-
-  /// No description provided for @categoriesGlobalLabel.
-  ///
-  /// In pt, this message translates to:
-  /// **'Global'**
-  String get categoriesGlobalLabel;
-
-  /// No description provided for @categoriesGlobalDescription.
-  ///
-  /// In pt, this message translates to:
-  /// **'Disponível para todos os usuários'**
-  String get categoriesGlobalDescription;
-
-  /// No description provided for @categoriesEditCategory.
-  ///
-  /// In pt, this message translates to:
-  /// **'Editar categoria'**
-  String get categoriesEditCategory;
-
-  /// No description provided for @categoriesDeleteConfirmTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Excluir categoria?'**
-  String get categoriesDeleteConfirmTitle;
-
-  /// No description provided for @categoriesDeleteConfirmBody.
-  ///
-  /// In pt, this message translates to:
-  /// **'A categoria será removida. Hábitos vinculados ficarão sem categoria.'**
-  String get categoriesDeleteConfirmBody;
-
-  /// No description provided for @categoriesDeleteError.
-  ///
-  /// In pt, this message translates to:
-  /// **'Não foi possível excluir.'**
-  String get categoriesDeleteError;
-
-  /// No description provided for @categoriesCreated.
-  ///
-  /// In pt, this message translates to:
-  /// **'Categoria criada!'**
-  String get categoriesCreated;
-
-  /// No description provided for @categoriesUpdated.
-  ///
-  /// In pt, this message translates to:
-  /// **'Categoria atualizada!'**
-  String get categoriesUpdated;
-
-  /// No description provided for @categoriesDeleted.
-  ///
-  /// In pt, this message translates to:
-  /// **'Categoria excluída!'**
-  String get categoriesDeleted;
-
   /// No description provided for @adminDashboardTitle.
   ///
   /// In pt, this message translates to:
@@ -1610,12 +1460,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Visão geral da plataforma'**
   String get adminDashboardSubtitle;
-
-  /// No description provided for @adminDashboardTotalUsers.
-  ///
-  /// In pt, this message translates to:
-  /// **'Total de usuários'**
-  String get adminDashboardTotalUsers;
 
   /// No description provided for @adminDashboardActiveUsers.
   ///
@@ -1635,23 +1479,11 @@ abstract class AppL10n {
   /// **'Total de hábitos'**
   String get adminDashboardTotalHabits;
 
-  /// No description provided for @adminDashboardAvgAdherence.
-  ///
-  /// In pt, this message translates to:
-  /// **'Aderência média'**
-  String get adminDashboardAvgAdherence;
-
   /// No description provided for @adminDashboardAvgStreak.
   ///
   /// In pt, this message translates to:
   /// **'Streak médio (dias)'**
   String get adminDashboardAvgStreak;
-
-  /// No description provided for @adminDashboardQuickAccess.
-  ///
-  /// In pt, this message translates to:
-  /// **'Acesso rápido'**
-  String get adminDashboardQuickAccess;
 
   /// No description provided for @adminUsersTitle.
   ///
@@ -1790,12 +1622,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'{nome} perderá acesso ao painel administrativo.'**
   String adminUsersDemoteBody(String nome);
-
-  /// No description provided for @adminCategoriesTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Categorias globais'**
-  String get adminCategoriesTitle;
 
   /// No description provided for @adminCategoriesShortTitle.
   ///
@@ -2121,6 +1947,78 @@ abstract class AppL10n {
   /// **'Backup'**
   String get adminLogsTypeBackup;
 
+  /// No description provided for @adminLogsDetailTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Detalhes do evento'**
+  String get adminLogsDetailTitle;
+
+  /// No description provided for @adminLogsDetailWhen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quando'**
+  String get adminLogsDetailWhen;
+
+  /// No description provided for @adminLogsDetailEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evento'**
+  String get adminLogsDetailEvent;
+
+  /// No description provided for @adminLogsDetailUser.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usuário'**
+  String get adminLogsDetailUser;
+
+  /// No description provided for @adminLogsDetailEmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail'**
+  String get adminLogsDetailEmail;
+
+  /// No description provided for @adminLogsDetailUserId.
+  ///
+  /// In pt, this message translates to:
+  /// **'ID do usuário'**
+  String get adminLogsDetailUserId;
+
+  /// No description provided for @adminLogsDetailRoute.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rota'**
+  String get adminLogsDetailRoute;
+
+  /// No description provided for @adminLogsDetailIp.
+  ///
+  /// In pt, this message translates to:
+  /// **'IP'**
+  String get adminLogsDetailIp;
+
+  /// No description provided for @adminLogsDetailPlatform.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plataforma'**
+  String get adminLogsDetailPlatform;
+
+  /// No description provided for @adminLogsDetailMetadata.
+  ///
+  /// In pt, this message translates to:
+  /// **'Metadados'**
+  String get adminLogsDetailMetadata;
+
+  /// No description provided for @adminLogsDetailLogId.
+  ///
+  /// In pt, this message translates to:
+  /// **'ID do log'**
+  String get adminLogsDetailLogId;
+
+  /// No description provided for @adminLogsDetailEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'—'**
+  String get adminLogsDetailEmpty;
+
   /// No description provided for @tooltipBack.
   ///
   /// In pt, this message translates to:
@@ -2132,36 +2030,6 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Configurações'**
   String get tooltipSettings;
-
-  /// No description provided for @tooltipOpenMenu.
-  ///
-  /// In pt, this message translates to:
-  /// **'Abrir menu'**
-  String get tooltipOpenMenu;
-
-  /// No description provided for @tooltipLogout.
-  ///
-  /// In pt, this message translates to:
-  /// **'Sair'**
-  String get tooltipLogout;
-
-  /// No description provided for @testNotificationTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Teste de lembrete'**
-  String get testNotificationTitle;
-
-  /// No description provided for @testNotificationBody.
-  ///
-  /// In pt, this message translates to:
-  /// **'Se você está vendo isso, as notificações estão funcionando!'**
-  String get testNotificationBody;
-
-  /// No description provided for @permissionDenied.
-  ///
-  /// In pt, this message translates to:
-  /// **'Permissão de notificação negada. Ative nas configurações do sistema.'**
-  String get permissionDenied;
 
   /// No description provided for @logoutDialogTitle.
   ///
@@ -2180,6 +2048,18 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Sair'**
   String get logoutDialogConfirm;
+
+  /// No description provided for @settingsLogout.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair'**
+  String get settingsLogout;
+
+  /// No description provided for @settingsLogoutSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encerrar a sessão'**
+  String get settingsLogoutSubtitle;
 
   /// No description provided for @onboardingSuggDrinkWater.
   ///

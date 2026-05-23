@@ -9,6 +9,7 @@ import 'core/error/error_reporter.dart';
 import 'core/i18n/locale_controller.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/theme_controller.dart';
+import 'data/local/audit_context.dart';
 import 'data/local/onboarding_store.dart';
 import 'features/auth/controllers/auth_controller.dart';
 import 'l10n/app_localizations.dart';
@@ -30,11 +31,18 @@ class _SahAppState extends State<SahApp> with WidgetsBindingObserver {
       context.read<AuthController>(),
       context.read<OnboardingStore>(),
     );
+    _router.routerDelegate.addListener(_onRouteChange);
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  void _onRouteChange() {
+    final uri = _router.routerDelegate.currentConfiguration.uri;
+    AuditContext.setRoute(uri.toString());
   }
 
   @override
   void dispose() {
+    _router.routerDelegate.removeListener(_onRouteChange);
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }

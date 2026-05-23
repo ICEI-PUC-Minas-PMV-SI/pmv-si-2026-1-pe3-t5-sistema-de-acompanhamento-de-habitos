@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
+
 import '../../data/local/hive_keys.dart';
 import '../../data/models/audit_log.dart';
 import '../design_system/tokens/sah_colors.dart';
@@ -52,23 +55,20 @@ class ErrorReporter {
     try {
       if (Hive.isBoxOpen(HiveBoxes.auditLogs)) {
         final id = 'err_${DateTime.now().microsecondsSinceEpoch}';
+        final firstLine = message.split('\n').first;
         final stackPreview = stack == null
             ? ''
-            : stack.toString().split('\n').take(5).join('\n');
+            : stack.toString().split('\n').take(5).join(' · ');
         final box = Hive.box<String>(HiveBoxes.auditLogs);
         final entry = AuditLog(
           id: id,
           tipoEvento: AuditEventType.erroSistema,
-          evento: 'Erro: ${message.split('\n').first}'
-              '${stackPreview.isEmpty ? '' : '\n$stackPreview'}',
+          evento: stackPreview.isEmpty
+              ? 'Erro: $firstLine'
+              : 'Erro: $firstLine — $stackPreview',
           data: DateTime.now(),
         );
-        await box.put(
-          id,
-          // toJson é Map<String, dynamic>; usamos toString simples para evitar
-          // ciclo de import com jsonEncode
-          _encode(entry),
-        );
+        await box.put(id, jsonEncode(entry.toJson()));
       }
     } catch (_) {
       // Reporting não pode falhar; ignorar
@@ -111,24 +111,4 @@ class ErrorReporter {
     return firstLine;
   }
 
-  String _encode(AuditLog log) {
-    final m = log.toJson();
-    // jsonEncode local sem dep externa
-    final buf = StringBuffer('{');
-    var first = true;
-    m.forEach((k, v) {
-      if (!first) buf.write(',');
-      first = false;
-      buf.write('"$k":');
-      if (v == null) {
-        buf.write('null');
-      } else if (v is num || v is bool) {
-        buf.write(v);
-      } else {
-        buf.write('"${v.toString().replaceAll(r'\', r'\\').replaceAll('"', r'\"')}"');
-      }
-    });
-    buf.write('}');
-    return buf.toString();
-  }
 }

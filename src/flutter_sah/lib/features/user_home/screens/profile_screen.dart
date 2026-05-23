@@ -220,7 +220,14 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
     final confirmar = _confirmarCtrl.text;
 
     final atualErr = atual.isEmpty ? l.profileCurrentPasswordRequired : null;
-    final novaErr = nova.length < 6 ? l.profileNewPasswordTooShort : null;
+    final String? novaErr;
+    if (nova.length < 6) {
+      novaErr = l.profileNewPasswordTooShort;
+    } else if (atual.isNotEmpty && nova == atual) {
+      novaErr = l.profileSameAsCurrentPassword;
+    } else {
+      novaErr = null;
+    }
     final confirmarErr = confirmar != nova ? l.profilePasswordsDoNotMatch : null;
 
     setState(() {
@@ -251,13 +258,18 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
         ),
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(ctrl.error ?? l.profilePasswordChangeError,
-              style: GoogleFonts.interTight(fontSize: 14)),
-          backgroundColor: SahColors.danger,
-        ),
-      );
+      final isSamePassword = ctrl.error == 'SAME_AS_PREVIOUS_PASSWORD';
+      if (isSamePassword) {
+        setState(() => _novaSenhaError = l.profileSameAsCurrentPassword);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(ctrl.error ?? l.profilePasswordChangeError,
+                style: GoogleFonts.interTight(fontSize: 14)),
+            backgroundColor: SahColors.danger,
+          ),
+        );
+      }
     }
   }
 

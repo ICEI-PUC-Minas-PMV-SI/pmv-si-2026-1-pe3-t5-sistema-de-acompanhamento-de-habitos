@@ -79,13 +79,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       );
       context.go(Routes.login);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(ctrl.error ?? l.authResetError,
-              style: GoogleFonts.interTight(fontSize: 14)),
-          backgroundColor: SahColors.danger,
-        ),
-      );
+      if (ctrl.error == 'SAME_AS_PREVIOUS_PASSWORD') {
+        setState(() => _newPassError = l.profileSameAsCurrentPassword);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(ctrl.error ?? l.authResetError,
+                style: GoogleFonts.interTight(fontSize: 14)),
+            backgroundColor: SahColors.danger,
+          ),
+        );
+      }
     }
   }
 

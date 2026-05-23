@@ -63,9 +63,16 @@ class BackupService {
 
     await AuditLogger.log(
       tipo: AuditEventType.dataBackup,
-      evento: 'Backup exportado: ${habits.length} hábitos, ${logs.length} registros',
+      evento: 'Backup exportado: ${user.nome} <${user.email}> — ${habits.length} hábitos, ${logs.length} registros',
       userId: userId,
       userNome: user.nome,
+      userEmail: user.email,
+      metadata: {
+        'action': 'export',
+        'habits': habits.length.toString(),
+        'logs': logs.length.toString(),
+        'categories': cats.length.toString(),
+      },
     );
 
     return Success(const JsonEncoder.withIndent('  ').convert(payload));
@@ -146,12 +153,20 @@ class BackupService {
     }
 
     final userRes = await _userRepo.getById(userId);
-    final userNome = userRes.valueOrNull?.nome;
+    final restoredUser = userRes.valueOrNull;
     await AuditLogger.log(
       tipo: AuditEventType.dataBackup,
-      evento: 'Backup importado: ${habits.length} hábitos, ${logs.length} registros',
+      evento: 'Backup importado: ${restoredUser?.nome ?? userId} '
+          '<${restoredUser?.email ?? '?'}> — ${habits.length} hábitos, ${logs.length} registros',
       userId: userId,
-      userNome: userNome,
+      userNome: restoredUser?.nome,
+      userEmail: restoredUser?.email,
+      metadata: {
+        'action': 'import',
+        'habits': habits.length.toString(),
+        'logs': logs.length.toString(),
+        'categories': cats.length.toString(),
+      },
     );
 
     return const Success(null);

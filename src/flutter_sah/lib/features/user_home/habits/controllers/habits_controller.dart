@@ -1,5 +1,6 @@
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/result.dart';
+import '../../../../data/events/categories_bus.dart';
 import '../../../../data/events/habits_bus.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/execution_log.dart';
@@ -16,6 +17,7 @@ class HabitsController extends BaseListController<Habit> {
   final ExecutionLogRepository _execRepo;
   final NotificationService _notifications;
   final HabitsBus _bus;
+  final CategoriesBus _catBus;
   final String userId;
 
   bool _showArchived = false;
@@ -29,11 +31,30 @@ class HabitsController extends BaseListController<Habit> {
     required ExecutionLogRepository execRepo,
     required NotificationService notifications,
     required HabitsBus bus,
+    required CategoriesBus catBus,
   })  : _catRepo = catRepo,
         _execRepo = execRepo,
         _notifications = notifications,
-        _bus = bus {
+        _bus = bus,
+        _catBus = catBus {
+    _catBus.addListener(_onCategoriesChanged);
     load();
+  }
+
+  void _onCategoriesChanged() {
+    _reloadCategories();
+  }
+
+  Future<void> _reloadCategories() async {
+    final catsResult = await _catRepo.listForUser(userId);
+    _categories = catsResult.fold(onSuccess: (l) => l, onFailure: (_) => []);
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _catBus.removeListener(_onCategoriesChanged);
+    super.dispose();
   }
 
   bool get showArchived => _showArchived;

@@ -9,9 +9,6 @@ class AppL10nPt extends AppL10n {
   AppL10nPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get appName => 'SAH';
-
-  @override
   String get commonCancel => 'Cancelar';
 
   @override
@@ -24,12 +21,6 @@ class AppL10nPt extends AppL10n {
   String get commonEdit => 'Editar';
 
   @override
-  String get commonBack => 'Voltar';
-
-  @override
-  String get commonOk => 'OK';
-
-  @override
   String get commonNext => 'Próximo';
 
   @override
@@ -39,22 +30,10 @@ class AppL10nPt extends AppL10n {
   String get commonContinue => 'Vamos começar';
 
   @override
-  String get commonRetry => 'Tentar novamente';
-
-  @override
-  String get commonLoading => 'Carregando…';
-
-  @override
   String get commonError => 'Algo deu errado.';
 
   @override
   String get commonRequiredField => 'Campo obrigatório';
-
-  @override
-  String get commonClose => 'Fechar';
-
-  @override
-  String get commonConfirm => 'Confirmar';
 
   @override
   String get commonUnderstood => 'Entendi';
@@ -105,9 +84,6 @@ class AppL10nPt extends AppL10n {
   String get authPasswordLabel => 'Senha';
 
   @override
-  String get authPasswordHint => 'Sua senha';
-
-  @override
   String get authLoginButton => 'Entrar';
 
   @override
@@ -133,12 +109,6 @@ class AppL10nPt extends AppL10n {
 
   @override
   String get authSignupButton => 'Criar conta';
-
-  @override
-  String get authHaveAccount => 'Já tem conta? ';
-
-  @override
-  String get authLoginLink => 'Entrar';
 
   @override
   String get authRecoverTitle => 'Recuperar senha';
@@ -217,9 +187,6 @@ class AppL10nPt extends AppL10n {
       'Nenhum hábito agendado para hoje. Aproveite o descanso ou crie um novo hábito.';
 
   @override
-  String get todayLoadError => 'Erro ao carregar hábitos.';
-
-  @override
   String get todayActionSkipDay => 'Pular hoje';
 
   @override
@@ -254,9 +221,6 @@ class AppL10nPt extends AppL10n {
 
   @override
   String get habitsShowArchived => 'Mostrar arquivados';
-
-  @override
-  String get habitsHideArchived => 'Ocultar arquivados';
 
   @override
   String get habitsEmptyTitle => 'Comece sua jornada';
@@ -313,9 +277,6 @@ class AppL10nPt extends AppL10n {
   @override
   String get habitsDeleteConfirmBody =>
       'O hábito e todo seu histórico serão permanentemente removidos.';
-
-  @override
-  String get habitsArchivedLabel => 'Arquivado';
 
   @override
   String get habitFormCreate => 'Novo hábito';
@@ -426,13 +387,6 @@ class AppL10nPt extends AppL10n {
       'Quando você marcar check-ins, o histórico aparece aqui.';
 
   @override
-  String get historyNoHabitsTitle => 'Comece sua jornada';
-
-  @override
-  String get historyNoHabitsDescription =>
-      'Você ainda não tem hábitos. Crie o primeiro pra acompanhar seu progresso.';
-
-  @override
   String get historyChartWeeklyTitle => 'Aderência semanal';
 
   @override
@@ -538,6 +492,10 @@ class AppL10nPt extends AppL10n {
   String get profilePasswordsDoNotMatch => 'As senhas não coincidem';
 
   @override
+  String get profileSameAsCurrentPassword =>
+      'A nova senha não pode ser igual à atual';
+
+  @override
   String get profileLogout => 'Sair da conta';
 
   @override
@@ -600,6 +558,18 @@ class AppL10nPt extends AppL10n {
 
   @override
   String get settingsBackupSubtitle => 'Exportar e importar';
+
+  @override
+  String get settingsSwitchToUser => 'Meus hábitos';
+
+  @override
+  String get settingsSwitchToUserSubtitle => 'Acessar área pessoal';
+
+  @override
+  String get settingsSwitchToAdmin => 'Painel admin';
+
+  @override
+  String get settingsSwitchToAdminSubtitle => 'Voltar para a administração';
 
   @override
   String get settingsTestNotification => 'Testar notificação';
@@ -808,60 +778,10 @@ class AppL10nPt extends AppL10n {
   }
 
   @override
-  String get categoriesEmptyTitle => 'Nenhuma categoria';
-
-  @override
-  String get categoriesEmptyDescription =>
-      'Crie sua primeira categoria para organizar seus hábitos.';
-
-  @override
-  String get categoriesNewCategory => 'Nova categoria';
-
-  @override
-  String get categoriesNameLabel => 'Nome';
-
-  @override
-  String get categoriesNameHint => 'Ex: Saúde, Trabalho…';
-
-  @override
-  String get categoriesColorLabel => 'Cor';
-
-  @override
-  String get categoriesGlobalLabel => 'Global';
-
-  @override
-  String get categoriesGlobalDescription => 'Disponível para todos os usuários';
-
-  @override
-  String get categoriesEditCategory => 'Editar categoria';
-
-  @override
-  String get categoriesDeleteConfirmTitle => 'Excluir categoria?';
-
-  @override
-  String get categoriesDeleteConfirmBody =>
-      'A categoria será removida. Hábitos vinculados ficarão sem categoria.';
-
-  @override
-  String get categoriesDeleteError => 'Não foi possível excluir.';
-
-  @override
-  String get categoriesCreated => 'Categoria criada!';
-
-  @override
-  String get categoriesUpdated => 'Categoria atualizada!';
-
-  @override
-  String get categoriesDeleted => 'Categoria excluída!';
-
-  @override
   String get adminDashboardTitle => 'Dashboard';
 
   @override
   String get adminDashboardSubtitle => 'Visão geral da plataforma';
-
-  @override
-  String get adminDashboardTotalUsers => 'Total de usuários';
 
   @override
   String get adminDashboardActiveUsers => 'Usuários ativos';
@@ -873,13 +793,7 @@ class AppL10nPt extends AppL10n {
   String get adminDashboardTotalHabits => 'Total de hábitos';
 
   @override
-  String get adminDashboardAvgAdherence => 'Aderência média';
-
-  @override
   String get adminDashboardAvgStreak => 'Streak médio (dias)';
-
-  @override
-  String get adminDashboardQuickAccess => 'Acesso rápido';
 
   @override
   String get adminUsersTitle => 'Usuários';
@@ -954,9 +868,6 @@ class AppL10nPt extends AppL10n {
   String adminUsersDemoteBody(String nome) {
     return '$nome perderá acesso ao painel administrativo.';
   }
-
-  @override
-  String get adminCategoriesTitle => 'Categorias globais';
 
   @override
   String get adminCategoriesShortTitle => 'Categorias';
@@ -1147,27 +1058,46 @@ class AppL10nPt extends AppL10n {
   String get adminLogsTypeBackup => 'Backup';
 
   @override
+  String get adminLogsDetailTitle => 'Detalhes do evento';
+
+  @override
+  String get adminLogsDetailWhen => 'Quando';
+
+  @override
+  String get adminLogsDetailEvent => 'Evento';
+
+  @override
+  String get adminLogsDetailUser => 'Usuário';
+
+  @override
+  String get adminLogsDetailEmail => 'E-mail';
+
+  @override
+  String get adminLogsDetailUserId => 'ID do usuário';
+
+  @override
+  String get adminLogsDetailRoute => 'Rota';
+
+  @override
+  String get adminLogsDetailIp => 'IP';
+
+  @override
+  String get adminLogsDetailPlatform => 'Plataforma';
+
+  @override
+  String get adminLogsDetailMetadata => 'Metadados';
+
+  @override
+  String get adminLogsDetailLogId => 'ID do log';
+
+  @override
+  String get adminLogsDetailEmpty => '—';
+
+  @override
   String get tooltipBack => 'Voltar';
 
   @override
   String get tooltipSettings => 'Configurações';
-
-  @override
-  String get tooltipOpenMenu => 'Abrir menu';
-
-  @override
-  String get tooltipLogout => 'Sair';
-
-  @override
-  String get testNotificationTitle => 'Teste de lembrete';
-
-  @override
-  String get testNotificationBody =>
-      'Se você está vendo isso, as notificações estão funcionando!';
-
-  @override
-  String get permissionDenied =>
-      'Permissão de notificação negada. Ative nas configurações do sistema.';
 
   @override
   String get logoutDialogTitle => 'Sair?';
@@ -1177,6 +1107,12 @@ class AppL10nPt extends AppL10n {
 
   @override
   String get logoutDialogConfirm => 'Sair';
+
+  @override
+  String get settingsLogout => 'Sair';
+
+  @override
+  String get settingsLogoutSubtitle => 'Encerrar a sessão';
 
   @override
   String get onboardingSuggDrinkWater => 'Beber 2L de água';

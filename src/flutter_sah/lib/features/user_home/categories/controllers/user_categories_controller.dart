@@ -1,14 +1,20 @@
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/result.dart';
+import '../../../../data/events/categories_bus.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/repositories/category_repository.dart';
 
 class UserCategoriesController extends BaseListController<Category> {
   final CategoryRepository _repo;
+  final CategoriesBus _bus;
   final String userId;
   Map<String, int> habitCounts = {};
 
-  UserCategoriesController(this._repo, {required this.userId}) {
+  UserCategoriesController(
+    this._repo, {
+    required this.userId,
+    required CategoriesBus bus,
+  }) : _bus = bus {
     load();
   }
 
@@ -39,6 +45,7 @@ class UserCategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return true;
       },
       onFailure: (_) => false,
@@ -50,6 +57,7 @@ class UserCategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return true;
       },
       onFailure: (_) => false,
@@ -68,6 +76,7 @@ class UserCategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return (ok: true, hasLinked: false, error: null);
       },
       onFailure: (msg) => (ok: false, hasLinked: false, error: msg),
@@ -79,6 +88,7 @@ class UserCategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return true;
       },
       onFailure: (_) => false,

@@ -47,9 +47,11 @@ class HiveUserRepository implements UserRepository {
     await _box.put(id, jsonEncode(updated.toJson()));
     await AuditLogger.log(
       tipo: AuditEventType.bloqueio,
-      evento: 'Usuário bloqueado: ${user.nome} — $motivo',
+      evento: 'Usuário bloqueado: ${user.nome} <${user.email}>',
       userId: id,
       userNome: user.nome,
+      userEmail: user.email,
+      metadata: {'motivo': motivo},
     );
     return Success(updated);
   }
@@ -63,9 +65,10 @@ class HiveUserRepository implements UserRepository {
     await _box.put(id, jsonEncode(updated.toJson()));
     await AuditLogger.log(
       tipo: AuditEventType.desbloqueio,
-      evento: 'Usuário desbloqueado: ${user.nome}',
+      evento: 'Usuário desbloqueado: ${user.nome} <${user.email}>',
       userId: id,
       userNome: user.nome,
+      userEmail: user.email,
     );
     return Success(updated);
   }
@@ -83,9 +86,11 @@ class HiveUserRepository implements UserRepository {
     final acao = isAdmin ? 'Promovido a admin' : 'Privilégio admin removido';
     await AuditLogger.log(
       tipo: AuditEventType.adminAction,
-      evento: '$acao: ${user.nome}',
+      evento: '$acao: ${user.nome} <${user.email}>',
       userId: id,
       userNome: user.nome,
+      userEmail: user.email,
+      metadata: {'new_is_admin': isAdmin.toString()},
     );
     return Success(updated);
   }
@@ -105,9 +110,11 @@ class HiveUserRepository implements UserRepository {
     await _box.put(id, jsonEncode(updated.toJson()));
     await AuditLogger.log(
       tipo: AuditEventType.profileUpdate,
-      evento: 'Nome atualizado: ${updated.nome}',
+      evento: 'Nome atualizado: ${user.nome} → ${updated.nome} <${updated.email}>',
       userId: id,
       userNome: updated.nome,
+      userEmail: updated.email,
+      metadata: {'old_nome': user.nome, 'new_nome': updated.nome},
     );
     return Success(updated);
   }

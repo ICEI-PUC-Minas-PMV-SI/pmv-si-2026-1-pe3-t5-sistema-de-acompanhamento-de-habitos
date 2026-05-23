@@ -49,12 +49,11 @@ class AppGuards {
       return Routes.userToday;
     }
 
-    if (_auth.isAdmin && loc.startsWith('/app')) {
-      return Routes.adminDashboard;
-    }
-
-    if (_auth.isAdmin && loc == Routes.onboarding) {
-      return Routes.adminDashboard;
+    if (loc.startsWith('/app')) {
+      final userId = _auth.currentUser?.id;
+      if (userId != null && !_onboarding.isCompleted(userId)) {
+        return Routes.onboarding;
+      }
     }
 
     if (!_auth.isAdmin && loc.startsWith('/admin')) {

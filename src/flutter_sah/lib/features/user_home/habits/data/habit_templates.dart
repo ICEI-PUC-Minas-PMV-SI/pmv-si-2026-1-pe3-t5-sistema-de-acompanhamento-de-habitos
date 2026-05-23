@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../../../core/design_system/tokens/sah_colors.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class TemplateHabit {
@@ -41,7 +42,7 @@ List<HabitTemplate> habitTemplatesFor(AppL10n l) => [
         nome: l.templateMorningName,
         descricao: l.templateMorningDesc,
         icone: PhosphorIconsRegular.sunHorizon,
-        cor: const Color(0xFFC89B3C),
+        cor: SahColors.streak,
         habitos: [
           TemplateHabit(nome: l.templateHabitMorningWater, categoriaId: 'c1', icone: 'drop', lembretes: const ['07:00']),
           TemplateHabit(nome: l.templateHabitMorningMeditate, categoriaId: 'c6', icone: 'brain', lembretes: const ['07:15']),
@@ -54,7 +55,7 @@ List<HabitTemplate> habitTemplatesFor(AppL10n l) => [
         nome: l.templateStudentName,
         descricao: l.templateStudentDesc,
         icone: PhosphorIconsRegular.book,
-        cor: const Color(0xFF5B7FA8),
+        cor: SahColors.info,
         habitos: [
           TemplateHabit(nome: l.templateHabitStudentRead, categoriaId: 'c5', icone: 'book', lembretes: const ['19:00']),
           TemplateHabit(nome: l.templateHabitStudentReview, categoriaId: 'c3', icone: 'pen'),
@@ -67,7 +68,7 @@ List<HabitTemplate> habitTemplatesFor(AppL10n l) => [
         nome: l.templateHealthyName,
         descricao: l.templateHealthyDesc,
         icone: PhosphorIconsRegular.heart,
-        cor: const Color(0xFF4A7C59),
+        cor: SahColors.primary,
         habitos: [
           TemplateHabit(nome: l.templateHabitHealthyWater, categoriaId: 'c1', icone: 'drop'),
           TemplateHabit(nome: l.templateHabitHealthyWalk, categoriaId: 'c4', icone: 'bicycle', lembretes: const ['18:00']),
@@ -80,7 +81,7 @@ List<HabitTemplate> habitTemplatesFor(AppL10n l) => [
         nome: l.templateRemoteName,
         descricao: l.templateRemoteDesc,
         icone: PhosphorIconsRegular.coffee,
-        cor: const Color(0xFF6B5B95),
+        cor: SahColors.accent,
         habitos: [
           TemplateHabit(nome: l.templateHabitRemoteInbox, categoriaId: 'c3', icone: 'chat', lembretes: const ['09:00']),
           TemplateHabit(nome: l.templateHabitRemoteBreak, categoriaId: 'c2', icone: 'alarm'),

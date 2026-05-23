@@ -40,6 +40,9 @@ class _SettingsModal extends StatelessWidget {
     final auth = context.read<AuthController>();
     final store = context.read<MailtrapConfigStore>();
     final l = AppL10n.of(context)!;
+    final currentLocation =
+        GoRouterState.of(parentContext).matchedLocation;
+    final inAdminArea = currentLocation.startsWith('/admin');
 
     final themeSubtitle = switch (themeCtrl.mode) {
       ThemeMode.light  => l.settingsThemeLight,
@@ -91,16 +94,18 @@ class _SettingsModal extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          _SettingsTile(
-            icon: PhosphorIconsRegular.tag,
-            title: l.settingsManageCategories,
-            subtitle: l.settingsManageCategoriesSubtitle,
-            onTap: () {
-              Navigator.pop(context);
-              parentContext.push(Routes.userCategories);
-            },
-          ),
-          const SizedBox(height: 4),
+          if (!inAdminArea) ...[
+            _SettingsTile(
+              icon: PhosphorIconsRegular.tag,
+              title: l.settingsManageCategories,
+              subtitle: l.settingsManageCategoriesSubtitle,
+              onTap: () {
+                Navigator.pop(context);
+                parentContext.push(Routes.userCategories);
+              },
+            ),
+            const SizedBox(height: 4),
+          ],
           _SettingsTile(
             icon: PhosphorIconsRegular.moon,
             title: l.settingsTheme,
@@ -114,38 +119,121 @@ class _SettingsModal extends StatelessWidget {
             subtitle: languageSubtitle(),
             onTap: () => _showLanguagePicker(context, localeCtrl),
           ),
-          const SizedBox(height: 4),
-          _SettingsTile(
-            icon: PhosphorIconsRegular.cloudArrowUp,
-            title: l.settingsBackup,
-            subtitle: l.settingsBackupSubtitle,
-            onTap: () {
-              Navigator.pop(context);
-              parentContext.push(Routes.backup);
-            },
-          ),
-          const SizedBox(height: 4),
-          _SettingsTile(
-            icon: PhosphorIconsRegular.bell,
-            title: l.settingsTestNotification,
-            subtitle: l.settingsTestNotificationSubtitle,
-            onTap: () async {
-              await context.read<NotificationService>().showTestNotification();
-              if (parentContext.mounted) Navigator.pop(context);
-            },
-          ),
+          if (!inAdminArea) ...[
+            const SizedBox(height: 4),
+            _SettingsTile(
+              icon: PhosphorIconsRegular.cloudArrowUp,
+              title: l.settingsBackup,
+              subtitle: l.settingsBackupSubtitle,
+              onTap: () {
+                Navigator.pop(context);
+                parentContext.push(Routes.backup);
+              },
+            ),
+            const SizedBox(height: 4),
+            _SettingsTile(
+              icon: PhosphorIconsRegular.bell,
+              title: l.settingsTestNotification,
+              subtitle: l.settingsTestNotificationSubtitle,
+              onTap: () async {
+                await context.read<NotificationService>().showTestNotification();
+                if (parentContext.mounted) Navigator.pop(context);
+              },
+            ),
+          ],
           if (auth.isAdmin) ...[
             const SizedBox(height: 4),
             _SettingsTile(
-              icon: Icons.mark_email_unread_outlined,
-              title: l.settingsEmailIntegration,
-              subtitle: store.isConfigured ? l.settingsEmailConfigured : l.settingsEmailNotConfigured,
-              onTap: () => _showMailtrapConfigModal(context, store),
+              icon: inAdminArea
+                  ? PhosphorIconsRegular.house
+                  : PhosphorIconsRegular.shieldStar,
+              title: inAdminArea
+                  ? l.settingsSwitchToUser
+                  : l.settingsSwitchToAdmin,
+              subtitle: inAdminArea
+                  ? l.settingsSwitchToUserSubtitle
+                  : l.settingsSwitchToAdminSubtitle,
+              onTap: () {
+                Navigator.pop(context);
+                parentContext.go(
+                  inAdminArea ? Routes.userToday : Routes.adminDashboard,
+                );
+              },
             ),
+            if (inAdminArea) ...[
+              const SizedBox(height: 4),
+              _SettingsTile(
+                icon: Icons.mark_email_unread_outlined,
+                title: l.settingsEmailIntegration,
+                subtitle: store.isConfigured ? l.settingsEmailConfigured : l.settingsEmailNotConfigured,
+                onTap: () => _showMailtrapConfigModal(context, store),
+              ),
+              const SizedBox(height: 4),
+              _SettingsTile(
+                icon: PhosphorIconsRegular.signOut,
+                title: l.settingsLogout,
+                subtitle: l.settingsLogoutSubtitle,
+                isDangerous: true,
+                onTap: () => _confirmLogout(context, parentContext),
+              ),
+            ],
           ],
         ],
       ),
     );
+  }
+
+  Future<void> _confirmLogout(
+    BuildContext sheetContext,
+    BuildContext parentContext,
+  ) async {
+    final l = AppL10n.of(sheetContext)!;
+    final ok = await showDialog<bool>(
+      context: sheetContext,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: SahColors.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SahRadius.lg),
+        ),
+        title: Text(
+          l.logoutDialogTitle,
+          style: TextStyle(
+            fontFamily: 'GeneralSans',
+            fontSize: 18,
+            color: SahColors.text,
+          ),
+        ),
+        content: Text(
+          l.logoutDialogBody,
+          style: GoogleFonts.interTight(
+            fontSize: 14,
+            color: SahColors.textMuted,
+            height: 1.5,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(
+              l.commonCancel,
+              style: GoogleFonts.interTight(color: SahColors.textMuted),
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(
+              l.logoutDialogConfirm,
+              style: GoogleFonts.interTight(color: SahColors.danger),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    if (sheetContext.mounted) Navigator.pop(sheetContext);
+    if (!parentContext.mounted) return;
+    await parentContext.read<AuthController>().logout();
+    if (parentContext.mounted) parentContext.go(Routes.login);
   }
 
   Future<void> _showThemePicker(
@@ -412,16 +500,21 @@ class _SettingsTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback? onTap;
+  final bool isDangerous;
 
   const _SettingsTile({
     required this.icon,
     required this.title,
     required this.subtitle,
     this.onTap,
+    this.isDangerous = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final accent = isDangerous ? SahColors.danger : SahColors.textMuted;
+    final iconBg = isDangerous ? SahColors.dangerSoft : SahColors.bgAlt;
+    final titleColor = isDangerous ? SahColors.danger : SahColors.text;
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -435,10 +528,10 @@ class _SettingsTile extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: SahColors.bgAlt,
+                  color: iconBg,
                   borderRadius: BorderRadius.circular(SahRadius.sm),
                 ),
-                child: Icon(icon, size: 18, color: SahColors.textMuted),
+                child: Icon(icon, size: 18, color: accent),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -450,7 +543,7 @@ class _SettingsTile extends StatelessWidget {
                       style: GoogleFonts.interTight(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: SahColors.text,
+                        color: titleColor,
                       ),
                     ),
                     Text(

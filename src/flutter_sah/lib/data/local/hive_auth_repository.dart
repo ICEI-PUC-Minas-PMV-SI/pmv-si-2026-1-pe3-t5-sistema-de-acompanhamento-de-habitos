@@ -101,9 +101,10 @@ class HiveAuthRepository implements AuthRepository {
     await _session.put('user_id', userId);
     await AuditLogger.log(
       tipo: AuditEventType.login,
-      evento: 'Login realizado por ${user.nome}',
+      evento: 'Login realizado: ${user.nome} <${user.email}>',
       userId: user.id,
       userNome: user.nome,
+      userEmail: user.email,
     );
     return Success(user);
   }
@@ -135,9 +136,11 @@ class HiveAuthRepository implements AuthRepository {
     await _session.put('user_id', id);
     await AuditLogger.log(
       tipo: AuditEventType.cadastro,
-      evento: 'Cadastro realizado: ${user.nome} (${user.email})',
+      evento: 'Cadastro realizado: ${user.nome} <${user.email}>',
       userId: id,
       userNome: user.nome,
+      userEmail: user.email,
+      metadata: {'is_admin': isAdmin.toString()},
     );
     return Success(user);
   }
@@ -151,9 +154,10 @@ class HiveAuthRepository implements AuthRepository {
         final user = User.fromJson(jsonDecode(raw) as Map<String, dynamic>);
         await AuditLogger.log(
           tipo: AuditEventType.logout,
-          evento: 'Logout realizado por ${user.nome}',
+          evento: 'Logout realizado: ${user.nome} <${user.email}>',
           userId: userId,
           userNome: user.nome,
+          userEmail: user.email,
         );
       }
     }
@@ -189,13 +193,17 @@ class HiveAuthRepository implements AuthRepository {
     if (!PasswordHasher.verify(currentPassword, cred['hash'] as String)) {
       return const Failure('Senha atual incorreta.');
     }
+    if (PasswordHasher.verify(newPassword, cred['hash'] as String)) {
+      return const Failure('SAME_AS_PREVIOUS_PASSWORD');
+    }
     cred['hash'] = PasswordHasher.hash(newPassword);
     await _credentials.put(emailKey, jsonEncode(cred));
     await AuditLogger.log(
       tipo: AuditEventType.passwordChanged,
-      evento: 'Senha alterada pelo próprio usuário',
+      evento: 'Senha alterada pelo próprio usuário: ${user.nome} <${user.email}>',
       userId: userId,
       userNome: user.nome,
+      userEmail: user.email,
     );
     return const Success(null);
   }
@@ -237,14 +245,18 @@ class HiveAuthRepository implements AuthRepository {
     final credRaw = _credentials.get(record.email);
     if (credRaw == null) return const Failure('Conta não encontrada.');
     final cred = jsonDecode(credRaw) as Map<String, dynamic>;
+    if (PasswordHasher.verify(newPassword, cred['hash'] as String)) {
+      return const Failure('SAME_AS_PREVIOUS_PASSWORD');
+    }
     cred['hash'] = PasswordHasher.hash(newPassword);
     await _credentials.put(record.email, jsonEncode(cred));
     await _tokenStore.consume(token.trim());
     await AuditLogger.log(
       tipo: AuditEventType.passwordReset,
-      evento: 'Senha redefinida via reset',
+      evento: 'Senha redefinida via reset: <${record.email}>',
       userId: cred['user_id'] as String,
       userNome: null,
+      userEmail: record.email,
     );
     return const Success(null);
   }
@@ -262,9 +274,10 @@ class HiveAuthRepository implements AuthRepository {
     // Log de exclusão precisa sobreviver à cascata — gravar antes de apagar nada.
     await AuditLogger.log(
       tipo: AuditEventType.contaExcluida,
-      evento: 'Conta excluída pelo próprio usuário: ${user.nome} (${user.email})',
+      evento: 'Conta excluída pelo próprio usuário: ${user.nome} <${user.email}>',
       userId: userId,
       userNome: user.nome,
+      userEmail: user.email,
     );
 
     // Hábitos + execution logs + notificações agendadas

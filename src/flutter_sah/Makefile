@@ -1,6 +1,9 @@
-.PHONY: run analyze format clean test gen gen-watch build-apk build-aab
+.PHONY: run run-debug analyze format clean test gen gen-watch build-apk build-aab install-release
 
 run:
+	flutter run --release
+
+run-debug:
 	flutter run
 
 analyze:
@@ -26,3 +29,6 @@ build-apk:
 
 build-aab:
 	flutter build appbundle
+
+install-release:
+	flutter install --release

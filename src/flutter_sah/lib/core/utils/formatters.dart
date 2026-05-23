@@ -6,6 +6,9 @@ abstract final class SahFormatters {
   static String dateTime(DateTime dt) =>
       DateFormat('dd MMM HH:mm', 'pt_BR').format(dt);
 
+  static String dateTimeFull(DateTime dt) =>
+      DateFormat('dd/MM/yyyy HH:mm:ss', 'pt_BR').format(dt);
+
   static String relativeDate(DateTime dt) {
     final now = DateTime.now();
     final diff = now.difference(dt);

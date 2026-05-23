@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/design_system/tokens/sah_colors.dart';
+import '../../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../../core/design_system/tokens/sah_radius.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_button.dart';
 import '../../../../core/design_system/widgets/sah_empty_state.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/utils/base_list_controller.dart';
+import '../../../../data/events/categories_bus.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../controllers/categories_controller.dart';
-import '../widgets/category_card.dart';
 import '../widgets/category_form_modal.dart';
+import '../widgets/category_tile.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -21,7 +23,10 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (ctx) => CategoriesController(ctx.read<CategoryRepository>()),
+      create: (ctx) => CategoriesController(
+        ctx.read<CategoryRepository>(),
+        bus: ctx.read<CategoriesBus>(),
+      ),
       child: const _CategoriesContent(),
     );
   }
@@ -32,26 +37,45 @@ class _CategoriesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SahPaletteScope.subscribe(context);
     final ctrl = context.watch<CategoriesController>();
     final l = AppL10n.of(context)!;
 
-    return Padding(
-      padding: const EdgeInsets.all(SahSpacing.pagePadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+            SahSpacing.pagePadding,
+            SahSpacing.pagePadding,
+            SahSpacing.pagePadding,
+            0,
+          ),
+          child: Row(
             children: [
               Expanded(
-                child: Text(
-                  l.adminCategoriesShortTitle,
-                  style: TextStyle(
-                    fontFamily: 'GeneralSans',
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color: SahColors.text,
-                    letterSpacing: -0.44,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.adminCategoriesShortTitle,
+                      style: TextStyle(
+                        fontFamily: 'GeneralSans',
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: SahColors.text,
+                        letterSpacing: -0.44,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      l.adminCategoriesSubtitle,
+                      style: GoogleFonts.interTight(
+                        fontSize: 13,
+                        color: SahColors.textMuted,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SahButton.primary(
@@ -62,10 +86,10 @@ class _CategoriesContent extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          Expanded(child: _buildBody(context, ctrl)),
-        ],
-      ),
+        ),
+        const SizedBox(height: 16),
+        Expanded(child: _buildBody(context, ctrl)),
+      ],
     );
   }
 
@@ -93,18 +117,19 @@ class _CategoriesContent extends StatelessWidget {
       );
     }
 
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1.0,
+    return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(
+        SahSpacing.pagePadding,
+        0,
+        SahSpacing.pagePadding,
+        SahSpacing.pagePadding,
       ),
       itemCount: ctrl.categories.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemBuilder: (ctx, i) {
         final cat = ctrl.categories[i];
         final count = ctrl.habitCounts[cat.id] ?? 0;
-        return CategoryCard(
+        return CategoryTile(
           category: cat,
           habitCount: count,
           onEdit: () => _showEdit(context, ctrl, cat),

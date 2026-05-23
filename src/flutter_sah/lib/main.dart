@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
@@ -8,8 +9,10 @@ import 'core/i18n/locale_controller.dart';
 import 'core/theme/theme_controller.dart';
 import 'data/backup/auto_backup_service.dart';
 import 'data/backup/backup_service.dart';
+import 'data/events/categories_bus.dart';
 import 'data/events/habits_bus.dart';
 import 'data/http/mailtrap_client.dart';
+import 'data/local/audit_context.dart';
 import 'data/local/hive_audit_log_repository.dart';
 import 'data/local/hive_auth_repository.dart';
 import 'data/local/hive_bootstrap.dart';
@@ -34,7 +37,11 @@ import 'features/auth/controllers/auth_controller.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ErrorReporter.instance.install();
+  // Usa apenas as fontes bundladas em assets/google_fonts/ — sem fetch online,
+  // evita erros em emuladores/dispositivos sem internet ou com DNS bloqueado.
+  GoogleFonts.config.allowRuntimeFetching = false;
   await initializeDateFormatting();
+  await AuditContext.init();
   await HiveBootstrap.init();
   final themeController = ThemeController();
   await themeController.load();
@@ -54,6 +61,7 @@ Future<void> main() async {
         Provider<HabitRepository>(create: (_) => HiveHabitRepository()),
         Provider<ExecutionLogRepository>(create: (_) => HiveExecutionLogRepository()),
         ChangeNotifierProvider<HabitsBus>(create: (_) => HabitsBus()),
+        ChangeNotifierProvider<CategoriesBus>(create: (_) => CategoriesBus()),
         Provider<NotificationService>.value(value: notificationService),
         Provider<HomeWidgetService>.value(value: homeWidgetService),
         Provider<BackupService>(

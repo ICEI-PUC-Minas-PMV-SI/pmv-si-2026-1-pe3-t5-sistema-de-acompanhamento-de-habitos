@@ -1,13 +1,15 @@
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/result.dart';
+import '../../../../data/events/categories_bus.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/repositories/category_repository.dart';
 
 class CategoriesController extends BaseListController<Category> {
   final CategoryRepository _repo;
+  final CategoriesBus _bus;
   Map<String, int> habitCounts = {};
 
-  CategoriesController(this._repo) {
+  CategoriesController(this._repo, {required CategoriesBus bus}) : _bus = bus {
     load();
   }
 
@@ -33,6 +35,7 @@ class CategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return true;
       },
       onFailure: (_) => false,
@@ -44,6 +47,7 @@ class CategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return true;
       },
       onFailure: (_) => false,
@@ -62,6 +66,7 @@ class CategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return (ok: true, hasLinked: false, error: null);
       },
       onFailure: (msg) => (ok: false, hasLinked: false, error: msg),
@@ -73,6 +78,7 @@ class CategoriesController extends BaseListController<Category> {
     return result.fold(
       onSuccess: (_) {
         load();
+        _bus.notifyChanged();
         return true;
       },
       onFailure: (_) => false,
