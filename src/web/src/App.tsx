@@ -28,7 +28,7 @@ export default function App() {
     <AuthProvider>
       <HabitsProvider>
         <ToastProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL}>
             <ResetShortcut />
             <AppRoutes />
           </BrowserRouter>
