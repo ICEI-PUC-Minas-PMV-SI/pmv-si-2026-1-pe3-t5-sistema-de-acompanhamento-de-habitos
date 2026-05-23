@@ -34,6 +34,7 @@ class UserShell extends StatelessWidget {
               size: 22,
               color: SahColors.textMuted,
             ),
+            tooltip: 'Configurações',
             onPressed: () => showSettingsModal(context),
           ),
         ],

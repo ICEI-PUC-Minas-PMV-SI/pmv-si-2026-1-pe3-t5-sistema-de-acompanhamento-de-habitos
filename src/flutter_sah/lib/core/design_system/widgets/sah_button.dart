@@ -17,6 +17,7 @@ class SahButton extends StatefulWidget {
   final bool fullWidth;
   final bool loading;
   final bool disabled;
+  final String? semanticLabel;
 
   const SahButton({
     super.key,
@@ -29,6 +30,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   });
 
   const SahButton.primary({
@@ -41,6 +43,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   }) : variant = SahButtonVariant.primary;
 
   const SahButton.accent({
@@ -53,6 +56,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   }) : variant = SahButtonVariant.accent;
 
   const SahButton.secondary({
@@ -65,6 +69,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   }) : variant = SahButtonVariant.secondary;
 
   const SahButton.ghost({
@@ -77,6 +82,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   }) : variant = SahButtonVariant.ghost;
 
   const SahButton.danger({
@@ -89,6 +95,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   }) : variant = SahButtonVariant.danger;
 
   const SahButton.dangerGhost({
@@ -101,6 +108,7 @@ class SahButton extends StatefulWidget {
     this.fullWidth = false,
     this.loading = false,
     this.disabled = false,
+    this.semanticLabel,
   }) : variant = SahButtonVariant.dangerGhost;
 
   @override
@@ -171,8 +179,15 @@ class _SahButtonState extends State<SahButton> {
   Widget build(BuildContext context) {
     final isDisabled = widget.disabled || widget.loading;
     final (bg, fg, border) = _colors;
+    final a11yLabel = widget.semanticLabel ?? widget.label ?? '';
 
-    return MouseRegion(
+    return Semantics(
+      button: true,
+      enabled: !isDisabled,
+      label: a11yLabel,
+      excludeSemantics: true,
+      onTap: isDisabled ? null : widget.onPressed,
+      child: MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: AnimatedOpacity(
@@ -223,6 +238,7 @@ class _SahButtonState extends State<SahButton> {
             ),
           ),
         ),
+      ),
       ),
     );
   }

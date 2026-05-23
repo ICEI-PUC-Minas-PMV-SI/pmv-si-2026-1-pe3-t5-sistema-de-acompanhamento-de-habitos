@@ -7,6 +7,7 @@ abstract final class Routes {
   static const resetPassword = '/recover/reset';
 
   static const onboarding = '/onboarding';
+  static const backup = '/app/backup';
 
   static const adminDashboard = '/admin';
   static const adminUsers = '/admin/users';

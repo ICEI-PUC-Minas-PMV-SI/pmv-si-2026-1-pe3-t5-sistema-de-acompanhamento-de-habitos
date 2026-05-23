@@ -29,7 +29,13 @@ class ProgressSummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final pct = total == 0 ? 0 : ((_progress * 100).round());
 
-    return Container(
+    return Semantics(
+      container: true,
+      label: total == 0
+          ? 'Nenhum hábito para hoje'
+          : '$completed de $total hábitos concluídos hoje, $pct por cento',
+      child: ExcludeSemantics(
+        child: Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: SahColors.surface,
@@ -90,6 +96,8 @@ class ProgressSummaryCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+        ),
       ),
     );
   }

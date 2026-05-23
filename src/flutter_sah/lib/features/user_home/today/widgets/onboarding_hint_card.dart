@@ -12,7 +12,12 @@ class OnboardingHintCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Semantics(
+      container: true,
+      label:
+          'Comece com sugestões. Você ainda não tem hábitos. Toque em ver sugestões para começar.',
+      child: ExcludeSemantics(
+        child: Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: SahColors.accentFaint,
@@ -57,6 +62,8 @@ class OnboardingHintCard extends StatelessWidget {
             onPressed: () => context.push(Routes.onboarding),
           ),
         ],
+      ),
+        ),
       ),
     );
   }

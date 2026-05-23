@@ -7,13 +7,24 @@ class SahIcon extends StatelessWidget {
   final SahIconName name;
   final double size;
   final Color? color;
+  final String? semanticLabel;
 
-  const SahIcon(this.name, {super.key, this.size = 20, this.color});
+  const SahIcon(
+    this.name, {
+    super.key,
+    this.size = 20,
+    this.color,
+    this.semanticLabel,
+  });
 
   @override
   Widget build(BuildContext context) {
     final effectiveColor =
         color ?? DefaultTextStyle.of(context).style.color ?? SahColors.text;
-    return Icon(sahIconData(name), size: size, color: effectiveColor);
+    final icon = Icon(sahIconData(name), size: size, color: effectiveColor);
+    if (semanticLabel == null) {
+      return ExcludeSemantics(child: icon);
+    }
+    return Semantics(label: semanticLabel, child: ExcludeSemantics(child: icon));
   }
 }

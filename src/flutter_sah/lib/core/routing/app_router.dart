@@ -12,6 +12,7 @@ import '../../features/auth/screens/signup_screen.dart';
 import '../../features/auth/screens/reset_password_screen.dart';
 import '../../features/onboarding/screens/onboarding_screen.dart';
 import '../../features/system_states/error_screen.dart';
+import '../../features/user_home/backup/screens/backup_screen.dart';
 import '../../data/local/onboarding_store.dart';
 import '../../features/system_states/splash_screen.dart';
 import '../../features/user_home/categories/screens/user_categories_screen.dart';
@@ -65,6 +66,10 @@ GoRouter buildRouter(
       GoRoute(
         path: Routes.onboarding,
         builder: (_, __) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: Routes.backup,
+        builder: (_, __) => const BackupScreen(),
       ),
       // Admin shell (4 branches)
       StatefulShellRoute.indexedStack(

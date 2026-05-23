@@ -32,8 +32,19 @@ class TodayHabitTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final done = entry.doneToday;
+    final streakText = entry.streak == 0
+        ? 'sem sequência'
+        : 'sequência de ${entry.streak} ${entry.streak == 1 ? "dia" : "dias"}';
+    final label =
+        'Hábito ${entry.habit.nome}, ${done ? "feito hoje" : "pendente"}, $streakText';
 
-    return GestureDetector(
+    return Semantics(
+      button: true,
+      enabled: true,
+      label: label,
+      excludeSemantics: true,
+      onTap: onToggle,
+      child: GestureDetector(
       onTap: onToggle,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 250),
@@ -106,6 +117,7 @@ class TodayHabitTile extends StatelessWidget {
             ],
           ],
         ),
+      ),
       ),
     );
   }

@@ -90,6 +90,16 @@ class _SettingsModal extends StatelessWidget {
             subtitle: themeSubtitle,
             onTap: () => _showThemePicker(context, themeCtrl),
           ),
+          const SizedBox(height: 4),
+          _SettingsTile(
+            icon: PhosphorIconsRegular.cloudArrowUp,
+            title: 'Backup e dados',
+            subtitle: 'Exportar e importar',
+            onTap: () {
+              Navigator.pop(context);
+              parentContext.push(Routes.backup);
+            },
+          ),
           if (auth.isAdmin) ...[
             const SizedBox(height: 4),
             _SettingsTile(

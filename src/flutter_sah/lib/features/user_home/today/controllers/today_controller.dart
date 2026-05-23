@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 import '../../../../core/utils/result.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/execution_log.dart';
 import '../../../../data/models/habit.dart';
+import '../../../../data/backup/auto_backup_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
 import '../../../../data/repositories/habit_repository.dart';
@@ -23,12 +25,14 @@ class TodayController extends ChangeNotifier {
   final ExecutionLogRepository _execRepo;
   final CategoryRepository _catRepo;
   final HomeWidgetService _widget;
+  final AutoBackupService _autoBackup;
   final String userId;
 
   TodayStatus _status = TodayStatus.loading;
   List<TodayHabitEntry> _entries = [];
   int _totalHabits = 0;
   String? _error;
+  bool _autoBackupRan = false;
 
   TodayController({
     required this.userId,
@@ -36,10 +40,12 @@ class TodayController extends ChangeNotifier {
     required ExecutionLogRepository execRepo,
     required CategoryRepository catRepo,
     required HomeWidgetService widget,
+    required AutoBackupService autoBackup,
   })  : _habitRepo = habitRepo,
         _execRepo = execRepo,
         _catRepo = catRepo,
-        _widget = widget {
+        _widget = widget,
+        _autoBackup = autoBackup {
     load();
   }
 
@@ -112,6 +118,12 @@ class TodayController extends ChangeNotifier {
     _status = TodayStatus.loaded;
     notifyListeners();
     await _widget.pushToday(entries);
+
+    if (!_autoBackupRan) {
+      _autoBackupRan = true;
+      // fire-and-forget; falha silenciosamente
+      unawaited(_autoBackup.maybeRun(userId));
+    }
   }
 
   Future<void> toggle(String habitId) async {

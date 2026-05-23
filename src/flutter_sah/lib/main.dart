@@ -9,6 +9,8 @@ import 'data/local/hive_bootstrap.dart';
 import 'data/local/hive_category_repository.dart';
 import 'data/local/hive_execution_log_repository.dart';
 import 'data/local/hive_habit_repository.dart';
+import 'data/backup/auto_backup_service.dart';
+import 'data/backup/backup_service.dart';
 import 'data/local/hive_user_repository.dart';
 import 'data/local/mailtrap_config_store.dart';
 import 'data/local/onboarding_store.dart';
@@ -43,6 +45,18 @@ Future<void> main() async {
         Provider<ExecutionLogRepository>(create: (_) => HiveExecutionLogRepository()),
         Provider<NotificationService>.value(value: notificationService),
         Provider<HomeWidgetService>.value(value: homeWidgetService),
+        Provider<BackupService>(
+          create: (ctx) => BackupService(
+            userRepo: ctx.read<UserRepository>(),
+            habitRepo: ctx.read<HabitRepository>(),
+            catRepo: ctx.read<CategoryRepository>(),
+            execLogRepo: ctx.read<ExecutionLogRepository>(),
+            notifications: ctx.read<NotificationService>(),
+          ),
+        ),
+        Provider<AutoBackupService>(
+          create: (ctx) => AutoBackupService(ctx.read<BackupService>()),
+        ),
         Provider<OnboardingStore>(create: (_) => OnboardingStore()),
         Provider<MailtrapConfigStore>(create: (_) => MailtrapConfigStore()),
         Provider<MailtrapClient>(create: (_) => MailtrapClient()),

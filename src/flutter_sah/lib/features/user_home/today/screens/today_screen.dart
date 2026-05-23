@@ -6,6 +6,7 @@ import '../../../../core/design_system/tokens/sah_palette_scope.dart';
 import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_empty_state.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
+import '../../../../data/backup/auto_backup_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
 import '../../../../data/repositories/habit_repository.dart';
@@ -29,6 +30,7 @@ class TodayScreen extends StatelessWidget {
         execRepo: ctx.read<ExecutionLogRepository>(),
         catRepo: ctx.read<CategoryRepository>(),
         widget: ctx.read<HomeWidgetService>(),
+        autoBackup: ctx.read<AutoBackupService>(),
       ),
       child: _TodayView(),
     );

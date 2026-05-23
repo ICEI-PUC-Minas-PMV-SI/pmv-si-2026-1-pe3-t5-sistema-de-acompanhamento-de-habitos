@@ -60,6 +60,7 @@ class _PhoneLayout extends StatelessWidget {
         leading: Builder(
           builder: (ctx) => IconButton(
             icon: SahIcon(SahIconName.menu, size: 22, color: SahColors.text),
+            tooltip: 'Abrir menu',
             onPressed: () => Scaffold.of(ctx).openDrawer(),
           ),
         ),

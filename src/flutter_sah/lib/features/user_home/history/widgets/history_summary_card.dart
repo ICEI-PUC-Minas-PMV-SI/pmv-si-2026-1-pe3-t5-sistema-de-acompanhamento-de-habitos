@@ -57,31 +57,37 @@ class _MetricTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 130,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.interTight(
-              fontSize: 11,
-              color: SahColors.textMuted,
-              fontWeight: FontWeight.w500,
-            ),
+    return Semantics(
+      container: true,
+      label: '$label: $value',
+      child: ExcludeSemantics(
+        child: SizedBox(
+          width: 130,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: GoogleFonts.interTight(
+                  fontSize: 12,
+                  color: SahColors.textMuted,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 2),
+              Text(
+                value,
+                style: TextStyle(
+                  fontFamily: 'GeneralSans',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: SahColors.text,
+                  letterSpacing: -0.4,
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 2),
-          Text(
-            value,
-            style: TextStyle(
-              fontFamily: 'GeneralSans',
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
-              color: SahColors.text,
-              letterSpacing: -0.4,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

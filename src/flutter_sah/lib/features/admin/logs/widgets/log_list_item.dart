@@ -21,6 +21,7 @@ class LogListItem extends StatelessWidget {
       AuditEventType.profileUpdate => SahColors.info,
       AuditEventType.passwordChanged || AuditEventType.passwordReset => SahColors.warning,
       AuditEventType.contaExcluida => SahColors.danger,
+      AuditEventType.dataBackup => SahColors.info,
     };
   }
 
@@ -35,6 +36,7 @@ class LogListItem extends StatelessWidget {
       AuditEventType.profileUpdate => SahColors.infoSoft,
       AuditEventType.passwordChanged || AuditEventType.passwordReset => SahColors.streakSoft,
       AuditEventType.contaExcluida => SahColors.dangerSoft,
+      AuditEventType.dataBackup => SahColors.infoSoft,
     };
   }
 
@@ -51,6 +53,7 @@ class LogListItem extends StatelessWidget {
       AuditEventType.passwordChanged => 'Senha',
       AuditEventType.passwordReset => 'Reset',
       AuditEventType.contaExcluida => 'Exclusão',
+      AuditEventType.dataBackup => 'Backup',
     };
   }
 

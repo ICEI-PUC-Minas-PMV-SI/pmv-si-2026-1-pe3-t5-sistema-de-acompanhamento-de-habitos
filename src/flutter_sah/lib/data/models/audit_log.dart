@@ -10,6 +10,7 @@ enum AuditEventType {
   passwordChanged,
   passwordReset,
   contaExcluida,
+  dataBackup,
 }
 
 class AuditLog {
