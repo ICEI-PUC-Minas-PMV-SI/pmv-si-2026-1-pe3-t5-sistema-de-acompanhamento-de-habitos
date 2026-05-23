@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../../../../core/utils/result.dart';
+import '../../../../data/events/habits_bus.dart';
 import '../../../../data/models/execution_log.dart';
 import '../../../../data/models/habit.dart';
 import '../../../../data/notifications/notification_service.dart';
@@ -12,6 +13,7 @@ class HistoryController extends ChangeNotifier {
   final HabitRepository _habitRepo;
   final ExecutionLogRepository _execRepo;
   final NotificationService _notifications;
+  final HabitsBus _bus;
   final String userId;
 
   List<Habit> habits = [];
@@ -26,7 +28,21 @@ class HistoryController extends ChangeNotifier {
     this._execRepo, {
     required this.userId,
     required NotificationService notifications,
-  }) : _notifications = notifications;
+    required HabitsBus bus,
+  })  : _notifications = notifications,
+        _bus = bus {
+    _bus.addListener(_onHabitsChanged);
+  }
+
+  void _onHabitsChanged() {
+    load();
+  }
+
+  @override
+  void dispose() {
+    _bus.removeListener(_onHabitsChanged);
+    super.dispose();
+  }
 
   Habit? get selectedHabit =>
       habits.cast<Habit?>().firstWhere((h) => h?.id == selectedHabitId, orElse: () => null);

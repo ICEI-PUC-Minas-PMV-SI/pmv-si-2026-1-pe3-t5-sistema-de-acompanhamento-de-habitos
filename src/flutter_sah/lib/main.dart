@@ -12,6 +12,7 @@ import 'data/local/hive_execution_log_repository.dart';
 import 'data/local/hive_habit_repository.dart';
 import 'data/backup/auto_backup_service.dart';
 import 'data/backup/backup_service.dart';
+import 'data/events/habits_bus.dart';
 import 'data/local/hive_user_repository.dart';
 import 'data/local/login_attempt_store.dart';
 import 'data/local/mailtrap_config_store.dart';
@@ -46,6 +47,7 @@ Future<void> main() async {
         Provider<AuditLogRepository>(create: (_) => HiveAuditLogRepository()),
         Provider<HabitRepository>(create: (_) => HiveHabitRepository()),
         Provider<ExecutionLogRepository>(create: (_) => HiveExecutionLogRepository()),
+        ChangeNotifierProvider<HabitsBus>(create: (_) => HabitsBus()),
         Provider<NotificationService>.value(value: notificationService),
         Provider<HomeWidgetService>.value(value: homeWidgetService),
         Provider<BackupService>(

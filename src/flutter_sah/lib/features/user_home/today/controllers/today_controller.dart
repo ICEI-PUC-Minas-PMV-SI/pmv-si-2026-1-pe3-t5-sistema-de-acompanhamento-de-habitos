@@ -5,6 +5,7 @@ import '../../../../data/models/category.dart';
 import '../../../../data/models/execution_log.dart';
 import '../../../../data/models/habit.dart';
 import '../../../../data/backup/auto_backup_service.dart';
+import '../../../../data/events/habits_bus.dart';
 import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
@@ -30,6 +31,7 @@ class TodayController extends ChangeNotifier {
   final HomeWidgetService _widget;
   final AutoBackupService _autoBackup;
   final NotificationService _notifications;
+  final HabitsBus _bus;
   final String userId;
 
   TodayStatus _status = TodayStatus.loading;
@@ -47,13 +49,26 @@ class TodayController extends ChangeNotifier {
     required HomeWidgetService widget,
     required AutoBackupService autoBackup,
     required NotificationService notifications,
+    required HabitsBus bus,
   })  : _habitRepo = habitRepo,
         _execRepo = execRepo,
         _catRepo = catRepo,
         _widget = widget,
         _autoBackup = autoBackup,
-        _notifications = notifications {
+        _notifications = notifications,
+        _bus = bus {
+    _bus.addListener(_onHabitsChanged);
     load();
+  }
+
+  void _onHabitsChanged() {
+    load();
+  }
+
+  @override
+  void dispose() {
+    _bus.removeListener(_onHabitsChanged);
+    super.dispose();
   }
 
   TodayStatus get status => _status;

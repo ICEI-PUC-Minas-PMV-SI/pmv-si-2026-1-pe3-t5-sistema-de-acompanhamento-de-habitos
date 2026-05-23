@@ -6,6 +6,7 @@ import '../../../core/design_system/tokens/sah_radius.dart';
 import '../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../core/design_system/widgets/sah_illustrated_empty.dart';
 import '../../../core/design_system/widgets/sah_spinner.dart';
+import '../../../data/events/habits_bus.dart';
 import '../../../data/notifications/notification_service.dart';
 import '../../../data/repositories/execution_log_repository.dart';
 import '../../../data/repositories/habit_repository.dart';
@@ -28,6 +29,7 @@ class HistoryScreen extends StatelessWidget {
         ctx.read<ExecutionLogRepository>(),
         userId: auth.currentUser?.id ?? '',
         notifications: ctx.read<NotificationService>(),
+        bus: ctx.read<HabitsBus>(),
       )..load(),
       child: const _HistoryContent(),
     );
@@ -48,11 +50,15 @@ class _HistoryContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final ctrl = context.watch<HistoryController>();
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(SahSpacing.pagePadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+    return RefreshIndicator(
+      color: SahColors.accent,
+      onRefresh: ctrl.load,
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(SahSpacing.pagePadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Text(
             'Histórico',
             style: TextStyle(
@@ -84,6 +90,9 @@ class _HistoryContent extends StatelessWidget {
             const SizedBox(height: 16),
             if (ctrl.loading)
               const Center(child: SahSpinner(size: 24))
+            else if (ctrl.logs.isEmpty)
+              // Nenhum check-in no período: tela limpa, só o empty state
+              SahIllustratedEmpty.noHistory()
             else ...[
               HistorySummaryCard(
                 checkIns: ctrl.checkInCount,
@@ -121,13 +130,11 @@ class _HistoryContent extends StatelessWidget {
                 HistoryWeeklyChart(data: ctrl.weeklyAdherence),
               ],
               const SizedBox(height: 16),
-              if (ctrl.logs.isEmpty)
-                SahIllustratedEmpty.noHistory()
-              else
-                HistoryList(logsByDay: ctrl.logsByDay),
+              HistoryList(logsByDay: ctrl.logsByDay),
             ],
           ],
         ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/result.dart';
 import '../../../../data/models/category.dart';
 import '../../../../data/models/execution_log.dart';
+import '../../../../data/events/habits_bus.dart';
 import '../../../../data/models/habit.dart';
 import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
@@ -14,6 +15,7 @@ class HabitsController extends BaseListController<Habit> {
   final CategoryRepository _catRepo;
   final ExecutionLogRepository _execRepo;
   final NotificationService _notifications;
+  final HabitsBus _bus;
   final String userId;
 
   bool _showArchived = false;
@@ -26,9 +28,11 @@ class HabitsController extends BaseListController<Habit> {
     required CategoryRepository catRepo,
     required ExecutionLogRepository execRepo,
     required NotificationService notifications,
+    required HabitsBus bus,
   })  : _catRepo = catRepo,
         _execRepo = execRepo,
-        _notifications = notifications {
+        _notifications = notifications,
+        _bus = bus {
     load();
   }
 
@@ -80,6 +84,7 @@ class HabitsController extends BaseListController<Habit> {
     if (created == null) return false;
     await _notifications.scheduleForHabit(created);
     await load();
+    _bus.notifyChanged();
     return true;
   }
 
@@ -89,6 +94,7 @@ class HabitsController extends BaseListController<Habit> {
     if (updated == null) return false;
     await _notifications.scheduleForHabit(updated);
     await load();
+    _bus.notifyChanged();
     return true;
   }
 
@@ -97,6 +103,7 @@ class HabitsController extends BaseListController<Habit> {
     if (result.isFailure) return false;
     await _notifications.cancelForHabit(id);
     await load();
+    _bus.notifyChanged();
     return true;
   }
 
@@ -105,6 +112,7 @@ class HabitsController extends BaseListController<Habit> {
     if (result.isFailure) return false;
     await _notifications.cancelForHabit(id);
     await load();
+    _bus.notifyChanged();
     return true;
   }
 
@@ -114,6 +122,7 @@ class HabitsController extends BaseListController<Habit> {
     if (unarchived == null) return false;
     await _notifications.scheduleForHabit(unarchived);
     await load();
+    _bus.notifyChanged();
     return true;
   }
 }

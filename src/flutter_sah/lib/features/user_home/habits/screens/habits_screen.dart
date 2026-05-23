@@ -12,6 +12,7 @@ import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../core/design_system/tokens/sah_durations.dart';
 import '../../../../core/utils/base_list_controller.dart';
 import '../../../../core/utils/dialogs.dart';
+import '../../../../data/events/habits_bus.dart';
 import '../../../../data/models/habit.dart';
 import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
@@ -36,6 +37,7 @@ class HabitsScreen extends StatelessWidget {
         catRepo: ctx.read<CategoryRepository>(),
         execRepo: ctx.read<ExecutionLogRepository>(),
         notifications: ctx.read<NotificationService>(),
+        bus: ctx.read<HabitsBus>(),
       ),
       child: const _HabitsView(),
     );

@@ -11,6 +11,7 @@ import '../../../../core/design_system/widgets/sah_illustrated_empty.dart';
 import '../../../../core/design_system/widgets/sah_input.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../data/backup/auto_backup_service.dart';
+import '../../../../data/events/habits_bus.dart';
 import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
@@ -37,6 +38,7 @@ class TodayScreen extends StatelessWidget {
         widget: ctx.read<HomeWidgetService>(),
         autoBackup: ctx.read<AutoBackupService>(),
         notifications: ctx.read<NotificationService>(),
+        bus: ctx.read<HabitsBus>(),
       ),
       child: const _TodayView(),
     );

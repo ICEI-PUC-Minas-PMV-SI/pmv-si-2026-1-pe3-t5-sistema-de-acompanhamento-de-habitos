@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
+import 'package:sah/data/events/habits_bus.dart';
 import 'package:sah/data/local/hive_category_repository.dart';
 import 'package:sah/data/local/hive_execution_log_repository.dart';
 import 'package:sah/data/local/hive_habit_repository.dart';
@@ -56,6 +57,7 @@ void main() {
       widget: fakeWidget,
       autoBackup: fakeAutoBackup,
       notifications: fakeNotifications,
+      bus: HabitsBus(),
     );
   }
 
