@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 class TemplateHabit {
   final String nome;
   final String categoriaId;
@@ -33,57 +35,57 @@ class HabitTemplate {
   });
 }
 
-const habitTemplates = <HabitTemplate>[
-  HabitTemplate(
-    id: 'morning',
-    nome: 'Rotina matinal',
-    descricao: 'Comece o dia com 4 hábitos curtos.',
-    icone: PhosphorIconsRegular.sunHorizon,
-    cor: Color(0xFFC89B3C),
-    habitos: [
-      TemplateHabit(nome: 'Beber um copo de água', categoriaId: 'c1', icone: 'drop', lembretes: ['07:00']),
-      TemplateHabit(nome: 'Meditar 10min', categoriaId: 'c6', icone: 'brain', lembretes: ['07:15']),
-      TemplateHabit(nome: 'Alongar', categoriaId: 'c4', icone: 'barbell'),
-      TemplateHabit(nome: 'Planejar o dia', categoriaId: 'c3', icone: 'pen', lembretes: ['08:00']),
-    ],
-  ),
-  HabitTemplate(
-    id: 'student',
-    nome: 'Estudante',
-    descricao: 'Rotina balanceada de estudo e descanso.',
-    icone: PhosphorIconsRegular.book,
-    cor: Color(0xFF5B7FA8),
-    habitos: [
-      TemplateHabit(nome: 'Ler 20 páginas', categoriaId: 'c5', icone: 'book', lembretes: ['19:00']),
-      TemplateHabit(nome: 'Revisar agenda', categoriaId: 'c3', icone: 'pen'),
-      TemplateHabit(nome: 'Aprender palavra nova', categoriaId: 'c5', icone: 'brain'),
-      TemplateHabit(nome: 'Pomodoro 25min', categoriaId: 'c3', icone: 'alarm'),
-    ],
-  ),
-  HabitTemplate(
-    id: 'healthy',
-    nome: 'Vida saudável',
-    descricao: 'Foco em corpo e mente.',
-    icone: PhosphorIconsRegular.heart,
-    cor: Color(0xFF4A7C59),
-    habitos: [
-      TemplateHabit(nome: 'Beber 2L de água', categoriaId: 'c1', icone: 'drop'),
-      TemplateHabit(nome: 'Caminhar 30min', categoriaId: 'c4', icone: 'bicycle', lembretes: ['18:00']),
-      TemplateHabit(nome: 'Anotar 3 gratidões', categoriaId: 'c2', icone: 'sparkle', lembretes: ['21:30']),
-      TemplateHabit(nome: 'Dormir 8 horas', categoriaId: 'c1', icone: 'moon'),
-    ],
-  ),
-  HabitTemplate(
-    id: 'remote',
-    nome: 'Trabalho remoto',
-    descricao: 'Mantém foco e energia trabalhando de casa.',
-    icone: PhosphorIconsRegular.coffee,
-    cor: Color(0xFF6B5B95),
-    habitos: [
-      TemplateHabit(nome: 'Inbox zero pela manhã', categoriaId: 'c3', icone: 'chat', lembretes: ['09:00']),
-      TemplateHabit(nome: 'Pausa de 5min a cada hora', categoriaId: 'c2', icone: 'alarm'),
-      TemplateHabit(nome: 'Alongar pescoço', categoriaId: 'c4', icone: 'barbell'),
-      TemplateHabit(nome: 'Café com calma', categoriaId: 'c2', icone: 'coffee'),
-    ],
-  ),
-];
+List<HabitTemplate> habitTemplatesFor(AppL10n l) => [
+      HabitTemplate(
+        id: 'morning',
+        nome: l.templateMorningName,
+        descricao: l.templateMorningDesc,
+        icone: PhosphorIconsRegular.sunHorizon,
+        cor: const Color(0xFFC89B3C),
+        habitos: [
+          TemplateHabit(nome: l.templateHabitMorningWater, categoriaId: 'c1', icone: 'drop', lembretes: const ['07:00']),
+          TemplateHabit(nome: l.templateHabitMorningMeditate, categoriaId: 'c6', icone: 'brain', lembretes: const ['07:15']),
+          TemplateHabit(nome: l.templateHabitMorningStretch, categoriaId: 'c4', icone: 'barbell'),
+          TemplateHabit(nome: l.templateHabitMorningPlan, categoriaId: 'c3', icone: 'pen', lembretes: const ['08:00']),
+        ],
+      ),
+      HabitTemplate(
+        id: 'student',
+        nome: l.templateStudentName,
+        descricao: l.templateStudentDesc,
+        icone: PhosphorIconsRegular.book,
+        cor: const Color(0xFF5B7FA8),
+        habitos: [
+          TemplateHabit(nome: l.templateHabitStudentRead, categoriaId: 'c5', icone: 'book', lembretes: const ['19:00']),
+          TemplateHabit(nome: l.templateHabitStudentReview, categoriaId: 'c3', icone: 'pen'),
+          TemplateHabit(nome: l.templateHabitStudentLearn, categoriaId: 'c5', icone: 'brain'),
+          TemplateHabit(nome: l.templateHabitStudentPomodoro, categoriaId: 'c3', icone: 'alarm'),
+        ],
+      ),
+      HabitTemplate(
+        id: 'healthy',
+        nome: l.templateHealthyName,
+        descricao: l.templateHealthyDesc,
+        icone: PhosphorIconsRegular.heart,
+        cor: const Color(0xFF4A7C59),
+        habitos: [
+          TemplateHabit(nome: l.templateHabitHealthyWater, categoriaId: 'c1', icone: 'drop'),
+          TemplateHabit(nome: l.templateHabitHealthyWalk, categoriaId: 'c4', icone: 'bicycle', lembretes: const ['18:00']),
+          TemplateHabit(nome: l.templateHabitHealthyGratitude, categoriaId: 'c2', icone: 'sparkle', lembretes: const ['21:30']),
+          TemplateHabit(nome: l.templateHabitHealthySleep, categoriaId: 'c1', icone: 'moon'),
+        ],
+      ),
+      HabitTemplate(
+        id: 'remote',
+        nome: l.templateRemoteName,
+        descricao: l.templateRemoteDesc,
+        icone: PhosphorIconsRegular.coffee,
+        cor: const Color(0xFF6B5B95),
+        habitos: [
+          TemplateHabit(nome: l.templateHabitRemoteInbox, categoriaId: 'c3', icone: 'chat', lembretes: const ['09:00']),
+          TemplateHabit(nome: l.templateHabitRemoteBreak, categoriaId: 'c2', icone: 'alarm'),
+          TemplateHabit(nome: l.templateHabitRemoteNeck, categoriaId: 'c4', icone: 'barbell'),
+          TemplateHabit(nome: l.templateHabitRemoteCoffee, categoriaId: 'c2', icone: 'coffee'),
+        ],
+      ),
+    ];

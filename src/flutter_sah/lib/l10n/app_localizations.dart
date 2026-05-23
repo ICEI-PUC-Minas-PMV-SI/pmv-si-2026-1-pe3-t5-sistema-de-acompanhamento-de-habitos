@@ -2180,6 +2180,258 @@ abstract class AppL10n {
   /// In pt, this message translates to:
   /// **'Sair'**
   String get logoutDialogConfirm;
+
+  /// No description provided for @onboardingSuggDrinkWater.
+  ///
+  /// In pt, this message translates to:
+  /// **'Beber 2L de água'**
+  String get onboardingSuggDrinkWater;
+
+  /// No description provided for @onboardingSuggVitamin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tomar vitamina'**
+  String get onboardingSuggVitamin;
+
+  /// No description provided for @onboardingSuggSleep8h.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dormir 8 horas'**
+  String get onboardingSuggSleep8h;
+
+  /// No description provided for @onboardingSuggGratitude.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anotar 3 gratidões'**
+  String get onboardingSuggGratitude;
+
+  /// No description provided for @onboardingSuggOffline15.
+  ///
+  /// In pt, this message translates to:
+  /// **'15min offline'**
+  String get onboardingSuggOffline15;
+
+  /// No description provided for @onboardingSuggWalkOutdoor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Caminhar ao ar livre'**
+  String get onboardingSuggWalkOutdoor;
+
+  /// No description provided for @onboardingSuggPlanDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planejar o dia'**
+  String get onboardingSuggPlanDay;
+
+  /// No description provided for @onboardingSuggReviewAgenda.
+  ///
+  /// In pt, this message translates to:
+  /// **'Revisar agenda'**
+  String get onboardingSuggReviewAgenda;
+
+  /// No description provided for @onboardingSuggInboxZero.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inbox zero'**
+  String get onboardingSuggInboxZero;
+
+  /// No description provided for @onboardingSuggTrain30.
+  ///
+  /// In pt, this message translates to:
+  /// **'Treinar 30min'**
+  String get onboardingSuggTrain30;
+
+  /// No description provided for @onboardingSuggStretchBeforeSleep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alongar antes de dormir'**
+  String get onboardingSuggStretchBeforeSleep;
+
+  /// No description provided for @onboardingSuggStairs.
+  ///
+  /// In pt, this message translates to:
+  /// **'Subir escadas'**
+  String get onboardingSuggStairs;
+
+  /// No description provided for @onboardingSuggRead20Pages.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler 20 páginas'**
+  String get onboardingSuggRead20Pages;
+
+  /// No description provided for @onboardingSuggReadBeforeSleep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler antes de dormir'**
+  String get onboardingSuggReadBeforeSleep;
+
+  /// No description provided for @onboardingSuggLearnNewWord.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprender palavra nova'**
+  String get onboardingSuggLearnNewWord;
+
+  /// No description provided for @onboardingSuggMeditate10.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meditar 10min'**
+  String get onboardingSuggMeditate10;
+
+  /// No description provided for @onboardingSuggConsciousBreathing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Respiração consciente 5min'**
+  String get onboardingSuggConsciousBreathing;
+
+  /// No description provided for @onboardingSuggMindfulnessLunch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mindfulness pós-almoço'**
+  String get onboardingSuggMindfulnessLunch;
+
+  /// No description provided for @templateMorningName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rotina matinal'**
+  String get templateMorningName;
+
+  /// No description provided for @templateMorningDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comece o dia com 4 hábitos curtos.'**
+  String get templateMorningDesc;
+
+  /// No description provided for @templateStudentName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estudante'**
+  String get templateStudentName;
+
+  /// No description provided for @templateStudentDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rotina balanceada de estudo e descanso.'**
+  String get templateStudentDesc;
+
+  /// No description provided for @templateHealthyName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vida saudável'**
+  String get templateHealthyName;
+
+  /// No description provided for @templateHealthyDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Foco em corpo e mente.'**
+  String get templateHealthyDesc;
+
+  /// No description provided for @templateRemoteName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Trabalho remoto'**
+  String get templateRemoteName;
+
+  /// No description provided for @templateRemoteDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mantém foco e energia trabalhando de casa.'**
+  String get templateRemoteDesc;
+
+  /// No description provided for @templateHabitMorningWater.
+  ///
+  /// In pt, this message translates to:
+  /// **'Beber um copo de água'**
+  String get templateHabitMorningWater;
+
+  /// No description provided for @templateHabitMorningMeditate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meditar 10min'**
+  String get templateHabitMorningMeditate;
+
+  /// No description provided for @templateHabitMorningStretch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alongar'**
+  String get templateHabitMorningStretch;
+
+  /// No description provided for @templateHabitMorningPlan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planejar o dia'**
+  String get templateHabitMorningPlan;
+
+  /// No description provided for @templateHabitStudentRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler 20 páginas'**
+  String get templateHabitStudentRead;
+
+  /// No description provided for @templateHabitStudentReview.
+  ///
+  /// In pt, this message translates to:
+  /// **'Revisar agenda'**
+  String get templateHabitStudentReview;
+
+  /// No description provided for @templateHabitStudentLearn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprender palavra nova'**
+  String get templateHabitStudentLearn;
+
+  /// No description provided for @templateHabitStudentPomodoro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pomodoro 25min'**
+  String get templateHabitStudentPomodoro;
+
+  /// No description provided for @templateHabitHealthyWater.
+  ///
+  /// In pt, this message translates to:
+  /// **'Beber 2L de água'**
+  String get templateHabitHealthyWater;
+
+  /// No description provided for @templateHabitHealthyWalk.
+  ///
+  /// In pt, this message translates to:
+  /// **'Caminhar 30min'**
+  String get templateHabitHealthyWalk;
+
+  /// No description provided for @templateHabitHealthyGratitude.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anotar 3 gratidões'**
+  String get templateHabitHealthyGratitude;
+
+  /// No description provided for @templateHabitHealthySleep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dormir 8 horas'**
+  String get templateHabitHealthySleep;
+
+  /// No description provided for @templateHabitRemoteInbox.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inbox zero pela manhã'**
+  String get templateHabitRemoteInbox;
+
+  /// No description provided for @templateHabitRemoteBreak.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pausa de 5min a cada hora'**
+  String get templateHabitRemoteBreak;
+
+  /// No description provided for @templateHabitRemoteNeck.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alongar pescoço'**
+  String get templateHabitRemoteNeck;
+
+  /// No description provided for @templateHabitRemoteCoffee.
+  ///
+  /// In pt, this message translates to:
+  /// **'Café com calma'**
+  String get templateHabitRemoteCoffee;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

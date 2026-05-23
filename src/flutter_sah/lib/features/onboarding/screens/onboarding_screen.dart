@@ -74,6 +74,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _createSelected() async {
     if (_selected.isEmpty) return;
+    final l = AppL10n.of(context)!;
+    final suggestions = onboardingSuggestionsFor(l);
     setState(() => _saving = true);
 
     final repo = context.read<HabitRepository>();
@@ -81,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     var failures = 0;
 
     for (final i in _selected) {
-      final s = onboardingSuggestions[i];
+      final s = suggestions[i];
       final habit = Habit(
         id: '',
         userId: userId,
@@ -94,7 +96,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     if (!mounted) return;
     if (failures > 0) {
-      final l = AppL10n.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
           l.onboardingFailedHabits(failures),
@@ -168,7 +169,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    ..._categories.map(_buildCategorySection),
+                    ..._categories.map((c) => _buildCategorySection(c, onboardingSuggestionsFor(l))),
                   ],
                 ),
               ),
@@ -180,9 +181,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildCategorySection(Category cat) {
+  Widget _buildCategorySection(Category cat, List<HabitSuggestion> allSuggestions) {
     final color = _parseColor(cat.cor);
-    final suggestions = onboardingSuggestions
+    final suggestions = allSuggestions
         .asMap()
         .entries
         .where((e) => e.value.categoriaId == cat.id)

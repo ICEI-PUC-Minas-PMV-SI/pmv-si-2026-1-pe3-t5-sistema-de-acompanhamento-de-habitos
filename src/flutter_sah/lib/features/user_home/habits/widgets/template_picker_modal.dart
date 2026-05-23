@@ -69,7 +69,7 @@ class _TemplatePickerModal extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            ...habitTemplates.map((t) => Padding(
+            ...habitTemplatesFor(l).map((t) => Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: _TemplateCard(template: t),
                 )),

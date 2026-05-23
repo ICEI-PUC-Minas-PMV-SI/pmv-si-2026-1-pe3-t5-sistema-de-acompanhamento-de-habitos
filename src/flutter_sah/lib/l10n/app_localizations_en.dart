@@ -1172,4 +1172,131 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get logoutDialogConfirm => 'Sign out';
+
+  @override
+  String get onboardingSuggDrinkWater => 'Drink 2L of water';
+
+  @override
+  String get onboardingSuggVitamin => 'Take vitamin';
+
+  @override
+  String get onboardingSuggSleep8h => 'Sleep 8 hours';
+
+  @override
+  String get onboardingSuggGratitude => 'Write 3 gratitudes';
+
+  @override
+  String get onboardingSuggOffline15 => '15min offline';
+
+  @override
+  String get onboardingSuggWalkOutdoor => 'Walk outdoors';
+
+  @override
+  String get onboardingSuggPlanDay => 'Plan the day';
+
+  @override
+  String get onboardingSuggReviewAgenda => 'Review agenda';
+
+  @override
+  String get onboardingSuggInboxZero => 'Inbox zero';
+
+  @override
+  String get onboardingSuggTrain30 => 'Work out 30min';
+
+  @override
+  String get onboardingSuggStretchBeforeSleep => 'Stretch before bed';
+
+  @override
+  String get onboardingSuggStairs => 'Take the stairs';
+
+  @override
+  String get onboardingSuggRead20Pages => 'Read 20 pages';
+
+  @override
+  String get onboardingSuggReadBeforeSleep => 'Read before bed';
+
+  @override
+  String get onboardingSuggLearnNewWord => 'Learn a new word';
+
+  @override
+  String get onboardingSuggMeditate10 => 'Meditate 10min';
+
+  @override
+  String get onboardingSuggConsciousBreathing => 'Mindful breathing 5min';
+
+  @override
+  String get onboardingSuggMindfulnessLunch => 'Post-lunch mindfulness';
+
+  @override
+  String get templateMorningName => 'Morning routine';
+
+  @override
+  String get templateMorningDesc => 'Start the day with 4 short habits.';
+
+  @override
+  String get templateStudentName => 'Student';
+
+  @override
+  String get templateStudentDesc => 'Balanced study and rest routine.';
+
+  @override
+  String get templateHealthyName => 'Healthy life';
+
+  @override
+  String get templateHealthyDesc => 'Focus on body and mind.';
+
+  @override
+  String get templateRemoteName => 'Remote work';
+
+  @override
+  String get templateRemoteDesc =>
+      'Keep focus and energy while working from home.';
+
+  @override
+  String get templateHabitMorningWater => 'Drink a glass of water';
+
+  @override
+  String get templateHabitMorningMeditate => 'Meditate 10min';
+
+  @override
+  String get templateHabitMorningStretch => 'Stretch';
+
+  @override
+  String get templateHabitMorningPlan => 'Plan the day';
+
+  @override
+  String get templateHabitStudentRead => 'Read 20 pages';
+
+  @override
+  String get templateHabitStudentReview => 'Review agenda';
+
+  @override
+  String get templateHabitStudentLearn => 'Learn a new word';
+
+  @override
+  String get templateHabitStudentPomodoro => 'Pomodoro 25min';
+
+  @override
+  String get templateHabitHealthyWater => 'Drink 2L of water';
+
+  @override
+  String get templateHabitHealthyWalk => 'Walk 30min';
+
+  @override
+  String get templateHabitHealthyGratitude => 'Write 3 gratitudes';
+
+  @override
+  String get templateHabitHealthySleep => 'Sleep 8 hours';
+
+  @override
+  String get templateHabitRemoteInbox => 'Inbox zero in the morning';
+
+  @override
+  String get templateHabitRemoteBreak => '5min break every hour';
+
+  @override
+  String get templateHabitRemoteNeck => 'Stretch your neck';
+
+  @override
+  String get templateHabitRemoteCoffee => 'Slow-paced coffee';
 }
