@@ -2,3 +2,10 @@ node_modules/
 dist/
 .env
 .env.local
+*.tsbuildinfo
+*.d.ts
+*.js
+!tailwind.config.js
+!postcss.config.js
+!vite.config.js
+!vitest.config.js
