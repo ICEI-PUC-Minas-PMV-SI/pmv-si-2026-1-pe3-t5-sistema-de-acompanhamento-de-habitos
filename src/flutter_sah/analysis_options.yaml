@@ -1,0 +1,37 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    missing_required_param: error
+    missing_return: error
+    dead_code: warning
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    # Estilo
+    prefer_single_quotes: true
+    sort_child_properties_last: true
+
+    # Dart moderno
+    use_super_parameters: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_fields: true
+
+    # Boas práticas
+    avoid_print: true
+    avoid_empty_else: true
+    avoid_redundant_argument_values: false
+    cancel_subscriptions: true
+    unawaited_futures: true
+
+    # Segurança
+    avoid_dynamic_calls: true
+    no_logic_in_create_state: true
