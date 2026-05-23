@@ -53,6 +53,14 @@ class _SahAppState extends State<SahApp> with WidgetsBindingObserver {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Rede pode ter mudado enquanto o app estava em background.
+      AuditContext.refresh();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final themeCtrl = context.watch<ThemeController>();
     final localeCtrl = context.watch<LocaleController>();

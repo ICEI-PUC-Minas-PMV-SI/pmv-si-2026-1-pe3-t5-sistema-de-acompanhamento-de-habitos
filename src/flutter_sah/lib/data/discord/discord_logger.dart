@@ -7,9 +7,18 @@ import '../models/audit_log.dart';
 ///
 /// Fire-and-forget: erros (rede, rate limit, webhook indisponível) são
 /// silenciados — o log no Hive sempre acontece, independente do Discord.
+///
+/// A URL é injetada via `--dart-define=SAH_DISCORD_WEBHOOK=https://...`
+/// (ou `--dart-define-from-file=.env.json`). Quando vazia, o envio
+/// é desligado e nenhum payload é montado. Veja Makefile + README.
 class DiscordLogger {
   static const String _webhookUrl =
-      'https://discord.com/api/webhooks/1507775874454392874/WJCkxoGx_tHuRByh8TxWM6nemdbh0mjBfaBJCPz-NK05k_C5p7FHA_ecuYhxIm7enoAf';
+      String.fromEnvironment('SAH_DISCORD_WEBHOOK');
+
+  /// Throttle 3s por mensagem para evitar flood quando o ErrorReporter
+  /// pegar um loop ou erros idênticos em sequência.
+  static final Map<String, DateTime> _lastSentAt = {};
+  static const _throttleWindow = Duration(seconds: 3);
 
   static final Dio _dio = Dio(BaseOptions(
     connectTimeout: const Duration(seconds: 5),
@@ -18,15 +27,31 @@ class DiscordLogger {
   ));
 
   static Future<void> send(AuditLog log) async {
+    if (_webhookUrl.isEmpty) return;
+
+    final key = '${log.tipoEvento.name}|${log.evento}';
+    final now = DateTime.now();
+    final last = _lastSentAt[key];
+    if (last != null && now.difference(last) < _throttleWindow) return;
+    _lastSentAt[key] = now;
+    _evictOldEntries(now);
+
     try {
       final payload = _buildPayload(log);
       await _dio.post<dynamic>(_webhookUrl, data: payload);
     } catch (e) {
-      // Webhook indisponível, sem internet, rate limit, etc. — não propaga.
       if (kDebugMode) {
         debugPrint('DiscordLogger: falha no envio — $e');
       }
     }
+  }
+
+  /// Mantém o mapa pequeno: descarta entradas com mais de 1 minuto.
+  static void _evictOldEntries(DateTime now) {
+    if (_lastSentAt.length < 50) return;
+    _lastSentAt.removeWhere(
+      (_, ts) => now.difference(ts) > const Duration(minutes: 1),
+    );
   }
 
   static Map<String, dynamic> _buildPayload(AuditLog log) {

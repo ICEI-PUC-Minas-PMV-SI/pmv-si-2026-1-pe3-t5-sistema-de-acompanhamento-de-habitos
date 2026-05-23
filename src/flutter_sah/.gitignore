@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local secrets (Discord webhook, futuras integrações)
+.env.json
+.env
+

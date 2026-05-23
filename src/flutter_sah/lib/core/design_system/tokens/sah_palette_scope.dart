@@ -31,3 +31,33 @@ class SahPaletteScope extends InheritedWidget {
   @override
   bool updateShouldNotify(SahPaletteScope old) => old.palette != palette;
 }
+
+/// Wrapper que registra dependência na paleta automaticamente.
+///
+/// Use em telas/widgets que leem `SahColors.*`. Equivalente a chamar
+/// `SahPaletteScope.subscribe(context)` na primeira linha do build, mas
+/// declarativo (não precisa lembrar).
+///
+/// Exemplo:
+/// ```dart
+/// @override
+/// Widget build(BuildContext context) {
+///   return PaletteAware(
+///     builder: (context) => Scaffold(
+///       backgroundColor: SahColors.bg,
+///       ...
+///     ),
+///   );
+/// }
+/// ```
+class PaletteAware extends StatelessWidget {
+  final WidgetBuilder builder;
+
+  const PaletteAware({super.key, required this.builder});
+
+  @override
+  Widget build(BuildContext context) {
+    SahPaletteScope.subscribe(context);
+    return builder(context);
+  }
+}
