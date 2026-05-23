@@ -11,3 +11,5 @@ export { Switch } from './Switch';
 export { ProgressBar } from './ProgressBar';
 export { EmptyState } from './EmptyState';
 export { CalloutNote } from './CalloutNote';
+export { Modal } from './Modal';
+export { ToastView } from './Toast';
