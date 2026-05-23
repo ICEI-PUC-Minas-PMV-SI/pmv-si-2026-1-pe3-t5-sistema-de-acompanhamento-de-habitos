@@ -90,10 +90,10 @@ class _BackupScreenState extends State<BackupScreen> {
       return;
     }
 
+    final userId = context.read<AuthController>().currentUser!.id;
+    final service = context.read<BackupService>();
     try {
       final content = await File(path).readAsString();
-      final userId = context.read<AuthController>().currentUser!.id;
-      final service = context.read<BackupService>();
       final result = await service.import(userId: userId, json: content);
       if (!mounted) return;
       setState(() => _importing = false);
@@ -159,7 +159,7 @@ class _BackupScreenState extends State<BackupScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(SahSpacing.pagePadding),
+        padding: const EdgeInsets.all(SahSpacing.pagePadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -171,7 +171,7 @@ class _BackupScreenState extends State<BackupScreen> {
                 height: 1.5,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             SahCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +188,7 @@ class _BackupScreenState extends State<BackupScreen> {
                         child: Icon(PhosphorIconsRegular.uploadSimple,
                             size: 18, color: SahColors.primary),
                       ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,7 +202,7 @@ class _BackupScreenState extends State<BackupScreen> {
                                 color: SahColors.text,
                               ),
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
                               'Gera um arquivo JSON com seus hábitos, registros e categorias.',
                               style: GoogleFonts.interTight(
@@ -216,7 +216,7 @@ class _BackupScreenState extends State<BackupScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 14),
+                  const SizedBox(height: 14),
                   SahButton.primary(
                     label: 'Exportar agora',
                     fullWidth: true,
@@ -226,7 +226,7 @@ class _BackupScreenState extends State<BackupScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             SahCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,7 +243,7 @@ class _BackupScreenState extends State<BackupScreen> {
                         child: Icon(PhosphorIconsRegular.downloadSimple,
                             size: 18, color: SahColors.accent),
                       ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,7 +257,7 @@ class _BackupScreenState extends State<BackupScreen> {
                                 color: SahColors.text,
                               ),
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
                               'Substitui seus dados pelos do arquivo. Ação destrutiva.',
                               style: GoogleFonts.interTight(
@@ -271,7 +271,7 @@ class _BackupScreenState extends State<BackupScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 14),
+                  const SizedBox(height: 14),
                   SahButton.dangerGhost(
                     label: 'Selecionar arquivo',
                     fullWidth: true,
@@ -281,9 +281,9 @@ class _BackupScreenState extends State<BackupScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
-              padding: EdgeInsets.all(14),
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: SahColors.bgAlt,
                 borderRadius: BorderRadius.circular(SahRadius.md),
@@ -293,7 +293,7 @@ class _BackupScreenState extends State<BackupScreen> {
                 children: [
                   Icon(PhosphorIconsRegular.clockCounterClockwise,
                       size: 16, color: SahColors.textMuted),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -306,7 +306,7 @@ class _BackupScreenState extends State<BackupScreen> {
                             color: SahColors.text,
                           ),
                         ),
-                        SizedBox(height: 2),
+                        const SizedBox(height: 2),
                         Text(
                           'Último: ${_formatLast(lastBackup)}',
                           style: GoogleFonts.interTight(

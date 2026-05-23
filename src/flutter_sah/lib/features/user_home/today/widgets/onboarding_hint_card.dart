@@ -18,7 +18,7 @@ class OnboardingHintCard extends StatelessWidget {
           'Comece com sugestões. Você ainda não tem hábitos. Toque em ver sugestões para começar.',
       child: ExcludeSemantics(
         child: Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: SahColors.accentFaint,
         borderRadius: BorderRadius.circular(SahRadius.lg),
@@ -34,7 +34,7 @@ class OnboardingHintCard extends StatelessWidget {
                 size: 18,
                 color: SahColors.accent,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 'Comece com sugestões',
                 style: TextStyle(
@@ -46,7 +46,7 @@ class OnboardingHintCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             'Você ainda não tem hábitos. Escolha alguns para começar — leva menos de um minuto.',
             style: GoogleFonts.interTight(
@@ -55,7 +55,7 @@ class OnboardingHintCard extends StatelessWidget {
               height: 1.45,
             ),
           ),
-          SizedBox(height: 14),
+          const SizedBox(height: 14),
           SahButton.primary(
             label: 'Ver sugestões',
             size: SahButtonSize.sm,

@@ -7,6 +7,7 @@ import '../../../../core/design_system/tokens/sah_spacing.dart';
 import '../../../../core/design_system/widgets/sah_empty_state.dart';
 import '../../../../core/design_system/widgets/sah_spinner.dart';
 import '../../../../data/backup/auto_backup_service.dart';
+import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
 import '../../../../data/repositories/habit_repository.dart';
@@ -18,7 +19,7 @@ import '../widgets/progress_summary_card.dart';
 import '../widgets/today_habit_tile.dart';
 
 class TodayScreen extends StatelessWidget {
-  TodayScreen({super.key});
+  const TodayScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +32,15 @@ class TodayScreen extends StatelessWidget {
         catRepo: ctx.read<CategoryRepository>(),
         widget: ctx.read<HomeWidgetService>(),
         autoBackup: ctx.read<AutoBackupService>(),
+        notifications: ctx.read<NotificationService>(),
       ),
-      child: _TodayView(),
+      child: const _TodayView(),
     );
   }
 }
 
 class _TodayView extends StatelessWidget {
-  _TodayView();
+  const _TodayView();
 
   String _greeting(String nome) {
     final hour = DateTime.now().hour;
@@ -75,7 +77,7 @@ class _TodayView extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverPadding(
-                padding: EdgeInsets.fromLTRB(
+                padding: const EdgeInsets.fromLTRB(
                   SahSpacing.pagePadding,
                   SahSpacing.x6,
                   SahSpacing.pagePadding,
@@ -94,7 +96,7 @@ class _TodayView extends StatelessWidget {
                           color: SahColors.text,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
                         _formatDate(today),
                         style: GoogleFonts.interTight(
@@ -102,14 +104,14 @@ class _TodayView extends StatelessWidget {
                           color: SahColors.textMuted,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
               ),
               // Corpo
               SliverPadding(
-                padding: EdgeInsets.fromLTRB(
+                padding: const EdgeInsets.fromLTRB(
                   SahSpacing.pagePadding,
                   0,
                   SahSpacing.pagePadding,
@@ -126,7 +128,7 @@ class _TodayView extends StatelessWidget {
 
   Widget _buildContent(TodayController ctrl) {
     if (ctrl.status == TodayStatus.loading) {
-      return SliverFillRemaining(
+      return const SliverFillRemaining(
         child: Center(child: SahSpinner()),
       );
     }
@@ -144,14 +146,14 @@ class _TodayView extends StatelessWidget {
 
     if (ctrl.entries.isEmpty) {
       if (!ctrl.hasAnyHabit) {
-        return SliverToBoxAdapter(
+        return const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.only(top: 8),
             child: OnboardingHintCard(),
           ),
         );
       }
-      return SliverFillRemaining(
+      return const SliverFillRemaining(
         child: SahEmptyState(
           title: 'Dia livre!',
           description: 'Nenhum hábito agendado para hoje.',
@@ -165,7 +167,7 @@ class _TodayView extends StatelessWidget {
           completed: ctrl.completedCount,
           total: ctrl.totalCount,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           'Hábitos de hoje',
           style: TextStyle(
@@ -175,10 +177,10 @@ class _TodayView extends StatelessWidget {
             color: SahColors.text,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         ...ctrl.entries.map(
           (entry) => Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: TodayHabitTile(
               entry: entry,
               onToggle: () => ctrl.toggle(entry.habit.id),

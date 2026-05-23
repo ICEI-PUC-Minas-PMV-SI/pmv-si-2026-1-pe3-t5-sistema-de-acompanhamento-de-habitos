@@ -17,12 +17,12 @@ class HistoryList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: logsByDay.entries.map((entry) {
         return Padding(
-          padding: EdgeInsets.only(bottom: SahSpacing.x4),
+          padding: const EdgeInsets.only(bottom: SahSpacing.x4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 6),
+                padding: const EdgeInsets.symmetric(vertical: 6),
                 child: Text(
                   SahFormatters.date(entry.key),
                   style: GoogleFonts.interTight(
@@ -45,7 +45,7 @@ class HistoryList extends StatelessWidget {
                     return Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 10,
                           ),
@@ -64,7 +64,7 @@ class HistoryList extends StatelessWidget {
                                   color: SahColors.primary,
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              const SizedBox(width: 12),
                               Text(
                                 'Concluído',
                                 style: GoogleFonts.interTight(
@@ -72,7 +72,7 @@ class HistoryList extends StatelessWidget {
                                   color: SahColors.text,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 _timeOnly(e.value.dataHora),
                                 style: GoogleFonts.jetBrainsMono(

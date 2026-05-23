@@ -15,7 +15,7 @@ import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 
 class RecoverScreen extends StatefulWidget {
-  RecoverScreen({super.key});
+  const RecoverScreen({super.key});
 
   @override
   State<RecoverScreen> createState() => _RecoverScreenState();
@@ -69,14 +69,14 @@ class _RecoverScreenState extends State<RecoverScreen> {
               children: [
                 SahIcon(SahIconName.arrowLeft,
                     size: 16, color: SahColors.textMuted),
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
                 Text('Voltar ao login',
                     style: GoogleFonts.interTight(
                         fontSize: 13, color: SahColors.textMuted)),
               ],
             ),
           ),
-          SizedBox(height: SahSpacing.x6),
+          const SizedBox(height: SahSpacing.x6),
           Text(
             'Recuperar senha.',
             style: TextStyle(
@@ -88,13 +88,13 @@ class _RecoverScreenState extends State<RecoverScreen> {
               height: 1.2,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Enviaremos um link de redefinição para o e-mail cadastrado.',
             style: GoogleFonts.interTight(
                 fontSize: 15, color: SahColors.textMuted, height: 1.5),
           ),
-          SizedBox(height: SahSpacing.x8),
+          const SizedBox(height: SahSpacing.x8),
           SahCard(
             padding: 24,
             child: Column(
@@ -103,13 +103,13 @@ class _RecoverScreenState extends State<RecoverScreen> {
                   label: 'E-mail',
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: SahIcon(SahIconName.mail, size: 16),
+                  prefixIcon: const SahIcon(SahIconName.mail, size: 16),
                   errorText: _emailError,
-                  autofillHints: [AutofillHints.email],
+                  autofillHints: const [AutofillHints.email],
                   textInputAction: TextInputAction.done,
                   onEditingComplete: _submit,
                 ),
-                SizedBox(height: SahSpacing.sectionGap),
+                const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
                   label: 'Enviar link',
                   fullWidth: true,
@@ -117,7 +117,7 @@ class _RecoverScreenState extends State<RecoverScreen> {
                   loading: _loading,
                   onPressed: _submit,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Center(
                   child: TextButton(
                     onPressed: () => context.go(Routes.resetPassword),

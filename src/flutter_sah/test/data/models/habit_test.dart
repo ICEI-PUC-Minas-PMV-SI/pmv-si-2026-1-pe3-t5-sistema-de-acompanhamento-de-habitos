@@ -4,7 +4,7 @@ import 'package:sah/data/models/habit.dart';
 void main() {
   group('Habit', () {
     test('toJson/fromJson round-trip preserva todos os campos', () {
-      final original = Habit(
+      const original = Habit(
         id: 'h_1',
         userId: 'u_1',
         nome: 'Meditar',
@@ -47,7 +47,7 @@ void main() {
     });
 
     test('copyWith preserva campos não alterados', () {
-      final original = Habit(
+      const original = Habit(
         id: 'h_1',
         userId: 'u_1',
         nome: 'Ler',

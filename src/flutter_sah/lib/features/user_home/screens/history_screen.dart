@@ -13,8 +13,8 @@ import '../history/controllers/history_controller.dart';
 import '../history/widgets/history_list.dart';
 import '../history/widgets/history_summary_card.dart';
 
-class HistoryPlaceholderScreen extends StatelessWidget {
-  const HistoryPlaceholderScreen({super.key});
+class HistoryScreen extends StatelessWidget {
+  const HistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _HistoryContent extends StatelessWidget {
     final ctrl = context.watch<HistoryController>();
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(SahSpacing.pagePadding),
+      padding: const EdgeInsets.all(SahSpacing.pagePadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -59,12 +59,12 @@ class _HistoryContent extends StatelessWidget {
               letterSpacing: -0.44,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
 
           if (ctrl.loading && ctrl.habits.isEmpty)
-            Center(child: SahSpinner(size: 28))
+            const Center(child: SahSpinner(size: 28))
           else if (ctrl.habits.isEmpty)
-            SahEmptyState(
+            const SahEmptyState(
               title: 'Nenhum hábito',
               description: 'Crie um hábito na aba Hábitos para ver seu histórico.',
             )
@@ -74,15 +74,15 @@ class _HistoryContent extends StatelessWidget {
               selectedId: ctrl.selectedHabitId,
               onSelect: ctrl.selectHabit,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _PeriodFilterBar(
               periods: _periods,
               current: ctrl.periodDays,
               onSelect: ctrl.selectPeriod,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             if (ctrl.loading)
-              Center(child: SahSpinner(size: 24))
+              const Center(child: SahSpinner(size: 24))
             else ...[
               HistorySummaryCard(
                 checkIns: ctrl.checkInCount,
@@ -90,9 +90,9 @@ class _HistoryContent extends StatelessWidget {
                 adherence: ctrl.adherence,
                 bestStreak: ctrl.bestStreak,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               if (ctrl.logs.isEmpty)
-                SahEmptyState(
+                const SahEmptyState(
                   title: 'Sem registros',
                   description: 'Nenhum check-in encontrado neste período.',
                 )
@@ -124,15 +124,15 @@ class _HabitFilterBar extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: habits.length,
-        separatorBuilder: (_, __) => SizedBox(width: 8),
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
         itemBuilder: (_, i) {
           final h = habits[i];
           final selected = h.id == selectedId;
           return GestureDetector(
             onTap: () => onSelect(h.id),
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 150),
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              duration: const Duration(milliseconds: 150),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
                 color: selected ? SahColors.primary : SahColors.surface,
                 borderRadius: BorderRadius.circular(SahRadius.full),
@@ -175,11 +175,11 @@ class _PeriodFilterBar extends StatelessWidget {
         children: periods.map((p) {
           final selected = p.days == current;
           return Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 8),
             child: GestureDetector(
               onTap: () => onSelect(p.days),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
                   color: selected ? SahColors.accentFaint : SahColors.bgAlt,
                   borderRadius: BorderRadius.circular(SahRadius.full),

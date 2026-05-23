@@ -15,26 +15,26 @@ import '../widgets/category_card.dart';
 import '../widgets/category_form_modal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  CategoriesScreen({super.key});
+  const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (ctx) => CategoriesController(ctx.read<CategoryRepository>()),
-      child: _CategoriesContent(),
+      child: const _CategoriesContent(),
     );
   }
 }
 
 class _CategoriesContent extends StatelessWidget {
-  _CategoriesContent();
+  const _CategoriesContent();
 
   @override
   Widget build(BuildContext context) {
     final ctrl = context.watch<CategoriesController>();
 
     return Padding(
-      padding: EdgeInsets.all(SahSpacing.pagePadding),
+      padding: const EdgeInsets.all(SahSpacing.pagePadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,13 +54,13 @@ class _CategoriesContent extends StatelessWidget {
               ),
               SahButton.primary(
                 label: 'Nova',
-                icon: Icon(Icons.add_rounded, size: 16, color: Colors.white),
+                icon: const Icon(Icons.add_rounded, size: 16, color: Colors.white),
                 size: SahButtonSize.sm,
                 onPressed: () => _showCreate(context, ctrl),
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(child: _buildBody(context, ctrl)),
         ],
       ),
@@ -69,7 +69,7 @@ class _CategoriesContent extends StatelessWidget {
 
   Widget _buildBody(BuildContext context, CategoriesController ctrl) {
     if (ctrl.status == ListStatus.loading) {
-      return Center(child: SahSpinner(size: 28));
+      return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == ListStatus.error) {
       return Center(
@@ -91,7 +91,7 @@ class _CategoriesContent extends StatelessWidget {
     }
 
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,

@@ -14,7 +14,7 @@ import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  ResetPasswordScreen({super.key});
+  const ResetPasswordScreen({super.key});
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -97,14 +97,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             child: Row(
               children: [
                 SahIcon(SahIconName.arrowLeft, size: 16, color: SahColors.textMuted),
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
                 Text('Voltar ao login',
                     style: GoogleFonts.interTight(
                         fontSize: 13, color: SahColors.textMuted)),
               ],
             ),
           ),
-          SizedBox(height: SahSpacing.x6),
+          const SizedBox(height: SahSpacing.x6),
           Text(
             'Redefinir senha.',
             style: TextStyle(
@@ -116,13 +116,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               height: 1.2,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Cole o código que enviamos por e-mail e escolha uma nova senha.',
             style: GoogleFonts.interTight(
                 fontSize: 15, color: SahColors.textMuted, height: 1.5),
           ),
-          SizedBox(height: SahSpacing.x8),
+          const SizedBox(height: SahSpacing.x8),
           SahCard(
             padding: 24,
             child: Column(
@@ -134,7 +134,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   errorText: _tokenError,
                   textInputAction: TextInputAction.next,
                 ),
-                SizedBox(height: SahSpacing.x4),
+                const SizedBox(height: SahSpacing.x4),
                 SahInput(
                   label: 'Nova senha',
                   controller: _newPassCtrl,
@@ -142,7 +142,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   errorText: _newPassError,
                   textInputAction: TextInputAction.next,
                 ),
-                SizedBox(height: SahSpacing.x4),
+                const SizedBox(height: SahSpacing.x4),
                 SahInput(
                   label: 'Confirmar nova senha',
                   controller: _confirmCtrl,
@@ -151,7 +151,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   textInputAction: TextInputAction.done,
                   onEditingComplete: _submit,
                 ),
-                SizedBox(height: SahSpacing.sectionGap),
+                const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
                   label: 'Redefinir senha',
                   fullWidth: true,

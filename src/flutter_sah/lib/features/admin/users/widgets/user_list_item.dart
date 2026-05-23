@@ -14,7 +14,7 @@ class UserListItem extends StatelessWidget {
   final VoidCallback onPromote;
   final VoidCallback onDemote;
 
-  UserListItem({
+  const UserListItem({
     super.key,
     required this.user,
     required this.currentUserId,
@@ -29,8 +29,8 @@ class UserListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: SahSpacing.x2),
-      padding: EdgeInsets.all(14),
+      margin: const EdgeInsets.only(bottom: SahSpacing.x2),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: SahColors.surface,
         borderRadius: BorderRadius.circular(SahRadius.md),
@@ -39,7 +39,7 @@ class UserListItem extends StatelessWidget {
       child: Row(
         children: [
           _Avatar(nome: user.nome, isBlocked: user.isBlocked, isAdmin: user.isAdmin, isOwner: user.isOwner),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,18 +58,18 @@ class UserListItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     if (user.isOwner)
-                      SahBadge.accent('Owner', size: SahBadgeSize.sm)
+                      const SahBadge.accent('Owner', size: SahBadgeSize.sm)
                     else if (user.isAdmin)
-                      SahBadge.accent('Admin', size: SahBadgeSize.sm)
+                      const SahBadge.accent('Admin', size: SahBadgeSize.sm)
                     else if (user.isBlocked)
-                      SahBadge.danger('Bloqueado', size: SahBadgeSize.sm)
+                      const SahBadge.danger('Bloqueado', size: SahBadgeSize.sm)
                     else
-                      SahBadge.success('Ativo', size: SahBadgeSize.sm),
+                      const SahBadge.success('Ativo', size: SahBadgeSize.sm),
                   ],
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(
                   user.email,
                   style: GoogleFonts.interTight(
@@ -81,7 +81,7 @@ class UserListItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           _ActionsMenu(
             user: user,
             isSelf: _isSelf,
@@ -104,7 +104,7 @@ class _ActionsMenu extends StatelessWidget {
   final VoidCallback onPromote;
   final VoidCallback onDemote;
 
-  _ActionsMenu({
+  const _ActionsMenu({
     required this.user,
     required this.isSelf,
     required this.onBlock,
@@ -140,7 +140,7 @@ class _ActionsMenu extends StatelessWidget {
       ));
     }
 
-    if (items.isEmpty) return SizedBox.shrink();
+    if (items.isEmpty) return const SizedBox.shrink();
 
     return PopupMenuButton<_Action>(
       icon: Icon(Icons.more_vert_rounded, size: 20, color: SahColors.textMuted),
@@ -169,14 +169,14 @@ class _MenuItem extends StatelessWidget {
   final String label;
   final Color color;
 
-  _MenuItem({required this.icon, required this.label, required this.color});
+  const _MenuItem({required this.icon, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Icon(icon, size: 16, color: color),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
           label,
           style: GoogleFonts.interTight(fontSize: 14, color: color),
@@ -192,7 +192,7 @@ class _Avatar extends StatelessWidget {
   final bool isAdmin;
   final bool isOwner;
 
-  _Avatar({
+  const _Avatar({
     required this.nome,
     required this.isBlocked,
     required this.isAdmin,

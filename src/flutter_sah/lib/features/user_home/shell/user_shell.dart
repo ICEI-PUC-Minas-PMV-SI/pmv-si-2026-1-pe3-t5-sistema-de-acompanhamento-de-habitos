@@ -9,7 +9,7 @@ import '../settings/widgets/settings_modal.dart';
 class UserShell extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
-  UserShell({super.key, required this.navigationShell});
+  const UserShell({super.key, required this.navigationShell});
 
   void _onTap(int idx) {
     navigationShell.goBranch(idx,
@@ -25,7 +25,7 @@ class UserShell extends StatelessWidget {
         backgroundColor: SahColors.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
-        title: SahLogo(size: 24),
+        title: const SahLogo(size: 24),
         centerTitle: false,
         actions: [
           IconButton(
@@ -47,22 +47,22 @@ class UserShell extends StatelessWidget {
         onDestinationSelected: _onTap,
         destinations: [
           NavigationDestination(
-            icon: Icon(PhosphorIconsRegular.house),
+            icon: const Icon(PhosphorIconsRegular.house),
             selectedIcon: Icon(PhosphorIconsFill.house, color: SahColors.accent),
             label: 'Hoje',
           ),
           NavigationDestination(
-            icon: Icon(PhosphorIconsRegular.sparkle),
+            icon: const Icon(PhosphorIconsRegular.sparkle),
             selectedIcon: Icon(PhosphorIconsFill.sparkle, color: SahColors.accent),
             label: 'Hábitos',
           ),
           NavigationDestination(
-            icon: Icon(PhosphorIconsRegular.chartBar),
+            icon: const Icon(PhosphorIconsRegular.chartBar),
             selectedIcon: Icon(PhosphorIconsFill.chartBar, color: SahColors.accent),
             label: 'Histórico',
           ),
           NavigationDestination(
-            icon: Icon(PhosphorIconsRegular.user),
+            icon: const Icon(PhosphorIconsRegular.user),
             selectedIcon: Icon(PhosphorIconsFill.user, color: SahColors.accent),
             label: 'Perfil',
           ),

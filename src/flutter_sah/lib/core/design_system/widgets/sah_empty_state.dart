@@ -9,7 +9,7 @@ class SahEmptyState extends StatelessWidget {
   final String description;
   final Widget? primaryAction;
 
-  SahEmptyState({
+  const SahEmptyState({
     super.key,
     this.illustration,
     required this.title,
@@ -21,7 +21,7 @@ class SahEmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(SahSpacing.x8),
+        padding: const EdgeInsets.all(SahSpacing.x8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -37,7 +37,7 @@ class SahEmptyState extends StatelessWidget {
                 ),
                 child: Icon(Icons.inbox_rounded, size: 36, color: SahColors.textFaint),
               ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               title,
               textAlign: TextAlign.center,
@@ -49,7 +49,7 @@ class SahEmptyState extends StatelessWidget {
                 letterSpacing: -0.3,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               description,
               textAlign: TextAlign.center,
@@ -60,7 +60,7 @@ class SahEmptyState extends StatelessWidget {
               ),
             ),
             if (primaryAction != null) ...[
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               primaryAction!,
             ],
           ],

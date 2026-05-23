@@ -163,7 +163,7 @@ class _SahButtonState extends State<SahButton> {
           null
         ),
       SahButtonVariant.danger => (
-          h ? Color(0xFFA04840) : SahColors.danger,
+          h ? const Color(0xFFA04840) : SahColors.danger,
           Colors.white,
           null
         ),

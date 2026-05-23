@@ -17,7 +17,7 @@ Future<String?> showBlockUserModal(BuildContext context, User user) {
 
 class _BlockUserModal extends StatefulWidget {
   final User user;
-  _BlockUserModal({required this.user});
+  const _BlockUserModal({required this.user});
 
   @override
   State<_BlockUserModal> createState() => _BlockUserModalState();
@@ -54,7 +54,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
       ),
       decoration: BoxDecoration(
         color: SahColors.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -70,7 +70,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             'Bloquear usuário',
             style: TextStyle(
@@ -80,14 +80,14 @@ class _BlockUserModalState extends State<_BlockUserModal> {
               color: SahColors.text,
             ),
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             'A conta de ${widget.user.nome} ficará inacessível até ser desbloqueada.',
             style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted, height: 1.5),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text('Motivo', style: GoogleFonts.interTight(fontSize: 13, fontWeight: FontWeight.w500, color: SahColors.text)),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           TextField(
             controller: _ctrl,
             maxLines: 3,
@@ -97,7 +97,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
               hintStyle: GoogleFonts.interTight(fontSize: 14, color: SahColors.textFaint),
               filled: true,
               fillColor: SahColors.bgAlt,
-              contentPadding: EdgeInsets.all(12),
+              contentPadding: const EdgeInsets.all(12),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(SahRadius.md),
                 borderSide: BorderSide(color: SahColors.border),
@@ -114,7 +114,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
             ),
             onChanged: (_) => setState(() => _error = null),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -123,7 +123,7 @@ class _BlockUserModalState extends State<_BlockUserModal> {
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: SahButton.danger(
                   label: 'Bloquear',

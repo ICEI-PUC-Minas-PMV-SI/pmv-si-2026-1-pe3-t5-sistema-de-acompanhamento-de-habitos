@@ -32,7 +32,7 @@ class _HabitFormModal extends StatefulWidget {
   final Habit? existing;
   final List<Category> categories;
 
-  _HabitFormModal({this.existing, required this.categories});
+  const _HabitFormModal({this.existing, required this.categories});
 
   @override
   State<_HabitFormModal> createState() => _HabitFormModalState();
@@ -89,7 +89,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
     showSahModal<void>(
       context: context,
       title: 'Como funcionam as categorias',
-      content: Column(
+      content: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -162,7 +162,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
       ),
       decoration: BoxDecoration(
         color: SahColors.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -180,7 +180,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               isEditing ? 'Editar hábito' : 'Novo hábito',
               style: TextStyle(
@@ -190,7 +190,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 color: SahColors.text,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             SahInput(
               label: 'Nome',
               controller: _nomeCtrl,
@@ -199,13 +199,13 @@ class _HabitFormModalState extends State<_HabitFormModal> {
               autofocus: true,
               onChanged: (_) => setState(() => _nomeError = null),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             SahInput(
               label: 'Descrição (opcional)',
               controller: _descCtrl,
               hint: 'Detalhes ou motivação',
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Categoria
             if (widget.categories.isNotEmpty) ...[
               Row(
@@ -218,12 +218,12 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                       color: SahColors.text,
                     ),
                   ),
-                  SizedBox(width: 6),
+                  const SizedBox(width: 6),
                   InkWell(
                     onTap: () => _showCategoryInfoDialog(context),
                     borderRadius: BorderRadius.circular(SahRadius.full),
                     child: Padding(
-                      padding: EdgeInsets.all(2),
+                      padding: const EdgeInsets.all(2),
                       child: Icon(
                         PhosphorIconsRegular.info,
                         size: 15,
@@ -233,13 +233,13 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                   ),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               SizedBox(
                 height: 36,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.categories.length,
-                  separatorBuilder: (_, __) => SizedBox(width: 8),
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
                   itemBuilder: (_, i) {
                     final cat = widget.categories[i];
                     final selected = _categoriaId == cat.id;
@@ -247,8 +247,8 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                     return GestureDetector(
                       onTap: () => setState(() => _categoriaId = cat.id),
                       child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        padding: EdgeInsets.symmetric(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 6,
                         ),
@@ -278,7 +278,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                   },
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
             // Frequência
             Text(
@@ -289,7 +289,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 color: SahColors.text,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(7, (day) {
@@ -306,7 +306,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                     });
                   },
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 150),
+                    duration: const Duration(milliseconds: 150),
                     width: 38,
                     height: 38,
                     decoration: BoxDecoration(
@@ -333,7 +333,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 );
               }),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Lembretes
             Text(
               'Lembretes',
@@ -343,7 +343,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 color: SahColors.text,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -355,7 +355,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 GestureDetector(
                   onTap: _addReminder,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: SahColors.bgAlt,
                       borderRadius: BorderRadius.circular(SahRadius.full),
@@ -365,7 +365,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(Icons.add, size: 14, color: SahColors.textMuted),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
                           'Adicionar',
                           style: GoogleFonts.interTight(
@@ -380,7 +380,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                 ),
               ],
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Row(
               children: [
                 Expanded(
@@ -389,7 +389,7 @@ class _HabitFormModalState extends State<_HabitFormModal> {
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: SahButton.primary(
                     label: isEditing ? 'Salvar' : 'Criar',
@@ -409,12 +409,12 @@ class _ReminderChip extends StatelessWidget {
   final String time;
   final VoidCallback onRemove;
 
-  _ReminderChip({required this.time, required this.onRemove});
+  const _ReminderChip({required this.time, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: SahColors.accentFaint,
         borderRadius: BorderRadius.circular(SahRadius.full),
@@ -424,7 +424,7 @@ class _ReminderChip extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.alarm_outlined, size: 13, color: SahColors.accent),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             time,
             style: GoogleFonts.interTight(
@@ -433,7 +433,7 @@ class _ReminderChip extends StatelessWidget {
               color: SahColors.accent,
             ),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           GestureDetector(
             onTap: onRemove,
             child: Icon(Icons.close, size: 12, color: SahColors.accent),
@@ -449,7 +449,7 @@ class _InfoBlock extends StatelessWidget {
   final String title;
   final String description;
 
-  _InfoBlock({
+  const _InfoBlock({
     required this.icon,
     required this.title,
     required this.description,
@@ -469,7 +469,7 @@ class _InfoBlock extends StatelessWidget {
           ),
           child: Icon(icon, size: 16, color: SahColors.textMuted),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -482,7 +482,7 @@ class _InfoBlock extends StatelessWidget {
                   color: SahColors.text,
                 ),
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
                 description,
                 style: GoogleFonts.interTight(

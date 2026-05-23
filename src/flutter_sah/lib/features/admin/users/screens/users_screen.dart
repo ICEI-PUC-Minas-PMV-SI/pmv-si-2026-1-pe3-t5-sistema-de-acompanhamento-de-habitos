@@ -14,19 +14,19 @@ import '../widgets/block_user_modal.dart';
 import '../widgets/user_list_item.dart';
 
 class UsersScreen extends StatelessWidget {
-  UsersScreen({super.key});
+  const UsersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (ctx) => UsersController(ctx.read<UserRepository>()),
-      child: _UsersContent(),
+      child: const _UsersContent(),
     );
   }
 }
 
 class _UsersContent extends StatelessWidget {
-  _UsersContent();
+  const _UsersContent();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _UsersContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(
+          padding: const EdgeInsets.fromLTRB(
             SahSpacing.pagePadding,
             SahSpacing.pagePadding,
             SahSpacing.pagePadding,
@@ -55,17 +55,17 @@ class _UsersContent extends StatelessWidget {
                   letterSpacing: -0.44,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SahSearchField(
                 hint: 'Buscar por nome ou e-mail…',
                 onChanged: ctrl.setQuery,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               _FilterBar(current: ctrl.filter, onChanged: ctrl.setFilter),
             ],
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Expanded(
           child: _buildBody(context, ctrl),
         ),
@@ -75,7 +75,7 @@ class _UsersContent extends StatelessWidget {
 
   Widget _buildBody(BuildContext context, UsersController ctrl) {
     if (ctrl.status == UsersStatus.loading) {
-      return Center(child: SahSpinner(size: 28));
+      return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == UsersStatus.error) {
       return Center(
@@ -86,7 +86,7 @@ class _UsersContent extends StatelessWidget {
       );
     }
     if (ctrl.users.isEmpty) {
-      return SahEmptyState(
+      return const SahEmptyState(
         title: 'Nenhum usuário encontrado',
         description: 'Tente ajustar os filtros ou o termo de busca.',
       );
@@ -95,7 +95,7 @@ class _UsersContent extends StatelessWidget {
     final currentUserId = context.read<AuthController>().currentUser?.id ?? '';
 
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: SahSpacing.pagePadding),
+      padding: const EdgeInsets.symmetric(horizontal: SahSpacing.pagePadding),
       itemCount: ctrl.users.length,
       itemBuilder: (ctx, i) {
         final user = ctrl.users[i];
@@ -158,7 +158,7 @@ class _FilterBar extends StatelessWidget {
   final UserStatusFilter current;
   final void Function(UserStatusFilter) onChanged;
 
-  _FilterBar({required this.current, required this.onChanged});
+  const _FilterBar({required this.current, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -174,11 +174,11 @@ class _FilterBar extends StatelessWidget {
         children: options.map((o) {
           final selected = current == o.value;
           return Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 8),
             child: GestureDetector(
               onTap: () => onChanged(o.value),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                 decoration: BoxDecoration(
                   color: selected ? SahColors.primary : SahColors.surface,
                   borderRadius: BorderRadius.circular(SahRadius.full),

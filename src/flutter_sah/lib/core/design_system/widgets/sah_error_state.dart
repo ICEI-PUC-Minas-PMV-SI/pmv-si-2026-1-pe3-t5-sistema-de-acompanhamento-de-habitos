@@ -12,7 +12,7 @@ class SahErrorState extends StatelessWidget {
   final VoidCallback? onRetry;
   final VoidCallback? onHome;
 
-  SahErrorState({
+  const SahErrorState({
     super.key,
     required this.illustration,
     this.title = 'Algo deu errado no nosso lado',
@@ -27,12 +27,12 @@ class SahErrorState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(SahSpacing.x10),
+        padding: const EdgeInsets.all(SahSpacing.x10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(width: 160, height: 160, child: illustration),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Text(
               title,
               textAlign: TextAlign.center,
@@ -44,7 +44,7 @@ class SahErrorState extends StatelessWidget {
                 letterSpacing: -0.33,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               description,
               textAlign: TextAlign.center,
@@ -55,7 +55,7 @@ class SahErrorState extends StatelessWidget {
               ),
             ),
             if (refCode != null) ...[
-              SizedBox(height: 6),
+              const SizedBox(height: 6),
               Text(
                 refCode!,
                 style: GoogleFonts.jetBrainsMono(
@@ -64,7 +64,7 @@ class SahErrorState extends StatelessWidget {
                 ),
               ),
             ],
-            SizedBox(height: 28),
+            const SizedBox(height: 28),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -74,7 +74,7 @@ class SahErrorState extends StatelessWidget {
                     onPressed: onHome,
                   ),
                 if (onHome != null && onRetry != null)
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                 if (onRetry != null)
                   SahButton.primary(
                     label: 'Tentar novamente',

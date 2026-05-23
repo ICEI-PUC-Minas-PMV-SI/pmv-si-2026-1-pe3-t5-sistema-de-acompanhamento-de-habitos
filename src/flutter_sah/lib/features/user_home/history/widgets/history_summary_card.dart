@@ -40,7 +40,7 @@ class HistorySummaryCard extends StatelessWidget {
             ],
           ),
           if (scheduledDays > 0) ...[
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             SahProgressBar(value: adherence, height: 8),
           ],
         ],
@@ -74,7 +74,7 @@ class _MetricTile extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
                 value,
                 style: TextStyle(

@@ -34,7 +34,7 @@ const _kColors = [
 class _CategoryFormModal extends StatefulWidget {
   final Category? existing;
   final String? userId;
-  _CategoryFormModal({this.existing, this.userId});
+  const _CategoryFormModal({this.existing, this.userId});
 
   @override
   State<_CategoryFormModal> createState() => _CategoryFormModalState();
@@ -97,7 +97,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
       ),
       decoration: BoxDecoration(
         color: SahColors.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -113,7 +113,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             isEditing ? 'Editar categoria' : 'Nova categoria',
             style: TextStyle(
@@ -123,7 +123,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
               color: SahColors.text,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           SahInput(
             label: 'Nome',
             controller: _nomeCtrl,
@@ -132,9 +132,9 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
             autofocus: true,
             onChanged: (_) => setState(() => _error = null),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text('Cor', style: GoogleFonts.interTight(fontSize: 13, fontWeight: FontWeight.w500, color: SahColors.text)),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Wrap(
             spacing: 10,
             runSpacing: 10,
@@ -157,13 +157,13 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
                         : null,
                   ),
                   child: selected
-                      ? Icon(Icons.check_rounded, size: 16, color: Colors.white)
+                      ? const Icon(Icons.check_rounded, size: 16, color: Colors.white)
                       : null,
                 ),
               );
             }).toList(),
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           Row(
             children: [
               Expanded(
@@ -172,7 +172,7 @@ class _CategoryFormModalState extends State<_CategoryFormModal> {
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: SahButton.primary(
                   label: isEditing ? 'Salvar' : 'Criar',

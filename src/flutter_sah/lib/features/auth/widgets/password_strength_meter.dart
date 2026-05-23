@@ -6,11 +6,11 @@ import '../../../core/utils/validators.dart';
 class PasswordStrengthMeter extends StatelessWidget {
   final String password;
 
-  PasswordStrengthMeter({super.key, required this.password});
+  const PasswordStrengthMeter({super.key, required this.password});
 
   @override
   Widget build(BuildContext context) {
-    if (password.isEmpty) return SizedBox.shrink();
+    if (password.isEmpty) return const SizedBox.shrink();
     final strength = SahValidators.passwordStrength(password);
     final (color, label, segments) = switch (strength) {
       PasswordStrength.none => (SahColors.bgAlt, '', 0),
@@ -23,7 +23,7 @@ class PasswordStrengthMeter extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           children: List.generate(4, (i) {
             return Expanded(
@@ -39,7 +39,7 @@ class PasswordStrengthMeter extends StatelessWidget {
           }),
         ),
         if (label.isNotEmpty) ...[
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             'Senha $label',
             style: GoogleFonts.interTight(

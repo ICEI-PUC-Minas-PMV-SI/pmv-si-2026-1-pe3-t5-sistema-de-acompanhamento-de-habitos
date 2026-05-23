@@ -13,8 +13,8 @@ import '../../../core/routing/routes.dart';
 import '../../../core/utils/dialogs.dart';
 import '../../auth/controllers/auth_controller.dart';
 
-class ProfilePlaceholderScreen extends StatelessWidget {
-  ProfilePlaceholderScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,12 @@ class ProfilePlaceholderScreen extends StatelessWidget {
     final user = auth.currentUser;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(SahSpacing.pagePadding),
+      padding: const EdgeInsets.all(SahSpacing.pagePadding),
       child: Column(
         children: [
           // Header com avatar
           Container(
-            padding: EdgeInsets.all(SahSpacing.cardPadding),
+            padding: const EdgeInsets.all(SahSpacing.cardPadding),
             decoration: BoxDecoration(
               color: SahColors.surface,
               borderRadius: BorderRadius.circular(SahRadius.lg),
@@ -57,7 +57,7 @@ class ProfilePlaceholderScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +71,7 @@ class ProfilePlaceholderScreen extends StatelessWidget {
                           color: SahColors.text,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
                         user?.email ?? '—',
                         style: GoogleFonts.interTight(
@@ -85,9 +85,9 @@ class ProfilePlaceholderScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 16),
-          _EditProfileSection(),
-          SizedBox(height: 8),
+          const SizedBox(height: 16),
+          const _EditProfileSection(),
+          const SizedBox(height: 8),
           SahButton.danger(
             label: 'Sair da conta',
             fullWidth: true,
@@ -96,7 +96,7 @@ class ProfilePlaceholderScreen extends StatelessWidget {
               if (context.mounted) context.go(Routes.login);
             },
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           SahButton.dangerGhost(
             label: 'Excluir minha conta',
             fullWidth: true,
@@ -137,7 +137,7 @@ class ProfilePlaceholderScreen extends StatelessWidget {
 }
 
 class _EditProfileSection extends StatefulWidget {
-  _EditProfileSection();
+  const _EditProfileSection();
 
   @override
   State<_EditProfileSection> createState() => _EditProfileSectionState();
@@ -276,7 +276,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
                   color: SahColors.text,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               SahInput(
                 label: 'Nome',
                 controller: _nomeCtrl,
@@ -285,7 +285,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
                 onChanged: (_) => setState(() {}),
                 onEditingComplete: _nomeAlterado ? _salvarNome : null,
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SahButton.primary(
                 label: 'Salvar nome',
                 fullWidth: true,
@@ -296,7 +296,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
             ],
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         // Seção: Alterar senha
         SahCard(
           padding: 20,
@@ -312,7 +312,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
                   color: SahColors.text,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               SahInput(
                 label: 'Senha atual',
                 controller: _senhaAtualCtrl,
@@ -320,7 +320,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
                 errorText: _senhaAtualError,
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: SahSpacing.x4),
+              const SizedBox(height: SahSpacing.x4),
               SahInput(
                 label: 'Nova senha',
                 controller: _novaSenhaCtrl,
@@ -328,7 +328,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
                 errorText: _novaSenhaError,
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: SahSpacing.x4),
+              const SizedBox(height: SahSpacing.x4),
               SahInput(
                 label: 'Confirmar nova senha',
                 controller: _confirmarCtrl,
@@ -337,7 +337,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
                 textInputAction: TextInputAction.done,
                 onEditingComplete: _alterarSenha,
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SahButton.primary(
                 label: 'Alterar senha',
                 fullWidth: true,
@@ -347,7 +347,7 @@ class _EditProfileSectionState extends State<_EditProfileSection> {
             ],
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
       ],
     );
   }

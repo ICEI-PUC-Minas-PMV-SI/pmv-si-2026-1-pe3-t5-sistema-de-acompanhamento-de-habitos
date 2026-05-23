@@ -9,7 +9,7 @@ class TodayHabitTile extends StatelessWidget {
   final TodayHabitEntry entry;
   final VoidCallback onToggle;
 
-  TodayHabitTile({
+  const TodayHabitTile({
     super.key,
     required this.entry,
     required this.onToggle,
@@ -47,8 +47,8 @@ class TodayHabitTile extends StatelessWidget {
       child: GestureDetector(
       onTap: onToggle,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 250),
-        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         decoration: BoxDecoration(
           color: done ? _catColor.withAlpha(12) : SahColors.surface,
           borderRadius: BorderRadius.circular(SahRadius.lg),
@@ -62,7 +62,7 @@ class TodayHabitTile extends StatelessWidget {
           children: [
             // Checkbox
             AnimatedContainer(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               width: 28,
               height: 28,
               decoration: BoxDecoration(
@@ -81,14 +81,14 @@ class TodayHabitTile extends StatelessWidget {
                     )
                   : null,
             ),
-            SizedBox(width: 14),
+            const SizedBox(width: 14),
             // Conteúdo
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AnimatedDefaultTextStyle(
-                    duration: Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 200),
                     style: TextStyle(
                       fontFamily: 'GeneralSans',
                       fontSize: 15,
@@ -101,7 +101,7 @@ class TodayHabitTile extends StatelessWidget {
                     child: Text(entry.habit.nome, overflow: TextOverflow.ellipsis),
                   ),
                   if (entry.category != null) ...[
-                    SizedBox(height: 3),
+                    const SizedBox(height: 3),
                     _CategoryChip(
                       label: entry.category!.nome,
                       color: _catColor,
@@ -112,7 +112,7 @@ class TodayHabitTile extends StatelessWidget {
             ),
             // Streak badge
             if (entry.streak > 0) ...[
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               _StreakBadge(streak: entry.streak),
             ],
           ],
@@ -126,12 +126,12 @@ class TodayHabitTile extends StatelessWidget {
 class _CategoryChip extends StatelessWidget {
   final String label;
   final Color color;
-  _CategoryChip({required this.label, required this.color});
+  const _CategoryChip({required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(
         color: color.withAlpha(20),
         borderRadius: BorderRadius.circular(SahRadius.full),
@@ -150,12 +150,12 @@ class _CategoryChip extends StatelessWidget {
 
 class _StreakBadge extends StatelessWidget {
   final int streak;
-  _StreakBadge({required this.streak});
+  const _StreakBadge({required this.streak});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
       decoration: BoxDecoration(
         color: SahColors.streakSoft,
         borderRadius: BorderRadius.circular(SahRadius.full),
@@ -166,14 +166,14 @@ class _StreakBadge extends StatelessWidget {
         children: [
           Icon(Icons.local_fire_department_rounded,
               size: 13, color: SahColors.streak),
-          SizedBox(width: 2),
+          const SizedBox(width: 2),
           Text(
             '$streak',
             style: GoogleFonts.interTight(
               fontSize: 12,
               fontWeight: FontWeight.w700,
               color: SahColors.streak,
-              fontFeatures: [FontFeature.tabularFigures()],
+              fontFeatures: [const FontFeature.tabularFigures()],
             ),
           ),
         ],

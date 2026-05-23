@@ -18,7 +18,7 @@ import '../../../auth/controllers/auth_controller.dart';
 import '../controllers/user_categories_controller.dart';
 
 class UserCategoriesScreen extends StatelessWidget {
-  UserCategoriesScreen({super.key});
+  const UserCategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +28,13 @@ class UserCategoriesScreen extends StatelessWidget {
         ctx.read<CategoryRepository>(),
         userId: userId,
       ),
-      child: _UserCategoriesContent(),
+      child: const _UserCategoriesContent(),
     );
   }
 }
 
 class _UserCategoriesContent extends StatelessWidget {
-  _UserCategoriesContent();
+  const _UserCategoriesContent();
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +62,10 @@ class _UserCategoriesContent extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: SahSpacing.pagePadding),
+            padding: const EdgeInsets.only(right: SahSpacing.pagePadding),
             child: SahButton.primary(
               label: 'Nova',
-              icon: Icon(Icons.add_rounded, size: 16, color: Colors.white),
+              icon: const Icon(Icons.add_rounded, size: 16, color: Colors.white),
               size: SahButtonSize.sm,
               onPressed: () => _showCreate(context, ctrl, userId),
             ),
@@ -82,7 +82,7 @@ class _UserCategoriesContent extends StatelessWidget {
     String userId,
   ) {
     if (ctrl.status == ListStatus.loading) {
-      return Center(child: SahSpinner(size: 28));
+      return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == ListStatus.error) {
       return Center(
@@ -94,12 +94,12 @@ class _UserCategoriesContent extends StatelessWidget {
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(SahSpacing.pagePadding),
+      padding: const EdgeInsets.all(SahSpacing.pagePadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionHeader(title: 'Suas categorias'),
-          SizedBox(height: 10),
+          const _SectionHeader(title: 'Suas categorias'),
+          const SizedBox(height: 10),
           if (ctrl.personal.isEmpty)
             SahEmptyState(
               title: 'Nenhuma categoria pessoal',
@@ -122,14 +122,14 @@ class _UserCategoriesContent extends StatelessWidget {
                 ctrl.habitCounts[cat.id] ?? 0,
               ),
             ),
-          SizedBox(height: 24),
-          _SectionHeader(title: 'Globais'),
-          SizedBox(height: 4),
+          const SizedBox(height: 24),
+          const _SectionHeader(title: 'Globais'),
+          const SizedBox(height: 4),
           Text(
             'Disponíveis para todos — somente leitura.',
             style: GoogleFonts.interTight(fontSize: 12, color: SahColors.textMuted),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           _CategoryList(
             categories: ctrl.globals,
             habitCounts: ctrl.habitCounts,
@@ -259,7 +259,7 @@ class _UserCategoriesContent extends StatelessWidget {
 
 class _SectionHeader extends StatelessWidget {
   final String title;
-  _SectionHeader({required this.title});
+  const _SectionHeader({required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -282,7 +282,7 @@ class _CategoryList extends StatelessWidget {
   final void Function(Category) onEdit;
   final void Function(Category) onDelete;
 
-  _CategoryList({
+  const _CategoryList({
     required this.categories,
     required this.habitCounts,
     required this.readOnly,
@@ -302,7 +302,7 @@ class _CategoryList extends StatelessWidget {
             onEdit: () => onEdit(categories[i]),
             onDelete: () => onDelete(categories[i]),
           ),
-          if (i < categories.length - 1) SizedBox(height: 8),
+          if (i < categories.length - 1) const SizedBox(height: 8),
         ],
       ],
     );
@@ -316,7 +316,7 @@ class _CategoryTile extends StatelessWidget {
   final VoidCallback onEdit;
   final VoidCallback onDelete;
 
-  _CategoryTile({
+  const _CategoryTile({
     required this.category,
     required this.habitCount,
     required this.readOnly,
@@ -360,7 +360,7 @@ class _CategoryTile extends StatelessWidget {
                 Container(width: 4, color: color),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 10),
                     child: Row(
                       children: [
@@ -384,7 +384,7 @@ class _CategoryTile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -411,14 +411,14 @@ class _CategoryTile extends StatelessWidget {
                           ),
                         ),
                         if (readOnly)
-                          SahBadge.neutral(
+                          const SahBadge.neutral(
                             'Global',
                             size: SahBadgeSize.sm,
                           )
                         else
                           IconButton(
                             padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
+                            constraints: const BoxConstraints(),
                             icon: Icon(
                               Icons.more_vert_rounded,
                               size: 18,

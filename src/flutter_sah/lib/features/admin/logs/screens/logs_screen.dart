@@ -13,19 +13,19 @@ import '../controllers/logs_controller.dart';
 import '../widgets/log_list_item.dart';
 
 class LogsScreen extends StatelessWidget {
-  LogsScreen({super.key});
+  const LogsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (ctx) => LogsController(ctx.read<AuditLogRepository>()),
-      child: _LogsContent(),
+      child: const _LogsContent(),
     );
   }
 }
 
 class _LogsContent extends StatelessWidget {
-  _LogsContent();
+  const _LogsContent();
 
   static const _typeFilters = [
     (label: 'Todos', value: null),
@@ -44,7 +44,7 @@ class _LogsContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(
+          padding: const EdgeInsets.fromLTRB(
             SahSpacing.pagePadding,
             SahSpacing.pagePadding,
             SahSpacing.pagePadding,
@@ -63,7 +63,7 @@ class _LogsContent extends StatelessWidget {
                   letterSpacing: -0.44,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               _FilterBar(
                 filters: _typeFilters,
                 current: ctrl.selectedType,
@@ -72,7 +72,7 @@ class _LogsContent extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Expanded(child: _buildBody(ctrl)),
       ],
     );
@@ -80,7 +80,7 @@ class _LogsContent extends StatelessWidget {
 
   Widget _buildBody(LogsController ctrl) {
     if (ctrl.status == ListStatus.loading) {
-      return Center(child: SahSpinner(size: 28));
+      return const Center(child: SahSpinner(size: 28));
     }
     if (ctrl.status == ListStatus.error) {
       return Center(
@@ -99,7 +99,7 @@ class _LogsContent extends StatelessWidget {
       );
     }
     return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: SahSpacing.pagePadding),
+      padding: const EdgeInsets.symmetric(horizontal: SahSpacing.pagePadding),
       itemCount: ctrl.logs.length,
       separatorBuilder: (_, __) => Divider(color: SahColors.border, height: 1),
       itemBuilder: (_, i) => LogListItem(log: ctrl.logs[i]),
@@ -112,7 +112,7 @@ class _FilterBar extends StatelessWidget {
   final AuditEventType? current;
   final void Function(AuditEventType?) onChanged;
 
-  _FilterBar({
+  const _FilterBar({
     required this.filters,
     required this.current,
     required this.onChanged,
@@ -126,11 +126,11 @@ class _FilterBar extends StatelessWidget {
         children: filters.map((f) {
           final selected = current == f.value;
           return Padding(
-            padding: EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 8),
             child: GestureDetector(
               onTap: () => onChanged(f.value),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                 decoration: BoxDecoration(
                   color: selected ? SahColors.primary : SahColors.surface,
                   borderRadius: BorderRadius.circular(SahRadius.full),

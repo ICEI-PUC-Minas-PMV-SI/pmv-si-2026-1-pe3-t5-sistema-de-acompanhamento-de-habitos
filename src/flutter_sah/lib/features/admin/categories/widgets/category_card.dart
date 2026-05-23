@@ -15,7 +15,7 @@ class CategoryCard extends StatelessWidget {
   final bool readOnly;
   final bool showGlobalBadge;
 
-  CategoryCard({
+  const CategoryCard({
     super.key,
     required this.category,
     required this.habitCount,
@@ -40,7 +40,7 @@ class CategoryCard extends StatelessWidget {
     final bg = catColor.withAlpha(26);
 
     return Container(
-      padding: EdgeInsets.all(14),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: SahColors.surface,
         borderRadius: BorderRadius.circular(SahRadius.lg),
@@ -63,9 +63,9 @@ class CategoryCard extends StatelessWidget {
                   child: Icon(sahIconData(SahIconName.grid), size: 18, color: catColor),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               if (showGlobalBadge)
-                SahBadge.neutral('Global', size: SahBadgeSize.sm),
+                const SahBadge.neutral('Global', size: SahBadgeSize.sm),
               if (!readOnly)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
@@ -91,7 +91,7 @@ class CategoryCard extends StatelessWidget {
                 ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             category.nome,
             style: TextStyle(
@@ -102,7 +102,7 @@ class CategoryCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
           Text(
             '$habitCount hábito${habitCount != 1 ? "s" : ""}',
             style: GoogleFonts.interTight(fontSize: 12, color: SahColors.textMuted),

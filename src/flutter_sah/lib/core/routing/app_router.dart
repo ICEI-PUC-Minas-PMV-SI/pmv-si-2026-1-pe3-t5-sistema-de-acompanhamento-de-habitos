@@ -16,8 +16,8 @@ import '../../features/user_home/backup/screens/backup_screen.dart';
 import '../../data/local/onboarding_store.dart';
 import '../../features/system_states/splash_screen.dart';
 import '../../features/user_home/categories/screens/user_categories_screen.dart';
-import '../../features/user_home/screens/history_placeholder_screen.dart';
-import '../../features/user_home/screens/profile_placeholder_screen.dart';
+import '../../features/user_home/screens/history_screen.dart';
+import '../../features/user_home/screens/profile_screen.dart';
 import '../../features/user_home/habits/screens/habits_screen.dart';
 import '../../features/user_home/today/screens/today_screen.dart';
 import '../../features/user_home/shell/user_shell.dart';
@@ -41,27 +41,27 @@ GoRouter buildRouter(
     routes: [
       GoRoute(
         path: Routes.splash,
-        builder: (_, __) => SplashScreen(),
+        builder: (_, __) => const SplashScreen(),
       ),
       GoRoute(
         path: Routes.login,
-        builder: (_, __) => LoginScreen(),
+        builder: (_, __) => const LoginScreen(),
       ),
       GoRoute(
         path: Routes.signup,
-        builder: (_, __) => SignupScreen(),
+        builder: (_, __) => const SignupScreen(),
       ),
       GoRoute(
         path: Routes.recover,
-        builder: (_, __) => RecoverScreen(),
+        builder: (_, __) => const RecoverScreen(),
       ),
       GoRoute(
         path: Routes.recoverSent,
-        builder: (_, __) => RecoverSentScreen(),
+        builder: (_, __) => const RecoverSentScreen(),
       ),
       GoRoute(
         path: Routes.resetPassword,
-        builder: (_, __) => ResetPasswordScreen(),
+        builder: (_, __) => const ResetPasswordScreen(),
       ),
       GoRoute(
         path: Routes.onboarding,
@@ -79,7 +79,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.adminDashboard,
-                builder: (_, __) => AdminDashboardScreen(),
+                builder: (_, __) => const AdminDashboardScreen(),
               ),
             ],
           ),
@@ -87,7 +87,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.adminUsers,
-                builder: (_, __) => UsersScreen(),
+                builder: (_, __) => const UsersScreen(),
               ),
             ],
           ),
@@ -95,7 +95,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.adminCategories,
-                builder: (_, __) => CategoriesScreen(),
+                builder: (_, __) => const CategoriesScreen(),
               ),
             ],
           ),
@@ -103,7 +103,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.adminLogs,
-                builder: (_, __) => LogsScreen(),
+                builder: (_, __) => const LogsScreen(),
               ),
             ],
           ),
@@ -111,7 +111,7 @@ GoRouter buildRouter(
       ),
       GoRoute(
         path: Routes.userCategories,
-        builder: (_, __) => UserCategoriesScreen(),
+        builder: (_, __) => const UserCategoriesScreen(),
       ),
       // User shell (4 branches)
       StatefulShellRoute.indexedStack(
@@ -121,7 +121,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.userToday,
-                builder: (_, __) => TodayScreen(),
+                builder: (_, __) => const TodayScreen(),
               ),
             ],
           ),
@@ -129,7 +129,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.userHabits,
-                builder: (_, __) => HabitsScreen(),
+                builder: (_, __) => const HabitsScreen(),
               ),
             ],
           ),
@@ -137,7 +137,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.userHistory,
-                builder: (_, __) => HistoryPlaceholderScreen(),
+                builder: (_, __) => const HistoryScreen(),
               ),
             ],
           ),
@@ -145,7 +145,7 @@ GoRouter buildRouter(
             routes: [
               GoRoute(
                 path: Routes.userProfile,
-                builder: (_, __) => ProfilePlaceholderScreen(),
+                builder: (_, __) => const ProfileScreen(),
               ),
             ],
           ),

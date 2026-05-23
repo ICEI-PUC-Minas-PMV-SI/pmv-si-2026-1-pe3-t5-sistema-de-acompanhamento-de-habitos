@@ -8,7 +8,7 @@ class AuthScaffold extends StatelessWidget {
   final Widget child;
   final bool showLogo;
 
-  AuthScaffold({super.key, required this.child, this.showLogo = true});
+  const AuthScaffold({super.key, required this.child, this.showLogo = true});
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +17,15 @@ class AuthScaffold extends StatelessWidget {
       backgroundColor: SahColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
               horizontal: SahSpacing.pagePadding,
               vertical: SahSpacing.sectionGap),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (showLogo) ...[
-                SahLogo(size: 32),
-                SizedBox(height: SahSpacing.x10),
+                const SahLogo(size: 32),
+                const SizedBox(height: SahSpacing.x10),
               ],
               child,
             ],

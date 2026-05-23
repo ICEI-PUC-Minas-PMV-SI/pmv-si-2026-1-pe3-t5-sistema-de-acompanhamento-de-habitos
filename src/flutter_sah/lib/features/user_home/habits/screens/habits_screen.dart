@@ -22,7 +22,7 @@ import '../widgets/habit_form_modal.dart';
 import '../widgets/habit_list_item.dart';
 
 class HabitsScreen extends StatelessWidget {
-  HabitsScreen({super.key});
+  const HabitsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +35,13 @@ class HabitsScreen extends StatelessWidget {
         execRepo: ctx.read<ExecutionLogRepository>(),
         notifications: ctx.read<NotificationService>(),
       ),
-      child: _HabitsView(),
+      child: const _HabitsView(),
     );
   }
 }
 
 class _HabitsView extends StatelessWidget {
-  _HabitsView();
+  const _HabitsView();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _HabitsView extends StatelessWidget {
           children: [
             // Header
             Padding(
-              padding: EdgeInsets.fromLTRB(
+              padding: const EdgeInsets.fromLTRB(
                 SahSpacing.pagePadding,
                 SahSpacing.x6,
                 SahSpacing.pagePadding,
@@ -85,7 +85,7 @@ class _HabitsView extends StatelessWidget {
             ),
             // Filtro arquivados
             Padding(
-              padding: EdgeInsets.fromLTRB(
+              padding: const EdgeInsets.fromLTRB(
                 SahSpacing.pagePadding,
                 8,
                 SahSpacing.pagePadding,
@@ -97,7 +97,7 @@ class _HabitsView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 200),
                       width: 36,
                       height: 20,
                       decoration: BoxDecoration(
@@ -107,14 +107,14 @@ class _HabitsView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(SahRadius.full),
                       ),
                       child: AnimatedAlign(
-                        duration: Duration(milliseconds: 200),
+                        duration: const Duration(milliseconds: 200),
                         alignment: ctrl.showArchived
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
                         child: Container(
                           width: 16,
                           height: 16,
-                          margin: EdgeInsets.symmetric(horizontal: 2),
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
                           decoration: BoxDecoration(
                             color: SahColors.surface,
                             shape: BoxShape.circle,
@@ -122,7 +122,7 @@ class _HabitsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
                       'Mostrar arquivados',
                       style: GoogleFonts.interTight(
@@ -134,7 +134,7 @@ class _HabitsView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Lista
             Expanded(child: _buildBody(context, ctrl)),
           ],
@@ -147,10 +147,10 @@ class _HabitsView extends StatelessWidget {
     final Widget body;
 
     if (ctrl.status == ListStatus.loading) {
-      body = Center(key: ValueKey('loading'), child: SahSpinner());
+      body = const Center(key: ValueKey('loading'), child: SahSpinner());
     } else if (ctrl.status == ListStatus.error) {
       body = Center(
-        key: ValueKey('error'),
+        key: const ValueKey('error'),
         child: Text(
           ctrl.error ?? 'Erro ao carregar hábitos.',
           style: GoogleFonts.interTight(color: SahColors.danger),
@@ -158,7 +158,7 @@ class _HabitsView extends StatelessWidget {
       );
     } else if (ctrl.habits.isEmpty) {
       body = SahEmptyState(
-        key: ValueKey('empty'),
+        key: const ValueKey('empty'),
         title: ctrl.showArchived
             ? 'Nenhum hábito arquivado'
             : 'Nenhum hábito ainda',
@@ -174,15 +174,15 @@ class _HabitsView extends StatelessWidget {
       );
     } else {
       body = ListView.separated(
-        key: ValueKey('data'),
-        padding: EdgeInsets.fromLTRB(
+        key: const ValueKey('data'),
+        padding: const EdgeInsets.fromLTRB(
           SahSpacing.pagePadding,
           0,
           SahSpacing.pagePadding,
           SahSpacing.pagePadding,
         ),
         itemCount: ctrl.habits.length,
-        separatorBuilder: (_, __) => SizedBox(height: 10),
+        separatorBuilder: (_, __) => const SizedBox(height: 10),
         itemBuilder: (_, i) {
           final habit = ctrl.habits[i];
           return TweenAnimationBuilder<double>(

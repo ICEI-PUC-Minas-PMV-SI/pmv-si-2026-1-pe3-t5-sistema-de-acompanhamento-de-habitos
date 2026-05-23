@@ -15,7 +15,7 @@ import '../controllers/auth_controller.dart';
 import '../widgets/auth_scaffold.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 1.2,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Entre para acompanhar seus hábitos.',
             style: GoogleFonts.interTight(
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 1.5,
             ),
           ),
-          SizedBox(height: SahSpacing.x8),
+          const SizedBox(height: SahSpacing.x8),
           SahCard(
             padding: 24,
             child: Column(
@@ -99,23 +99,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: 'E-mail',
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: SahIcon(SahIconName.mail, size: 16),
+                  prefixIcon: const SahIcon(SahIconName.mail, size: 16),
                   errorText: _emailError,
-                  autofillHints: [AutofillHints.email],
+                  autofillHints: const [AutofillHints.email],
                   textInputAction: TextInputAction.next,
                 ),
-                SizedBox(height: SahSpacing.itemGap),
+                const SizedBox(height: SahSpacing.itemGap),
                 SahInput(
                   label: 'Senha',
                   controller: _passCtrl,
                   obscureText: true,
-                  prefixIcon: SahIcon(SahIconName.lock, size: 16),
+                  prefixIcon: const SahIcon(SahIconName.lock, size: 16),
                   errorText: _passError,
-                  autofillHints: [AutofillHints.password],
+                  autofillHints: const [AutofillHints.password],
                   textInputAction: TextInputAction.done,
                   onEditingComplete: _submit,
                 ),
-                SizedBox(height: SahSpacing.sectionGap),
+                const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
                   label: 'Entrar',
                   fullWidth: true,
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
-          SizedBox(height: SahSpacing.itemGap),
+          const SizedBox(height: SahSpacing.itemGap),
           Center(
             child: GestureDetector(
               onTap: () => context.push(Routes.recover),
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          SizedBox(height: SahSpacing.x4),
+          const SizedBox(height: SahSpacing.x4),
           Center(
             child: GestureDetector(
               onTap: () => context.push(Routes.signup),
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: GoogleFonts.interTight(
                       fontSize: 13, color: SahColors.textMuted),
                   children: <TextSpan>[
-                    TextSpan(text: 'Não tem conta? '),
+                    const TextSpan(text: 'Não tem conta? '),
                     TextSpan(
                       text: 'Cadastre-se',
                       style: TextStyle(

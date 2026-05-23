@@ -13,7 +13,7 @@ Future<T?> showSahModal<T>({
   return showDialog<T>(
     context: context,
     barrierDismissible: barrierDismissible,
-    barrierColor: Color.fromRGBO(40, 30, 20, 0.45),
+    barrierColor: const Color.fromRGBO(40, 30, 20, 0.45),
     builder: (ctx) => _SahModal(
       title: title,
       content: content,
@@ -27,7 +27,7 @@ class _SahModal extends StatelessWidget {
   final Widget content;
   final List<Widget>? actions;
 
-  _SahModal(
+  const _SahModal(
       {required this.title, required this.content, this.actions});
 
   @override
@@ -36,13 +36,13 @@ class _SahModal extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: Container(
-        constraints: BoxConstraints(maxWidth: 440),
+        constraints: const BoxConstraints(maxWidth: 440),
         decoration: BoxDecoration(
           color: SahColors.surface,
           borderRadius: BorderRadius.circular(SahRadius.xl),
           boxShadow: SahShadows.lg,
         ),
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,14 +57,14 @@ class _SahModal extends StatelessWidget {
                 letterSpacing: -0.3,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             content,
             if (actions != null) ...[
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: actions!
-                    .expand((w) => [w, SizedBox(width: 8)])
+                    .expand((w) => [w, const SizedBox(width: 8)])
                     .toList()
                   ..removeLast(),
               ),

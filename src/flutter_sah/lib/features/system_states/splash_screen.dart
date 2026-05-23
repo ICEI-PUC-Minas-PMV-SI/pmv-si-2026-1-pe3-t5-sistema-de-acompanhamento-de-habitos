@@ -4,7 +4,7 @@ import '../../core/design_system/widgets/sah_logo.dart';
 import '../../core/design_system/widgets/sah_spinner.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,8 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SahLogo(size: 48),
-            SizedBox(height: 32),
+            const SahLogo(size: 48),
+            const SizedBox(height: 32),
             SahSpinner(size: 20, color: SahColors.textFaint),
           ],
         ),

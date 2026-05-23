@@ -11,7 +11,7 @@ class ErrorScreen extends StatelessWidget {
   final String? message;
   final String? refCode;
 
-  ErrorScreen({super.key, this.message, this.refCode});
+  const ErrorScreen({super.key, this.message, this.refCode});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ErrorScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(SahSpacing.x8),
+            padding: const EdgeInsets.all(SahSpacing.x8),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -37,7 +37,7 @@ class ErrorScreen extends StatelessWidget {
                     color: SahColors.danger,
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Text(
                   'Algo deu errado.',
                   textAlign: TextAlign.center,
@@ -49,7 +49,7 @@ class ErrorScreen extends StatelessWidget {
                     letterSpacing: -0.48,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   message ?? 'Não foi possível carregar esta página. Tente novamente.',
                   textAlign: TextAlign.center,
@@ -60,9 +60,9 @@ class ErrorScreen extends StatelessWidget {
                   ),
                 ),
                 if (refCode != null) ...[
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: SahColors.bgAlt,
                       borderRadius: BorderRadius.circular(SahRadius.sm),
@@ -77,7 +77,7 @@ class ErrorScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 SahButton.primary(
                   label: 'Ir para o início',
                   onPressed: () => context.go(Routes.login),

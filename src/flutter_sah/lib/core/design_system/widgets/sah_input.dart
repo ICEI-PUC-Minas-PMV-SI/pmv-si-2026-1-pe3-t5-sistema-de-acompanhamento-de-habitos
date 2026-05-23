@@ -22,7 +22,7 @@ class SahInput extends StatefulWidget {
   final TextInputAction? textInputAction;
   final VoidCallback? onEditingComplete;
 
-  SahInput({
+  const SahInput({
     super.key,
     required this.label,
     this.controller,
@@ -85,7 +85,7 @@ class _SahInputState extends State<SahInput> {
             color: SahColors.textMuted,
           ),
         ),
-        SizedBox(height: 6),
+        const SizedBox(height: 6),
         AnimatedContainer(
           duration: SahDurations.fast,
           decoration: BoxDecoration(
@@ -96,7 +96,7 @@ class _SahInputState extends State<SahInput> {
           child: Row(
             children: [
               if (widget.prefixIcon != null) ...[
-                SizedBox(width: 14),
+                const SizedBox(width: 14),
                 IconTheme(
                   data: IconThemeData(
                       color: SahColors.textFaint, size: 16),
@@ -126,7 +126,7 @@ class _SahInputState extends State<SahInput> {
                       color: SahColors.textFaint,
                     ),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
+                    contentPadding: const EdgeInsets.symmetric(
                         horizontal: 14, vertical: 13),
                     isDense: true,
                   ),
@@ -137,7 +137,7 @@ class _SahInputState extends State<SahInput> {
                 GestureDetector(
                   onTap: () => setState(() => _obscured = !_obscured),
                   child: Padding(
-                    padding: EdgeInsets.only(right: 12),
+                    padding: const EdgeInsets.only(right: 12),
                     child: SahIcon(
                       _obscured ? SahIconName.eye : SahIconName.eyeOff,
                       size: 16,
@@ -147,18 +147,18 @@ class _SahInputState extends State<SahInput> {
                 )
               else if (widget.suffixSlot != null) ...[
                 widget.suffixSlot!,
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
               ],
             ],
           ),
         ),
         if (widget.errorText != null) ...[
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Row(
             children: [
               SahIcon(SahIconName.alert,
                   size: 12, color: SahColors.danger),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
                 widget.errorText!,
                 style: GoogleFonts.interTight(
@@ -167,7 +167,7 @@ class _SahInputState extends State<SahInput> {
             ],
           ),
         ] else if (widget.hint != null && !_focused) ...[
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             widget.hint!,
             style: GoogleFonts.interTight(

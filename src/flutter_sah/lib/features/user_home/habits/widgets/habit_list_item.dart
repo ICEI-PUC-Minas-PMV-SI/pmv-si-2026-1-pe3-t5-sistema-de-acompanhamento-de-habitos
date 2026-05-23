@@ -15,7 +15,7 @@ class HabitListItem extends StatelessWidget {
   final VoidCallback onArchive;
   final VoidCallback onDelete;
 
-  HabitListItem({
+  const HabitListItem({
     super.key,
     required this.habit,
     required this.category,
@@ -80,7 +80,7 @@ class HabitListItem extends StatelessWidget {
                   // Conteúdo
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 12, 8, 12),
+                      padding: const EdgeInsets.fromLTRB(10, 12, 8, 12),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -103,7 +103,7 @@ class HabitListItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       // Textos
                       Expanded(
                         child: Column(
@@ -127,13 +127,13 @@ class HabitListItem extends StatelessWidget {
                                   ),
                                 ),
                                 if (streak > 0) ...[
-                                  SizedBox(width: 6),
+                                  const SizedBox(width: 6),
                                   _StreakBadge(streak: streak),
                                 ],
                               ],
                             ),
                             if (habit.descricao.isNotEmpty) ...[
-                              SizedBox(height: 2),
+                              const SizedBox(height: 2),
                               Text(
                                 habit.descricao,
                                 style: GoogleFonts.interTight(
@@ -144,13 +144,13 @@ class HabitListItem extends StatelessWidget {
                                 maxLines: 1,
                               ),
                             ],
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Row(
                               children: [
                                 if (category != null) ...[
                                   _CategoryChip(
                                       label: category!.nome, color: _catColor),
-                                  SizedBox(width: 6),
+                                  const SizedBox(width: 6),
                                 ],
                                 Text(
                                   _freqLabel(habit.frequencia),
@@ -167,7 +167,7 @@ class HabitListItem extends StatelessWidget {
                       // Menu
                       IconButton(
                         padding: EdgeInsets.zero,
-                        constraints: BoxConstraints(),
+                        constraints: const BoxConstraints(),
                         icon: Icon(
                           Icons.more_vert_rounded,
                           size: 18,
@@ -223,12 +223,12 @@ class HabitListItem extends StatelessWidget {
 
 class _StreakBadge extends StatelessWidget {
   final int streak;
-  _StreakBadge({required this.streak});
+  const _StreakBadge({required this.streak});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: SahColors.streakSoft,
         borderRadius: BorderRadius.circular(SahRadius.full),
@@ -239,14 +239,14 @@ class _StreakBadge extends StatelessWidget {
         children: [
           Icon(Icons.local_fire_department_rounded,
               size: 11, color: SahColors.streak),
-          SizedBox(width: 2),
+          const SizedBox(width: 2),
           Text(
             '$streak',
             style: GoogleFonts.interTight(
               fontSize: 11,
               fontWeight: FontWeight.w700,
               color: SahColors.streak,
-              fontFeatures: [FontFeature.tabularFigures()],
+              fontFeatures: [const FontFeature.tabularFigures()],
             ),
           ),
         ],
@@ -258,12 +258,12 @@ class _StreakBadge extends StatelessWidget {
 class _CategoryChip extends StatelessWidget {
   final String label;
   final Color color;
-  _CategoryChip({required this.label, required this.color});
+  const _CategoryChip({required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: color.withAlpha(20),
         borderRadius: BorderRadius.circular(SahRadius.full),

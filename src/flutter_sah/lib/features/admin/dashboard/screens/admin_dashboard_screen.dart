@@ -14,7 +14,7 @@ import '../controllers/dashboard_controller.dart';
 import '../widgets/metric_card.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
-  AdminDashboardScreen({super.key});
+  const AdminDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,13 @@ class AdminDashboardScreen extends StatelessWidget {
         userRepo: ctx.read<UserRepository>(),
         habitRepo: ctx.read<HabitRepository>(),
       ),
-      child: _DashboardContent(),
+      child: const _DashboardContent(),
     );
   }
 }
 
 class _DashboardContent extends StatelessWidget {
-  _DashboardContent();
+  const _DashboardContent();
 
   String _formatNumber(int n) {
     if (n >= 1000) {
@@ -43,13 +43,13 @@ class _DashboardContent extends StatelessWidget {
     final ctrl = context.watch<DashboardController>();
 
     if (ctrl.status == DashboardStatus.loading) {
-      return Center(child: SahSpinner(size: 28));
+      return const Center(child: SahSpinner(size: 28));
     }
 
     final m = ctrl.metrics;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(SahSpacing.pagePadding),
+      padding: const EdgeInsets.all(SahSpacing.pagePadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,19 +63,19 @@ class _DashboardContent extends StatelessWidget {
               letterSpacing: -0.44,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             'Visão geral da plataforma',
             style: GoogleFonts.interTight(fontSize: 14, color: SahColors.textMuted),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           GridView.count(
             crossAxisCount: 2,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
             childAspectRatio: 1.0,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               MetricCard(
                 label: 'Usuários ativos',
@@ -107,7 +107,7 @@ class _DashboardContent extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           Text(
             'Acesso rápido',
             style: TextStyle(
@@ -117,19 +117,19 @@ class _DashboardContent extends StatelessWidget {
               color: SahColors.text,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _QuickLink(
             icon: SahIconName.users,
             label: 'Gerenciar usuários',
             onTap: () => context.go(Routes.adminUsers),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _QuickLink(
             icon: SahIconName.grid,
             label: 'Categorias globais',
             onTap: () => context.go(Routes.adminCategories),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _QuickLink(
             icon: SahIconName.logs,
             label: 'Logs do sistema',
@@ -146,7 +146,7 @@ class _QuickLink extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  _QuickLink({required this.icon, required this.label, required this.onTap});
+  const _QuickLink({required this.icon, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,7 @@ class _QuickLink extends StatelessWidget {
         borderRadius: BorderRadius.circular(SahRadius.md),
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
             border: Border.all(color: SahColors.border),
             borderRadius: BorderRadius.circular(SahRadius.md),
@@ -165,7 +165,7 @@ class _QuickLink extends StatelessWidget {
           child: Row(
             children: [
               _IconBubble(icon),
-              SizedBox(width: 14),
+              const SizedBox(width: 14),
               Expanded(
                 child: Text(
                   label,
@@ -187,7 +187,7 @@ class _QuickLink extends StatelessWidget {
 
 class _IconBubble extends StatelessWidget {
   final SahIconName name;
-  _IconBubble(this.name);
+  const _IconBubble(this.name);
 
   @override
   Widget build(BuildContext context) {

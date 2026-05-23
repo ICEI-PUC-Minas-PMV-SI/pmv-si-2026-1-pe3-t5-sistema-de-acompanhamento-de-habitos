@@ -15,7 +15,7 @@ import '../widgets/auth_scaffold.dart';
 import '../widgets/password_strength_meter.dart';
 
 class SignupScreen extends StatefulWidget {
-  SignupScreen({super.key});
+  const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
               children: [
                 SahIcon(SahIconName.arrowLeft,
                     size: 16, color: SahColors.textMuted),
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
                 Text(
                   'Voltar ao login',
                   style: GoogleFonts.interTight(
@@ -90,7 +90,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ],
             ),
           ),
-          SizedBox(height: SahSpacing.x6),
+          const SizedBox(height: SahSpacing.x6),
           Text(
             'Crie sua conta.',
             style: TextStyle(
@@ -102,13 +102,13 @@ class _SignupScreenState extends State<SignupScreen> {
               height: 1.2,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Comece a acompanhar seus hábitos hoje.',
             style: GoogleFonts.interTight(
                 fontSize: 15, color: SahColors.textMuted, height: 1.5),
           ),
-          SizedBox(height: SahSpacing.x8),
+          const SizedBox(height: SahSpacing.x8),
           SahCard(
             padding: 24,
             child: Column(
@@ -117,34 +117,34 @@ class _SignupScreenState extends State<SignupScreen> {
                   label: 'Nome',
                   controller: _nomeCtrl,
                   hint: 'Seu nome completo',
-                  prefixIcon: SahIcon(SahIconName.user, size: 16),
+                  prefixIcon: const SahIcon(SahIconName.user, size: 16),
                   errorText: _nomeError,
                   textInputAction: TextInputAction.next,
                 ),
-                SizedBox(height: SahSpacing.itemGap),
+                const SizedBox(height: SahSpacing.itemGap),
                 SahInput(
                   label: 'E-mail',
                   controller: _emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: SahIcon(SahIconName.mail, size: 16),
+                  prefixIcon: const SahIcon(SahIconName.mail, size: 16),
                   errorText: _emailError,
-                  autofillHints: [AutofillHints.email],
+                  autofillHints: const [AutofillHints.email],
                   textInputAction: TextInputAction.next,
                 ),
-                SizedBox(height: SahSpacing.itemGap),
+                const SizedBox(height: SahSpacing.itemGap),
                 SahInput(
                   label: 'Senha',
                   controller: _passCtrl,
                   obscureText: true,
                   hint: 'Mínimo 8 caracteres com 1 número',
-                  prefixIcon: SahIcon(SahIconName.lock, size: 16),
+                  prefixIcon: const SahIcon(SahIconName.lock, size: 16),
                   errorText: _passError,
                   onChanged: (_) => setState(() {}),
                   textInputAction: TextInputAction.done,
                   onEditingComplete: _submit,
                 ),
                 PasswordStrengthMeter(password: _passCtrl.text),
-                SizedBox(height: SahSpacing.sectionGap),
+                const SizedBox(height: SahSpacing.sectionGap),
                 SahButton.primary(
                   label: 'Criar conta',
                   fullWidth: true,

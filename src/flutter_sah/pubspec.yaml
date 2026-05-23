@@ -27,6 +27,7 @@ dependencies:
   dio: ^5.7.0
   flutter_local_notifications: ^17.2.3
   timezone: ^0.9.4
+  flutter_timezone: ^4.0.0
   home_widget: ^0.7.0
   path_provider: ^2.1.4
   share_plus: ^10.0.0

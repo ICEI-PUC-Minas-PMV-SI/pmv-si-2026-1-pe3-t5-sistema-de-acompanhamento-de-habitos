@@ -13,6 +13,7 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/theme_controller.dart';
 import '../../../../data/local/mailtrap_config_store.dart';
 import '../../../../data/models/mailtrap_config.dart';
+import '../../../../data/notifications/notification_service.dart';
 import '../../../auth/controllers/auth_controller.dart';
 
 Future<void> showSettingsModal(BuildContext context) {
@@ -100,6 +101,16 @@ class _SettingsModal extends StatelessWidget {
               parentContext.push(Routes.backup);
             },
           ),
+          const SizedBox(height: 4),
+          _SettingsTile(
+            icon: PhosphorIconsRegular.bell,
+            title: 'Testar notificação',
+            subtitle: 'Dispara uma notificação agora',
+            onTap: () async {
+              await context.read<NotificationService>().showTestNotification();
+              if (parentContext.mounted) Navigator.pop(context);
+            },
+          ),
           if (auth.isAdmin) ...[
             const SizedBox(height: 4),
             _SettingsTile(
@@ -161,7 +172,7 @@ class _SettingsModal extends StatelessWidget {
 
 class _MailtrapConfigForm extends StatefulWidget {
   final MailtrapConfigStore store;
-  _MailtrapConfigForm({required this.store});
+  const _MailtrapConfigForm({required this.store});
 
   @override
   State<_MailtrapConfigForm> createState() => _MailtrapConfigFormState();
@@ -284,14 +295,14 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
               hint: 'Token de API do Mailtrap',
               textInputAction: TextInputAction.next,
             ),
-            SizedBox(height: SahSpacing.x4),
+            const SizedBox(height: SahSpacing.x4),
             SahInput(
               label: 'Inbox ID',
               controller: _inboxCtrl,
               hint: 'ID da inbox no Mailtrap',
               textInputAction: TextInputAction.next,
             ),
-            SizedBox(height: SahSpacing.x4),
+            const SizedBox(height: SahSpacing.x4),
             SahInput(
               label: 'E-mail do remetente',
               controller: _emailCtrl,
@@ -299,7 +310,7 @@ class _MailtrapConfigFormState extends State<_MailtrapConfigForm> {
               hint: 'ex: noreply@sah.app',
               textInputAction: TextInputAction.next,
             ),
-            SizedBox(height: SahSpacing.x4),
+            const SizedBox(height: SahSpacing.x4),
             SahInput(
               label: 'Nome do remetente',
               controller: _nameCtrl,

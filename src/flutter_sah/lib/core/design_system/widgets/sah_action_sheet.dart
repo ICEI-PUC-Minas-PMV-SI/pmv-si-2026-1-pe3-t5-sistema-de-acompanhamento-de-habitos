@@ -34,15 +34,15 @@ class _SahActionSheet extends StatelessWidget {
   final String title;
   final List<SahActionItem> actions;
 
-  _SahActionSheet({required this.title, required this.actions});
+  const _SahActionSheet({required this.title, required this.actions});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 12, 20, 32),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
       decoration: BoxDecoration(
         color: SahColors.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(SahRadius.xl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -58,7 +58,7 @@ class _SahActionSheet extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             title,
             style: TextStyle(
@@ -69,7 +69,7 @@ class _SahActionSheet extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ...actions.map((item) => _ActionTile(item: item)),
         ],
       ),
@@ -80,7 +80,7 @@ class _SahActionSheet extends StatelessWidget {
 class _ActionTile extends StatelessWidget {
   final SahActionItem item;
 
-  _ActionTile({required this.item});
+  const _ActionTile({required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class _ActionTile extends StatelessWidget {
         onTap: item.onTap,
         borderRadius: BorderRadius.circular(SahRadius.md),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
           child: Row(
             children: [
               Container(
@@ -105,7 +105,7 @@ class _ActionTile extends StatelessWidget {
                 ),
                 child: Icon(item.icon, size: 18, color: color),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   item.label,

@@ -5,6 +5,7 @@ import '../../../../data/models/category.dart';
 import '../../../../data/models/execution_log.dart';
 import '../../../../data/models/habit.dart';
 import '../../../../data/backup/auto_backup_service.dart';
+import '../../../../data/notifications/notification_service.dart';
 import '../../../../data/repositories/category_repository.dart';
 import '../../../../data/repositories/execution_log_repository.dart';
 import '../../../../data/repositories/habit_repository.dart';
@@ -26,6 +27,7 @@ class TodayController extends ChangeNotifier {
   final CategoryRepository _catRepo;
   final HomeWidgetService _widget;
   final AutoBackupService _autoBackup;
+  final NotificationService _notifications;
   final String userId;
 
   TodayStatus _status = TodayStatus.loading;
@@ -33,6 +35,7 @@ class TodayController extends ChangeNotifier {
   int _totalHabits = 0;
   String? _error;
   bool _autoBackupRan = false;
+  bool _notificationsRescheduled = false;
 
   TodayController({
     required this.userId,
@@ -41,11 +44,13 @@ class TodayController extends ChangeNotifier {
     required CategoryRepository catRepo,
     required HomeWidgetService widget,
     required AutoBackupService autoBackup,
+    required NotificationService notifications,
   })  : _habitRepo = habitRepo,
         _execRepo = execRepo,
         _catRepo = catRepo,
         _widget = widget,
-        _autoBackup = autoBackup {
+        _autoBackup = autoBackup,
+        _notifications = notifications {
     load();
   }
 
@@ -123,6 +128,13 @@ class TodayController extends ChangeNotifier {
       _autoBackupRan = true;
       // fire-and-forget; falha silenciosamente
       unawaited(_autoBackup.maybeRun(userId));
+    }
+
+    // Reagenda notificações na primeira load da sessão. Cobre o caso de hábitos
+    // criados antes de mudanças no timezone do device ou na lógica de agendamento.
+    if (!_notificationsRescheduled) {
+      _notificationsRescheduled = true;
+      unawaited(_notifications.rescheduleAll(habits));
     }
   }
 

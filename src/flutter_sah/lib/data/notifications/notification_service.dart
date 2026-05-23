@@ -1,11 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import '../models/habit.dart';
 
-// Fuso fixo para o app (app local, sem necessidade de detectar timezone do device).
-const _kTz = 'America/Sao_Paulo';
+// Fallback caso a detecção de timezone falhe.
+const _kFallbackTz = 'America/Sao_Paulo';
 const _kChannelId = 'sah_habits_v1';
 
 class NotificationService {
@@ -13,7 +15,13 @@ class NotificationService {
 
   Future<void> init() async {
     tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation(_kTz));
+    try {
+      final name = await FlutterTimezone.getLocalTimezone();
+      tz.setLocalLocation(tz.getLocation(name));
+    } catch (e) {
+      debugPrint('Falha ao detectar timezone; usando $_kFallbackTz. $e');
+      tz.setLocalLocation(tz.getLocation(_kFallbackTz));
+    }
     await _plugin.initialize(
       const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
@@ -89,11 +97,36 @@ class NotificationService {
             uiLocalNotificationDateInterpretation:
                 UILocalNotificationDateInterpretation.absoluteTime,
           );
-        } on PlatformException {
-          // Permissão de alarme exato negada; ignora silenciosamente.
+        } on PlatformException catch (e) {
+          debugPrint('Falha ao agendar lembrete ($id): $e');
         }
       }
     }
+  }
+
+  Future<void> rescheduleAll(List<Habit> habits) async {
+    for (final habit in habits) {
+      await scheduleForHabit(habit);
+    }
+  }
+
+  /// Dispara uma notificação imediata para validar permissão e canal.
+  Future<void> showTestNotification() async {
+    await requestPermission();
+    await _plugin.show(
+      999999,
+      'Teste de lembrete',
+      'Se você está vendo isso, as notificações estão funcionando!',
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          _kChannelId,
+          'Lembretes de hábitos',
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+    );
   }
 
   // dow: 0=dom..6=sab → DateTime.weekday: 1=seg..7=dom

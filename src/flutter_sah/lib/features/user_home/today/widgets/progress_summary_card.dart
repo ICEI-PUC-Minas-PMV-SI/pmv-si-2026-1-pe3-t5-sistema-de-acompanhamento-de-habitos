@@ -9,7 +9,7 @@ class ProgressSummaryCard extends StatelessWidget {
   final int completed;
   final int total;
 
-  ProgressSummaryCard({
+  const ProgressSummaryCard({
     super.key,
     required this.completed,
     required this.total,
@@ -36,7 +36,7 @@ class ProgressSummaryCard extends StatelessWidget {
           : '$completed de $total hábitos concluídos hoje, $pct por cento',
       child: ExcludeSemantics(
         child: Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: SahColors.surface,
         borderRadius: BorderRadius.circular(SahRadius.lg),
@@ -56,22 +56,22 @@ class ProgressSummaryCard extends StatelessWidget {
                   fontSize: 40,
                   fontWeight: FontWeight.w700,
                   color: SahColors.primary,
-                  fontFeatures: [FontFeature.tabularFigures()],
+                  fontFeatures: const [FontFeature.tabularFigures()],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 6, left: 4),
+                padding: const EdgeInsets.only(bottom: 6, left: 4),
                 child: Text(
                   '/ $total',
                   style: GoogleFonts.interTight(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                     color: SahColors.textMuted,
-                    fontFeatures: [FontFeature.tabularFigures()],
+                    fontFeatures: [const FontFeature.tabularFigures()],
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 '$pct%',
                 style: GoogleFonts.interTight(
@@ -80,14 +80,14 @@ class ProgressSummaryCard extends StatelessWidget {
                   color: completed == total && total > 0
                       ? SahColors.primary
                       : SahColors.textMuted,
-                  fontFeatures: [FontFeature.tabularFigures()],
+                  fontFeatures: [const FontFeature.tabularFigures()],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SahProgressBar(value: _progress),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             _microcopy,
             style: GoogleFonts.interTight(
