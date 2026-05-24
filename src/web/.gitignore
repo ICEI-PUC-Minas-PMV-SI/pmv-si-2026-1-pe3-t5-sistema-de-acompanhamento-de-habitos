@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+*.tsbuildinfo
+
+# tsc -b artifacts from root config files (we use .ts configs, not .js)
+/vite.config.js
+/vitest.config.js
+/tailwind.config.js
+/*.d.ts

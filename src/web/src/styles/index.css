@@ -1,0 +1,30 @@
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=inter-tight@400,500,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    background: theme(colors.bg);
+    color: theme(colors.text);
+  }
+  body {
+    font-family: theme(fontFamily.body);
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4 {
+    font-family: theme(fontFamily.display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .num-tabular { font-variant-numeric: tabular-nums; }
+  :focus-visible {
+    outline: none;
+    box-shadow: theme(boxShadow.focus);
+    border-radius: theme(borderRadius.sm);
+  }
+}
