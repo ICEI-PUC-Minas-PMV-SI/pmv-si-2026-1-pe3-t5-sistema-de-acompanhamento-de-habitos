@@ -1,8 +1,10 @@
 import type { Session, User } from '@/features/auth/types';
 import type { Habit, CheckIn } from '@/features/habits/types';
+import type { Category } from '@/features/categories/types';
+import type { LogEntry } from '@/features/logs/types';
 
 export const STORAGE_KEY = 'sah:store:v1';
-export const STORAGE_VERSION = 1 as const;
+export const STORAGE_VERSION = 2 as const;
 
 export type SAHStore = {
   version: typeof STORAGE_VERSION;
@@ -10,10 +12,12 @@ export type SAHStore = {
   users: User[];
   habits: Habit[];
   checkIns: CheckIn[];
+  categories: Category[];
+  logs: LogEntry[];
 };
 
 export function emptyStore(): SAHStore {
-  return { version: STORAGE_VERSION, session: null, users: [], habits: [], checkIns: [] };
+  return { version: STORAGE_VERSION, session: null, users: [], habits: [], checkIns: [], categories: [], logs: [] };
 }
 
 export function loadStore(): SAHStore | null {
