@@ -33,10 +33,17 @@ npm run test:watch
 
 ## Credenciais demo
 
+**Usuário final:**
 - **E-mail:** `demo@sah.dev`
 - **Senha:** `123456`
 
-Hábitos e check-ins do último mês são populados automaticamente na primeira execução.
+**Moderadora (painel admin):**
+- **E-mail:** `marina@sah.dev`
+- **Senha:** `123456`
+
+Ao logar como moderadora, você cai no **painel administrativo** (`/admin`): dashboard com métricas, gestão de usuários (com bloqueio), categorias globais e logs do sistema. Usuários comuns vão para o app de hábitos.
+
+Hábitos, check-ins, categorias, usuários e logs são populados automaticamente na primeira execução.
 
 ## Atalho de reset
 
@@ -59,3 +66,4 @@ Hábitos e check-ins do último mês são populados automaticamente na primeira 
 - **Senhas em texto puro propositalmente** — protótipo offline para testes; não use credenciais reais.
 - **Responsivo:** mobile-first, com Sidebar em desktop e BottomNav em mobile.
 - Cores, raios, sombras e tipografia em `src/tokens/sah.ts` (fonte da verdade) e expostos como classes Tailwind via `tailwind.config.ts`.
+- **Painel de moderação:** acessível por contas com papel `moderator`. As categorias são globais (geridas no admin) e aparecem no formulário de hábito do usuário. O schema do `localStorage` é versionado (`v2`); ao atualizar, dados antigos são descartados e o seed recarregado.
