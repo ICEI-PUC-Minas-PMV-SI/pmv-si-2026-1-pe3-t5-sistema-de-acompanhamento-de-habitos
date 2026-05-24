@@ -1,15 +1,3 @@
-export type HabitCategory =
-  | 'saude' | 'estudo' | 'exercicio' | 'leitura' | 'mindfulness' | 'outros';
-
-export const HABIT_CATEGORIES: { value: HabitCategory; label: string }[] = [
-  { value: 'saude',       label: 'Saúde' },
-  { value: 'estudo',      label: 'Estudo' },
-  { value: 'exercicio',   label: 'Exercício' },
-  { value: 'leitura',     label: 'Leitura' },
-  { value: 'mindfulness', label: 'Mindfulness' },
-  { value: 'outros',      label: 'Outros' },
-];
-
 export type HabitFrequency =
   | { kind: 'daily' }
   | { kind: 'weekdays'; days: number[] }
@@ -19,7 +7,7 @@ export type Habit = {
   id: string;
   userId: string;
   name: string;
-  category: HabitCategory;
+  category: string;
   frequency: HabitFrequency;
   reminderTime?: string;
   notificationsEnabled: boolean;

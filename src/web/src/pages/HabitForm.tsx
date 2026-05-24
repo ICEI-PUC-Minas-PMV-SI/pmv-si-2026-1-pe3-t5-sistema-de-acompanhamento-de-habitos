@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, FormField, Input, Select, Switch } from '@/components/ui';
-import { HABIT_CATEGORIES } from '@/features/habits/types';
 import type { Habit, HabitFrequency } from '@/features/habits/types';
+import { useCategories } from '@/features/categories/useCategories';
 import clsx from 'clsx';
 
 const WEEKDAYS = [
@@ -22,8 +22,9 @@ type Props = {
 };
 
 export function HabitForm({ initial, onSubmit, onDelete, submitLabel }: Props) {
+  const { categories } = useCategories();
   const [name, setName] = useState(initial?.name ?? '');
-  const [category, setCategory] = useState(initial?.category ?? 'saude');
+  const [category, setCategory] = useState(initial?.category ?? categories[0]?.id ?? '');
   const [freqKind, setFreqKind] = useState<HabitFrequency['kind']>(initial?.frequency?.kind ?? 'daily');
   const [weekdays, setWeekdays] = useState<number[]>(
     initial?.frequency?.kind === 'weekdays' ? initial.frequency.days : [1, 2, 3, 4, 5],
@@ -70,8 +71,8 @@ export function HabitForm({ initial, onSubmit, onDelete, submitLabel }: Props) {
 
       <FormField label="Categoria" htmlFor="category">
         <Select id="category" value={category}
-          onChange={(e) => setCategory(e.target.value as typeof category)}
-          options={HABIT_CATEGORIES.map((c) => ({ value: c.value, label: c.label }))} />
+          onChange={(e) => setCategory(e.target.value)}
+          options={categories.map((c) => ({ value: c.id, label: `${c.icon} ${c.label}` }))} />
       </FormField>
 
       <FormField label="Frequência" error={errors.frequency}>
