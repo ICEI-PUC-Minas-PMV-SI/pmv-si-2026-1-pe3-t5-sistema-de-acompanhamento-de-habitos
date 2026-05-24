@@ -27,7 +27,7 @@ export function Login() {
     setSubmitting(false);
 
     if (res.ok) {
-      navigate('/', { replace: true });
+      navigate(res.role === 'moderator' ? '/admin' : '/', { replace: true });
     } else {
       show(res.error, 'error');
     }
@@ -40,7 +40,9 @@ export function Login() {
         <p className="text-sm text-textMuted">Continue acompanhando seus hábitos</p>
       </header>
 
-      <CalloutNote>Demo: <strong>demo@sah.dev</strong> · senha <strong>123456</strong></CalloutNote>
+      <CalloutNote>
+        Demo usuário: <strong>demo@sah.dev</strong> · Moderadora: <strong>marina@sah.dev</strong> · senha <strong>123456</strong>
+      </CalloutNote>
 
       <FormField label="E-mail" htmlFor="email" error={errors.email}>
         <Input id="email" type="email" value={email}

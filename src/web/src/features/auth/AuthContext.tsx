@@ -3,12 +3,12 @@ import { loadStore, saveStore, type SAHStore } from '@/lib/storage';
 import { buildSeed } from '@/lib/seed';
 import { todayKey } from '@/lib/date';
 import { makeId } from '@/lib/id';
-import type { User } from './types';
+import type { User, UserRole } from './types';
 
 export type AuthAPI = {
   currentUser: User | null;
-  signIn: (email: string, password: string) => Promise<{ ok: true } | { ok: false; error: string }>;
-  signUp: (name: string, email: string, password: string) => Promise<{ ok: true } | { ok: false; error: string }>;
+  signIn: (email: string, password: string) => Promise<{ ok: true; role: UserRole } | { ok: false; error: string }>;
+  signUp: (name: string, email: string, password: string) => Promise<{ ok: true; role: 'user' } | { ok: false; error: string }>;
   signOut: () => void;
 };
 
@@ -40,8 +40,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!user || user.password !== password) {
       return { ok: false, error: 'E-mail ou senha incorretos.' };
     }
+    if (user.blocked) {
+      return { ok: false, error: 'Esta conta está bloqueada. Contate a moderação.' };
+    }
     setStore((s) => ({ ...s, session: { userId: user.id } }));
-    return { ok: true };
+    return { ok: true, role: user.role };
   };
 
   const signUp: AuthAPI['signUp'] = async (name, email, password) => {
@@ -50,6 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     const newUser: User = {
       id: makeId(), name, email, password,
+      role: 'user',
       createdAt: new Date().toISOString(),
     };
     setStore((s) => ({
@@ -57,7 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       users: [...s.users, newUser],
       session: { userId: newUser.id },
     }));
-    return { ok: true };
+    return { ok: true, role: 'user' };
   };
 
   const signOut = () => setStore((s) => ({ ...s, session: null }));
