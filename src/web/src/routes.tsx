@@ -10,6 +10,12 @@ import { Dashboard } from '@/pages/Dashboard';
 import { HabitoNovo } from '@/pages/HabitoNovo';
 import { HabitoEditar } from '@/pages/HabitoEditar';
 import { Estatisticas } from '@/pages/Estatisticas';
+import { RequireModerator } from '@/features/auth/RequireModerator';
+import { AdminShell } from '@/components/layout/AdminShell';
+import { AdminDashboard } from '@/pages/admin/AdminDashboard';
+import { AdminUsuarios } from '@/pages/admin/AdminUsuarios';
+import { AdminCategorias } from '@/pages/admin/AdminCategorias';
+import { AdminLogs } from '@/pages/admin/AdminLogs';
 
 export function AppRoutes() {
   return (
@@ -24,6 +30,12 @@ export function AppRoutes() {
         <Route path="/habitos/novo" element={<HabitoNovo />} />
         <Route path="/habitos/:id"  element={<HabitoEditar />} />
         <Route path="/estatisticas" element={<Estatisticas />} />
+      </Route>
+      <Route element={<RequireModerator><AdminShell /></RequireModerator>}>
+        <Route path="/admin"            element={<AdminDashboard />} />
+        <Route path="/admin/usuarios"   element={<AdminUsuarios />} />
+        <Route path="/admin/categorias" element={<AdminCategorias />} />
+        <Route path="/admin/logs"       element={<AdminLogs />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
