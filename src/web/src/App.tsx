@@ -5,6 +5,7 @@ import { HabitsProvider } from '@/features/habits/HabitsContext';
 import { ToastProvider } from '@/features/toast/ToastContext';
 import { AppRoutes } from './routes';
 import { resetStore } from '@/lib/storage';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 function ResetShortcut() {
   useEffect(() => {
@@ -28,10 +29,12 @@ export default function App() {
     <AuthProvider>
       <HabitsProvider>
         <ToastProvider>
-          <BrowserRouter basename={import.meta.env.BASE_URL}>
-            <ResetShortcut />
-            <AppRoutes />
-          </BrowserRouter>
+          <ErrorBoundary>
+            <BrowserRouter basename={import.meta.env.BASE_URL}>
+              <ResetShortcut />
+              <AppRoutes />
+            </BrowserRouter>
+          </ErrorBoundary>
         </ToastProvider>
       </HabitsProvider>
     </AuthProvider>
