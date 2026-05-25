@@ -1,0 +1,68 @@
+name: sah
+description: SAH - Sistema de Acompanhamento de Habitos (mobile).
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.22.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  go_router: ^14.2.0
+  provider: ^6.1.2
+  google_fonts: ^6.2.1
+  phosphor_flutter: ^2.1.0
+  flutter_svg: ^2.0.10+1
+  intl: ^0.20.2
+  equatable: ^2.0.5
+  collection: ^1.18.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  crypto: ^3.0.5
+  bcrypt: ^1.1.3
+  fl_chart: ^0.69.0
+  # shared_preferences: ^2.2.3   # sessão persistente (fase futura)
+  dio: ^5.7.0
+  flutter_local_notifications: ^17.2.3
+  timezone: ^0.9.4
+  flutter_timezone: ^4.0.0
+  home_widget: ^0.7.0
+  path_provider: ^2.1.4
+  share_plus: ^10.0.0
+  file_picker: ^8.1.2
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  image: ^4.8.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/illustrations/
+    - assets/icon/
+    - assets/google_fonts/
+  fonts:
+    - family: GeneralSans
+      fonts:
+        - asset: assets/fonts/GeneralSans-Medium.otf
+          weight: 500
+        - asset: assets/fonts/GeneralSans-Semibold.otf
+          weight: 600
+        - asset: assets/fonts/GeneralSans-Bold.otf
+          weight: 700
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#FAF7F2"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  min_sdk_android: 21

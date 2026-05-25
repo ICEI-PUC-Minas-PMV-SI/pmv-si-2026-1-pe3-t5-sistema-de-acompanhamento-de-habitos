@@ -1,0 +1,59 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "build/**"
+    - "tool/**"
+  errors:
+    missing_required_param: error
+    missing_return: error
+    dead_code: warning
+    invalid_use_of_protected_member: error
+    invalid_assignment: error
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    # Estilo
+    prefer_single_quotes: true
+    sort_child_properties_last: true
+    directives_ordering: true
+    eol_at_end_of_file: true
+
+    # Dart moderno
+    use_super_parameters: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_fields: true
+    prefer_final_locals: true
+    unnecessary_lambdas: true
+    unnecessary_parenthesis: true
+    unnecessary_null_checks: true
+    unnecessary_breaks: true
+    always_declare_return_types: true
+
+    # Boas práticas
+    avoid_print: true
+    avoid_empty_else: true
+    avoid_redundant_argument_values: false
+    cancel_subscriptions: true
+    unawaited_futures: true
+    use_decorated_box: true
+    sized_box_for_whitespace: true
+    use_colored_box: true
+
+    # Segurança
+    avoid_dynamic_calls: true
+    no_logic_in_create_state: true
+    avoid_returning_null_for_void: true
+    use_build_context_synchronously: true
+
+    # Async
+    discarded_futures: false # ativaria muito ruído em fire-and-forget
+    avoid_void_async: true

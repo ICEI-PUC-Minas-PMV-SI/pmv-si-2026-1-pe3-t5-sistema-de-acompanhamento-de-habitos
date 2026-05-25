@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sah_widget_description">Veja seus hábitos do dia</string>
+    <string name="sah_widget_title">Hoje</string>
+    <string name="sah_widget_empty">Crie um hábito para começar</string>
+</resources>
